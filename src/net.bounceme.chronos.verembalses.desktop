@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+
+Name=VerEmbalses
+GenericName=Monitoriza los embalses de la Confederación Hidrográfica del Guadalquivir
+Icon=verembalses
+
+Exec=verembalses
+StartupWMClass=verembalses
+X-DocPath=verembalses/index.html
+
+Categories=KDE;Utility;

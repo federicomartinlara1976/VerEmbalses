@@ -1,0 +1,5 @@
+server: mongodb://discovery:27017
+dbName: EmbalsesCHG
+zona.selected: CO
+embalse.selected: CO-E30
+round.decimals: 3
