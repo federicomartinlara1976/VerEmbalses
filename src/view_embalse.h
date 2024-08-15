@@ -31,6 +31,7 @@ class Ui_MainWindow
 {
 public:
     QAction *actionPor_fecha;
+    QAction *actionDiaria;
     QWidget *centralwidget;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
@@ -84,6 +85,7 @@ public:
     QToolButton *btnExportarCSV;
     QMenuBar *menubar;
     QMenu *menuConsulta;
+    QMenu *menuEstadisticas;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -93,6 +95,8 @@ public:
         MainWindow->resize(575, 530);
         actionPor_fecha = new QAction(MainWindow);
         actionPor_fecha->setObjectName(QString::fromUtf8("actionPor_fecha"));
+        actionDiaria = new QAction(MainWindow);
+        actionDiaria->setObjectName(QString::fromUtf8("actionDiaria"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -439,13 +443,17 @@ public:
         menubar->setGeometry(QRect(0, 0, 505, 32));
         menuConsulta = new QMenu(menubar);
         menuConsulta->setObjectName(QString::fromUtf8("menuConsulta"));
+        menuEstadisticas = new QMenu(menubar);
+        menuEstadisticas->setObjectName(QString::fromUtf8("menuEstadisticas"));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
 
         menubar->addAction(menuConsulta->menuAction());
+        menubar->addAction(menuEstadisticas->menuAction());
         menuConsulta->addAction(actionPor_fecha);
+        menuEstadisticas->addAction(actionDiaria);
 
         retranslateUi(MainWindow);
 
@@ -456,6 +464,7 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Ver embalse", nullptr));
         actionPor_fecha->setText(QApplication::translate("MainWindow", "Por fecha", nullptr));
+        actionDiaria->setText(QApplication::translate("MainWindow", "Diaria", nullptr));
         label_3->setText(QApplication::translate("MainWindow", "Zona", nullptr));
         label_5->setText(QApplication::translate("MainWindow", "Embalses", nullptr));
         label_12->setText(QApplication::translate("MainWindow", "<html><head/><body><p>Estad\303\255sticas por zona</p></body></html>", nullptr));
@@ -489,6 +498,7 @@ public:
 #endif // QT_NO_TOOLTIP
         btnExportarCSV->setText(QApplication::translate("MainWindow", "...", nullptr));
         menuConsulta->setTitle(QApplication::translate("MainWindow", "Consulta", nullptr));
+        menuEstadisticas->setTitle(QApplication::translate("MainWindow", "Estad\303\255sticas", nullptr));
     } // retranslateUi
 };
 

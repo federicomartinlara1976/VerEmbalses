@@ -7,7 +7,7 @@
 #include "tablemodel.hpp"
 #include "showgraphic.hpp"
 
-#include <qttools/qtdialogwindow.hpp>
+#include "qtdialogwindow.hpp"
 #include <QObject>
 #include <QDate>
 #include <iostream>

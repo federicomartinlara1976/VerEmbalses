@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.9)
 set(CMAKE_BUILD_TYPE DEBUG)
 set(CMAKE_VERBOSE_MAKEFILE ON)
-set(CMAKE_CXX_COMPILER "/usr/bin/c++")
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_COMPILER "/usr/bin/g++")
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(verembalses)
 
@@ -31,7 +31,7 @@ find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     XmlGui
     Plotting
     Config
-    IdleTime
+    ThreadWeaver
 )
 
 find_package(spdlog REQUIRED)

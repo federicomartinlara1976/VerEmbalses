@@ -1,4 +1,6 @@
-set(verembalses_SRCS
+add_executable(verembalses)
+
+target_sources(verembalses PRIVATE
     main.cpp
     verembalses.cpp
     selectfecha.cpp
@@ -7,9 +9,18 @@ set(verembalses_SRCS
     funciones_ui.cpp
     VerEmbalsesAppHelper.cpp
     tablemodel.cpp
+    progreso.cpp
+    qtdialogwindow.cpp
+    qtwindow.cpp
+    signalmanager.cpp
+    qloadjob.cpp
 )
 
-add_executable(verembalses ${verembalses_SRCS})
+ecm_qt_declare_logging_category(verembalses
+    HEADER verembalsesdebug.h
+    IDENTIFIER VEREMBALSES
+    CATEGORY_NAME "verembalses"
+)
 
 target_include_directories (verembalses PRIVATE 
     "/usr/local/include"
@@ -29,6 +40,7 @@ target_link_libraries(verembalses
     KF5::DBusAddons
     KF5::Crash
     KF5::Plotting
+    KF5::ThreadWeaver
     Qt5::Widgets
     Qt5::Charts
     spdlog::spdlog

@@ -5,10 +5,12 @@
 #include "selectfecha.hpp"
 #include "showgraphic.hpp"
 #include "showtable.hpp"
+#include "progreso.hpp"
+#include "qloadjob.hpp"
 #include "funciones_ui.hpp"
 #include "VerEmbalsesAppHelper.hpp"
 
-#include <qttools/qtwindow.hpp>
+#include "qtwindow.hpp"
 
 #include <QObject>
 
@@ -34,6 +36,7 @@ private slots:
     void showGraphicClicked();
     void showExcelClicked();
     void buscarPorFechas();
+    void estadisticasDiarias();
     
 protected:
     void setup() override;

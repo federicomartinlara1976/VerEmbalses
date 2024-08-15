@@ -24,6 +24,7 @@ void VerEmbalses::connectEvents() {
     connect(btnVerGrafico , &QAbstractButton::clicked, this, &VerEmbalses::showGraphicClicked);
     connect(btnExportarCSV , &QAbstractButton::clicked, this, &VerEmbalses::showExcelClicked);
     connect(actionPor_fecha, &QAction::triggered, this, &VerEmbalses::buscarPorFechas);
+    connect(actionDiaria, &QAction::triggered, this, &VerEmbalses::estadisticasDiarias);
 }
 
 void VerEmbalses::delayedInitialization() {
@@ -146,6 +147,18 @@ void VerEmbalses::buscarPorFechas() {
         dlgShowTable->setFechas(get<0>(fechas), get<1>(fechas));
         dlgShowTable->setData(context.getDataframe(codEmbalse, get<0>(fechas), get<1>(fechas)));
         dlgShowTable->mostrar(true);
+    }
+}
+
+void VerEmbalses::estadisticasDiarias() {
+    DlgProgreso* dlg = new DlgProgreso(this);
+    dlg->show();
+    
+    QLoadJob* j1 = new QLoadJob();
+    
+    if (j1->isRunning()) {
+        // Queue the Job using the default Queue stream:
+        stream() << j1;
     }
 }
 

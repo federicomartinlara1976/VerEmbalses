@@ -5,7 +5,7 @@
 #include "funciones_ui.hpp"
 #include "VerEmbalsesAppHelper.hpp"
 
-#include <qttools/qtdialogwindow.hpp>
+#include "qtdialogwindow.hpp"
 #include <QObject>
 #include <QDate>
 #include <iostream>
