@@ -25,6 +25,7 @@ void VerEmbalses::connectEvents() {
     connect(btnExportarCSV , &QAbstractButton::clicked, this, &VerEmbalses::showExcelClicked);
     connect(actionPor_fecha, &QAction::triggered, this, &VerEmbalses::buscarPorFechas);
     connect(actionDiaria, &QAction::triggered, this, &VerEmbalses::estadisticasDiarias);
+    connect(actionMes, &QAction::triggered, this, &VerEmbalses::estadisticasMensuales);
 }
 
 void VerEmbalses::delayedInitialization() {
@@ -156,9 +157,16 @@ void VerEmbalses::estadisticasDiarias() {
     
     QLoadJob* j1 = new QLoadJob();
     
-    if (j1->isRunning()) {
-        // Queue the Job using the default Queue stream:
-        stream() << j1;
+    // Queue the Job using the default Queue stream:
+    stream() << j1;
+}
+
+void VerEmbalses::estadisticasMensuales() {
+    unique_ptr<DlgSelectMes> dlg = getDlgMes();
+    int result = dlg->mostrar(true);
+    
+    if (result == 1) {
+        tuple<int, string> mes = dlg->getMes();
     }
 }
 
@@ -176,6 +184,10 @@ unique_ptr<DlgSelectFecha> VerEmbalses::getDlgFecha(bool isSelectedZone) {
     }
     
     return dlg;
+}
+
+unique_ptr<DlgSelectMes> VerEmbalses::getDlgMes() {
+    return unique_ptr<DlgSelectMes>{new DlgSelectMes(this)};
 }
 
 void VerEmbalses::showInfoEmbalse(InfoEmbalse& info) {

@@ -4,6 +4,7 @@ target_sources(verembalses PRIVATE
     main.cpp
     verembalses.cpp
     selectfecha.cpp
+    selectmes.cpp
     showgraphic.cpp
     showtable.cpp
     funciones_ui.cpp

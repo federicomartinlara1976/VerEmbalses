@@ -32,6 +32,7 @@ class Ui_MainWindow
 public:
     QAction *actionPor_fecha;
     QAction *actionDiaria;
+    QAction *actionMes;
     QWidget *centralwidget;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
@@ -97,6 +98,8 @@ public:
         actionPor_fecha->setObjectName(QString::fromUtf8("actionPor_fecha"));
         actionDiaria = new QAction(MainWindow);
         actionDiaria->setObjectName(QString::fromUtf8("actionDiaria"));
+        actionMes = new QAction(MainWindow);
+        actionMes->setObjectName(QString::fromUtf8("actionMes"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -454,6 +457,7 @@ public:
         menubar->addAction(menuEstadisticas->menuAction());
         menuConsulta->addAction(actionPor_fecha);
         menuEstadisticas->addAction(actionDiaria);
+        menuEstadisticas->addAction(actionMes);
 
         retranslateUi(MainWindow);
 
@@ -465,6 +469,7 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Ver embalse", nullptr));
         actionPor_fecha->setText(QApplication::translate("MainWindow", "Por fecha", nullptr));
         actionDiaria->setText(QApplication::translate("MainWindow", "Diaria", nullptr));
+        actionMes->setText(QApplication::translate("MainWindow", "Mensual", nullptr));
         label_3->setText(QApplication::translate("MainWindow", "Zona", nullptr));
         label_5->setText(QApplication::translate("MainWindow", "Embalses", nullptr));
         label_12->setText(QApplication::translate("MainWindow", "<html><head/><body><p>Estad\303\255sticas por zona</p></body></html>", nullptr));
