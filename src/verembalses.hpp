@@ -25,11 +25,14 @@ class VerEmbalses : public QtWindow, public Ui::MainWindow {
 private:
     VerEmbalsesAppHelper helper;
     
+    QLoadJob* j1;
+    
     unique_ptr<DlgSelectFecha> getDlgFecha(bool isSelectedZone = true);
     unique_ptr<DlgSelectMes> getDlgMes();
     
     void showInfoEmbalse(InfoEmbalse& info);
     void showStatsPorZona(string codZona);
+    void progresoTerminado();
     void setStatus();
     
 private slots:

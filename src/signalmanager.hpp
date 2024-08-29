@@ -17,6 +17,7 @@ Q_SIGNALS:
     void percentSignal(int percent, QString message);
     void finishedSignal();
     void startedSignal();
+    void unblockingDialogDispatched();
 
 public:
     static SignalManager* instance();

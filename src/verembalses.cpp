@@ -29,26 +29,30 @@ void VerEmbalses::connectEvents() {
 }
 
 void VerEmbalses::delayedInitialization() {
-    AppContext& context = AppContext::getInstance();
-    
-    Configuration& config_instance = Configuration::getInstance(); 
-    YAML::Node config = config_instance.getConfiguration();
-    string zona = config["zona.selected"].as<string>();
-    string embalse = config["embalse.selected"].as<string>();
-    
-    context.populateZonas(cmbZona);
-    
-    context.setZonaDefecto(zona, cmbZona, cmbEmbalse);
-    showStatsPorZona(zona);
-    
-    context.setEmbalseDefecto(embalse, cmbEmbalse);
-    
-    InfoEmbalse info = context.getLastEmbalseInfo(embalse);
-    showInfoEmbalse(info);
-    
-    setStatus();
-    
-    spdlog::info("VerEmbalses cargado en memoria");
+    try {
+        AppContext& context = AppContext::getInstance();
+
+        Configuration& config_instance = Configuration::getInstance();
+        YAML::Node config = config_instance.getConfiguration();
+        string zona = config["zona.selected"].as<string>();
+        string embalse = config["embalse.selected"].as<string>();
+
+        context.populateZonas(cmbZona);
+
+        context.setZonaDefecto(zona, cmbZona, cmbEmbalse);
+        showStatsPorZona(zona);
+
+        context.setEmbalseDefecto(embalse, cmbEmbalse);
+
+        InfoEmbalse info = context.getLastEmbalseInfo(embalse);
+        showInfoEmbalse(info);
+
+        setStatus();
+
+        spdlog::info("VerEmbalses cargado en memoria");
+    } catch (const std::exception &e) {
+        spdlog::error(e.what());
+    }
 }
 
 void VerEmbalses::cmbZonasIndexChanged(int index) {
@@ -155,7 +159,9 @@ void VerEmbalses::estadisticasDiarias() {
     DlgProgreso* dlg = new DlgProgreso(this);
     dlg->show();
     
-    QLoadJob* j1 = new QLoadJob();
+    connect(dlg, &DlgProgreso::unblockingDialogDispatched, this, &VerEmbalses::progresoTerminado);
+    
+    j1 = new QLoadJob();
     
     // Queue the Job using the default Queue stream:
     stream() << j1;
@@ -167,7 +173,12 @@ void VerEmbalses::estadisticasMensuales() {
     
     if (result == 1) {
         tuple<int, string> mes = dlg->getMes();
+        spdlog::info("{}, {}", get<0>(mes), get<1>(mes));
     }
+}
+
+void VerEmbalses::progresoTerminado() {
+    spdlog::info("Mostrar tabla");
 }
 
 unique_ptr<DlgSelectFecha> VerEmbalses::getDlgFecha(bool isSelectedZone) {

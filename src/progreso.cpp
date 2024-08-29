@@ -2,6 +2,8 @@
 
 #include "signalmanager.hpp"
 
+#include <QThread>
+
 using namespace std;
 
 DlgProgreso::DlgProgreso(QWidget *parent) : QtDialogWindow(parent) {
@@ -12,6 +14,8 @@ DlgProgreso::DlgProgreso(QWidget *parent) : QtDialogWindow(parent) {
 
     // Set dialog always on top of its parent
     setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
+    
+    visible = false;
 }
 
 void DlgProgreso::setup() {
@@ -40,13 +44,18 @@ void DlgProgreso::started() {
 void DlgProgreso::finished() {
     this->lblEstado->setText("Finalizado");
     this->progressBar->setValue(100);
-    this->buttonBox->setEnabled(true);
+    QThread::sleep(1);
+    this->accept();
+    
+    Q_EMIT unblockingDialogDispatched();
 }
 
 void DlgProgreso::show() {
     QDialog::show();
     raise();  // Make sure the dialog is on top
     activateWindow();  // Bring the dialog to the foreground
+    
+    visible = true;
 }
 
 DlgProgreso::~DlgProgreso() {}

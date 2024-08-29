@@ -16,6 +16,7 @@ class DlgProgreso : public QtDialogWindow, public Ui::DialogProgreso {
     
 private:
     AppHelper helper;
+    bool visible;
     
 private slots:
     void percentChanged(int percent, QString message);
@@ -27,9 +28,14 @@ protected:
     void connectEvents() override;
     void delayedInitialization() override;
     
+Q_SIGNALS:
+    void unblockingDialogDispatched();
+    
 public:
     DlgProgreso(QWidget* parent = nullptr);
     void show();
+    
+    bool isVisible() { return visible; }
     
     virtual ~DlgProgreso();
 };
