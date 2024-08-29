@@ -37,12 +37,12 @@ void VerEmbalses::delayedInitialization() {
         string zona = config["zona.selected"].as<string>();
         string embalse = config["embalse.selected"].as<string>();
 
-        context.populateZonas(cmbZona);
+        context.populateZonasIn(cmbZona);
 
-        context.setZonaDefecto(zona, cmbZona, cmbEmbalse);
+        context.setDefaultZona(zona, cmbZona, cmbEmbalse);
         showStatsPorZona(zona);
 
-        context.setEmbalseDefecto(embalse, cmbEmbalse);
+        context.setDefaultEmbalse(embalse, cmbEmbalse);
 
         InfoEmbalse info = context.getLastEmbalseInfo(embalse);
         showInfoEmbalse(info);
@@ -59,7 +59,7 @@ void VerEmbalses::cmbZonasIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
     
     showStatsPorZona(helper.getStringValue(cmbZona, index));
-    context.populateEmbalses(helper.getStringValue(cmbZona, index), this->cmbEmbalse);
+    context.populateEmbalsesIn(helper.getStringValue(cmbZona, index), this->cmbEmbalse);
     
     string codigoEmbalse = helper.getStringValue(cmbEmbalse, 0);
     

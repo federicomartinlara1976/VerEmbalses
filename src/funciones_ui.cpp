@@ -69,19 +69,19 @@ DataEngine& AppContext::getDataEngine() {
     return dataEngine;
 }
 
-void AppContext::setZonaDefecto(string zona, QComboBox* cmbZona, QComboBox* cmbEmbalse) {
+void AppContext::setDefaultZona(string zona, QComboBox* cmbZona, QComboBox* cmbEmbalse) {
     int index = helper.getCmbIndexByCode(cmbZona, zona);
     cmbZona->setCurrentIndex(index);
     
-    populateEmbalses(zona, cmbEmbalse);
+    populateEmbalsesIn(zona, cmbEmbalse);
 }
 
-void AppContext::setEmbalseDefecto(string embalse, QComboBox* cmbEmbalse) {
+void AppContext::setDefaultEmbalse(string embalse, QComboBox* cmbEmbalse) {
     int index = helper.getCmbIndexByCode(cmbEmbalse, embalse);
     cmbEmbalse->setCurrentIndex(index);
 }
 
-void AppContext::populateZonas(QComboBox* combo) {
+void AppContext::populateZonasIn(QComboBox* combo) {
     try {
         unique_ptr<vector<InfoZona>> zonas = getZonas();
         
@@ -125,7 +125,7 @@ unique_ptr<vector<InfoZona>> AppContext::getZonas() {
     }
 }
 
-void AppContext::populateEmbalses(string codZona, QComboBox *combo) {
+void AppContext::populateEmbalsesIn(string codZona, QComboBox *combo) {
     try {
         unique_ptr<vector<InfoEmbalse>> embalses = getEmbalsesPorZona("Embalses", codZona);
         

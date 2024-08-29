@@ -29,10 +29,10 @@ void DlgSelectFecha::delayedInitialization() {
     try {
         AppContext& context = AppContext::getInstance();
         
-        context.populateZonas(cmbZona);
+        context.populateZonasIn(cmbZona);
         
-        context.setZonaDefecto(codZona, cmbZona, cmbEmbalse);
-        context.setEmbalseDefecto(codEmbalse, cmbEmbalse);
+        context.setDefaultZona(codZona, cmbZona, cmbEmbalse);
+        context.setDefaultEmbalse(codEmbalse, cmbEmbalse);
         
         if (!codZona.empty()) {
             cmbZona->setDisabled(true);
@@ -50,7 +50,7 @@ void DlgSelectFecha::delayedInitialization() {
 
 void DlgSelectFecha::cmbZonasIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
-    context.populateEmbalses(helper.getStringValue(cmbZona, index), cmbEmbalse);
+    context.populateEmbalsesIn(helper.getStringValue(cmbZona, index), cmbEmbalse);
     
     codZona = helper.getStringValue(cmbZona);
     codEmbalse = helper.getStringValue(cmbEmbalse, 0);
