@@ -100,16 +100,6 @@ public:
 
         verticalLayout->addLayout(containerSelectores);
 
-        /*
-        kplotwidget = new KPlotWidget(DialogShowGraphic);
-        kplotwidget->setObjectName(QString::fromUtf8("kplotwidget"));
-        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(kplotwidget->sizePolicy().hasHeightForWidth());
-        kplotwidget->setSizePolicy(sizePolicy2);
-        */
-
         chartView = new QChartView(DialogShowGraphic);
         chartView->setObjectName(QString::fromUtf8("ChartView"));
         chartView->setRenderHint(QPainter::Antialiasing);
