@@ -26,7 +26,15 @@ void DlgShowTable::connectEvents() {
     connect(btnExportarCSV , &QAbstractButton::clicked, this, &DlgShowTable::showExcelClicked);
 }
 
-void DlgShowTable::delayedInitialization() {}
+void DlgShowTable::delayedInitialization() {
+    QIcon icon;
+    icon.addFile(QString::fromUtf8("/usr/share/icons/gnome/22x22/apps/ksysguard.png"), QSize(), QIcon::Normal, QIcon::Off);
+    btnExportarCSV->setIcon(icon);
+
+    QIcon icon1;
+    icon1.addFile(QString::fromUtf8("/usr/share/icons/Humanity/categories/22/redhat-office.svg"), QSize(), QIcon::Normal, QIcon::Off);
+    btnVerGrafico->setIcon(icon1);
+}
 
 void DlgShowTable::setData(const FuncionesUi::Dataframe& dataframe) {
     this->dataframe = dataframe;

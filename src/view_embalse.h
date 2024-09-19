@@ -1,27 +1,25 @@
 /********************************************************************************
-** Form generated from reading UI file 'view-embalse.ui'
+** Form generated from reading UI file 'ver_embalseszTCUzt.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.8
+** Created by: Qt User Interface Compiler version 5.15.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef VIEW_EMBALSE_H
-#define VIEW_EMBALSE_H
+#ifndef VER_EMBALSESZTCUZT_H
+#define VER_EMBALSESZTCUZT_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QIcon>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
-#include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -30,102 +28,99 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
-    QAction *actionPor_fecha;
     QAction *actionDiaria;
     QAction *actionMes;
+    QAction *actionPor_fecha;
     QWidget *centralwidget;
-    QWidget *verticalLayoutWidget;
-    QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout_2;
+    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout_4;
     QLabel *label_3;
     QComboBox *cmbZona;
-    QVBoxLayout *verticalLayout_5;
-    QLabel *label_5;
+    QVBoxLayout *verticalLayout_3;
+    QLabel *label_4;
     QComboBox *cmbEmbalse;
-    QFrame *line_2;
-    QVBoxLayout *verticalLayout_9;
-    QLabel *label_12;
-    QHBoxLayout *horizontalLayout_3;
-    QVBoxLayout *verticalLayout_10;
-    QLabel *label_9;
-    QVBoxLayout *verticalLayout_8;
-    QLabel *label_8;
-    QLabel *lblNivelMedia;
+    QVBoxLayout *verticalLayout_14;
+    QLabel *label;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_4;
+    QLabel *label_5;
     QVBoxLayout *verticalLayout_7;
     QLabel *label_7;
-    QLabel *lblNivelMinimo;
+    QLabel *lblNivelMedia;
     QVBoxLayout *verticalLayout_6;
-    QLabel *label_6;
+    QLabel *label_9;
+    QLabel *lblNivelMinimo;
+    QVBoxLayout *verticalLayout_5;
+    QLabel *label_11;
     QLabel *lblNivelMaximo;
-    QHBoxLayout *horizontalLayout_4;
-    QVBoxLayout *verticalLayout_14;
-    QLabel *label_17;
-    QVBoxLayout *verticalLayout_13;
-    QLabel *label_16;
+    QHBoxLayout *horizontalLayout_3;
+    QLabel *label_6;
+    QVBoxLayout *verticalLayout_10;
+    QLabel *label_13;
     QLabel *lblVolumenMedia;
-    QVBoxLayout *verticalLayout_12;
-    QLabel *label_14;
+    QVBoxLayout *verticalLayout_9;
+    QLabel *label_15;
     QLabel *lblVolumenMinimo;
-    QVBoxLayout *verticalLayout_11;
-    QLabel *label_10;
+    QVBoxLayout *verticalLayout_8;
+    QLabel *label_17;
     QLabel *lblVolumenMaximo;
-    QFrame *line;
-    QLabel *lblNombreEmbalse;
-    QHBoxLayout *horizontalLayout;
-    QVBoxLayout *verticalLayout_2;
-    QLabel *label;
-    QLabel *lblCapacidad;
-    QVBoxLayout *verticalLayout_3;
-    QLabel *label_2;
-    QLabel *lblVolumen;
-    QLabel *label_4;
-    QLabel *lblPercent;
     QVBoxLayout *verticalLayout_15;
-    QToolButton *btnVerGrafico;
-    QToolButton *btnExportarCSV;
+    QLabel *lblNombreEmbalse;
+    QHBoxLayout *horizontalLayout_2;
+    QVBoxLayout *verticalLayout_13;
+    QLabel *label_19;
+    QLabel *lblCapacidad;
+    QVBoxLayout *verticalLayout_12;
+    QLabel *label_21;
+    QLabel *lblVolumen;
+    QLabel *label_23;
+    QLabel *lblPercent;
+    QVBoxLayout *verticalLayout_11;
+    QPushButton *btnVerGrafico;
+    QPushButton *btnExportarCSV;
     QMenuBar *menubar;
     QMenu *menuConsulta;
-    QMenu *menuEstadisticas;
+    QMenu *menuGeneral;
+    QMenu *menuEstad_sticas;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(575, 530);
-        actionPor_fecha = new QAction(MainWindow);
-        actionPor_fecha->setObjectName(QString::fromUtf8("actionPor_fecha"));
+        MainWindow->resize(800, 600);
         actionDiaria = new QAction(MainWindow);
         actionDiaria->setObjectName(QString::fromUtf8("actionDiaria"));
         actionMes = new QAction(MainWindow);
         actionMes->setObjectName(QString::fromUtf8("actionMes"));
+        actionPor_fecha = new QAction(MainWindow);
+        actionPor_fecha->setObjectName(QString::fromUtf8("actionPor_fecha"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(centralwidget->sizePolicy().hasHeightForWidth());
-        centralwidget->setSizePolicy(sizePolicy);
-        verticalLayoutWidget = new QWidget(centralwidget);
-        verticalLayoutWidget->setObjectName(QString::fromUtf8("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 0, 491, 464));
-        verticalLayout = new QVBoxLayout(verticalLayoutWidget);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setSizeConstraint(QLayout::SetMinAndMaxSize);
-        verticalLayout->setContentsMargins(10, 10, 10, 10);
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(5, 5, 5, 5);
+        verticalLayout_2 = new QVBoxLayout(centralwidget);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setSizeConstraint(QLayout::SetDefaultConstraint);
+        verticalLayout_2->setContentsMargins(10, 10, 10, 10);
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setSizeConstraint(QLayout::SetFixedSize);
+        horizontalLayout->setContentsMargins(5, 5, 5, 5);
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        verticalLayout_4->setSizeConstraint(QLayout::SetMinimumSize);
         verticalLayout_4->setContentsMargins(5, 5, 5, 5);
-        label_3 = new QLabel(verticalLayoutWidget);
+        label_3 = new QLabel(centralwidget);
         label_3->setObjectName(QString::fromUtf8("label_3"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
+        label_3->setSizePolicy(sizePolicy);
 
         verticalLayout_4->addWidget(label_3);
 
-        cmbZona = new QComboBox(verticalLayoutWidget);
+        cmbZona = new QComboBox(centralwidget);
         cmbZona->setObjectName(QString::fromUtf8("cmbZona"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
@@ -136,328 +131,358 @@ public:
         verticalLayout_4->addWidget(cmbZona);
 
 
-        horizontalLayout_2->addLayout(verticalLayout_4);
+        horizontalLayout->addLayout(verticalLayout_4);
 
-        verticalLayout_5 = new QVBoxLayout();
-        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
-        verticalLayout_5->setContentsMargins(5, 5, 5, 5);
-        label_5 = new QLabel(verticalLayoutWidget);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setSizeConstraint(QLayout::SetMinimumSize);
+        verticalLayout_3->setContentsMargins(5, 5, 5, 5);
+        label_4 = new QLabel(centralwidget);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        sizePolicy.setHeightForWidth(label_4->sizePolicy().hasHeightForWidth());
+        label_4->setSizePolicy(sizePolicy);
 
-        verticalLayout_5->addWidget(label_5);
+        verticalLayout_3->addWidget(label_4);
 
-        cmbEmbalse = new QComboBox(verticalLayoutWidget);
+        cmbEmbalse = new QComboBox(centralwidget);
         cmbEmbalse->setObjectName(QString::fromUtf8("cmbEmbalse"));
         sizePolicy1.setHeightForWidth(cmbEmbalse->sizePolicy().hasHeightForWidth());
         cmbEmbalse->setSizePolicy(sizePolicy1);
 
-        verticalLayout_5->addWidget(cmbEmbalse);
+        verticalLayout_3->addWidget(cmbEmbalse);
 
 
-        horizontalLayout_2->addLayout(verticalLayout_5);
+        horizontalLayout->addLayout(verticalLayout_3);
 
 
-        verticalLayout->addLayout(horizontalLayout_2);
+        verticalLayout_2->addLayout(horizontalLayout);
 
-        line_2 = new QFrame(verticalLayoutWidget);
-        line_2->setObjectName(QString::fromUtf8("line_2"));
-        line_2->setFrameShape(QFrame::HLine);
-        line_2->setFrameShadow(QFrame::Sunken);
-
-        verticalLayout->addWidget(line_2);
-
-        verticalLayout_9 = new QVBoxLayout();
-        verticalLayout_9->setObjectName(QString::fromUtf8("verticalLayout_9"));
-        label_12 = new QLabel(verticalLayoutWidget);
-        label_12->setObjectName(QString::fromUtf8("label_12"));
+        verticalLayout_14 = new QVBoxLayout();
+        verticalLayout_14->setObjectName(QString::fromUtf8("verticalLayout_14"));
+        verticalLayout_14->setSizeConstraint(QLayout::SetFixedSize);
+        verticalLayout_14->setContentsMargins(5, 5, 5, 5);
+        label = new QLabel(centralwidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy);
         QFont font;
         font.setBold(true);
         font.setWeight(75);
-        label_12->setFont(font);
-        label_12->setAlignment(Qt::AlignCenter);
+        label->setFont(font);
+        label->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_9->addWidget(label_12);
-
-
-        verticalLayout->addLayout(verticalLayout_9);
-
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        verticalLayout_10 = new QVBoxLayout();
-        verticalLayout_10->setObjectName(QString::fromUtf8("verticalLayout_10"));
-        verticalLayout_10->setContentsMargins(5, 5, 5, 5);
-        label_9 = new QLabel(verticalLayoutWidget);
-        label_9->setObjectName(QString::fromUtf8("label_9"));
-
-        verticalLayout_10->addWidget(label_9);
+        verticalLayout_14->addWidget(label);
 
 
-        horizontalLayout_3->addLayout(verticalLayout_10);
+        verticalLayout_2->addLayout(verticalLayout_14);
 
-        verticalLayout_8 = new QVBoxLayout();
-        verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
-        verticalLayout_8->setContentsMargins(5, 5, 5, 5);
-        label_8 = new QLabel(verticalLayoutWidget);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setSizeConstraint(QLayout::SetFixedSize);
+        verticalLayout->setContentsMargins(5, 5, 5, 5);
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalLayout_4->setSizeConstraint(QLayout::SetFixedSize);
+        horizontalLayout_4->setContentsMargins(5, 5, 5, 5);
+        label_5 = new QLabel(centralwidget);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+        sizePolicy.setHeightForWidth(label_5->sizePolicy().hasHeightForWidth());
+        label_5->setSizePolicy(sizePolicy);
 
-        verticalLayout_8->addWidget(label_8);
-
-        lblNivelMedia = new QLabel(verticalLayoutWidget);
-        lblNivelMedia->setObjectName(QString::fromUtf8("lblNivelMedia"));
-        lblNivelMedia->setFont(font);
-
-        verticalLayout_8->addWidget(lblNivelMedia);
-
-
-        horizontalLayout_3->addLayout(verticalLayout_8);
+        horizontalLayout_4->addWidget(label_5);
 
         verticalLayout_7 = new QVBoxLayout();
         verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
         verticalLayout_7->setContentsMargins(5, 5, 5, 5);
-        label_7 = new QLabel(verticalLayoutWidget);
+        label_7 = new QLabel(centralwidget);
         label_7->setObjectName(QString::fromUtf8("label_7"));
+        sizePolicy.setHeightForWidth(label_7->sizePolicy().hasHeightForWidth());
+        label_7->setSizePolicy(sizePolicy);
 
         verticalLayout_7->addWidget(label_7);
 
-        lblNivelMinimo = new QLabel(verticalLayoutWidget);
-        lblNivelMinimo->setObjectName(QString::fromUtf8("lblNivelMinimo"));
-        lblNivelMinimo->setFont(font);
+        lblNivelMedia = new QLabel(centralwidget);
+        lblNivelMedia->setObjectName(QString::fromUtf8("lblNivelMedia"));
+        sizePolicy.setHeightForWidth(lblNivelMedia->sizePolicy().hasHeightForWidth());
+        lblNivelMedia->setSizePolicy(sizePolicy);
+        lblNivelMedia->setFont(font);
 
-        verticalLayout_7->addWidget(lblNivelMinimo);
+        verticalLayout_7->addWidget(lblNivelMedia);
 
 
-        horizontalLayout_3->addLayout(verticalLayout_7);
+        horizontalLayout_4->addLayout(verticalLayout_7);
 
         verticalLayout_6 = new QVBoxLayout();
         verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
         verticalLayout_6->setContentsMargins(5, 5, 5, 5);
-        label_6 = new QLabel(verticalLayoutWidget);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
+        label_9 = new QLabel(centralwidget);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+        sizePolicy.setHeightForWidth(label_9->sizePolicy().hasHeightForWidth());
+        label_9->setSizePolicy(sizePolicy);
 
-        verticalLayout_6->addWidget(label_6);
+        verticalLayout_6->addWidget(label_9);
 
-        lblNivelMaximo = new QLabel(verticalLayoutWidget);
+        lblNivelMinimo = new QLabel(centralwidget);
+        lblNivelMinimo->setObjectName(QString::fromUtf8("lblNivelMinimo"));
+        sizePolicy.setHeightForWidth(lblNivelMinimo->sizePolicy().hasHeightForWidth());
+        lblNivelMinimo->setSizePolicy(sizePolicy);
+        lblNivelMinimo->setFont(font);
+
+        verticalLayout_6->addWidget(lblNivelMinimo);
+
+
+        horizontalLayout_4->addLayout(verticalLayout_6);
+
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        verticalLayout_5->setContentsMargins(5, 5, 5, 5);
+        label_11 = new QLabel(centralwidget);
+        label_11->setObjectName(QString::fromUtf8("label_11"));
+        sizePolicy.setHeightForWidth(label_11->sizePolicy().hasHeightForWidth());
+        label_11->setSizePolicy(sizePolicy);
+
+        verticalLayout_5->addWidget(label_11);
+
+        lblNivelMaximo = new QLabel(centralwidget);
         lblNivelMaximo->setObjectName(QString::fromUtf8("lblNivelMaximo"));
+        sizePolicy.setHeightForWidth(lblNivelMaximo->sizePolicy().hasHeightForWidth());
+        lblNivelMaximo->setSizePolicy(sizePolicy);
         lblNivelMaximo->setFont(font);
 
-        verticalLayout_6->addWidget(lblNivelMaximo);
+        verticalLayout_5->addWidget(lblNivelMaximo);
 
 
-        horizontalLayout_3->addLayout(verticalLayout_6);
-
-
-        verticalLayout->addLayout(horizontalLayout_3);
-
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        verticalLayout_14 = new QVBoxLayout();
-        verticalLayout_14->setObjectName(QString::fromUtf8("verticalLayout_14"));
-        verticalLayout_14->setContentsMargins(5, 5, 5, 5);
-        label_17 = new QLabel(verticalLayoutWidget);
-        label_17->setObjectName(QString::fromUtf8("label_17"));
-
-        verticalLayout_14->addWidget(label_17);
-
-
-        horizontalLayout_4->addLayout(verticalLayout_14);
-
-        verticalLayout_13 = new QVBoxLayout();
-        verticalLayout_13->setObjectName(QString::fromUtf8("verticalLayout_13"));
-        verticalLayout_13->setContentsMargins(5, 5, 5, 5);
-        label_16 = new QLabel(verticalLayoutWidget);
-        label_16->setObjectName(QString::fromUtf8("label_16"));
-
-        verticalLayout_13->addWidget(label_16);
-
-        lblVolumenMedia = new QLabel(verticalLayoutWidget);
-        lblVolumenMedia->setObjectName(QString::fromUtf8("lblVolumenMedia"));
-        lblVolumenMedia->setFont(font);
-
-        verticalLayout_13->addWidget(lblVolumenMedia);
-
-
-        horizontalLayout_4->addLayout(verticalLayout_13);
-
-        verticalLayout_12 = new QVBoxLayout();
-        verticalLayout_12->setObjectName(QString::fromUtf8("verticalLayout_12"));
-        verticalLayout_12->setContentsMargins(5, 5, 5, 5);
-        label_14 = new QLabel(verticalLayoutWidget);
-        label_14->setObjectName(QString::fromUtf8("label_14"));
-
-        verticalLayout_12->addWidget(label_14);
-
-        lblVolumenMinimo = new QLabel(verticalLayoutWidget);
-        lblVolumenMinimo->setObjectName(QString::fromUtf8("lblVolumenMinimo"));
-        lblVolumenMinimo->setFont(font);
-
-        verticalLayout_12->addWidget(lblVolumenMinimo);
-
-
-        horizontalLayout_4->addLayout(verticalLayout_12);
-
-        verticalLayout_11 = new QVBoxLayout();
-        verticalLayout_11->setObjectName(QString::fromUtf8("verticalLayout_11"));
-        verticalLayout_11->setContentsMargins(5, 5, 5, 5);
-        label_10 = new QLabel(verticalLayoutWidget);
-        label_10->setObjectName(QString::fromUtf8("label_10"));
-
-        verticalLayout_11->addWidget(label_10);
-
-        lblVolumenMaximo = new QLabel(verticalLayoutWidget);
-        lblVolumenMaximo->setObjectName(QString::fromUtf8("lblVolumenMaximo"));
-        lblVolumenMaximo->setFont(font);
-
-        verticalLayout_11->addWidget(lblVolumenMaximo);
-
-
-        horizontalLayout_4->addLayout(verticalLayout_11);
+        horizontalLayout_4->addLayout(verticalLayout_5);
 
 
         verticalLayout->addLayout(horizontalLayout_4);
 
-        line = new QFrame(verticalLayoutWidget);
-        line->setObjectName(QString::fromUtf8("line"));
-        line->setFrameShape(QFrame::HLine);
-        line->setFrameShadow(QFrame::Sunken);
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setSizeConstraint(QLayout::SetFixedSize);
+        horizontalLayout_3->setContentsMargins(5, 5, 5, 5);
+        label_6 = new QLabel(centralwidget);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+        sizePolicy.setHeightForWidth(label_6->sizePolicy().hasHeightForWidth());
+        label_6->setSizePolicy(sizePolicy);
 
-        verticalLayout->addWidget(line);
+        horizontalLayout_3->addWidget(label_6);
 
-        lblNombreEmbalse = new QLabel(verticalLayoutWidget);
+        verticalLayout_10 = new QVBoxLayout();
+        verticalLayout_10->setObjectName(QString::fromUtf8("verticalLayout_10"));
+        verticalLayout_10->setContentsMargins(5, 5, 5, 5);
+        label_13 = new QLabel(centralwidget);
+        label_13->setObjectName(QString::fromUtf8("label_13"));
+        sizePolicy.setHeightForWidth(label_13->sizePolicy().hasHeightForWidth());
+        label_13->setSizePolicy(sizePolicy);
+
+        verticalLayout_10->addWidget(label_13);
+
+        lblVolumenMedia = new QLabel(centralwidget);
+        lblVolumenMedia->setObjectName(QString::fromUtf8("lblVolumenMedia"));
+        sizePolicy.setHeightForWidth(lblVolumenMedia->sizePolicy().hasHeightForWidth());
+        lblVolumenMedia->setSizePolicy(sizePolicy);
+        lblVolumenMedia->setFont(font);
+
+        verticalLayout_10->addWidget(lblVolumenMedia);
+
+
+        horizontalLayout_3->addLayout(verticalLayout_10);
+
+        verticalLayout_9 = new QVBoxLayout();
+        verticalLayout_9->setObjectName(QString::fromUtf8("verticalLayout_9"));
+        verticalLayout_9->setContentsMargins(5, 5, 5, 5);
+        label_15 = new QLabel(centralwidget);
+        label_15->setObjectName(QString::fromUtf8("label_15"));
+        sizePolicy.setHeightForWidth(label_15->sizePolicy().hasHeightForWidth());
+        label_15->setSizePolicy(sizePolicy);
+
+        verticalLayout_9->addWidget(label_15);
+
+        lblVolumenMinimo = new QLabel(centralwidget);
+        lblVolumenMinimo->setObjectName(QString::fromUtf8("lblVolumenMinimo"));
+        sizePolicy.setHeightForWidth(lblVolumenMinimo->sizePolicy().hasHeightForWidth());
+        lblVolumenMinimo->setSizePolicy(sizePolicy);
+        lblVolumenMinimo->setFont(font);
+
+        verticalLayout_9->addWidget(lblVolumenMinimo);
+
+
+        horizontalLayout_3->addLayout(verticalLayout_9);
+
+        verticalLayout_8 = new QVBoxLayout();
+        verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
+        verticalLayout_8->setContentsMargins(5, 5, 5, 5);
+        label_17 = new QLabel(centralwidget);
+        label_17->setObjectName(QString::fromUtf8("label_17"));
+        sizePolicy.setHeightForWidth(label_17->sizePolicy().hasHeightForWidth());
+        label_17->setSizePolicy(sizePolicy);
+
+        verticalLayout_8->addWidget(label_17);
+
+        lblVolumenMaximo = new QLabel(centralwidget);
+        lblVolumenMaximo->setObjectName(QString::fromUtf8("lblVolumenMaximo"));
+        sizePolicy.setHeightForWidth(lblVolumenMaximo->sizePolicy().hasHeightForWidth());
+        lblVolumenMaximo->setSizePolicy(sizePolicy);
+        lblVolumenMaximo->setFont(font);
+
+        verticalLayout_8->addWidget(lblVolumenMaximo);
+
+
+        horizontalLayout_3->addLayout(verticalLayout_8);
+
+
+        verticalLayout->addLayout(horizontalLayout_3);
+
+
+        verticalLayout_2->addLayout(verticalLayout);
+
+        verticalLayout_15 = new QVBoxLayout();
+        verticalLayout_15->setObjectName(QString::fromUtf8("verticalLayout_15"));
+        verticalLayout_15->setSizeConstraint(QLayout::SetFixedSize);
+        verticalLayout_15->setContentsMargins(5, 5, 5, 5);
+        lblNombreEmbalse = new QLabel(centralwidget);
         lblNombreEmbalse->setObjectName(QString::fromUtf8("lblNombreEmbalse"));
-        sizePolicy1.setHeightForWidth(lblNombreEmbalse->sizePolicy().hasHeightForWidth());
-        lblNombreEmbalse->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(lblNombreEmbalse->sizePolicy().hasHeightForWidth());
+        lblNombreEmbalse->setSizePolicy(sizePolicy);
         lblNombreEmbalse->setFont(font);
         lblNombreEmbalse->setAlignment(Qt::AlignCenter);
 
-        verticalLayout->addWidget(lblNombreEmbalse);
+        verticalLayout_15->addWidget(lblNombreEmbalse);
 
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(5);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setContentsMargins(5, 5, 5, 5);
-        verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setSpacing(10);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        verticalLayout_2->setSizeConstraint(QLayout::SetFixedSize);
-        verticalLayout_2->setContentsMargins(10, 10, 10, 10);
-        label = new QLabel(verticalLayoutWidget);
-        label->setObjectName(QString::fromUtf8("label"));
-        sizePolicy1.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
-        label->setSizePolicy(sizePolicy1);
-        label->setFont(font);
-        label->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_2->addWidget(label);
+        verticalLayout_2->addLayout(verticalLayout_15);
 
-        lblCapacidad = new QLabel(verticalLayoutWidget);
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setSizeConstraint(QLayout::SetDefaultConstraint);
+        horizontalLayout_2->setContentsMargins(5, 5, 5, 5);
+        verticalLayout_13 = new QVBoxLayout();
+        verticalLayout_13->setObjectName(QString::fromUtf8("verticalLayout_13"));
+        verticalLayout_13->setContentsMargins(5, 5, 5, 5);
+        label_19 = new QLabel(centralwidget);
+        label_19->setObjectName(QString::fromUtf8("label_19"));
+        sizePolicy.setHeightForWidth(label_19->sizePolicy().hasHeightForWidth());
+        label_19->setSizePolicy(sizePolicy);
+        label_19->setFont(font);
+        label_19->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_13->addWidget(label_19);
+
+        lblCapacidad = new QLabel(centralwidget);
         lblCapacidad->setObjectName(QString::fromUtf8("lblCapacidad"));
-        sizePolicy.setHeightForWidth(lblCapacidad->sizePolicy().hasHeightForWidth());
-        lblCapacidad->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(lblCapacidad->sizePolicy().hasHeightForWidth());
+        lblCapacidad->setSizePolicy(sizePolicy2);
         QFont font1;
-        font1.setPointSize(12);
+        font1.setPointSize(14);
         font1.setBold(true);
         font1.setWeight(75);
         lblCapacidad->setFont(font1);
         lblCapacidad->setStyleSheet(QString::fromUtf8("background-color: white; border: 1px solid black;"));
         lblCapacidad->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_2->addWidget(lblCapacidad);
+        verticalLayout_13->addWidget(lblCapacidad);
 
 
-        horizontalLayout->addLayout(verticalLayout_2);
+        horizontalLayout_2->addLayout(verticalLayout_13);
 
-        verticalLayout_3 = new QVBoxLayout();
-        verticalLayout_3->setSpacing(10);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        verticalLayout_3->setContentsMargins(10, 10, 10, 10);
-        label_2 = new QLabel(verticalLayoutWidget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        sizePolicy1.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
-        label_2->setSizePolicy(sizePolicy1);
-        label_2->setFont(font);
-        label_2->setAlignment(Qt::AlignCenter);
+        verticalLayout_12 = new QVBoxLayout();
+        verticalLayout_12->setObjectName(QString::fromUtf8("verticalLayout_12"));
+        verticalLayout_12->setSizeConstraint(QLayout::SetDefaultConstraint);
+        verticalLayout_12->setContentsMargins(5, 5, 5, 5);
+        label_21 = new QLabel(centralwidget);
+        label_21->setObjectName(QString::fromUtf8("label_21"));
+        sizePolicy.setHeightForWidth(label_21->sizePolicy().hasHeightForWidth());
+        label_21->setSizePolicy(sizePolicy);
+        label_21->setFont(font);
+        label_21->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_3->addWidget(label_2);
+        verticalLayout_12->addWidget(label_21);
 
-        lblVolumen = new QLabel(verticalLayoutWidget);
+        lblVolumen = new QLabel(centralwidget);
         lblVolumen->setObjectName(QString::fromUtf8("lblVolumen"));
-        sizePolicy.setHeightForWidth(lblVolumen->sizePolicy().hasHeightForWidth());
-        lblVolumen->setSizePolicy(sizePolicy);
-        QFont font2;
-        font2.setPointSize(14);
-        font2.setBold(true);
-        font2.setWeight(75);
-        lblVolumen->setFont(font2);
+        sizePolicy2.setHeightForWidth(lblVolumen->sizePolicy().hasHeightForWidth());
+        lblVolumen->setSizePolicy(sizePolicy2);
+        lblVolumen->setFont(font1);
         lblVolumen->setStyleSheet(QString::fromUtf8("background-color: white; border: 1px solid black;"));
         lblVolumen->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_3->addWidget(lblVolumen);
+        verticalLayout_12->addWidget(lblVolumen);
 
-        label_4 = new QLabel(verticalLayoutWidget);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-        sizePolicy1.setHeightForWidth(label_4->sizePolicy().hasHeightForWidth());
-        label_4->setSizePolicy(sizePolicy1);
-        label_4->setFont(font);
-        label_4->setAlignment(Qt::AlignCenter);
+        label_23 = new QLabel(centralwidget);
+        label_23->setObjectName(QString::fromUtf8("label_23"));
+        sizePolicy.setHeightForWidth(label_23->sizePolicy().hasHeightForWidth());
+        label_23->setSizePolicy(sizePolicy);
+        label_23->setFont(font);
+        label_23->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_3->addWidget(label_4);
+        verticalLayout_12->addWidget(label_23);
 
-        lblPercent = new QLabel(verticalLayoutWidget);
+        lblPercent = new QLabel(centralwidget);
         lblPercent->setObjectName(QString::fromUtf8("lblPercent"));
-        sizePolicy.setHeightForWidth(lblPercent->sizePolicy().hasHeightForWidth());
-        lblPercent->setSizePolicy(sizePolicy);
-        lblPercent->setFont(font2);
+        sizePolicy2.setHeightForWidth(lblPercent->sizePolicy().hasHeightForWidth());
+        lblPercent->setSizePolicy(sizePolicy2);
+        lblPercent->setFont(font1);
         lblPercent->setStyleSheet(QString::fromUtf8("background-color: white; border: 1px solid black;"));
         lblPercent->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_3->addWidget(lblPercent);
+        verticalLayout_12->addWidget(lblPercent);
 
 
-        horizontalLayout->addLayout(verticalLayout_3);
+        horizontalLayout_2->addLayout(verticalLayout_12);
 
-        verticalLayout_15 = new QVBoxLayout();
-        verticalLayout_15->setObjectName(QString::fromUtf8("verticalLayout_15"));
-        verticalLayout_15->setContentsMargins(10, 10, 10, 10);
-        btnVerGrafico = new QToolButton(verticalLayoutWidget);
+        verticalLayout_11 = new QVBoxLayout();
+        verticalLayout_11->setObjectName(QString::fromUtf8("verticalLayout_11"));
+        verticalLayout_11->setSizeConstraint(QLayout::SetMinimumSize);
+        verticalLayout_11->setContentsMargins(5, 5, 5, 5);
+        btnVerGrafico = new QPushButton(centralwidget);
         btnVerGrafico->setObjectName(QString::fromUtf8("btnVerGrafico"));
-        QIcon icon;
-        icon.addFile(QString::fromUtf8("/usr/share/icons/Humanity/categories/22/redhat-office.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        btnVerGrafico->setIcon(icon);
+        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(btnVerGrafico->sizePolicy().hasHeightForWidth());
+        btnVerGrafico->setSizePolicy(sizePolicy3);
+        btnVerGrafico->setLayoutDirection(Qt::LeftToRight);
 
-        verticalLayout_15->addWidget(btnVerGrafico);
+        verticalLayout_11->addWidget(btnVerGrafico);
 
-        btnExportarCSV = new QToolButton(verticalLayoutWidget);
+        btnExportarCSV = new QPushButton(centralwidget);
         btnExportarCSV->setObjectName(QString::fromUtf8("btnExportarCSV"));
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8("/usr/share/icons/gnome/22x22/apps/ksysguard.png"), QSize(), QIcon::Normal, QIcon::Off);
-        btnExportarCSV->setIcon(icon1);
+        sizePolicy3.setHeightForWidth(btnExportarCSV->sizePolicy().hasHeightForWidth());
+        btnExportarCSV->setSizePolicy(sizePolicy3);
 
-        verticalLayout_15->addWidget(btnExportarCSV);
-
-
-        horizontalLayout->addLayout(verticalLayout_15);
+        verticalLayout_11->addWidget(btnExportarCSV);
 
 
-        verticalLayout->addLayout(horizontalLayout);
+        horizontalLayout_2->addLayout(verticalLayout_11);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_2);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 505, 32));
+        menubar->setGeometry(QRect(0, 0, 800, 32));
         menuConsulta = new QMenu(menubar);
         menuConsulta->setObjectName(QString::fromUtf8("menuConsulta"));
-        menuEstadisticas = new QMenu(menubar);
-        menuEstadisticas->setObjectName(QString::fromUtf8("menuEstadisticas"));
+        menuGeneral = new QMenu(menubar);
+        menuGeneral->setObjectName(QString::fromUtf8("menuGeneral"));
+        menuEstad_sticas = new QMenu(menuGeneral);
+        menuEstad_sticas->setObjectName(QString::fromUtf8("menuEstad_sticas"));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
 
         menubar->addAction(menuConsulta->menuAction());
-        menubar->addAction(menuEstadisticas->menuAction());
+        menubar->addAction(menuGeneral->menuAction());
         menuConsulta->addAction(actionPor_fecha);
-        menuEstadisticas->addAction(actionDiaria);
-        menuEstadisticas->addAction(actionMes);
+        menuGeneral->addAction(menuEstad_sticas->menuAction());
+        menuEstad_sticas->addAction(actionDiaria);
+        menuEstad_sticas->addAction(actionMes);
 
         retranslateUi(MainWindow);
 
@@ -466,45 +491,41 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Ver embalse", nullptr));
-        actionPor_fecha->setText(QApplication::translate("MainWindow", "Por fecha", nullptr));
-        actionDiaria->setText(QApplication::translate("MainWindow", "Diaria", nullptr));
-        actionMes->setText(QApplication::translate("MainWindow", "Mensual", nullptr));
-        label_3->setText(QApplication::translate("MainWindow", "Zona", nullptr));
-        label_5->setText(QApplication::translate("MainWindow", "Embalses", nullptr));
-        label_12->setText(QApplication::translate("MainWindow", "<html><head/><body><p>Estad\303\255sticas por zona</p></body></html>", nullptr));
-        label_9->setText(QApplication::translate("MainWindow", "<html><head/><body><p>Niveles (Hm3)</p></body></html>", nullptr));
-        label_8->setText(QApplication::translate("MainWindow", "<html><head/><body><p>Media</p></body></html>", nullptr));
-        lblNivelMedia->setText(QApplication::translate("MainWindow", "--", nullptr));
-        label_7->setText(QApplication::translate("MainWindow", "M\303\255nimo", nullptr));
-        lblNivelMinimo->setText(QApplication::translate("MainWindow", "--", nullptr));
-        label_6->setText(QApplication::translate("MainWindow", "M\303\241ximo", nullptr));
-        lblNivelMaximo->setText(QApplication::translate("MainWindow", "--", nullptr));
-        label_17->setText(QApplication::translate("MainWindow", "Volumen (Hm3)", nullptr));
-        label_16->setText(QApplication::translate("MainWindow", "Media", nullptr));
-        lblVolumenMedia->setText(QApplication::translate("MainWindow", "--", nullptr));
-        label_14->setText(QApplication::translate("MainWindow", "M\303\255nimo", nullptr));
-        lblVolumenMinimo->setText(QApplication::translate("MainWindow", "--", nullptr));
-        label_10->setText(QApplication::translate("MainWindow", "M\303\241ximo", nullptr));
-        lblVolumenMaximo->setText(QApplication::translate("MainWindow", "--", nullptr));
-        lblNombreEmbalse->setText(QApplication::translate("MainWindow", "EMBALSE", nullptr));
-        label->setText(QApplication::translate("MainWindow", "Capacidad (Hm3)", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Ver embalse", nullptr));
+        actionDiaria->setText(QCoreApplication::translate("MainWindow", "Diaria", nullptr));
+        actionMes->setText(QCoreApplication::translate("MainWindow", "Mensual", nullptr));
+        actionPor_fecha->setText(QCoreApplication::translate("MainWindow", "Por fecha", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "Zona", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "Embalses", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Estad\303\255sticas por zona", nullptr));
+        label_5->setText(QCoreApplication::translate("MainWindow", "Niveles (Hm3)", nullptr));
+        label_7->setText(QCoreApplication::translate("MainWindow", "Media", nullptr));
+        lblNivelMedia->setText(QCoreApplication::translate("MainWindow", "--", nullptr));
+        label_9->setText(QCoreApplication::translate("MainWindow", "M\303\255nimo", nullptr));
+        lblNivelMinimo->setText(QCoreApplication::translate("MainWindow", "--", nullptr));
+        label_11->setText(QCoreApplication::translate("MainWindow", "M\303\241ximo", nullptr));
+        lblNivelMaximo->setText(QCoreApplication::translate("MainWindow", "--", nullptr));
+        label_6->setText(QCoreApplication::translate("MainWindow", "Volumen (Hm3)", nullptr));
+        label_13->setText(QCoreApplication::translate("MainWindow", "Media", nullptr));
+        lblVolumenMedia->setText(QCoreApplication::translate("MainWindow", "--", nullptr));
+        label_15->setText(QCoreApplication::translate("MainWindow", "M\303\255nimo", nullptr));
+        lblVolumenMinimo->setText(QCoreApplication::translate("MainWindow", "--", nullptr));
+        label_17->setText(QCoreApplication::translate("MainWindow", "M\303\241ximo", nullptr));
+        lblVolumenMaximo->setText(QCoreApplication::translate("MainWindow", "--", nullptr));
+        lblNombreEmbalse->setText(QCoreApplication::translate("MainWindow", "EMBALSE", nullptr));
+        label_19->setText(QCoreApplication::translate("MainWindow", "Capacidad (Hm3)", nullptr));
         lblCapacidad->setText(QString());
-        label_2->setText(QApplication::translate("MainWindow", "Volumen (Hm3)", nullptr));
+        label_21->setText(QCoreApplication::translate("MainWindow", "Volumen (Hm3)", nullptr));
         lblVolumen->setText(QString());
-        label_4->setText(QApplication::translate("MainWindow", "porcentaje %", nullptr));
+        label_23->setText(QCoreApplication::translate("MainWindow", "Porcentaje %", nullptr));
         lblPercent->setText(QString());
-#ifndef QT_NO_TOOLTIP
-        btnVerGrafico->setToolTip(QApplication::translate("MainWindow", "Ver gr\303\241fico", nullptr));
-#endif // QT_NO_TOOLTIP
-        btnVerGrafico->setText(QApplication::translate("MainWindow", "...", nullptr));
-#ifndef QT_NO_TOOLTIP
-        btnExportarCSV->setToolTip(QApplication::translate("MainWindow", "Exportar a CSV", nullptr));
-#endif // QT_NO_TOOLTIP
-        btnExportarCSV->setText(QApplication::translate("MainWindow", "...", nullptr));
-        menuConsulta->setTitle(QApplication::translate("MainWindow", "Consulta", nullptr));
-        menuEstadisticas->setTitle(QApplication::translate("MainWindow", "Estad\303\255sticas", nullptr));
+        btnVerGrafico->setText(QString());
+        btnExportarCSV->setText(QString());
+        menuConsulta->setTitle(QCoreApplication::translate("MainWindow", "Consulta", nullptr));
+        menuGeneral->setTitle(QCoreApplication::translate("MainWindow", "General", nullptr));
+        menuEstad_sticas->setTitle(QCoreApplication::translate("MainWindow", "Estad\303\255sticas", nullptr));
     } // retranslateUi
+
 };
 
 namespace Ui {
@@ -513,4 +534,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // VIEW_EMBALSE_H
+#endif // VER_EMBALSESZTCUZT_H

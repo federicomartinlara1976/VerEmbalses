@@ -166,17 +166,10 @@ public:
         horizontalLayout_3->setContentsMargins(10, 10, 10, 10);
         btnExportarCSV = new QToolButton(verticalLayoutWidget);
         btnExportarCSV->setObjectName(QString::fromUtf8("btnExportarCSV"));
-        QIcon icon;
-        icon.addFile(QString::fromUtf8("/usr/share/icons/gnome/22x22/apps/libreoffice-calc.png"), QSize(), QIcon::Normal, QIcon::Off);
-        btnExportarCSV->setIcon(icon);
-
         horizontalLayout_3->addWidget(btnExportarCSV);
 
         btnVerGrafico = new QToolButton(verticalLayoutWidget);
         btnVerGrafico->setObjectName(QString::fromUtf8("btnVerGrafico"));
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8("/usr/share/icons/Humanity/categories/22/redhat-office.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        btnVerGrafico->setIcon(icon1);
 
         horizontalLayout_3->addWidget(btnVerGrafico);
 
