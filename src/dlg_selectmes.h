@@ -1,73 +1,90 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg_select-messcWCoA.ui'
+** Form generated from reading UI file 'dlg_select-mesXUEyLo.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_SELECT_2D_MESSCWCOA_H
-#define DLG_SELECT_2D_MESSCWCOA_H
+#ifndef DLG_SELECT_2D_MESXUEYLO_H
+#define DLG_SELECT_2D_MESXUEYLO_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 
-class Ui_Dialog
+class Ui_DialogSelectMes
 {
 public:
-    QDialogButtonBox *buttonBox;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout;
     QLabel *lblEstado;
     QComboBox *cmbMes;
+    QDialogButtonBox *buttonBox;
 
-    void setupUi(QDialog *Dialog)
+    void setupUi(QDialog *DialogSelectMes)
     {
-        if (Dialog->objectName().isEmpty())
-            Dialog->setObjectName(QString::fromUtf8("Dialog"));
-        Dialog->resize(348, 131);
-        buttonBox = new QDialogButtonBox(Dialog);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
-        buttonBox->setGeometry(QRect(110, 80, 221, 41));
-        buttonBox->setOrientation(Qt::Horizontal);
-        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
-        lblEstado = new QLabel(Dialog);
+        if (DialogSelectMes->objectName().isEmpty())
+            DialogSelectMes->setObjectName(QString::fromUtf8("DialogSelectMes"));
+        DialogSelectMes->resize(348, 131);
+        verticalLayout = new QVBoxLayout(DialogSelectMes);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setSizeConstraint(QLayout::SetFixedSize);
+        lblEstado = new QLabel(DialogSelectMes);
         lblEstado->setObjectName(QString::fromUtf8("lblEstado"));
-        lblEstado->setGeometry(QRect(10, 20, 61, 31));
         QFont font;
         font.setPointSize(11);
         font.setBold(true);
         font.setWeight(75);
         lblEstado->setFont(font);
         lblEstado->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
-        cmbMes = new QComboBox(Dialog);
+
+        horizontalLayout->addWidget(lblEstado);
+
+        cmbMes = new QComboBox(DialogSelectMes);
         cmbMes->setObjectName(QString::fromUtf8("cmbMes"));
-        cmbMes->setGeometry(QRect(100, 20, 231, 34));
 
-        retranslateUi(Dialog);
-        QObject::connect(buttonBox, SIGNAL(accepted()), Dialog, SLOT(accept()));
-        QObject::connect(buttonBox, SIGNAL(rejected()), Dialog, SLOT(reject()));
+        horizontalLayout->addWidget(cmbMes);
 
-        QMetaObject::connectSlotsByName(Dialog);
+
+        verticalLayout->addLayout(horizontalLayout);
+
+        buttonBox = new QDialogButtonBox(DialogSelectMes);
+        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setOrientation(Qt::Horizontal);
+        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+
+        verticalLayout->addWidget(buttonBox);
+
+
+        retranslateUi(DialogSelectMes);
+        QObject::connect(buttonBox, SIGNAL(accepted()), DialogSelectMes, SLOT(accept()));
+        QObject::connect(buttonBox, SIGNAL(rejected()), DialogSelectMes, SLOT(reject()));
+
+        QMetaObject::connectSlotsByName(DialogSelectMes);
     } // setupUi
 
-    void retranslateUi(QDialog *Dialog)
+    void retranslateUi(QDialog *DialogSelectMes)
     {
-        Dialog->setWindowTitle(QCoreApplication::translate("Dialog", "Dialog", nullptr));
-        lblEstado->setText(QCoreApplication::translate("Dialog", "Mes", nullptr));
+        DialogSelectMes->setWindowTitle(QCoreApplication::translate("DialogSelectMes", "Dialog", nullptr));
+        lblEstado->setText(QCoreApplication::translate("DialogSelectMes", "Mes", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class DialogSelectMes: public Ui_Dialog {};
+    class DialogSelectMes: public Ui_DialogSelectMes {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // DLG_SELECT_2D_MESSCWCOA_H
-
+#endif // DLG_SELECT_2D_MESXUEYLO_H
