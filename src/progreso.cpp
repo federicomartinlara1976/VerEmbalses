@@ -29,11 +29,6 @@ void DlgProgreso::connectEvents() {
 }
 
 void DlgProgreso::delayedInitialization() {
-    // Fijar el tamaño del diálogo para evitar que se redimensione
-    setFixedSize(413, 131);
-
-    // Establecer los flags de la ventana para desactivar maximizar
-    setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
 }
 
 void DlgProgreso::percentChanged(int percent, QString message) {
