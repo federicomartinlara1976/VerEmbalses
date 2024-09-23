@@ -22,7 +22,7 @@ class DlgShowTable : public QtDialogWindow, public Ui::DialogShowTable {
     Q_OBJECT
     
 private:
-    AppHelper helper;
+    QtHelper helper;
     
     string codEmbalse;
     QDate fechaDesde;

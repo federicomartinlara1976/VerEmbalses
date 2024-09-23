@@ -19,7 +19,7 @@ class DlgSelectFecha : public QtDialogWindow, public Ui::DialogSelectFecha {
     Q_OBJECT
     
 private:
-    AppHelper helper;
+    QtHelper helper;
     
     string codZona = {};
     string codEmbalse = {};

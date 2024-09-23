@@ -49,6 +49,7 @@ target_link_libraries(verembalses
     DataFrame::DataFrame
     yaml-cpp::yaml-cpp
     "fmt"
+    "common"
     "mongocxx"
     "bsoncxx"
     "qttools"

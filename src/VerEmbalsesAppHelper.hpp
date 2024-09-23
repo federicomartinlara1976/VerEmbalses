@@ -7,12 +7,12 @@
 #include <QComboBox>
 #include <QLabel>
 #include <DataFrame/DataFrame.h>
-#include <qttools/AppHelper.hpp>
+#include <qttools/QtHelper.hpp>
 
 using namespace std;
 using namespace hmdf;
 
-class VerEmbalsesAppHelper : public AppHelper {    
+class VerEmbalsesAppHelper : public QtHelper {
 public:
     tuple<String64, std::size_t, std::type_index> getColumn(const StdDataFrame<unsigned long>& dataframe, int index) const;
     

@@ -17,7 +17,8 @@ class DlgShowGraphic : public QtDialogWindow, public Ui::DialogShowGraphic {
     Q_OBJECT
     
 private:
-    AppHelper helper;
+    QtHelper qtHelper;
+    AppHelper appHelper;
     
     FuncionesUi::Dataframe dataframe;
     

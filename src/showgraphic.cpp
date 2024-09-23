@@ -33,28 +33,28 @@ void DlgShowGraphic::setData(const FuncionesUi::Dataframe& dataframe) {
         if (std::get<0>(citer) == "Fecha") {
             string nombre = std::get<0>(citer).c_str();
         
-            const QString label = helper.asQString(nombre, true); 
-            const QVariant value = QVariant(helper.asQString(nombre, true));
+            const QString label = qtHelper.asQString(nombre, true);
+            const QVariant value = QVariant(qtHelper.asQString(nombre, true));
             
             cmbDatoX->addItem(label, value);
         }
     }
     
-    selectedXValue = helper.getStringValue(cmbDatoX);
+    selectedXValue = qtHelper.getStringValue(cmbDatoX);
     populateDatoY(selectedXValue);
     
-    selectedYValue = helper.getStringValue(cmbDatoY);
+    selectedYValue = qtHelper.getStringValue(cmbDatoY);
     drawGraphic(selectedXValue, selectedYValue);
 }
 
 void DlgShowGraphic::cmbDatoXIndexChanged(int index) {
-    selectedXValue = helper.getStringValue(cmbDatoX, index);
+    selectedXValue = qtHelper.getStringValue(cmbDatoX, index);
     populateDatoY(selectedXValue);
     drawGraphic(selectedXValue, selectedYValue);
 }
 
 void DlgShowGraphic::cmbDatoYIndexChanged(int index) {
-    string selectedValue = helper.getStringValue(cmbDatoY, index);
+    string selectedValue = qtHelper.getStringValue(cmbDatoY, index);
     drawGraphic(selectedXValue, selectedValue);
 }
 
@@ -66,8 +66,8 @@ void DlgShowGraphic::populateDatoY(string exclude) {
         string nombre = std::get<0>(citer).c_str();
         
         if (nombre.compare(exclude) != 0) {
-            const QString label = helper.asQString(nombre, true); 
-            const QVariant value = QVariant(helper.asQString(nombre, true));
+            const QString label = qtHelper.asQString(nombre, true);
+            const QVariant value = QVariant(qtHelper.asQString(nombre, true));
         
             cmbDatoY->addItem(label, value);
         }
@@ -85,20 +85,20 @@ void DlgShowGraphic::drawGraphic(string selectedXValue, string selectedYValue) {
     axisY->setTickCount(5);
     axisY->setMinorTickCount(1);
     axisY->setLabelFormat("%.2f");
-    axisY->setTitleText(helper.asQString(selectedYValue));
+    axisY->setTitleText(qtHelper.asQString(selectedYValue));
 
     QDateTimeAxis *axisX = new QDateTimeAxis(); // Using QValueAxis here instead makes the problem disappear.
     axisX->setFormat("dd-MM-yyyy");
     axisX->setLabelsAngle(-90);
     axisX->setTickCount(10);
      
-    vector<string> fechas = dataframe.get_column<string>(helper.asCharArray(selectedXValue));
-    vector<double> values = dataframe.get_column<double>(helper.asCharArray(selectedYValue));
+    vector<string> fechas = dataframe.get_column<string>(appHelper.asCharArray(selectedXValue));
+    vector<double> values = dataframe.get_column<double>(appHelper.asCharArray(selectedYValue));
      
     int i = 0;
     for (string fecha : fechas) {
-        QString qFecha = helper.asQString(fecha);
-        QString qFormat = helper.asQString(Constants::DATE_FORMAT);
+        QString qFecha = qtHelper.asQString(fecha);
+        QString qFormat = qtHelper.asQString(Constants::DATE_FORMAT);
         
         QDateTime momentInTime;
         momentInTime.setDate(QDate::fromString(qFecha, qFormat));

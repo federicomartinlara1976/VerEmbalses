@@ -23,6 +23,8 @@ class VerEmbalses : public QtWindow, public Ui::MainWindow {
     Q_OBJECT
     
 private:
+    string applicationName = "verembalses";
+
     VerEmbalsesAppHelper helper;
     
     QLoadJob* j1;

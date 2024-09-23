@@ -59,25 +59,25 @@ AppContext::AppContext() {
 }
 
 AppContext::~AppContext() {
-    DataEngine& instance = DataEngine::getInstance();
+    DataEngine& instance = DataEngine::getInstance(applicationName);
     instance.destroyInstance();
     spdlog::info("AppContext liberado de la memoria");
 }
 
 DataEngine& AppContext::getDataEngine() {
-    DataEngine& dataEngine = DataEngine::getInstance();
+    DataEngine& dataEngine = DataEngine::getInstance(applicationName);
     return dataEngine;
 }
 
 void AppContext::setDefaultZona(string zona, QComboBox* cmbZona, QComboBox* cmbEmbalse) {
-    int index = helper.getCmbIndexByCode(cmbZona, zona);
+    int index = qtHelper.getCmbIndexByCode(cmbZona, zona);
     cmbZona->setCurrentIndex(index);
     
     populateEmbalsesIn(zona, cmbEmbalse);
 }
 
 void AppContext::setDefaultEmbalse(string embalse, QComboBox* cmbEmbalse) {
-    int index = helper.getCmbIndexByCode(cmbEmbalse, embalse);
+    int index = qtHelper.getCmbIndexByCode(cmbEmbalse, embalse);
     cmbEmbalse->setCurrentIndex(index);
 }
 
@@ -87,8 +87,8 @@ void AppContext::populateZonasIn(QComboBox* combo) {
         
         for (InfoZona& zona : *zonas) {
             string item = string(zona.codZona + " - " + zona.nombre); 
-            const QString label = helper.asQString(item, true); 
-            const QVariant value = QVariant(helper.asQString(zona.codZona, true));
+            const QString label = qtHelper.asQString(item, true);
+            const QVariant value = QVariant(qtHelper.asQString(zona.codZona, true));
             
             combo->addItem(label, value);
         }
@@ -135,8 +135,8 @@ void AppContext::populateEmbalsesIn(string codZona, QComboBox *combo) {
         for (InfoEmbalse& info : *embalses) {
             string codEmbalse = info.codEmbalse;
             string nombre = info.embalse;
-            const QString label = helper.asQString(nombre, true); 
-            const QVariant value = QVariant(helper.asQString(codEmbalse, true));
+            const QString label = qtHelper.asQString(nombre, true);
+            const QVariant value = QVariant(qtHelper.asQString(codEmbalse, true));
             
             combo->addItem(label, value);
         }
@@ -174,8 +174,8 @@ FuncionesUi::Dataframe AppContext::getDataframeZona(string codZona) {
         FuncionesUi::Dataframe ul_df2;
         
         ul_df2.load_data(std::move(cIndex.getData()),
-                     std::make_pair(helper.asCharArray(cNivel.getName()), cNivel.getData()),
-                     std::make_pair(helper.asCharArray(cVolumen.getName()), cVolumen.getData()));
+                     std::make_pair(appHelper.asCharArray(cNivel.getName()), cNivel.getData()),
+                     std::make_pair(appHelper.asCharArray(cVolumen.getName()), cVolumen.getData()));
         
         return ul_df2;
     } catch (const exception& e) {
@@ -249,12 +249,12 @@ FuncionesUi::Dataframe AppContext::getDataframePorFecha(string codEmbalse, QDate
     FuncionesUi::Dataframe ul_df2;
         
     ul_df2.load_data(std::move(cIndex.getData()),
-                    std::make_pair(helper.asCharArray(cFecha.getName()), cFecha.getData()),
-                    std::make_pair(helper.asCharArray(cNivel.getName()), cNivel.getData()),
-                    std::make_pair(helper.asCharArray(cVolumen.getName()), cVolumen.getData()),
-                    std::make_pair(helper.asCharArray(cPorcentaje.getName()), cPorcentaje.getData()),
-                    std::make_pair(helper.asCharArray(cMen.getName()), cMen.getData()),
-                    std::make_pair(helper.asCharArray(cCapacidad.getName()), cCapacidad.getData()));
+                    std::make_pair(appHelper.asCharArray(cFecha.getName()), cFecha.getData()),
+                    std::make_pair(appHelper.asCharArray(cNivel.getName()), cNivel.getData()),
+                    std::make_pair(appHelper.asCharArray(cVolumen.getName()), cVolumen.getData()),
+                    std::make_pair(appHelper.asCharArray(cPorcentaje.getName()), cPorcentaje.getData()),
+                    std::make_pair(appHelper.asCharArray(cMen.getName()), cMen.getData()),
+                    std::make_pair(appHelper.asCharArray(cCapacidad.getName()), cCapacidad.getData()));
         
     return ul_df2;
 }
@@ -316,10 +316,10 @@ string AppContext::getLastExecution() {
 vector<InfoEmbalse> AppContext::getPorFechas(string collectionName, QDate& desde, QDate& hasta) {
     vector<InfoEmbalse> v;
     
-    const QString format = helper.asQString(Constants::DATE_FORMAT);
+    const QString format = qtHelper.asQString(Constants::DATE_FORMAT);
     
-    string sDesde = helper.asString(desde.toString(format));
-    string sHasta = helper.asString(hasta.toString(format));
+    string sDesde = qtHelper.asString(desde.toString(format));
+    string sHasta = qtHelper.asString(hasta.toString(format));
     
     DataEngine& dataEngine = getDataEngine();
         
@@ -416,7 +416,7 @@ void AppContext::saveDataframeToDisk(const QString &outputFileName, FuncionesUi:
 void AppContext::writeHeader(QSaveFile& file, FuncionesUi::Dataframe& dataframe) {
     string header = buildCsvHeader(dataframe, Constants::CSV_FIELD_SEPARATOR);
     QByteArray outputByteArray;
-    outputByteArray.append(helper.asCharArray(header));
+    outputByteArray.append(appHelper.asCharArray(header));
     file.write(outputByteArray);
 }
 
@@ -447,13 +447,13 @@ void AppContext::writeContent(QSaveFile& file, FuncionesUi::Dataframe& dataframe
         values = values.substr(0, values.length() - 1) + "\r\n";
         
         QByteArray outputByteArray = {};
-        outputByteArray.append(helper.asCharArray(values));
+        outputByteArray.append(appHelper.asCharArray(values));
         file.write(outputByteArray);
     }
 }
 
 void AppContext::saveDataframe(FuncionesUi::Dataframe& dataframe, QWidget *parent, const string& filetype) {
-    const QString filename = QFileDialog::getSaveFileName(parent, i18n("Save File As"), QDir::currentPath(), helper.asQString(filetype));
+    const QString filename = QFileDialog::getSaveFileName(parent, i18n("Save File As"), QDir::currentPath(), qtHelper.asQString(filetype));
     saveDataframeToDisk(filename, dataframe);
 }
 

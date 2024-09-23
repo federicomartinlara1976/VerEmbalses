@@ -8,7 +8,7 @@
 #include <qdatetime.h>
 #include <mongo.hpp>
 #include <memory>
-#include <qttools/AppHelper.hpp>
+#include <qttools/QtHelper.hpp>
 #include <common/types.hpp>
 #include <fmt/core.h>
 
@@ -39,9 +39,12 @@ namespace FuncionesUi {
     
     class AppContext {
     private:
+        string applicationName = "verembalses";
+
         static std::unique_ptr<AppContext> _instance;
         
-        AppHelper helper;
+        QtHelper qtHelper;
+        AppHelper appHelper;
         
         DataEngine& getDataEngine();
         

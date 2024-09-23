@@ -5,7 +5,7 @@
 
 #include "qtdialogwindow.hpp"
 #include <QObject>
-#include <qttools/AppHelper.hpp>
+#include <qttools/QtHelper.hpp>
 
 using namespace std;
 
@@ -13,7 +13,7 @@ class DlgSelectMes : public QtDialogWindow, public Ui::DialogSelectMes {
     Q_OBJECT
     
 private:
-    AppHelper helper;
+    QtHelper helper;
     tuple<int, string> selected;
     
 private slots:

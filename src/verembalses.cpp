@@ -2,7 +2,7 @@
 #include <iostream>
 #include <QTimer>
 
-#include <qttools/config.hpp>
+#include <common/config.hpp>
 
 #include "verembalses.hpp"
 #include "constants.hpp"
@@ -44,10 +44,9 @@ void VerEmbalses::delayedInitialization() {
 
         AppContext& context = AppContext::getInstance();
 
-        Configuration& config_instance = Configuration::getInstance();
-        YAML::Node config = config_instance.getConfiguration();
-        string zona = config["zona.selected"].as<string>();
-        string embalse = config["embalse.selected"].as<string>();
+        Configuration& config_instance = Configuration::getInstance(applicationName);
+        string zona = config_instance.getPropertyAsString("zona.selected");
+        string embalse = config_instance.getPropertyAsString("embalse.selected");
 
         context.populateZonasIn(cmbZona);
 
@@ -274,7 +273,7 @@ void VerEmbalses::setStatus() {
         string last = context.getLastExecution();
         
         string label = "Datos a fecha: " + last;
-        statusbar->showMessage(helper.asCharArray(label));
+        statusbar->showMessage(helper.asQString(label));
     } catch (const exception& e) {
         spdlog::error(e.what());
         throw (e);
