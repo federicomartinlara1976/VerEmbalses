@@ -16,6 +16,12 @@ void DlgSelectMes::connectEvents() {
 }
 
 void DlgSelectMes::delayedInitialization() {
+    // Fijar el tamaño del diálogo para evitar que se redimensione
+    setFixedSize(348, 131);
+
+    // Establecer los flags de la ventana para desactivar maximizar
+    setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
+
     helper.populateMeses(cmbMes);
     int index = cmbMes->currentIndex();
     
