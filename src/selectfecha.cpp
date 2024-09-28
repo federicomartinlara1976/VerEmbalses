@@ -1,5 +1,4 @@
 #include <spdlog/spdlog.h>
-#include <qttools/config.hpp>
 
 #include "selectfecha.hpp"
 

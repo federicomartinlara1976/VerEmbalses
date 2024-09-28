@@ -13,8 +13,6 @@
 #include <DataFrame/DataFrame.h> 
 #include <DataFrame/DataFrameStatsVisitors.h>
 
-#include <qttools/config.hpp>
-
 #include "funciones_ui.hpp"
 #include "constants.hpp"
 
