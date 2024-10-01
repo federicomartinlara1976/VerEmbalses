@@ -81,6 +81,9 @@ void AppContext::setDefaultEmbalse(string embalse, QComboBox* cmbEmbalse) {
 
 void AppContext::populateZonasIn(QComboBox* combo) {
     try {
+        tuple<QString, QVariant> emptyOption = qtHelper.buildComboEmptyOption("Seleccione una zona");
+        combo->addItem(get<0>(emptyOption), get<1>(emptyOption));
+
         unique_ptr<vector<InfoZona>> zonas = getZonas();
         
         for (InfoZona& zona : *zonas) {
@@ -129,6 +132,9 @@ void AppContext::populateEmbalsesIn(string codZona, QComboBox *combo) {
         
         // Clear the combo
         combo->clear();
+
+        tuple<QString, QVariant> emptyOption = qtHelper.buildComboEmptyOption("Seleccione un embalse");
+        combo->addItem(get<0>(emptyOption), get<1>(emptyOption));
         
         for (InfoEmbalse& info : *embalses) {
             string codEmbalse = info.codEmbalse;
