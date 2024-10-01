@@ -126,6 +126,31 @@ unique_ptr<vector<InfoZona>> AppContext::getZonas() {
     }
 }
 
+InfoZona AppContext::getZona(string codZona) {
+    try {
+        unique_ptr<vector<InfoZona>> zonas = unique_ptr<vector<InfoZona>>{new vector<InfoZona>()};
+
+        DataEngine& dataEngine = getDataEngine();
+
+        collection collection = dataEngine.getCollection("zonas");
+
+        InfoZona info{};
+
+        bsoncxx::stdx::optional<bsoncxx::document::value> oElement = collection.find_one(make_document(kvp("codigo", make_document(kvp("$eq", codZona)))));
+        if(oElement) {
+            auto doc = oElement.get();
+
+            info.codZona = string(doc["codigo"].get_string().value);
+            info.nombre = string(doc["descripcion"].get_string().value);
+        }
+
+        return info;
+    } catch (const exception& e) {
+        spdlog::error("ERROR getZona: {}", e.what());
+        throw e;
+    }
+}
+
 void AppContext::populateEmbalsesIn(string codZona, QComboBox *combo) {
     try {
         unique_ptr<vector<InfoEmbalse>> embalses = getEmbalsesPorZona("Embalses", codZona);

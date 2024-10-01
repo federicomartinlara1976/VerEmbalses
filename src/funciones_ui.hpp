@@ -77,6 +77,7 @@ namespace FuncionesUi {
         void populateEmbalsesIn(string codZona, QComboBox *combo);
         
         InfoEmbalse getLastEmbalseInfo(string collectionName);
+        InfoZona getZona(string codZona);
         Dataframe getDataframeZona(string codZona);
         string getLastExecution();
         Dataframe getDataframe(string codEmbalse, QDate& desde, QDate& hasta);

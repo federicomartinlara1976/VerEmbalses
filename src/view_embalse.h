@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'ver_embalsesDWGzXC.ui'
+** Form generated from reading UI file 'ver_embalsesvaydVy.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef VER_EMBALSESDWGZXC_H
-#define VER_EMBALSESDWGZXC_H
+#ifndef VER_EMBALSESVAYDVY_H
+#define VER_EMBALSESVAYDVY_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -276,6 +276,7 @@ public:
 
         lblNivelTotal = new QLabel(centralwidget);
         lblNivelTotal->setObjectName(QString::fromUtf8("lblNivelTotal"));
+        lblNivelTotal->setFont(font1);
 
         verticalLayout_16->addWidget(lblNivelTotal);
 
@@ -369,6 +370,7 @@ public:
 
         lblVolumenTotal = new QLabel(centralwidget);
         lblVolumenTotal->setObjectName(QString::fromUtf8("lblVolumenTotal"));
+        lblVolumenTotal->setFont(font1);
 
         verticalLayout_17->addWidget(lblVolumenTotal);
 
@@ -582,4 +584,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // VER_EMBALSESDWGZXC_H
+#endif // VER_EMBALSESVAYDVY_H

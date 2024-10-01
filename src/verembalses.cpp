@@ -51,12 +51,14 @@ void VerEmbalses::delayedInitialization() {
         context.populateZonasIn(cmbZona);
 
         context.setDefaultZona(zona, cmbZona, cmbEmbalse);
+        InfoZona infoZona = context.getZona(zona);
+        lblZona->setText(helper.asQString(infoZona.nombre));
         showStatsPorZona(zona);
 
         context.setDefaultEmbalse(embalse, cmbEmbalse);
 
-        InfoEmbalse info = context.getLastEmbalseInfo(embalse);
-        showInfoEmbalse(info);
+        InfoEmbalse infoEmbalse = context.getLastEmbalseInfo(embalse);
+        showInfoEmbalse(infoEmbalse);
 
         setStatus();
 
@@ -72,6 +74,9 @@ void VerEmbalses::cmbZonasIndexChanged(int index) {
     string value = helper.getStringValue(cmbZona, index);
 
     if (!value.empty()) {
+        InfoZona info = context.getZona(value);
+
+        lblZona->setText(helper.asQString(info.nombre));
         showStatsPorZona(value);
         context.populateEmbalsesIn(helper.getStringValue(cmbZona, index), this->cmbEmbalse);
 
@@ -252,6 +257,7 @@ void VerEmbalses::showStatsPorZona(string codZona) {
         MeanVisitor<double, unsigned long> mean_v;
         MinVisitor<double, unsigned long> min_v;
         MaxVisitor<double, unsigned long> max_v;
+        SumVisitor<double, unsigned long> sum_v;
 
         df.visit<double>("Nivel", mean_v);
         std::string sMedia = fmt::format(Constants::NUMBER_FORMAT, mean_v.get_result());
@@ -276,6 +282,14 @@ void VerEmbalses::showStatsPorZona(string codZona) {
         df.visit<double>("Volumen", max_v);
         sMax = fmt::format(Constants::NUMBER_FORMAT, max_v.get_result());
         lblVolumenMaximo->setText(helper.asQString(sMax));
+
+        df.visit<double>("Nivel", sum_v);
+        std::string sSum = fmt::format(Constants::NUMBER_FORMAT, sum_v.get_result());
+        lblNivelTotal->setText(helper.asQString(sSum));
+
+        df.visit<double>("Volumen", sum_v);
+        sSum = fmt::format(Constants::NUMBER_FORMAT, max_v.get_result());
+        lblVolumenTotal->setText(helper.asQString(sSum));
     } catch (const exception& e) {
         spdlog::error("ERROR getStatsPorZona: {}", e.what());
         throw e;

@@ -389,6 +389,11 @@
           </item>
           <item>
            <widget class="QLabel" name="lblNivelTotal">
+            <property name="font">
+             <font>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>--</string>
             </property>
@@ -592,6 +597,11 @@
           </item>
           <item>
            <widget class="QLabel" name="lblVolumenTotal">
+            <property name="font">
+             <font>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>--</string>
             </property>
