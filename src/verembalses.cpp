@@ -69,22 +69,38 @@ void VerEmbalses::delayedInitialization() {
 void VerEmbalses::cmbZonasIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
     
-    showStatsPorZona(helper.getStringValue(cmbZona, index));
-    context.populateEmbalsesIn(helper.getStringValue(cmbZona, index), this->cmbEmbalse);
-    
-    string codigoEmbalse = helper.getStringValue(cmbEmbalse, 0);
-    
-    InfoEmbalse info = context.getLastEmbalseInfo(codigoEmbalse);
-    showInfoEmbalse(info);
+    string value = helper.getStringValue(cmbZona, index);
+
+    if (!value.empty()) {
+        showStatsPorZona(value);
+        context.populateEmbalsesIn(helper.getStringValue(cmbZona, index), this->cmbEmbalse);
+
+        string codigoEmbalse = helper.getStringValue(cmbEmbalse, 0);
+        if (!codigoEmbalse.empty()) {
+            InfoEmbalse info = context.getLastEmbalseInfo(codigoEmbalse);
+            showInfoEmbalse(info);
+        }
+        else {
+            spdlog::info("Debe seleccionar un embalse");
+        }
+    }
+    else {
+        spdlog::info("Debe seleccionar una zona");
+        // TODO - Mensaje emergente
+    }
 }
 
 void VerEmbalses::cmbEmbalsesIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
     
     string codigoEmbalse = helper.getStringValue(cmbEmbalse, index);
-    
-    InfoEmbalse info = context.getLastEmbalseInfo(codigoEmbalse);
-    showInfoEmbalse(info);
+    if (!codigoEmbalse.empty()) {
+        InfoEmbalse info = context.getLastEmbalseInfo(codigoEmbalse);
+        showInfoEmbalse(info);
+    }
+    else {
+        spdlog::info("Debe seleccionar un embalse");
+    }
 }
 
 void VerEmbalses::showGraphicClicked() {
