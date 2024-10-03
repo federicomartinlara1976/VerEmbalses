@@ -162,10 +162,8 @@ void AppContext::populateEmbalsesIn(string codZona, QComboBox *combo) {
         combo->addItem(get<0>(emptyOption), get<1>(emptyOption));
         
         for (InfoEmbalse& info : *embalses) {
-            string codEmbalse = info.codEmbalse;
-            string nombre = info.embalse;
-            const QString label = qtHelper.asQString(nombre, true);
-            const QVariant value = QVariant(qtHelper.asQString(codEmbalse, true));
+            const QString label = qtHelper.asQString(info.embalse, true);
+            const QVariant value = QVariant(qtHelper.asQString(info.codEmbalse, true));
             
             combo->addItem(label, value);
         }

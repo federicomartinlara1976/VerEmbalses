@@ -6,6 +6,7 @@
 
 #include "verembalses.hpp"
 #include "constants.hpp"
+#include <QMessageBox>
 
 using namespace std;
 using namespace FuncionesUi;
@@ -91,7 +92,10 @@ void VerEmbalses::cmbZonasIndexChanged(int index) {
     }
     else {
         spdlog::info("Debe seleccionar una zona");
-        // TODO - Mensaje emergente
+        QMessageBox msgBox;
+        msgBox.setText("Debe seleccionar una zona");
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.exec();
     }
 }
 
@@ -174,16 +178,25 @@ void VerEmbalses::buscarPorFechas() {
         tuple<QDate, QDate> fechas = dlg->getFechas();
         tuple<string, string> datosEmbalse = dlg->getDatosEmbalse();
         string codZona = get<0>(datosEmbalse);
-        string codEmbalse = get<1>(datosEmbalse);
-        
-        if (codZona.empty() || codEmbalse.empty())
-            return;
-        
-        unique_ptr<DlgShowTable> dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(this)};
-        dlgShowTable->setCodEmbalse(codEmbalse);
-        dlgShowTable->setFechas(get<0>(fechas), get<1>(fechas));
-        dlgShowTable->setData(context.getDataframe(codEmbalse, get<0>(fechas), get<1>(fechas)));
-        dlgShowTable->mostrar(true);
+
+        if (!codZona.empty()) {
+            string codEmbalse = get<1>(datosEmbalse);
+
+            if (codZona.empty() || codEmbalse.empty())
+                return;
+
+            unique_ptr<DlgShowTable> dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(this)};
+            dlgShowTable->setCodEmbalse(codEmbalse);
+            dlgShowTable->setFechas(get<0>(fechas), get<1>(fechas));
+            dlgShowTable->setData(context.getDataframe(codEmbalse, get<0>(fechas), get<1>(fechas)));
+            dlgShowTable->mostrar(true);
+        }
+        else {
+            QMessageBox msgBox;
+            msgBox.setText("Debe seleccionar una zona");
+            msgBox.setIcon(QMessageBox::Warning);
+            msgBox.exec();
+        }
     }
 }
 
