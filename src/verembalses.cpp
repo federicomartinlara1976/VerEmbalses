@@ -88,9 +88,6 @@ void VerEmbalses::cmbZonasIndexChanged(int index) {
             InfoEmbalse info = context.getEmbalseInfoByDate(codigoEmbalse, context.getLastExecution());
             showInfoEmbalse(info);
         }
-        else {
-            spdlog::info("Debe seleccionar un embalse");
-        }
     }
     else {
         spdlog::info("Debe seleccionar una zona");
@@ -109,9 +106,6 @@ void VerEmbalses::cmbEmbalsesIndexChanged(int index) {
     if (!codigoEmbalse.empty()) {
         InfoEmbalse info = context.getEmbalseInfoByDate(codigoEmbalse, lastExecution);
         showInfoEmbalse(info);
-    }
-    else {
-        spdlog::info("Debe seleccionar un embalse");
     }
 }
 

@@ -253,8 +253,7 @@ FuncionesUi::Dataframe AppContext::getDataframePorFecha(string codEmbalse, QDate
         
     ulong index = 0;
     for (InfoEmbalse& registro : registros) {
-        //spdlog::info("[{}, {}] -> Nivel: {} Hm3, Volumen: {} Hm3, {}%", codEmbalse, registro.fecha, registro.nivel, registro.volumen, registro.porcentaje);
-        
+
         indices.push_back(index);
         fechas.push_back(registro.fecha);
         niveles.push_back(registro.nivel);
@@ -298,7 +297,6 @@ InfoEmbalse AppContext::getEmbalseInfoByDate(string collectionName, string date)
         if(oElement) {
             auto doc = oElement.get();
             info = createInfoEmbalse(collectionName, doc);
-            spdlog::info("Fecha: {}, embalse: {}, %: {}, vol: {}, niv: {}", info.fecha, info.embalse, info.porcentaje, info.volumen, info.nivel);
         }
         
         return info;
