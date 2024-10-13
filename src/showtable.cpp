@@ -65,7 +65,7 @@ void DlgShowTable::setCodEmbalse(const string codEmbalse) {
     this->codEmbalse = codEmbalse;
     spdlog::info("{}", codEmbalse);
     
-    InfoEmbalse info = context.getLastEmbalseInfo(codEmbalse);
+    InfoEmbalse info = context.getEmbalseInfoByDate(codEmbalse, context.getLastExecution());
     this->lblNombreEmbalse->setText(helper.asQString(info.embalse));
 }
     

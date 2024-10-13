@@ -173,8 +173,9 @@ void AppContext::populateEmbalsesIn(string codZona, QComboBox *combo) {
     }
 }
 
-FuncionesUi::Dataframe AppContext::getDataframeZona(string codZona) {
+FuncionesUi::Dataframe AppContext::getDataframeZonaAndDate(string codZona, string date) {
     try {
+        spdlog::info("Dataframe para la zona {} con fecha {}", codZona, date);
         unique_ptr<vector<InfoEmbalse>> embalses = getEmbalsesPorZona("Embalses", codZona);
         
         data::ColumnData<unsigned long> cIndex("Index");
@@ -187,7 +188,7 @@ FuncionesUi::Dataframe AppContext::getDataframeZona(string codZona) {
         unsigned long index = 0;
         for (InfoEmbalse& embalse : *embalses) {
             string codEmbalse = embalse.codEmbalse;
-            InfoEmbalse info = getLastEmbalseInfo(codEmbalse);
+            InfoEmbalse info = getEmbalseInfoByDate(codEmbalse, date);
             indices.push_back(index);
             niveles.push_back(info.nivel);
             volumenes.push_back(info.volumen);
@@ -286,23 +287,18 @@ FuncionesUi::Dataframe AppContext::getDataframePorFecha(string codEmbalse, QDate
     return ul_df2;
 }
 
-InfoEmbalse AppContext::getLastEmbalseInfo(string collectionName) {
+InfoEmbalse AppContext::getEmbalseInfoByDate(string collectionName, string date) {
     try {
         InfoEmbalse info{};
         DataEngine& dbInstance = getDataEngine();
         
         auto collection = dbInstance.getCollection(collectionName);
         
-        bsoncxx::builder::stream::document sort_doc{};
-        sort_doc << string("_id") << -1 ;
-
-        mongocxx::options::find opts;
-        opts.sort(sort_doc.view()).limit(1);
-        
-        bsoncxx::stdx::optional<bsoncxx::document::value> oElement = collection.find_one({}, opts);
+        bsoncxx::stdx::optional<bsoncxx::document::value> oElement = collection.find_one(make_document(kvp("_id", make_document(kvp("$eq", date)))));
         if(oElement) {
             auto doc = oElement.get();
             info = createInfoEmbalse(collectionName, doc);
+            spdlog::info("Fecha: {}, embalse: {}, %: {}, vol: {}, niv: {}", info.fecha, info.embalse, info.porcentaje, info.volumen, info.nivel);
         }
         
         return info;

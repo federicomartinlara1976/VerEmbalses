@@ -33,9 +33,9 @@ private:
     unique_ptr<DlgSelectMes> getDlgMes();
     
     void showInfoEmbalse(InfoEmbalse& info);
-    void showStatsPorZona(string codZona);
+    void showStatsPorZona(string codZona, string date);
     void progresoTerminado();
-    void setStatus();
+    void setStatus(string date);
     
 private slots:
     void cmbZonasIndexChanged(int index);

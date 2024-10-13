@@ -44,6 +44,7 @@ void VerEmbalses::delayedInitialization() {
         btnVerGrafico->setToolTip(QApplication::translate("Dialog", "Ver gr\303\241fico", nullptr));
 
         AppContext& context = AppContext::getInstance();
+        string lastExecution = context.getLastExecution();
 
         Configuration& config_instance = Configuration::getInstance(applicationName);
         string zona = config_instance.getPropertyAsString("zona.selected");
@@ -54,14 +55,14 @@ void VerEmbalses::delayedInitialization() {
         context.setDefaultZona(zona, cmbZona, cmbEmbalse);
         InfoZona infoZona = context.getZona(zona);
         lblZona->setText(helper.asQString(infoZona.nombre));
-        showStatsPorZona(zona);
+        showStatsPorZona(zona, lastExecution);
 
         context.setDefaultEmbalse(embalse, cmbEmbalse);
 
-        InfoEmbalse infoEmbalse = context.getLastEmbalseInfo(embalse);
+        InfoEmbalse infoEmbalse = context.getEmbalseInfoByDate(embalse, lastExecution);
         showInfoEmbalse(infoEmbalse);
 
-        setStatus();
+        setStatus(lastExecution);
 
         spdlog::info("VerEmbalses cargado en memoria");
     } catch (const std::exception &e) {
@@ -71,6 +72,7 @@ void VerEmbalses::delayedInitialization() {
 
 void VerEmbalses::cmbZonasIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
+    string lastExecution = context.getLastExecution();
     
     string value = helper.getStringValue(cmbZona, index);
 
@@ -78,12 +80,12 @@ void VerEmbalses::cmbZonasIndexChanged(int index) {
         InfoZona info = context.getZona(value);
 
         lblZona->setText(helper.asQString(info.nombre));
-        showStatsPorZona(value);
+        showStatsPorZona(value, lastExecution);
         context.populateEmbalsesIn(helper.getStringValue(cmbZona, index), this->cmbEmbalse);
 
         string codigoEmbalse = helper.getStringValue(cmbEmbalse, 0);
         if (!codigoEmbalse.empty()) {
-            InfoEmbalse info = context.getLastEmbalseInfo(codigoEmbalse);
+            InfoEmbalse info = context.getEmbalseInfoByDate(codigoEmbalse, context.getLastExecution());
             showInfoEmbalse(info);
         }
         else {
@@ -101,10 +103,11 @@ void VerEmbalses::cmbZonasIndexChanged(int index) {
 
 void VerEmbalses::cmbEmbalsesIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
+    string lastExecution = context.getLastExecution();
     
     string codigoEmbalse = helper.getStringValue(cmbEmbalse, index);
     if (!codigoEmbalse.empty()) {
-        InfoEmbalse info = context.getLastEmbalseInfo(codigoEmbalse);
+        InfoEmbalse info = context.getEmbalseInfoByDate(codigoEmbalse, lastExecution);
         showInfoEmbalse(info);
     }
     else {
@@ -261,11 +264,11 @@ void VerEmbalses::showInfoEmbalse(InfoEmbalse& info) {
     lblVolumen->setText(helper.asQString(sVolumen));
 }
 
-void VerEmbalses::showStatsPorZona(string codZona) {
+void VerEmbalses::showStatsPorZona(string codZona, string date) {
     try {
         AppContext& context = AppContext::getInstance();
         
-        Dataframe df = context.getDataframeZona(codZona);
+        Dataframe df = context.getDataframeZonaAndDate(codZona, date);
         
         MeanVisitor<double, unsigned long> mean_v;
         MinVisitor<double, unsigned long> min_v;
@@ -309,13 +312,9 @@ void VerEmbalses::showStatsPorZona(string codZona) {
     }
 }
 
-void VerEmbalses::setStatus() {
+void VerEmbalses::setStatus(string date) {
     try {
-        AppContext& context = AppContext::getInstance();
-        
-        string last = context.getLastExecution();
-        
-        string label = "Datos a fecha: " + last;
+        string label = "Datos a fecha: " + date;
         statusbar->showMessage(helper.asQString(label));
     } catch (const exception& e) {
         spdlog::error(e.what());
