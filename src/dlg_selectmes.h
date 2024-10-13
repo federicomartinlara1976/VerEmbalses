@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg_select-mesXUEyLo.ui'
+** Form generated from reading UI file 'dlg_select-mesdhZFjj.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.3
+** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_SELECT_2D_MESXUEYLO_H
-#define DLG_SELECT_2D_MESXUEYLO_H
+#ifndef DLG_SELECT_2D_MESDHZFJJ_H
+#define DLG_SELECT_2D_MESDHZFJJ_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -34,6 +34,13 @@ public:
         if (DialogSelectMes->objectName().isEmpty())
             DialogSelectMes->setObjectName(QString::fromUtf8("DialogSelectMes"));
         DialogSelectMes->resize(348, 131);
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(DialogSelectMes->sizePolicy().hasHeightForWidth());
+        DialogSelectMes->setSizePolicy(sizePolicy);
+        DialogSelectMes->setMinimumSize(QSize(348, 131));
+        DialogSelectMes->setMaximumSize(QSize(348, 131));
         verticalLayout = new QVBoxLayout(DialogSelectMes);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
@@ -44,7 +51,6 @@ public:
         QFont font;
         font.setPointSize(11);
         font.setBold(true);
-        font.setWeight(75);
         lblEstado->setFont(font);
         lblEstado->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
 
@@ -87,4 +93,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_SELECT_2D_MESXUEYLO_H
+#endif // DLG_SELECT_2D_MESDHZFJJ_H
