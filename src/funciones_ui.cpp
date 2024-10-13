@@ -233,7 +233,7 @@ unique_ptr<vector<InfoEmbalse>> AppContext::getEmbalsesPorZona(string collection
     }
 }
 
-FuncionesUi::Dataframe AppContext::getDataframePorFecha(string codEmbalse, QDate& desde, QDate& hasta) {
+FuncionesUi::Dataframe AppContext::getDataframePorRangoFechas(string codEmbalse, QDate& desde, QDate& hasta) {
     vector<InfoEmbalse> registros = getPorFechas(codEmbalse, desde, hasta);
     
     data::ColumnData<ulong> cIndex("Index");
@@ -381,7 +381,7 @@ InfoEmbalse AppContext::getIdEmbalse(bsoncxx::v_noabi::document::view doc) {
 
 Dataframe AppContext::getDataframe(string codEmbalse, QDate& desde, QDate& hasta) {
     try {
-        return getDataframePorFecha(codEmbalse, desde, hasta);
+        return getDataframePorRangoFechas(codEmbalse, desde, hasta);
     } catch (const exception& e) {
         spdlog::error(e.what());
         throw e;

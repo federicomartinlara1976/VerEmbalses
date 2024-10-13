@@ -52,7 +52,7 @@ namespace FuncionesUi {
         vector<InfoEmbalse> getPorFechas(string collectionName, QDate& desde, QDate& hasta);
         unique_ptr<vector<InfoZona>> getZonas();
         
-        Dataframe getDataframePorFecha(string codEmbalse, QDate& desde, QDate& hasta);
+        Dataframe getDataframePorRangoFechas(string codEmbalse, QDate& desde, QDate& hasta);
         InfoEmbalse createInfoEmbalse(string codEmbalse, bsoncxx::v_noabi::document::view doc);
         InfoEmbalse getIdEmbalse(bsoncxx::v_noabi::document::view doc);
         string buildCsvHeader(Dataframe& dataFrame, const string& fieldSeparator);
