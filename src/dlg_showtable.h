@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg-show-tableGdEZMI.ui'
+** Form generated from reading UI file 'dlg-show-tablegdXGno.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.3
+** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_2D_SHOW_2D_TABLEGDEZMI_H
-#define DLG_2D_SHOW_2D_TABLEGDEZMI_H
+#ifndef DLG_2D_SHOW_2D_TABLEGDXGNO_H
+#define DLG_2D_SHOW_2D_TABLEGDXGNO_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -17,6 +17,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
@@ -46,6 +47,7 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QToolButton *btnExportarCSV;
     QToolButton *btnVerGrafico;
+    QSpacerItem *horizontalSpacer;
     QTableView *tblResultados;
     QDialogButtonBox *buttonBox;
 
@@ -64,7 +66,6 @@ public:
         QFont font;
         font.setPointSize(12);
         font.setBold(true);
-        font.setWeight(75);
         lblNombreEmbalse->setFont(font);
         lblNombreEmbalse->setAlignment(Qt::AlignCenter);
 
@@ -159,13 +160,23 @@ public:
         horizontalLayout_3->setContentsMargins(10, 10, 10, 10);
         btnExportarCSV = new QToolButton(DialogShowTable);
         btnExportarCSV->setObjectName(QString::fromUtf8("btnExportarCSV"));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8("../../../../../usr/share/icons/gnome/22x22/apps/libreoffice-calc.png"), QSize(), QIcon::Normal, QIcon::Off);
+        btnExportarCSV->setIcon(icon);
 
         horizontalLayout_3->addWidget(btnExportarCSV);
 
         btnVerGrafico = new QToolButton(DialogShowTable);
         btnVerGrafico->setObjectName(QString::fromUtf8("btnVerGrafico"));
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8("../../../../../usr/share/icons/Humanity/categories/22/redhat-office.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnVerGrafico->setIcon(icon1);
 
         horizontalLayout_3->addWidget(btnVerGrafico);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer);
 
 
         verticalLayout->addLayout(horizontalLayout_3);
@@ -223,4 +234,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_2D_SHOW_2D_TABLEGDEZMI_H
+#endif // DLG_2D_SHOW_2D_TABLEGDXGNO_H

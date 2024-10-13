@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'ver_embalsesvaydVy.ui'
+** Form generated from reading UI file 'ver_embalsesnDKiBv.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef VER_EMBALSESVAYDVY_H
-#define VER_EMBALSESVAYDVY_H
+#ifndef VER_EMBALSESNDKIBV_H
+#define VER_EMBALSESNDKIBV_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -19,6 +19,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -86,6 +87,7 @@ public:
     QVBoxLayout *verticalLayout_11;
     QPushButton *btnVerGrafico;
     QPushButton *btnExportarCSV;
+    QSpacerItem *verticalSpacer;
     QMenuBar *menubar;
     QMenu *menuConsulta;
     QMenu *menuGeneral;
@@ -501,6 +503,10 @@ public:
 
         verticalLayout_11->addWidget(btnExportarCSV);
 
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_11->addItem(verticalSpacer);
+
 
         horizontalLayout_2->addLayout(verticalLayout_11);
 
@@ -584,4 +590,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // VER_EMBALSESVAYDVY_H
+#endif // VER_EMBALSESNDKIBV_H
