@@ -483,3 +483,46 @@ void AppContext::saveDataframe(FuncionesUi::Dataframe& dataframe, QWidget *paren
 int AppContext::getDataframeSize(FuncionesUi::Dataframe& dataframe) {
     return dataframe.get_index().size();
 }
+
+std::tuple<double*, double*> AppContext::getStatsPorZonaYFecha(string codZona, string date) {
+    try {
+        Dataframe df = getDataframeZonaAndDate(codZona, date);
+
+        double* statsNivel = new double[4];
+        double* statsVolumen = new double[4];
+
+        MeanVisitor<double, unsigned long> mean_v;
+        MinVisitor<double, unsigned long> min_v;
+        MaxVisitor<double, unsigned long> max_v;
+        SumVisitor<double, unsigned long> sum_v;
+
+        df.visit<double>("Nivel", mean_v);
+        statsNivel[0] = mean_v.get_result();
+
+        df.visit<double>("Volumen", mean_v);
+        statsVolumen[0] = mean_v.get_result();
+
+        df.visit<double>("Nivel", min_v);
+        statsNivel[1] = min_v.get_result();
+
+        df.visit<double>("Volumen", min_v);
+        statsVolumen[1] = min_v.get_result();
+
+        df.visit<double>("Nivel", max_v);
+        statsNivel[2] = max_v.get_result();
+
+        df.visit<double>("Volumen", max_v);
+        statsVolumen[2] = max_v.get_result();
+
+        df.visit<double>("Nivel", sum_v);
+        statsNivel[3] = sum_v.get_result();
+
+        df.visit<double>("Volumen", sum_v);
+        statsVolumen[3] = max_v.get_result();
+
+        return make_tuple(statsNivel, statsVolumen);
+    } catch (const exception& e) {
+        spdlog::error("ERROR getStatsPorZonaYFecha: {}", e.what());
+        throw e;
+    }
+}

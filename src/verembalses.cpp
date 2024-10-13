@@ -268,43 +268,30 @@ void VerEmbalses::showStatsPorZona(string codZona, string date) {
     try {
         AppContext& context = AppContext::getInstance();
         
-        Dataframe df = context.getDataframeZonaAndDate(codZona, date);
+        std::tuple<double*, double*> stats = context.getStatsPorZonaYFecha(codZona, date);
         
-        MeanVisitor<double, unsigned long> mean_v;
-        MinVisitor<double, unsigned long> min_v;
-        MaxVisitor<double, unsigned long> max_v;
-        SumVisitor<double, unsigned long> sum_v;
-
-        df.visit<double>("Nivel", mean_v);
-        std::string sMedia = fmt::format(Constants::NUMBER_FORMAT, mean_v.get_result());
+        std::string sMedia = fmt::format(Constants::NUMBER_FORMAT, get<0>(stats)[0]);
         lblNivelMedia->setText(helper.asQString(sMedia));
         
-        df.visit<double>("Volumen", mean_v);
-        sMedia = fmt::format(Constants::NUMBER_FORMAT, mean_v.get_result());
+        sMedia = fmt::format(Constants::NUMBER_FORMAT, get<1>(stats)[0]);
         lblVolumenMedia->setText(helper.asQString(sMedia));
         
-        df.visit<double>("Nivel", min_v);
-        std::string sMinimo = fmt::format(Constants::NUMBER_FORMAT, min_v.get_result());
+        std::string sMinimo = fmt::format(Constants::NUMBER_FORMAT, get<0>(stats)[1]);
         lblNivelMinimo->setText(helper.asQString(sMinimo));
         
-        df.visit<double>("Volumen", min_v);
-        sMinimo = fmt::format(Constants::NUMBER_FORMAT, min_v.get_result());
+        sMinimo = fmt::format(Constants::NUMBER_FORMAT, get<1>(stats)[1]);
         lblVolumenMinimo->setText(helper.asQString(sMinimo));
         
-        df.visit<double>("Nivel", max_v);
-        std::string sMax = fmt::format(Constants::NUMBER_FORMAT, max_v.get_result());
+        std::string sMax = fmt::format(Constants::NUMBER_FORMAT, get<0>(stats)[2]);
         lblNivelMaximo->setText(helper.asQString(sMax));
         
-        df.visit<double>("Volumen", max_v);
-        sMax = fmt::format(Constants::NUMBER_FORMAT, max_v.get_result());
+        sMax = fmt::format(Constants::NUMBER_FORMAT, get<1>(stats)[2]);
         lblVolumenMaximo->setText(helper.asQString(sMax));
 
-        df.visit<double>("Nivel", sum_v);
-        std::string sSum = fmt::format(Constants::NUMBER_FORMAT, sum_v.get_result());
+        std::string sSum = fmt::format(Constants::NUMBER_FORMAT, get<0>(stats)[3]);
         lblNivelTotal->setText(helper.asQString(sSum));
 
-        df.visit<double>("Volumen", sum_v);
-        sSum = fmt::format(Constants::NUMBER_FORMAT, max_v.get_result());
+        sSum = fmt::format(Constants::NUMBER_FORMAT, get<1>(stats)[3]);
         lblVolumenTotal->setText(helper.asQString(sSum));
     } catch (const exception& e) {
         spdlog::error("ERROR getStatsPorZona: {}", e.what());

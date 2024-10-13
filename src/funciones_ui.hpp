@@ -82,6 +82,7 @@ namespace FuncionesUi {
         string getLastExecution();
         Dataframe getDataframe(string codEmbalse, QDate& desde, QDate& hasta);
         void saveDataframe(Dataframe& dataframe, QWidget *parent, const string& filetype = Constants::CSV_FILE_TYPE);
+        std::tuple<double*, double*> getStatsPorZonaYFecha(string codZona, string date);
         
         virtual ~AppContext();
     };
