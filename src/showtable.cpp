@@ -78,7 +78,12 @@ void DlgShowTable::setCodZona(const string codZona) {
     InfoZona info = context.getZona(codZona);
     spdlog::info("{} - {}", info.codZona, info.nombre);
 
+    double totalCapacidad = context.getTotalCapacidadZona(codZona);
+    std::string sTotalCapacidad = fmt::format(Constants::NUMBER_FORMAT, totalCapacidad);
+    lblCapacidad->setText(helper.asQString(sTotalCapacidad));
+
     this->lblTituloTabla->setText(helper.asQString(info.nombre));
+    this->menContainer->setVisible(false);
 }
     
 void DlgShowTable::setFechas(const QDate fechaDesde, const QDate fechaHasta) {

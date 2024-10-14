@@ -212,6 +212,50 @@ FuncionesUi::Dataframe AppContext::getDataframeZonaAndDate(string codZona, strin
     }
 }
 
+FuncionesUi::Dataframe AppContext::getDataframeZona(string codZona) {
+    try {
+        spdlog::info("Dataframe para la zona {}", codZona);
+        unique_ptr<vector<InfoEmbalse>> embalses = getEmbalsesPorZona("Embalses", codZona);
+
+        data::ColumnData<unsigned long> cIndex("Index");
+        vector<unsigned long> indices;
+        data::ColumnData<double> cNivel("Nivel");
+        vector<double> niveles;
+        data::ColumnData<double> cVolumen("Volumen");
+        vector<double> volumenes;
+        data::ColumnData<double> cCapacidad("Capacidad");
+        vector<double> capacidades;
+
+        unsigned long index = 0;
+        for (InfoEmbalse& embalse : *embalses) {
+            string codEmbalse = embalse.codEmbalse;
+            InfoEmbalse info = getEmbalseInfoByDate(codEmbalse, getLastExecution());
+            indices.push_back(index);
+            niveles.push_back(info.nivel);
+            volumenes.push_back(info.volumen);
+            capacidades.push_back(info.capacidad);
+            index++;
+        }
+
+        cIndex.setData(indices);
+        cNivel.setData(niveles);
+        cVolumen.setData(volumenes);
+        cCapacidad.setData(capacidades);
+
+        FuncionesUi::Dataframe ul_df2;
+
+        ul_df2.load_data(std::move(cIndex.getData()),
+                     std::make_pair(appHelper.asCharArray(cNivel.getName()), cNivel.getData()),
+                     std::make_pair(appHelper.asCharArray(cVolumen.getName()), cVolumen.getData()),
+                     std::make_pair(appHelper.asCharArray(cCapacidad.getName()), cCapacidad.getData()));
+
+        return ul_df2;
+    } catch (const exception& e) {
+        spdlog::error("ERROR getDataframeZona: {}", e.what());
+        throw e;
+    }
+}
+
 unique_ptr<vector<InfoEmbalse>> AppContext::getEmbalsesPorZona(string collectionName, string codZona) {
     try {
         unique_ptr<vector<InfoEmbalse>> v = unique_ptr<vector<InfoEmbalse>>{new vector<InfoEmbalse>()};
@@ -398,7 +442,7 @@ InfoEmbalse AppContext::getIdEmbalse(bsoncxx::v_noabi::document::view doc) {
     return info;
 }
 
-Dataframe AppContext::getDataframe(string codEmbalse, QDate& desde, QDate& hasta) {
+Dataframe AppContext::getDataframeEmbalse(string codEmbalse, QDate& desde, QDate& hasta) {
     try {
         return getDataframePorRangoFechas(codEmbalse, desde, hasta);
     } catch (const exception& e) {
@@ -535,11 +579,28 @@ std::tuple<double*, double*> AppContext::getStatsPorZonaYFecha(string codZona, s
         statsNivel[3] = sum_v.get_result();
 
         df.visit<double>("Volumen", sum_v);
-        statsVolumen[3] = max_v.get_result();
+        statsVolumen[3] = sum_v.get_result();
 
         return make_tuple(statsNivel, statsVolumen);
     } catch (const exception& e) {
         spdlog::error("ERROR getStatsPorZonaYFecha: {}", e.what());
+        throw e;
+    }
+}
+
+double AppContext::getTotalCapacidadZona(string codZona) {
+    try {
+        double totalCapacidad = 0.0;
+        Dataframe df = getDataframeZona(codZona);
+
+        SumVisitor<double, unsigned long> sum_v;
+
+        df.visit<double>("Capacidad", sum_v);
+        totalCapacidad = sum_v.get_result();
+
+        return totalCapacidad;
+    } catch (const exception& e) {
+        spdlog::error("ERROR getTotalCapacidadZona: {}", e.what());
         throw e;
     }
 }

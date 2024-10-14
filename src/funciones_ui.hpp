@@ -78,12 +78,20 @@ namespace FuncionesUi {
         
         InfoEmbalse getEmbalseInfoByDate(string collectionName, string date);
         InfoEmbalse getEmbalseInfo(string codEmbalse);
+
         InfoZona getZona(string codZona);
+        Dataframe getDataframeZona(string codZona);
         Dataframe getDataframeZonaAndDate(string codZona, string date);
+
         string getLastExecution();
-        Dataframe getDataframe(string codEmbalse, QDate& desde, QDate& hasta);
+
+        Dataframe getDataframeEmbalse(string codEmbalse, QDate& desde, QDate& hasta);
+
         void saveDataframe(Dataframe& dataframe, QWidget *parent, const string& filetype = Constants::CSV_FILE_TYPE);
+
         std::tuple<double*, double*> getStatsPorZonaYFecha(string codZona, string date);
+
+        double getTotalCapacidadZona(string codZona);
         
         virtual ~AppContext();
     };

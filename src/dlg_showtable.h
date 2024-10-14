@@ -1,18 +1,19 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg-show-tableyWlLdQ.ui'
+** Form generated from reading UI file 'dlg-show-tablePAImmi.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_2D_SHOW_2D_TABLEYWLLDQ_H
-#define DLG_2D_SHOW_2D_TABLEYWLLDQ_H
+#ifndef DLG_2D_SHOW_2D_TABLEPAIMMI_H
+#define DLG_2D_SHOW_2D_TABLEPAIMMI_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -30,11 +31,11 @@ public:
     QVBoxLayout *verticalLayout;
     QLabel *lblTituloTabla;
     QHBoxLayout *horizontalLayout_2;
-    QVBoxLayout *capacidadContainer;
-    QLabel *label_4;
+    QGroupBox *capacidadContainer;
+    QVBoxLayout *_2;
     QLabel *lblCapacidad;
-    QVBoxLayout *menContainer;
-    QLabel *label_5;
+    QGroupBox *menContainer;
+    QVBoxLayout *_3;
     QLabel *lblMen;
     QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout_3;
@@ -73,41 +74,38 @@ public:
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(10, 10, 10, 10);
-        capacidadContainer = new QVBoxLayout();
+        capacidadContainer = new QGroupBox(DialogShowTable);
         capacidadContainer->setObjectName(QString::fromUtf8("capacidadContainer"));
-        label_4 = new QLabel(DialogShowTable);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-        label_4->setAlignment(Qt::AlignCenter);
-
-        capacidadContainer->addWidget(label_4);
-
-        lblCapacidad = new QLabel(DialogShowTable);
+        QFont font1;
+        font1.setBold(true);
+        capacidadContainer->setFont(font1);
+        capacidadContainer->setFlat(false);
+        _2 = new QVBoxLayout(capacidadContainer);
+        _2->setObjectName(QString::fromUtf8("_2"));
+        lblCapacidad = new QLabel(capacidadContainer);
         lblCapacidad->setObjectName(QString::fromUtf8("lblCapacidad"));
         lblCapacidad->setFont(font);
         lblCapacidad->setAlignment(Qt::AlignCenter);
 
-        capacidadContainer->addWidget(lblCapacidad);
+        _2->addWidget(lblCapacidad);
 
 
-        horizontalLayout_2->addLayout(capacidadContainer);
+        horizontalLayout_2->addWidget(capacidadContainer);
 
-        menContainer = new QVBoxLayout();
+        menContainer = new QGroupBox(DialogShowTable);
         menContainer->setObjectName(QString::fromUtf8("menContainer"));
-        label_5 = new QLabel(DialogShowTable);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
-        label_5->setAlignment(Qt::AlignCenter);
-
-        menContainer->addWidget(label_5);
-
-        lblMen = new QLabel(DialogShowTable);
+        menContainer->setFont(font1);
+        _3 = new QVBoxLayout(menContainer);
+        _3->setObjectName(QString::fromUtf8("_3"));
+        lblMen = new QLabel(menContainer);
         lblMen->setObjectName(QString::fromUtf8("lblMen"));
         lblMen->setFont(font);
         lblMen->setAlignment(Qt::AlignCenter);
 
-        menContainer->addWidget(lblMen);
+        _3->addWidget(lblMen);
 
 
-        horizontalLayout_2->addLayout(menContainer);
+        horizontalLayout_2->addWidget(menContainer);
 
 
         verticalLayout->addLayout(horizontalLayout_2);
@@ -201,9 +199,9 @@ public:
     {
         DialogShowTable->setWindowTitle(QCoreApplication::translate("DialogShowTable", "Datos por fecha", nullptr));
         lblTituloTabla->setText(QCoreApplication::translate("DialogShowTable", "TextLabel", nullptr));
-        label_4->setText(QCoreApplication::translate("DialogShowTable", "Capacidad (Hm3)", nullptr));
+        capacidadContainer->setTitle(QCoreApplication::translate("DialogShowTable", "Capacidad (Hm3)", nullptr));
         lblCapacidad->setText(QCoreApplication::translate("DialogShowTable", "--", nullptr));
-        label_5->setText(QCoreApplication::translate("DialogShowTable", "MEN (m.s.n.m.)", nullptr));
+        menContainer->setTitle(QCoreApplication::translate("DialogShowTable", "MEN (m.s.n.m.)", nullptr));
         lblMen->setText(QCoreApplication::translate("DialogShowTable", "--", nullptr));
         label->setText(QCoreApplication::translate("DialogShowTable", "Desde", nullptr));
         lblDesde->setText(QCoreApplication::translate("DialogShowTable", "--", nullptr));
@@ -227,4 +225,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_2D_SHOW_2D_TABLEYWLLDQ_H
+#endif // DLG_2D_SHOW_2D_TABLEPAIMMI_H
