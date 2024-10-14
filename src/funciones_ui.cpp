@@ -305,6 +305,25 @@ InfoEmbalse AppContext::getEmbalseInfoByDate(string collectionName, string date)
     }
 }
 
+InfoEmbalse AppContext::getEmbalseInfo(string codEmbalse) {
+    try {
+        InfoEmbalse info{};
+        DataEngine& dbInstance = getDataEngine();
+
+        auto collection = dbInstance.getCollection("Embalses");
+
+        bsoncxx::stdx::optional<bsoncxx::document::value> oElement = collection.find_one(make_document(kvp("_id", make_document(kvp("$eq", codEmbalse)))));
+        if(oElement) {
+            auto doc = oElement.get();
+            info = getIdEmbalse(doc);
+        }
+
+        return info;
+    } catch (const exception& e) {
+        throw (e);
+    }
+}
+
 string AppContext::getLastExecution() {
     try {
         string last = {};

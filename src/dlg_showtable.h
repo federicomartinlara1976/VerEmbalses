@@ -1,16 +1,15 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg-show-tablegdXGno.ui'
+** Form generated from reading UI file 'dlg-show-tableyWlLdQ.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_2D_SHOW_2D_TABLEGDXGNO_H
-#define DLG_2D_SHOW_2D_TABLEGDXGNO_H
+#ifndef DLG_2D_SHOW_2D_TABLEYWLLDQ_H
+#define DLG_2D_SHOW_2D_TABLEYWLLDQ_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
@@ -29,12 +28,12 @@ class Ui_DialogShowTable
 public:
     QVBoxLayout *verticalLayout_6;
     QVBoxLayout *verticalLayout;
-    QLabel *lblNombreEmbalse;
+    QLabel *lblTituloTabla;
     QHBoxLayout *horizontalLayout_2;
-    QVBoxLayout *verticalLayout_5;
+    QVBoxLayout *capacidadContainer;
     QLabel *label_4;
     QLabel *lblCapacidad;
-    QVBoxLayout *verticalLayout_4;
+    QVBoxLayout *menContainer;
     QLabel *label_5;
     QLabel *lblMen;
     QHBoxLayout *horizontalLayout;
@@ -61,54 +60,54 @@ public:
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(10, 10, 10, 10);
-        lblNombreEmbalse = new QLabel(DialogShowTable);
-        lblNombreEmbalse->setObjectName(QString::fromUtf8("lblNombreEmbalse"));
+        lblTituloTabla = new QLabel(DialogShowTable);
+        lblTituloTabla->setObjectName(QString::fromUtf8("lblTituloTabla"));
         QFont font;
         font.setPointSize(12);
         font.setBold(true);
-        lblNombreEmbalse->setFont(font);
-        lblNombreEmbalse->setAlignment(Qt::AlignCenter);
+        lblTituloTabla->setFont(font);
+        lblTituloTabla->setAlignment(Qt::AlignCenter);
 
-        verticalLayout->addWidget(lblNombreEmbalse);
+        verticalLayout->addWidget(lblTituloTabla);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(10, 10, 10, 10);
-        verticalLayout_5 = new QVBoxLayout();
-        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        capacidadContainer = new QVBoxLayout();
+        capacidadContainer->setObjectName(QString::fromUtf8("capacidadContainer"));
         label_4 = new QLabel(DialogShowTable);
         label_4->setObjectName(QString::fromUtf8("label_4"));
         label_4->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_5->addWidget(label_4);
+        capacidadContainer->addWidget(label_4);
 
         lblCapacidad = new QLabel(DialogShowTable);
         lblCapacidad->setObjectName(QString::fromUtf8("lblCapacidad"));
         lblCapacidad->setFont(font);
         lblCapacidad->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_5->addWidget(lblCapacidad);
+        capacidadContainer->addWidget(lblCapacidad);
 
 
-        horizontalLayout_2->addLayout(verticalLayout_5);
+        horizontalLayout_2->addLayout(capacidadContainer);
 
-        verticalLayout_4 = new QVBoxLayout();
-        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        menContainer = new QVBoxLayout();
+        menContainer->setObjectName(QString::fromUtf8("menContainer"));
         label_5 = new QLabel(DialogShowTable);
         label_5->setObjectName(QString::fromUtf8("label_5"));
         label_5->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_4->addWidget(label_5);
+        menContainer->addWidget(label_5);
 
         lblMen = new QLabel(DialogShowTable);
         lblMen->setObjectName(QString::fromUtf8("lblMen"));
         lblMen->setFont(font);
         lblMen->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_4->addWidget(lblMen);
+        menContainer->addWidget(lblMen);
 
 
-        horizontalLayout_2->addLayout(verticalLayout_4);
+        horizontalLayout_2->addLayout(menContainer);
 
 
         verticalLayout->addLayout(horizontalLayout_2);
@@ -160,17 +159,11 @@ public:
         horizontalLayout_3->setContentsMargins(10, 10, 10, 10);
         btnExportarCSV = new QToolButton(DialogShowTable);
         btnExportarCSV->setObjectName(QString::fromUtf8("btnExportarCSV"));
-        QIcon icon;
-        icon.addFile(QString::fromUtf8("../../../../../usr/share/icons/gnome/22x22/apps/libreoffice-calc.png"), QSize(), QIcon::Normal, QIcon::Off);
-        btnExportarCSV->setIcon(icon);
 
         horizontalLayout_3->addWidget(btnExportarCSV);
 
         btnVerGrafico = new QToolButton(DialogShowTable);
         btnVerGrafico->setObjectName(QString::fromUtf8("btnVerGrafico"));
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8("../../../../../usr/share/icons/Humanity/categories/22/redhat-office.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        btnVerGrafico->setIcon(icon1);
 
         horizontalLayout_3->addWidget(btnVerGrafico);
 
@@ -207,7 +200,7 @@ public:
     void retranslateUi(QDialog *DialogShowTable)
     {
         DialogShowTable->setWindowTitle(QCoreApplication::translate("DialogShowTable", "Datos por fecha", nullptr));
-        lblNombreEmbalse->setText(QCoreApplication::translate("DialogShowTable", "TextLabel", nullptr));
+        lblTituloTabla->setText(QCoreApplication::translate("DialogShowTable", "TextLabel", nullptr));
         label_4->setText(QCoreApplication::translate("DialogShowTable", "Capacidad (Hm3)", nullptr));
         lblCapacidad->setText(QCoreApplication::translate("DialogShowTable", "--", nullptr));
         label_5->setText(QCoreApplication::translate("DialogShowTable", "MEN (m.s.n.m.)", nullptr));
@@ -234,4 +227,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_2D_SHOW_2D_TABLEGDXGNO_H
+#endif // DLG_2D_SHOW_2D_TABLEYWLLDQ_H

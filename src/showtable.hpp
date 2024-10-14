@@ -25,6 +25,7 @@ private:
     QtHelper helper;
     
     string codEmbalse;
+    string codZona;
     QDate fechaDesde;
     QDate fechaHasta;
     
@@ -45,6 +46,7 @@ public:
     DlgShowTable(QWidget* parent = nullptr);
     
     void setCodEmbalse(const string codEmbalse);
+    void setCodZona(const string codZona);
     void setFechas(const QDate fechaDesde, const QDate fechaHasta);
     
     void setData(const FuncionesUi::Dataframe& dataframe);
