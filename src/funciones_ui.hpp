@@ -51,8 +51,10 @@ namespace FuncionesUi {
         unique_ptr<vector<InfoEmbalse>> getEmbalsesPorZona(string collectionName, string codZona);
         vector<InfoEmbalse> getPorFechas(string collectionName, QDate& desde, QDate& hasta);
         unique_ptr<vector<InfoZona>> getZonas();
+        vector<string> getExecutions(QDate& desde, QDate& hasta);
         
-        Dataframe getDataframePorRangoFechas(string codEmbalse, QDate& desde, QDate& hasta);
+        Dataframe getDataframePorEmbalseYRangoFechas(string codEmbalse, QDate& desde, QDate& hasta);
+        Dataframe getDataframePorZonaYRangoFechas(string codZona, QDate& desde, QDate& hasta);
         InfoEmbalse createInfoEmbalse(string codEmbalse, bsoncxx::v_noabi::document::view doc);
         InfoEmbalse getIdEmbalse(bsoncxx::v_noabi::document::view doc);
         string buildCsvHeader(Dataframe& dataFrame, const string& fieldSeparator);
@@ -85,7 +87,8 @@ namespace FuncionesUi {
 
         string getLastExecution();
 
-        Dataframe getDataframeEmbalse(string codEmbalse, QDate& desde, QDate& hasta);
+        Dataframe getDataframeEmbalseyFechas(string codEmbalse, QDate& desde, QDate& hasta);
+        Dataframe getDataframeZonayFechas(string codZona, QDate& desde, QDate& hasta);
 
         void saveDataframe(Dataframe& dataframe, QWidget *parent, const string& filetype = Constants::CSV_FILE_TYPE);
 

@@ -277,7 +277,7 @@ unique_ptr<vector<InfoEmbalse>> AppContext::getEmbalsesPorZona(string collection
     }
 }
 
-FuncionesUi::Dataframe AppContext::getDataframePorRangoFechas(string codEmbalse, QDate& desde, QDate& hasta) {
+FuncionesUi::Dataframe AppContext::getDataframePorEmbalseYRangoFechas(string codEmbalse, QDate& desde, QDate& hasta) {
     vector<InfoEmbalse> registros = getPorFechas(codEmbalse, desde, hasta);
     
     data::ColumnData<ulong> cIndex("Index");
@@ -328,6 +328,113 @@ FuncionesUi::Dataframe AppContext::getDataframePorRangoFechas(string codEmbalse,
                     std::make_pair(appHelper.asCharArray(cCapacidad.getName()), cCapacidad.getData()));
         
     return ul_df2;
+}
+
+FuncionesUi::Dataframe AppContext::getDataframePorZonaYRangoFechas(string codZona, QDate& desde, QDate& hasta) {
+    // Obtener las ejecuciones entre las fechas
+    vector<string> ejecuciones = getExecutions(desde, hasta);
+
+    data::ColumnData<ulong> cIndex("Index");
+    vector<ulong> indices;
+    data::ColumnData<string> cFecha("Fecha");
+    vector<string> fechas;
+
+    data::ColumnData<double> cNivelMedia("MediaNivel");
+    vector<double> mediaNiveles;
+    data::ColumnData<double> cNivelMinimo("MinimoNivel");
+    vector<double> minimoNiveles;
+    data::ColumnData<double> cNivelMaximo("MaximoNivel");
+    vector<double> maximoNiveles;
+    data::ColumnData<double> cNivelSuma("SumaNivel");
+    vector<double> sumaNiveles;
+
+    data::ColumnData<double> cVolumenMedia("MediaVolumen");
+    vector<double> mediaVolumenes;
+    data::ColumnData<double> cVolumenMinimo("MinimoVolumen");
+    vector<double> minimoVolumenes;
+    data::ColumnData<double> cVolumenMaximo("MaximoVolumen");
+    vector<double> maximoVolumenes;
+    data::ColumnData<double> cVolumenSuma("SumaVolumen");
+    vector<double> sumaVolumenes;
+
+
+    // Para cada ejecución, obtener el dataframe de las estadísticas de la zona
+    ulong index = 0;
+    for (string fecha : ejecuciones) {
+        spdlog::info("Zona: {}, fecha: {}", codZona, fecha);
+
+        std::tuple<double*, double*> stats = getStatsPorZonaYFecha(codZona, fecha);
+        double* statsNivel = std::get<0>(stats);
+        double* statsVolumen = std::get<1>(stats);
+
+        indices.push_back(index);
+        fechas.push_back(fecha);
+
+        mediaNiveles.push_back(statsNivel[0]);
+        minimoNiveles.push_back(statsNivel[1]);
+        maximoNiveles.push_back(statsNivel[2]);
+        sumaNiveles.push_back(statsNivel[3]);
+
+        mediaVolumenes.push_back(statsVolumen[0]);
+        minimoVolumenes.push_back(statsVolumen[1]);
+        maximoVolumenes.push_back(statsVolumen[2]);
+        sumaVolumenes.push_back(statsVolumen[3]);
+
+        index++;
+    }
+
+    cIndex.setData(indices);
+    cFecha.setData(fechas);
+
+    cNivelMedia.setData(mediaNiveles);
+    cNivelMinimo.setData(minimoNiveles);
+    cNivelMaximo.setData(maximoNiveles);
+    cNivelSuma.setData(sumaNiveles);
+
+    cVolumenMedia.setData(mediaVolumenes);
+    cVolumenMinimo.setData(minimoVolumenes);
+    cVolumenMaximo.setData(maximoVolumenes);
+    cVolumenSuma.setData(sumaVolumenes);
+
+    FuncionesUi::Dataframe ul_df2;
+
+    ul_df2.load_data(std::move(cIndex.getData()),
+                    std::make_pair(appHelper.asCharArray(cFecha.getName()), cFecha.getData()),
+                    std::make_pair(appHelper.asCharArray(cNivelMedia.getName()), cNivelMedia.getData()),
+                    std::make_pair(appHelper.asCharArray(cNivelMinimo.getName()), cNivelMinimo.getData()),
+                    std::make_pair(appHelper.asCharArray(cNivelMaximo.getName()), cNivelMaximo.getData()),
+                    std::make_pair(appHelper.asCharArray(cNivelSuma.getName()), cNivelSuma.getData()),
+                    std::make_pair(appHelper.asCharArray(cVolumenMedia.getName()), cVolumenMedia.getData()),
+                    std::make_pair(appHelper.asCharArray(cVolumenMinimo.getName()), cVolumenMinimo.getData()),
+                    std::make_pair(appHelper.asCharArray(cVolumenMaximo.getName()), cVolumenMaximo.getData()),
+                    std::make_pair(appHelper.asCharArray(cVolumenSuma.getName()), cVolumenSuma.getData()));
+
+    return ul_df2;
+}
+
+vector<string> AppContext::getExecutions(QDate& desde, QDate& hasta) {
+    try {
+        vector<string> v;
+
+        DataEngine& dbInstance = getDataEngine();
+
+        const QString format = qtHelper.asQString(Constants::DATE_FORMAT);
+
+        string sDesde = qtHelper.asString(desde.toString(format));
+        string sHasta = qtHelper.asString(hasta.toString(format));
+
+        collection collection = dbInstance.getCollection("Executions");
+        cursor cursor_ejecuciones = collection.find(make_document(kvp("_id", make_document(kvp("$gte", sDesde), kvp("$lte", sHasta)))));
+
+        for (bsoncxx::v_noabi::document::view ejecucion : cursor_ejecuciones) {
+            v.push_back(string(ejecucion["_id"].get_string().value));
+        }
+
+        return v;
+    } catch (const exception& e) {
+        spdlog::error("ERROR getExecutions: {}", e.what());
+        throw e;
+    }
 }
 
 InfoEmbalse AppContext::getEmbalseInfoByDate(string collectionName, string date) {
@@ -442,9 +549,18 @@ InfoEmbalse AppContext::getIdEmbalse(bsoncxx::v_noabi::document::view doc) {
     return info;
 }
 
-Dataframe AppContext::getDataframeEmbalse(string codEmbalse, QDate& desde, QDate& hasta) {
+Dataframe AppContext::getDataframeEmbalseyFechas(string codEmbalse, QDate& desde, QDate& hasta) {
     try {
-        return getDataframePorRangoFechas(codEmbalse, desde, hasta);
+        return getDataframePorEmbalseYRangoFechas(codEmbalse, desde, hasta);
+    } catch (const exception& e) {
+        spdlog::error(e.what());
+        throw e;
+    }
+}
+
+Dataframe AppContext::getDataframeZonayFechas(string codZona, QDate& desde, QDate& hasta) {
+    try {
+        return getDataframePorZonaYRangoFechas(codZona, desde, hasta);
     } catch (const exception& e) {
         spdlog::error(e.what());
         throw e;

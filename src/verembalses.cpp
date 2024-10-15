@@ -127,7 +127,7 @@ void VerEmbalses::showGraphicClicked() {
             return;
     
         if (fechaDesde < fechaHasta) {
-            Dataframe df = context.getDataframeEmbalse(codEmbalse, fechaDesde, fechaHasta);
+            Dataframe df = context.getDataframeEmbalseyFechas(codEmbalse, fechaDesde, fechaHasta);
             
             // Remove the columns MEN and Capacidad
             df.remove_column("MEN");
@@ -158,7 +158,7 @@ void VerEmbalses::showExcelClicked() {
             return;
         
         if (fechaDesde < fechaHasta) {
-            StdDataFrame<unsigned long> dataframe = context.getDataframeEmbalse(codEmbalse, fechaDesde, fechaHasta);
+            StdDataFrame<unsigned long> dataframe = context.getDataframeEmbalseyFechas(codEmbalse, fechaDesde, fechaHasta);
         
             context.saveDataframe(dataframe, this);
         }
@@ -183,10 +183,12 @@ void VerEmbalses::buscarPorFechas() {
             dlgShowTable->setFechas(get<0>(fechas), get<1>(fechas));
             if (!codEmbalse.empty()) {
                 dlgShowTable->setCodEmbalse(codEmbalse);
-                dlgShowTable->setData(context.getDataframeEmbalse(codEmbalse, get<0>(fechas), get<1>(fechas)));
+                dlgShowTable->setData(context.getDataframeEmbalseyFechas(codEmbalse, get<0>(fechas), get<1>(fechas)));
             }
             else {
                 dlgShowTable->setCodZona(codZona);
+                Dataframe df = context.getDataframeZonayFechas(codZona, get<0>(fechas), get<1>(fechas));
+                dlgShowTable->setData(df);
             }
 
             dlgShowTable->mostrar(true);
