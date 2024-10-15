@@ -39,24 +39,25 @@ void DlgShowTable::delayedInitialization() {
 void DlgShowTable::setData(const FuncionesUi::Dataframe& dataframe) {
     this->dataframe = dataframe;
 
-    // TODO - Esto cambiará en función si está informado codEmbalse o codZona
-    
-    // Recoger la primera fila, los datos MEN y capacidad
-    std::vector<const char *> columns = {"MEN", "Capacidad"};
-    auto row = dataframe.get_row<double>(0, columns);
-    
-    // Remove the columns MEN and Capacidad
-    this->dataframe.remove_column("MEN");
-    this->dataframe.remove_column("Capacidad");
-    
-    std::string sMen = fmt::format("{:.3f}", row.at<double>(0)); // s == "3.14"
-    lblMen->setText(helper.asQString(sMen));
-    std::string sCapacidad = fmt::format("{:.3f}", row.at<double>(1)); // s == "3.14"
-    lblCapacidad->setText(helper.asQString(sCapacidad));
-    
+    // Se carga el dataframe en función si está informado codEmbalse
+    if (!codEmbalse.empty()) {
+        // Recoger la primera fila, los datos MEN y capacidad
+        std::vector<const char *> columns = {"MEN", "Capacidad"};
+        auto row = dataframe.get_row<double>(0, columns);
+
+        // Remove the columns MEN and Capacidad
+        this->dataframe.remove_column("MEN");
+        this->dataframe.remove_column("Capacidad");
+
+        std::string sMen = fmt::format("{:.3f}", row.at<double>(0)); // s == "3.14"
+        lblMen->setText(helper.asQString(sMen));
+        std::string sCapacidad = fmt::format("{:.3f}", row.at<double>(1)); // s == "3.14"
+        lblCapacidad->setText(helper.asQString(sCapacidad));
+    }
+
     this->model = new TableModel(this->dataframe);
     this->tblResultados->setModel(model);
-    
+
     QHeaderView *headerView = new QHeaderView(Qt::Horizontal);
     this->tblResultados->setHorizontalHeader(headerView);
 }
