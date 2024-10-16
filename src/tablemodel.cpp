@@ -21,8 +21,6 @@ TableModel::TableModel(const FuncionesUi::Dataframe& dataframe, QObject* parent)
         setHeaderData(i, Qt::Horizontal, std::get<0>(citer).c_str(), Qt::DisplayRole);
         i++;
     }
-    
-    spdlog::info("TableModel: [{}, {}]", shape.first, shape.second);
 }
 
 int TableModel::rowCount(const QModelIndex &) const {
