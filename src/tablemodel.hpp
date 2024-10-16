@@ -13,7 +13,6 @@ class TableModel : public QStandardItemModel {
     Q_OBJECT
     
 private:
-    int rows, cols;
     FuncionesUi::Dataframe dataframe;
     
     VerEmbalsesAppHelper helper;

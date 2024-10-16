@@ -9,13 +9,12 @@ using namespace std;
 
 TableModel::TableModel(const FuncionesUi::Dataframe& dataframe, QObject* parent) : QStandardItemModel(parent) {
     this->dataframe = dataframe;
+    auto shape = this->dataframe.shape();
     
-    this->rows = this->dataframe.get_index().size();
-    setRowCount(this->rows);
+    setRowCount(shape.first);
+    setColumnCount(shape.second);
     
     auto columnsInfo = this->dataframe.get_columns_info<int, double, std::string>();
-    this->cols = columnsInfo.size();
-    setColumnCount(this->cols);
     
     int i = 0;
     for (auto citer: columnsInfo)  {
@@ -23,15 +22,17 @@ TableModel::TableModel(const FuncionesUi::Dataframe& dataframe, QObject* parent)
         i++;
     }
     
-    spdlog::info("TableModel: [{}, {}]", rows, cols);
+    spdlog::info("TableModel: [{}, {}]", shape.first, shape.second);
 }
 
 int TableModel::rowCount(const QModelIndex &) const {
-   return this->rows;
+    auto shape = this->dataframe.shape();
+    return shape.first;
 }
 
 int TableModel::columnCount(const QModelIndex &) const {
-    return this->cols;
+    auto shape = this->dataframe.shape();
+    return shape.second;
 }
 
 QVariant TableModel::data(const QModelIndex &index, int role) const {
