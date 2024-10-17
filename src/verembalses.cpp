@@ -130,8 +130,8 @@ void VerEmbalses::showGraphicClicked() {
             Dataframe df = context.getDataframeEmbalseyFechas(codEmbalse, fechaDesde, fechaHasta);
             
             // Remove the columns MEN and Capacidad
-            df.remove_column("MEN");
-            df.remove_column("Capacidad");
+            df.remove_column<double>("MEN");
+            df.remove_column<double>("Capacidad");
             
             unique_ptr<DlgShowGraphic> dlgShowGraphic = unique_ptr<DlgShowGraphic>{new DlgShowGraphic(this)};
             dlgShowGraphic->setData(df);

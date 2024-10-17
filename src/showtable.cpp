@@ -46,8 +46,8 @@ void DlgShowTable::setData(const FuncionesUi::Dataframe& dataframe) {
         auto row = dataframe.get_row<double>(0, columns);
 
         // Remove the columns MEN and Capacidad
-        this->dataframe.remove_column("MEN");
-        this->dataframe.remove_column("Capacidad");
+        this->dataframe.remove_column<double>("MEN");
+        this->dataframe.remove_column<double>("Capacidad");
 
         std::string sMen = fmt::format("{:.3f}", row.at<double>(0)); // s == "3.14"
         lblMen->setText(helper.asQString(sMen));
