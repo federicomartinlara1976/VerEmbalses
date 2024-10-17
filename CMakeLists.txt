@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.9)
 set(CMAKE_BUILD_TYPE DEBUG)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_COMPILER "/usr/bin/g++")
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(verembalses)
 
