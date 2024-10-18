@@ -63,8 +63,6 @@ void VerEmbalses::delayedInitialization() {
         showInfoEmbalse(infoEmbalse);
 
         setStatus(lastExecution);
-
-        spdlog::info("VerEmbalses cargado en memoria");
     } catch (const std::exception &e) {
         spdlog::error(e.what());
     }
@@ -90,7 +88,6 @@ void VerEmbalses::cmbZonasIndexChanged(int index) {
         }
     }
     else {
-        spdlog::info("Debe seleccionar una zona");
         QMessageBox msgBox;
         msgBox.setText("Debe seleccionar una zona");
         msgBox.setIcon(QMessageBox::Warning);
@@ -224,9 +221,7 @@ void VerEmbalses::estadisticasMensuales() {
     }
 }
 
-void VerEmbalses::progresoTerminado() {
-    spdlog::info("Mostrar tabla");
-}
+void VerEmbalses::progresoTerminado() {}
 
 unique_ptr<DlgSelectFecha> VerEmbalses::getDlgFecha(bool isSelectedZone) {
     unique_ptr<DlgSelectFecha> dlg;
@@ -311,5 +306,4 @@ void VerEmbalses::setStatus(string date) {
 VerEmbalses::~VerEmbalses() {
     AppContext& instance = AppContext::getInstance();
     instance.destroyInstance();
-    spdlog::info("VerEmbalses liberado de la memoria");
 }

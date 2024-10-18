@@ -52,14 +52,11 @@ void AppContext::destroyInstance() {
     }
 }
 
-AppContext::AppContext() {
-    spdlog::info("AppContext cargado en memoria");
-}
+AppContext::AppContext() {}
 
 AppContext::~AppContext() {
     DataEngine& instance = DataEngine::getInstance(applicationName);
     instance.destroyInstance();
-    spdlog::info("AppContext liberado de la memoria");
 }
 
 DataEngine& AppContext::getDataEngine() {
