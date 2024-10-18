@@ -1,4 +1,3 @@
 - Obtención de datos:
 
-	- Limpieza de los valores a 0 en los dataframes antes de mostrar la tabla de estadísticas de la zona por fecha
 	- Quitar la columna índice a los dataframes que tengan una columna fecha, ya que ésta será el índice
