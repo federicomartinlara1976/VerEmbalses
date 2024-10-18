@@ -54,6 +54,14 @@ void DlgShowTable::setData(const FuncionesUi::Dataframe& dataframe) {
         std::string sCapacidad = fmt::format("{:.3f}", row.at<double>(1)); // s == "3.14"
         lblCapacidad->setText(helper.asQString(sCapacidad));
     }
+    else {
+        // La función que se usa para eliminar las filas
+        auto lambda = [](const unsigned long &, const double &val1, const double &val2, const double &val3)-> bool {
+            return (val1 <= 0.0 && val2 <= 0.0 && val3 <= 0.0);
+        };
+
+        this->dataframe.remove_data_by_sel<double, double, double, decltype(lambda), double, std::string>("MediaNivel", "MinimoNivel", "MaximoNivel", lambda);
+    }
 
     this->model = new TableModel(this->dataframe);
     this->tblResultados->setModel(model);
