@@ -58,7 +58,6 @@ void DlgSelectFecha::cmbZonasIndexChanged(int index) {
         codEmbalse = helper.getStringValue(cmbEmbalse, 0);
     }
     else {
-        spdlog::info("Debe seleccionar una zona");
         QMessageBox msgBox;
         msgBox.setText("Debe seleccionar una zona");
         msgBox.setIcon(QMessageBox::Warning);
@@ -78,9 +77,7 @@ tuple<string, string> DlgSelectFecha::getDatosEmbalse() {
     return make_tuple(codZona, codEmbalse);
 }
 
-DlgSelectFecha::~DlgSelectFecha() { 
-    spdlog::info("DlgSelectFecha liberado de la memoria");
-}
+DlgSelectFecha::~DlgSelectFecha() {}
 
 
 

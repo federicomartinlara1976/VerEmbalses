@@ -172,7 +172,7 @@ void AppContext::populateEmbalsesIn(string codZona, QComboBox *combo) {
 
 FuncionesUi::Dataframe AppContext::getDataframeZonaAndDate(string codZona, string date) {
     try {
-        spdlog::info("Dataframe para la zona {} con fecha {}", codZona, date);
+        //spdlog::info("Dataframe para la zona {} con fecha {}", codZona, date);
         unique_ptr<vector<InfoEmbalse>> embalses = getEmbalsesPorZona("Embalses", codZona);
         
         data::ColumnData<unsigned long> cIndex("Index");
@@ -211,7 +211,7 @@ FuncionesUi::Dataframe AppContext::getDataframeZonaAndDate(string codZona, strin
 
 FuncionesUi::Dataframe AppContext::getDataframeZona(string codZona) {
     try {
-        spdlog::info("Dataframe para la zona {}", codZona);
+        //spdlog::info("Dataframe para la zona {}", codZona);
         unique_ptr<vector<InfoEmbalse>> embalses = getEmbalsesPorZona("Embalses", codZona);
 
         data::ColumnData<unsigned long> cIndex("Index");
@@ -358,8 +358,6 @@ FuncionesUi::Dataframe AppContext::getDataframePorZonaYRangoFechas(string codZon
     // Para cada ejecución, obtener el dataframe de las estadísticas de la zona
     ulong index = 0;
     for (string fecha : ejecuciones) {
-        spdlog::info("Zona: {}, fecha: {}", codZona, fecha);
-
         std::tuple<double*, double*> stats = getStatsPorZonaYFecha(codZona, fecha);
         double* statsNivel = std::get<0>(stats);
         double* statsVolumen = std::get<1>(stats);

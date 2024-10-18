@@ -36,7 +36,7 @@ using namespace std;
 int main(int argc, char **argv) {
     try {
         unique_ptr<QApplication> application = unique_ptr<QApplication>{new QApplication(argc, argv)};
-        spdlog::info("Application {}", application->applicationDisplayName().toStdString());
+        //spdlog::info("Application {}", application->applicationDisplayName().toStdString());
         
         KCrash::initialize();
         

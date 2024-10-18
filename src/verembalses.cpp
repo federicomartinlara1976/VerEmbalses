@@ -217,7 +217,7 @@ void VerEmbalses::estadisticasMensuales() {
     
     if (result == 1) {
         tuple<int, string> mes = dlg->getMes();
-        spdlog::info("{}, {}", get<0>(mes), get<1>(mes));
+        //spdlog::info("{}, {}", get<0>(mes), get<1>(mes));
     }
 }
 

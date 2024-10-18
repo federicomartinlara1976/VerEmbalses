@@ -121,6 +121,4 @@ void DlgShowGraphic::drawGraphic(string selectedXValue, string selectedYValue) {
     chartView->repaint();
 }
 
-DlgShowGraphic::~DlgShowGraphic() {
-    spdlog::info("DlgShowGraphic liberado de la memoria");
-}
+DlgShowGraphic::~DlgShowGraphic() {}

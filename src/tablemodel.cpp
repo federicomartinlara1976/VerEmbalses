@@ -59,6 +59,4 @@ QVariant TableModel::data(const QModelIndex &index, int role) const {
     return QVariant();
 }
 
-TableModel::~TableModel() {
-    spdlog::info("TableModel liberado de la memoria");
-}
+TableModel::~TableModel() {}

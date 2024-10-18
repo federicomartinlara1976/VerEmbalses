@@ -77,7 +77,7 @@ void DlgShowTable::setCodZona(const string codZona) {
 
     this->codZona = codZona;
     InfoZona info = context.getZona(codZona);
-    spdlog::info("{} - {}", info.codZona, info.nombre);
+    //spdlog::info("{} - {}", info.codZona, info.nombre);
 
     double totalCapacidad = context.getTotalCapacidadZona(codZona);
     std::string sTotalCapacidad = fmt::format(Constants::NUMBER_FORMAT, totalCapacidad);
@@ -95,7 +95,7 @@ void DlgShowTable::setFechas(const QDate fechaDesde, const QDate fechaHasta) {
     
     string sDesde = helper.asString(fechaDesde.toString(format));
     string sHasta = helper.asString(fechaHasta.toString(format));
-    spdlog::info("[{} - {}]", sDesde, sHasta);
+    //spdlog::info("[{} - {}]", sDesde, sHasta);
     
     this->lblDesde->setText(helper.asQString(sDesde));
     this->lblHasta->setText(helper.asQString(sHasta));
@@ -114,5 +114,4 @@ void DlgShowTable::showExcelClicked() {
 
 DlgShowTable::~DlgShowTable() {
     delete model;
-    spdlog::info("DlgShowTable liberado de la memoria");
 }
