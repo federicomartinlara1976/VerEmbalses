@@ -10,6 +10,8 @@ target_sources(verembalses PRIVATE
     funciones_ui.cpp
     VerEmbalsesAppHelper.cpp
     tablemodel.cpp
+    tablemodelembalse.cpp
+    tablemodelzona.cpp
     progreso.cpp
     qtdialogwindow.cpp
     qtwindow.cpp

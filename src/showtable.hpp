@@ -6,6 +6,7 @@
 #include "VerEmbalsesAppHelper.hpp"
 #include "tablemodel.hpp"
 #include "showgraphic.hpp"
+#include "constants.hpp"
 
 #include "qtdialogwindow.hpp"
 #include <QObject>
@@ -33,6 +34,12 @@ private:
     
     FuncionesUi::Dataframe dataframe;
 
+    enum Constants::TableType tableType;
+
+    void setCodEmbalse(const string& codEmbalse);
+    void setCodZona(const string& codZona);
+    void setData();
+
 private slots:
     void showGraphicClicked();
     void showExcelClicked();
@@ -43,13 +50,9 @@ protected:
     void delayedInitialization() override;    
 
 public:
-    DlgShowTable(QWidget* parent = nullptr);
+    DlgShowTable(const FuncionesUi::Dataframe& dataframe, const string& code, enum Constants::TableType tableType, QWidget* parent = nullptr);
     
-    void setCodEmbalse(const string codEmbalse);
-    void setCodZona(const string codZona);
     void setFechas(const QDate fechaDesde, const QDate fechaHasta);
-    
-    void setData(const FuncionesUi::Dataframe& dataframe);
     
     virtual ~DlgShowTable();
 

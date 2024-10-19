@@ -176,18 +176,17 @@ void VerEmbalses::buscarPorFechas() {
         if (!codZona.empty()) {
             string codEmbalse = get<1>(datosEmbalse);
 
-            unique_ptr<DlgShowTable> dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(this)};
-            dlgShowTable->setFechas(get<0>(fechas), get<1>(fechas));
+            unique_ptr<DlgShowTable> dlgShowTable = nullptr;
             if (!codEmbalse.empty()) {
-                dlgShowTable->setCodEmbalse(codEmbalse);
-                dlgShowTable->setData(context.getDataframeEmbalseyFechas(codEmbalse, get<0>(fechas), get<1>(fechas)));
+                Dataframe df = context.getDataframeEmbalseyFechas(codEmbalse, get<0>(fechas), get<1>(fechas));
+                dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codEmbalse, Constants::EMBALSE, this)};
             }
             else {
-                dlgShowTable->setCodZona(codZona);
                 Dataframe df = context.getDataframeZonayFechas(codZona, get<0>(fechas), get<1>(fechas));
-                dlgShowTable->setData(df);
+                dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codZona, Constants::ZONA, this)};
             }
 
+            dlgShowTable->setFechas(get<0>(fechas), get<1>(fechas));
             dlgShowTable->mostrar(true);
         }
         else {

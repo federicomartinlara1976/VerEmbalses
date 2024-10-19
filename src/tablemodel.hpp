@@ -13,9 +13,10 @@ class TableModel : public QStandardItemModel {
     Q_OBJECT
     
 private:
-    FuncionesUi::Dataframe dataframe;
-    
     VerEmbalsesAppHelper helper;
+
+protected:
+    FuncionesUi::Dataframe dataframe;
     
 public:
     TableModel(const FuncionesUi::Dataframe& dataframe, QObject* parent = nullptr);
@@ -24,5 +25,17 @@ public:
     QVariant data(const QModelIndex &index, int role) const override;
     ~TableModel();
 };
+
+class TableModelEmbalse : public TableModel {
+public:
+    TableModelEmbalse(const FuncionesUi::Dataframe& dataframe);
+};
+
+class TableModelZona : public TableModel {
+public:
+    TableModelZona(const FuncionesUi::Dataframe& dataframe);
+};
+
+
 
 #endif

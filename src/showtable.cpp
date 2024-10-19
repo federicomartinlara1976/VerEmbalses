@@ -8,13 +8,24 @@
 #include <fmt/format.h>
 
 #include "showtable.hpp"
-#include "constants.hpp"
 
 using namespace std;
 using namespace hmdf;
 
-DlgShowTable::DlgShowTable(QWidget* parent) : QtDialogWindow(parent) {
+DlgShowTable::DlgShowTable(const FuncionesUi::Dataframe& dataframe, const string& code, enum Constants::TableType tableType, QWidget* parent) : QtDialogWindow(parent) {
     this->initWindow();
+    this->dataframe = dataframe;
+    this->tableType = tableType;
+
+    if (tableType == Constants::EMBALSE) {
+        setCodEmbalse(code);
+    }
+
+    if (tableType == Constants::ZONA) {
+        setCodZona(code);
+    }
+
+    setData();
 }
 
 void DlgShowTable::setup() {
@@ -36,51 +47,45 @@ void DlgShowTable::delayedInitialization() {
     btnVerGrafico->setIcon(icon1);
 }
 
-void DlgShowTable::setData(const FuncionesUi::Dataframe& dataframe) {
-    this->dataframe = dataframe;
+void DlgShowTable::setData() {
+    this->model = nullptr;
 
     // Se carga el dataframe en función si está informado codEmbalse
-    if (!codEmbalse.empty()) {
-        // Recoger la primera fila, los datos MEN y capacidad
-        std::vector<const char *> columns = {"MEN", "Capacidad"};
-        auto row = dataframe.get_row<double>(0, columns);
-
-        // Remove the columns MEN and Capacidad
-        this->dataframe.remove_column<double>("MEN");
-        this->dataframe.remove_column<double>("Capacidad");
-
-        std::string sMen = fmt::format("{:.3f}", row.at<double>(0)); // s == "3.14"
-        lblMen->setText(helper.asQString(sMen));
-        std::string sCapacidad = fmt::format("{:.3f}", row.at<double>(1)); // s == "3.14"
-        lblCapacidad->setText(helper.asQString(sCapacidad));
-    }
-    else {
-        // La función que se usa para eliminar las filas
-        auto lambda = [](const unsigned long &, const double &val1, const double &val2, const double &val3)-> bool {
-            return (val1 <= 0.0 && val2 <= 0.0 && val3 <= 0.0);
-        };
-
-        this->dataframe.remove_data_by_sel<double, double, double, decltype(lambda), double, std::string>("MediaNivel", "MinimoNivel", "MaximoNivel", lambda);
+    if (tableType == Constants::EMBALSE) {
+        this->model = new TableModelEmbalse(this->dataframe);
     }
 
-    this->model = new TableModel(this->dataframe);
+    if (tableType == Constants::ZONA) {
+        this->model = new TableModelZona(this->dataframe);
+    }
+
     this->tblResultados->setModel(model);
 
     QHeaderView *headerView = new QHeaderView(Qt::Horizontal);
     this->tblResultados->setHorizontalHeader(headerView);
 }
   
-void DlgShowTable::setCodEmbalse(const string codEmbalse) {
+void DlgShowTable::setCodEmbalse(const string& codEmbalse) {
     AppContext& context = AppContext::getInstance();
     
     this->codEmbalse = codEmbalse;
     InfoEmbalse info = context.getEmbalseInfo(codEmbalse);
-    spdlog::info("{} - {}", info.codEmbalse, info.embalse);
+    //spdlog::info("{} - {}", info.codEmbalse, info.embalse);
+
+    // Recoger la primera fila, los datos MEN y capacidad para informar las etiquetas de la cabecera
+    std::vector<const char *> columns = {"MEN", "Capacidad"};
+    auto row = dataframe.get_row<double>(0, columns);
+
+    std::string sMen = fmt::format("{:.3f}", row.at<double>(0)); // s == "3.14"
+    lblMen->setText(helper.asQString(sMen));
+    std::string sCapacidad = fmt::format("{:.3f}", row.at<double>(1)); // s == "3.14"
+    lblCapacidad->setText(helper.asQString(sCapacidad));
 
     this->lblTituloTabla->setText(helper.asQString(info.embalse));
+    this->menContainer->setVisible(true);
 }
 
-void DlgShowTable::setCodZona(const string codZona) {
+void DlgShowTable::setCodZona(const string& codZona) {
     AppContext& context = AppContext::getInstance();
 
     this->codZona = codZona;
