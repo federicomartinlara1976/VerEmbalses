@@ -16,7 +16,7 @@ private:
     VerEmbalsesAppHelper helper;
 
 protected:
-    FuncionesUi::Dataframe dataframe;
+    FuncionesUi::Dataframe dataFrame;
     
 public:
     TableModel(const FuncionesUi::Dataframe& dataframe, QObject* parent = nullptr);
@@ -28,12 +28,12 @@ public:
 
 class TableModelEmbalse : public TableModel {
 public:
-    TableModelEmbalse(const FuncionesUi::Dataframe& dataframe);
+    TableModelEmbalse(const FuncionesUi::Dataframe& dataFrame);
 };
 
 class TableModelZona : public TableModel {
 public:
-    TableModelZona(const FuncionesUi::Dataframe& dataframe);
+    TableModelZona(const FuncionesUi::Dataframe& dataFrame);
 };
 
 

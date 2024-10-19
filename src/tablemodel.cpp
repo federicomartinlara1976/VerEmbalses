@@ -7,14 +7,14 @@
 
 using namespace std;
 
-TableModel::TableModel(const FuncionesUi::Dataframe& dataframe, QObject* parent) : QStandardItemModel(parent) {
-    this->dataframe = dataframe;
-    auto shape = this->dataframe.shape();
+TableModel::TableModel(const FuncionesUi::Dataframe& dataFrame, QObject* parent) : QStandardItemModel(parent) {
+    this->dataFrame = dataFrame;
+    auto shape = this->dataFrame.shape();
     
     setRowCount(shape.first);
     setColumnCount(shape.second);
     
-    auto columnsInfo = this->dataframe.get_columns_info<int, double, std::string>();
+    auto columnsInfo = this->dataFrame.get_columns_info<int, double, std::string>();
     
     int i = 0;
     for (auto citer: columnsInfo)  {
@@ -24,26 +24,26 @@ TableModel::TableModel(const FuncionesUi::Dataframe& dataframe, QObject* parent)
 }
 
 int TableModel::rowCount(const QModelIndex &) const {
-    auto shape = this->dataframe.shape();
+    auto shape = this->dataFrame.shape();
     return shape.first;
 }
 
 int TableModel::columnCount(const QModelIndex &) const {
-    auto shape = this->dataframe.shape();
+    auto shape = this->dataFrame.shape();
     return shape.second;
 }
 
 QVariant TableModel::data(const QModelIndex &index, int role) const {
     if (role == Qt::DisplayRole) {
-        auto column = helper.getColumn(dataframe, index.column());
+        auto column = helper.getColumn(dataFrame, index.column());
         
         if (std::get<2>(column) == type_index(typeid(string))) {
-            std::vector<string> svec = dataframe.get_column<string>(index.column());
+            std::vector<string> svec = dataFrame.get_column<string>(index.column());
             return QString(svec[index.row()].c_str());
         }
         
         if (std::get<2>(column) == type_index(typeid(double))) {
-            std::vector<double> dvec = dataframe.get_column<double>(index.column());
+            std::vector<double> dvec = dataFrame.get_column<double>(index.column());
             
             std::string sValue = {};
             if (index.column() == 3) {
