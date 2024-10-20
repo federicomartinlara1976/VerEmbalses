@@ -1,3 +1,0 @@
-- Obtención de datos:
-
-	- Quitar la columna índice a los dataframes que tengan una columna fecha, ya que ésta será el índice
