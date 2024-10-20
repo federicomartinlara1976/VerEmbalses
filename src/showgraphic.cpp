@@ -18,63 +18,42 @@ void DlgShowGraphic::setup() {
 }
 
 void DlgShowGraphic::connectEvents() {
-    connect(cmbDatoX, QOverload<int>::of(&QComboBox::activated), this, &DlgShowGraphic::cmbDatoXIndexChanged);
     connect(cmbDatoY, QOverload<int>::of(&QComboBox::activated), this, &DlgShowGraphic::cmbDatoYIndexChanged);
 }
 
 void DlgShowGraphic::delayedInitialization() {}
 
-void DlgShowGraphic::setData(const FuncionesUi::Dataframe& dataframe) {
-    this->dataframe = dataframe;
+void DlgShowGraphic::setData(const FuncionesUi::StringDataframe& df) {
+    this->df = df;
     
-    auto columns = this->dataframe.get_columns_info<double, string>();
-
-    for (auto citer: columns)  {
-        if (std::get<0>(citer) == "Fecha") {
-            string nombre = std::get<0>(citer).c_str();
-        
-            const QString label = qtHelper.asQString(nombre, true);
-            const QVariant value = QVariant(qtHelper.asQString(nombre, true));
-            
-            cmbDatoX->addItem(label, value);
-        }
-    }
+    auto columns = this->df.get_columns_info<double, string>();
     
-    selectedXValue = qtHelper.getStringValue(cmbDatoX);
-    populateDatoY(selectedXValue);
+    populateDatoY();
     
     selectedYValue = qtHelper.getStringValue(cmbDatoY);
-    drawGraphic(selectedXValue, selectedYValue);
-}
-
-void DlgShowGraphic::cmbDatoXIndexChanged(int index) {
-    selectedXValue = qtHelper.getStringValue(cmbDatoX, index);
-    populateDatoY(selectedXValue);
-    drawGraphic(selectedXValue, selectedYValue);
+    drawGraphic(selectedYValue);
 }
 
 void DlgShowGraphic::cmbDatoYIndexChanged(int index) {
     string selectedValue = qtHelper.getStringValue(cmbDatoY, index);
-    drawGraphic(selectedXValue, selectedValue);
+    drawGraphic(selectedValue);
 }
 
-void DlgShowGraphic::populateDatoY(string exclude) {
-    auto columns = dataframe.get_columns_info<double, string>();
+void DlgShowGraphic::populateDatoY() {
+    auto columns = df.get_columns_info<double, string>();
 
     cmbDatoY->clear();
     for (auto citer: columns)  {
         string nombre = std::get<0>(citer).c_str();
         
-        if (nombre.compare(exclude) != 0) {
-            const QString label = qtHelper.asQString(nombre, true);
-            const QVariant value = QVariant(qtHelper.asQString(nombre, true));
+        const QString label = qtHelper.asQString(nombre, true);
+        const QVariant value = QVariant(qtHelper.asQString(nombre, true));
         
-            cmbDatoY->addItem(label, value);
-        }
+        cmbDatoY->addItem(label, value);
     }
 }
 
-void DlgShowGraphic::drawGraphic(string selectedXValue, string selectedYValue) {
+void DlgShowGraphic::drawGraphic(string selectedYValue) {
     if (chartView->chart() != nullptr) {
         chartView->chart()->removeAllSeries();
     }
@@ -92,8 +71,8 @@ void DlgShowGraphic::drawGraphic(string selectedXValue, string selectedYValue) {
     axisX->setLabelsAngle(-90);
     axisX->setTickCount(10);
      
-    vector<string> fechas = dataframe.get_column<string>(appHelper.asCharArray(selectedXValue));
-    vector<double> values = dataframe.get_column<double>(appHelper.asCharArray(selectedYValue));
+    vector<string> fechas = df.get_index();
+    vector<double> values = df.get_column<double>(appHelper.asCharArray(selectedYValue));
      
     int i = 0;
     for (string fecha : fechas) {

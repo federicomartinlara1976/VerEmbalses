@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg-show-graphicBDxVfR.ui'
+** Form generated from reading UI file 'dlg-show-graphicMqIELT.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.3
+** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_2D_SHOW_2D_GRAPHICBDXVFR_H
-#define DLG_2D_SHOW_2D_GRAPHICBDXVFR_H
+#ifndef DLG_2D_SHOW_2D_GRAPHICMQIELT_H
+#define DLG_2D_SHOW_2D_GRAPHICMQIELT_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -16,12 +16,11 @@
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtCharts/QChartView>
 
 QT_BEGIN_NAMESPACE
-
-using namespace QtCharts;
 
 class Ui_DialogShowGraphic
 {
@@ -29,12 +28,10 @@ public:
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *containerSelectores;
-    QHBoxLayout *containerSelectorX;
-    QLabel *lblDatoX;
-    QComboBox *cmbDatoX;
     QHBoxLayout *containerSelectorY;
     QLabel *lblDatoY;
     QComboBox *cmbDatoY;
+    QSpacerItem *horizontalSpacer;
     QChartView *chartView;
     QDialogButtonBox *buttonBox;
 
@@ -51,32 +48,6 @@ public:
         containerSelectores->setObjectName(QString::fromUtf8("containerSelectores"));
         containerSelectores->setSizeConstraint(QLayout::SetFixedSize);
         containerSelectores->setContentsMargins(10, 10, 10, 10);
-        containerSelectorX = new QHBoxLayout();
-        containerSelectorX->setObjectName(QString::fromUtf8("containerSelectorX"));
-        containerSelectorX->setContentsMargins(10, 10, 10, 10);
-        lblDatoX = new QLabel(DialogShowGraphic);
-        lblDatoX->setObjectName(QString::fromUtf8("lblDatoX"));
-        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(lblDatoX->sizePolicy().hasHeightForWidth());
-        lblDatoX->setSizePolicy(sizePolicy);
-
-        containerSelectorX->addWidget(lblDatoX);
-
-        cmbDatoX = new QComboBox(DialogShowGraphic);
-        cmbDatoX->setObjectName(QString::fromUtf8("cmbDatoX"));
-        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(cmbDatoX->sizePolicy().hasHeightForWidth());
-        cmbDatoX->setSizePolicy(sizePolicy1);
-
-        containerSelectorX->addWidget(cmbDatoX);
-
-
-        containerSelectores->addLayout(containerSelectorX);
-
         containerSelectorY = new QHBoxLayout();
         containerSelectorY->setObjectName(QString::fromUtf8("containerSelectorY"));
         containerSelectorY->setContentsMargins(10, 10, 10, 10);
@@ -96,6 +67,10 @@ public:
 
 
         containerSelectores->addLayout(containerSelectorY);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        containerSelectores->addItem(horizontalSpacer);
 
 
         verticalLayout->addLayout(containerSelectores);
@@ -132,7 +107,6 @@ public:
     void retranslateUi(QDialog *DialogShowGraphic)
     {
         DialogShowGraphic->setWindowTitle(QCoreApplication::translate("DialogShowGraphic", "Mostrar gr\303\241fico", nullptr));
-        lblDatoX->setText(QCoreApplication::translate("DialogShowGraphic", "Dato X", nullptr));
         lblDatoY->setText(QCoreApplication::translate("DialogShowGraphic", "Dato Y", nullptr));
     } // retranslateUi
 
@@ -144,5 +118,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_2D_SHOW_2D_GRAPHICBDXVFR_H
-
+#endif // DLG_2D_SHOW_2D_GRAPHICMQIELT_H
