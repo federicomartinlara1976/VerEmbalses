@@ -53,9 +53,6 @@ public:
         containerSelectorY->setContentsMargins(10, 10, 10, 10);
         lblDatoY = new QLabel(DialogShowGraphic);
         lblDatoY->setObjectName(QString::fromUtf8("lblDatoY"));
-        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(lblDatoY->sizePolicy().hasHeightForWidth());
         lblDatoY->setSizePolicy(sizePolicy);
 
@@ -63,9 +60,6 @@ public:
 
         cmbDatoY = new QComboBox(DialogShowGraphic);
         cmbDatoY->setObjectName(QString::fromUtf8("cmbDatoY"));
-        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(cmbDatoY->sizePolicy().hasHeightForWidth());
         cmbDatoY->setSizePolicy(sizePolicy1);
 
