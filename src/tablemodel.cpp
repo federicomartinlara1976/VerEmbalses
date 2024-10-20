@@ -12,11 +12,14 @@ TableModel::TableModel(const FuncionesUi::StringDataframe& dataFrame, QObject* p
     auto shape = this->dataFrame.shape();
     
     setRowCount(shape.first);
-    setColumnCount(shape.second);
+
+    // Hay que añadir la columna de las fechas
+    setColumnCount(shape.second+1);
+    setHeaderData(0, Qt::Horizontal, "Fecha", Qt::DisplayRole);
     
-    auto columnsInfo = this->dataFrame.get_columns_info<int, double, std::string>();
+    auto columnsInfo = this->dataFrame.get_columns_info<double>();
     
-    int i = 0;
+    int i = 1;
     for (auto citer: columnsInfo)  {
         setHeaderData(i, Qt::Horizontal, std::get<0>(citer).c_str(), Qt::DisplayRole);
         i++;
@@ -30,29 +33,28 @@ int TableModel::rowCount(const QModelIndex &) const {
 
 int TableModel::columnCount(const QModelIndex &) const {
     auto shape = this->dataFrame.shape();
-    return shape.second;
+    return shape.second+1;
 }
 
 QVariant TableModel::data(const QModelIndex &index, int role) const {
     if (role == Qt::DisplayRole) {
-        auto column = helper.getColumn(dataFrame, index.column());
+        // Si el numero de columna es 0, ponemos el índice del dataframe
+        if (index.column() == 0) {
+            std::vector<string> svec = dataFrame.get_index();
+            return QString(svec[index.row()].c_str());
+        }
+
+        int columnIndex = index.column() - 1;
+        auto column = helper.getColumn(dataFrame, columnIndex);
         
         if (std::get<2>(column) == type_index(typeid(string))) {
-            std::vector<string> svec = dataFrame.get_column<string>(index.column());
+            std::vector<string> svec = dataFrame.get_column<string>(columnIndex);
             return QString(svec[index.row()].c_str());
         }
         
         if (std::get<2>(column) == type_index(typeid(double))) {
-            std::vector<double> dvec = dataFrame.get_column<double>(index.column());
-            
-            std::string sValue = {};
-            if (index.column() == 3) {
-                sValue = fmt::format(Constants::PERCENT_FORMAT, dvec[index.row()]);
-            }
-            else {
-                sValue = fmt::format(Constants::NUMBER_FORMAT, dvec[index.row()]);
-            }
-            
+            std::vector<double> dvec = dataFrame.get_column<double>(columnIndex);
+            std::string sValue = fmt::format(Constants::NUMBER_FORMAT, dvec[index.row()]);
             return QString(sValue.c_str());
         }
     }

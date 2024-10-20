@@ -532,6 +532,9 @@ string AppContext::buildCsvHeader(FuncionesUi::StringDataframe& dataFrame, const
     string header = {};
     auto columns = getFields(dataFrame);
 
+    // Pone la columna fecha
+    header.append("Fecha").append(fieldSeparator);
+
     for (auto citer: columns)  {
         string nombre = std::get<0>(citer).c_str();
         
@@ -599,13 +602,13 @@ void AppContext::writeHeader(QSaveFile& file, FuncionesUi::StringDataframe& data
 }
 
 void AppContext::writeContent(QSaveFile& file, FuncionesUi::StringDataframe& dataframe) {
-    spdlog::info("Dataframe size: {}", getDataframeSize(dataframe));
-    
     auto fields = getFields(dataframe);
     vector<const char*> fieldNames = getFieldNames(dataframe);
     
     for (int i=0;i<getDataframeSize(dataframe);i++) {
         string values = {};
+
+        values.append(dataframe.get_index()[i]).append(",");
         
         int j = 0;
         for (auto field : fields) {
