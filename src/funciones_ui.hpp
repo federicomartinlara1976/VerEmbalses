@@ -27,6 +27,8 @@ using namespace hmdf;
 namespace FuncionesUi {
     
     typedef StdDataFrame<ulong> Dataframe;
+
+    typedef StdDataFrame<string> StringDataframe;
     
     typedef struct {
         string fecha, codEmbalse, embalse;
@@ -53,17 +55,21 @@ namespace FuncionesUi {
         unique_ptr<vector<InfoZona>> getZonas();
         vector<string> getExecutions(QDate& desde, QDate& hasta);
         
-        Dataframe getDataframePorEmbalseYRangoFechas(string codEmbalse, QDate& desde, QDate& hasta);
-        Dataframe getDataframePorZonaYRangoFechas(string codZona, QDate& desde, QDate& hasta);
         InfoEmbalse createInfoEmbalse(string codEmbalse, bsoncxx::v_noabi::document::view doc);
         InfoEmbalse getIdEmbalse(bsoncxx::v_noabi::document::view doc);
-        string buildCsvHeader(Dataframe& dataFrame, const string& fieldSeparator);
-        void saveDataframeToDisk(const QString &outputFileName, Dataframe& dataframe);
-        void writeHeader(QSaveFile& file, Dataframe& dataFrame);
-        void writeContent(QSaveFile& file, Dataframe& dataFrame);
+        string buildCsvHeader(StringDataframe& dataFrame, const string& fieldSeparator);
+        void saveDataframeToDisk(const QString &outputFileName, StringDataframe& dataframe);
+        void writeHeader(QSaveFile& file, StringDataframe& dataFrame);
+        void writeContent(QSaveFile& file, StringDataframe& dataFrame);
+
         int getDataframeSize(Dataframe& dataframe);
+        int getDataframeSize(StringDataframe& dataframe);
+
         vector<std::tuple<String64, std::size_t, std::type_index>> getFields(Dataframe& dataframe);
+        vector<std::tuple<String64, std::size_t, std::type_index>> getFields(StringDataframe& dataframe);
+
         vector<const char*> getFieldNames(Dataframe& dataFrame);
+        vector<const char*> getFieldNames(StringDataframe& dataFrame);
         
         AppContext();
         static void destroy(AppContext* instance);
@@ -87,10 +93,10 @@ namespace FuncionesUi {
 
         string getLastExecution();
 
-        Dataframe getDataframeEmbalseyFechas(string codEmbalse, QDate& desde, QDate& hasta);
-        Dataframe getDataframeZonayFechas(string codZona, QDate& desde, QDate& hasta);
+        StringDataframe getDataframePorEmbalseYRangoFechas(string codEmbalse, QDate& desde, QDate& hasta);
+        StringDataframe getDataframePorZonaYRangoFechas(string codZona, QDate& desde, QDate& hasta);
 
-        void saveDataframe(Dataframe& dataframe, QWidget *parent, const string& filetype = Constants::CSV_FILE_TYPE);
+        void saveDataframe(StringDataframe& dataframe, QWidget *parent, const string& filetype = Constants::CSV_FILE_TYPE);
 
         std::tuple<double*, double*> getStatsPorZonaYFecha(string codZona, string date);
 

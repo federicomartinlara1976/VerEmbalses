@@ -124,7 +124,7 @@ void VerEmbalses::showGraphicClicked() {
             return;
     
         if (fechaDesde < fechaHasta) {
-            Dataframe df = context.getDataframeEmbalseyFechas(codEmbalse, fechaDesde, fechaHasta);
+            StringDataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, fechaDesde, fechaHasta);
             
             // Remove the columns MEN and Capacidad
             df.remove_column<double>("MEN");
@@ -155,9 +155,9 @@ void VerEmbalses::showExcelClicked() {
             return;
         
         if (fechaDesde < fechaHasta) {
-            StdDataFrame<unsigned long> dataframe = context.getDataframeEmbalseyFechas(codEmbalse, fechaDesde, fechaHasta);
+            StringDataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, fechaDesde, fechaHasta);
         
-            context.saveDataframe(dataframe, this);
+            context.saveDataframe(df, this);
         }
     }
 }
@@ -178,11 +178,11 @@ void VerEmbalses::buscarPorFechas() {
 
             unique_ptr<DlgShowTable> dlgShowTable = nullptr;
             if (!codEmbalse.empty()) {
-                Dataframe df = context.getDataframeEmbalseyFechas(codEmbalse, get<0>(fechas), get<1>(fechas));
+                StringDataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, get<0>(fechas), get<1>(fechas));
                 dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codEmbalse, Constants::EMBALSE, this)};
             }
             else {
-                Dataframe df = context.getDataframeZonayFechas(codZona, get<0>(fechas), get<1>(fechas));
+                StringDataframe df = context.getDataframePorZonaYRangoFechas(codZona, get<0>(fechas), get<1>(fechas));
                 dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codZona, Constants::ZONA, this)};
             }
 

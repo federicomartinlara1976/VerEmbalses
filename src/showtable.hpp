@@ -32,7 +32,7 @@ private:
     
     TableModel *model = nullptr; 
     
-    FuncionesUi::Dataframe dataframe;
+    FuncionesUi::StringDataframe dataframe;
 
     enum Constants::TableType tableType;
 
@@ -50,7 +50,7 @@ protected:
     void delayedInitialization() override;    
 
 public:
-    DlgShowTable(const FuncionesUi::Dataframe& dataframe, const string& code, enum Constants::TableType tableType, QWidget* parent = nullptr);
+    DlgShowTable(const FuncionesUi::StringDataframe& dataframe, const string& code, enum Constants::TableType tableType, QWidget* parent = nullptr);
     
     void setFechas(const QDate fechaDesde, const QDate fechaHasta);
     

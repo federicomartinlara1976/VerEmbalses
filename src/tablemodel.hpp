@@ -16,10 +16,10 @@ private:
     VerEmbalsesAppHelper helper;
 
 protected:
-    FuncionesUi::Dataframe dataFrame;
+    FuncionesUi::StringDataframe dataFrame;
     
 public:
-    TableModel(const FuncionesUi::Dataframe& dataframe, QObject* parent = nullptr);
+    TableModel(const FuncionesUi::StringDataframe& dataframe, QObject* parent = nullptr);
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role) const override;
@@ -28,12 +28,12 @@ public:
 
 class TableModelEmbalse : public TableModel {
 public:
-    TableModelEmbalse(const FuncionesUi::Dataframe& dataFrame);
+    TableModelEmbalse(const FuncionesUi::StringDataframe& dataFrame);
 };
 
 class TableModelZona : public TableModel {
 public:
-    TableModelZona(const FuncionesUi::Dataframe& dataFrame);
+    TableModelZona(const FuncionesUi::StringDataframe& dataFrame);
 };
 
 

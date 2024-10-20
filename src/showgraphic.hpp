@@ -20,16 +20,14 @@ private:
     QtHelper qtHelper;
     AppHelper appHelper;
     
-    FuncionesUi::Dataframe dataframe;
+    FuncionesUi::StringDataframe df;
     
-    string selectedXValue;
     string selectedYValue;
     
-    void populateDatoY(string exclude);
-    void drawGraphic(string selectedXValue, string selectedYValue);
+    void populateDatoY();
+    void drawGraphic(string selectedYValue);
     
 private slots:
-    void cmbDatoXIndexChanged(int index);
     void cmbDatoYIndexChanged(int index);
     
 protected:
@@ -40,7 +38,7 @@ protected:
 public:
     DlgShowGraphic(QWidget* parent = nullptr);
     
-    void setData(const FuncionesUi::Dataframe& dataframe);
+    void setData(const FuncionesUi::StringDataframe& df);
     
     virtual ~DlgShowGraphic();
 };

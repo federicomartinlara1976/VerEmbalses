@@ -7,7 +7,7 @@
 
 using namespace std;
 
-TableModel::TableModel(const FuncionesUi::Dataframe& dataFrame, QObject* parent) : QStandardItemModel(parent) {
+TableModel::TableModel(const FuncionesUi::StringDataframe& dataFrame, QObject* parent) : QStandardItemModel(parent) {
     this->dataFrame = dataFrame;
     auto shape = this->dataFrame.shape();
     

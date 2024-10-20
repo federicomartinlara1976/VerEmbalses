@@ -274,11 +274,9 @@ unique_ptr<vector<InfoEmbalse>> AppContext::getEmbalsesPorZona(string collection
     }
 }
 
-FuncionesUi::Dataframe AppContext::getDataframePorEmbalseYRangoFechas(string codEmbalse, QDate& desde, QDate& hasta) {
+FuncionesUi::StringDataframe AppContext::getDataframePorEmbalseYRangoFechas(string codEmbalse, QDate& desde, QDate& hasta) {
     vector<InfoEmbalse> registros = getPorFechas(codEmbalse, desde, hasta);
     
-    data::ColumnData<ulong> cIndex("Index");
-    vector<ulong> indices;
     data::ColumnData<string> cFecha("Fecha");
     vector<string> fechas;
     data::ColumnData<double> cNivel("Nivel");
@@ -292,21 +290,16 @@ FuncionesUi::Dataframe AppContext::getDataframePorEmbalseYRangoFechas(string cod
     data::ColumnData<double> cCapacidad("Capacidad");
     vector<double> v_capacidad;
         
-    ulong index = 0;
     for (InfoEmbalse& registro : registros) {
-
-        indices.push_back(index);
         fechas.push_back(registro.fecha);
+
         niveles.push_back(registro.nivel);
         volumenes.push_back(registro.volumen);
         porcentajes.push_back(registro.porcentaje);
         v_men.push_back(registro.men);
         v_capacidad.push_back(registro.capacidad);
-            
-        index++;
     }
         
-    cIndex.setData(indices);
     cFecha.setData(fechas);
     cNivel.setData(niveles);
     cVolumen.setData(volumenes);
@@ -314,25 +307,22 @@ FuncionesUi::Dataframe AppContext::getDataframePorEmbalseYRangoFechas(string cod
     cMen.setData(v_men);
     cCapacidad.setData(v_capacidad);
         
-    FuncionesUi::Dataframe ul_df2;
+    FuncionesUi::StringDataframe df;
         
-    ul_df2.load_data(std::move(cIndex.getData()),
-                    std::make_pair(appHelper.asCharArray(cFecha.getName()), cFecha.getData()),
+    df.load_data(std::move(cFecha.getData()),
                     std::make_pair(appHelper.asCharArray(cNivel.getName()), cNivel.getData()),
                     std::make_pair(appHelper.asCharArray(cVolumen.getName()), cVolumen.getData()),
                     std::make_pair(appHelper.asCharArray(cPorcentaje.getName()), cPorcentaje.getData()),
                     std::make_pair(appHelper.asCharArray(cMen.getName()), cMen.getData()),
                     std::make_pair(appHelper.asCharArray(cCapacidad.getName()), cCapacidad.getData()));
         
-    return ul_df2;
+    return df;
 }
 
-FuncionesUi::Dataframe AppContext::getDataframePorZonaYRangoFechas(string codZona, QDate& desde, QDate& hasta) {
+FuncionesUi::StringDataframe AppContext::getDataframePorZonaYRangoFechas(string codZona, QDate& desde, QDate& hasta) {
     // Obtener las ejecuciones entre las fechas
     vector<string> ejecuciones = getExecutions(desde, hasta);
 
-    data::ColumnData<ulong> cIndex("Index");
-    vector<ulong> indices;
     data::ColumnData<string> cFecha("Fecha");
     vector<string> fechas;
 
@@ -356,13 +346,11 @@ FuncionesUi::Dataframe AppContext::getDataframePorZonaYRangoFechas(string codZon
 
 
     // Para cada ejecución, obtener el dataframe de las estadísticas de la zona
-    ulong index = 0;
     for (string fecha : ejecuciones) {
         std::tuple<double*, double*> stats = getStatsPorZonaYFecha(codZona, fecha);
         double* statsNivel = std::get<0>(stats);
         double* statsVolumen = std::get<1>(stats);
 
-        indices.push_back(index);
         fechas.push_back(fecha);
 
         mediaNiveles.push_back(statsNivel[0]);
@@ -374,11 +362,8 @@ FuncionesUi::Dataframe AppContext::getDataframePorZonaYRangoFechas(string codZon
         minimoVolumenes.push_back(statsVolumen[1]);
         maximoVolumenes.push_back(statsVolumen[2]);
         sumaVolumenes.push_back(statsVolumen[3]);
-
-        index++;
     }
 
-    cIndex.setData(indices);
     cFecha.setData(fechas);
 
     cNivelMedia.setData(mediaNiveles);
@@ -391,10 +376,9 @@ FuncionesUi::Dataframe AppContext::getDataframePorZonaYRangoFechas(string codZon
     cVolumenMaximo.setData(maximoVolumenes);
     cVolumenSuma.setData(sumaVolumenes);
 
-    FuncionesUi::Dataframe ul_df2;
+    FuncionesUi::StringDataframe df;
 
-    ul_df2.load_data(std::move(cIndex.getData()),
-                    std::make_pair(appHelper.asCharArray(cFecha.getName()), cFecha.getData()),
+    df.load_data(std::move(cFecha.getData()),
                     std::make_pair(appHelper.asCharArray(cNivelMedia.getName()), cNivelMedia.getData()),
                     std::make_pair(appHelper.asCharArray(cNivelMinimo.getName()), cNivelMinimo.getData()),
                     std::make_pair(appHelper.asCharArray(cNivelMaximo.getName()), cNivelMaximo.getData()),
@@ -404,7 +388,7 @@ FuncionesUi::Dataframe AppContext::getDataframePorZonaYRangoFechas(string codZon
                     std::make_pair(appHelper.asCharArray(cVolumenMaximo.getName()), cVolumenMaximo.getData()),
                     std::make_pair(appHelper.asCharArray(cVolumenSuma.getName()), cVolumenSuma.getData()));
 
-    return ul_df2;
+    return df;
 }
 
 vector<string> AppContext::getExecutions(QDate& desde, QDate& hasta) {
@@ -544,25 +528,7 @@ InfoEmbalse AppContext::getIdEmbalse(bsoncxx::v_noabi::document::view doc) {
     return info;
 }
 
-Dataframe AppContext::getDataframeEmbalseyFechas(string codEmbalse, QDate& desde, QDate& hasta) {
-    try {
-        return getDataframePorEmbalseYRangoFechas(codEmbalse, desde, hasta);
-    } catch (const exception& e) {
-        spdlog::error(e.what());
-        throw e;
-    }
-}
-
-Dataframe AppContext::getDataframeZonayFechas(string codZona, QDate& desde, QDate& hasta) {
-    try {
-        return getDataframePorZonaYRangoFechas(codZona, desde, hasta);
-    } catch (const exception& e) {
-        spdlog::error(e.what());
-        throw e;
-    }
-}
-
-string AppContext::buildCsvHeader(FuncionesUi::Dataframe& dataFrame, const string& fieldSeparator) {
+string AppContext::buildCsvHeader(FuncionesUi::StringDataframe& dataFrame, const string& fieldSeparator) {
     string header = {};
     auto columns = getFields(dataFrame);
 
@@ -579,6 +545,10 @@ vector<std::tuple<String64, std::size_t, std::type_index>> AppContext::getFields
     return dataframe.get_columns_info<double, string>();
 }
 
+vector<std::tuple<String64, std::size_t, std::type_index>> AppContext::getFields(FuncionesUi::StringDataframe& dataframe) {
+    return dataframe.get_columns_info<double, string>();
+}
+
 vector<const char*> AppContext::getFieldNames(FuncionesUi::Dataframe& dataFrame) {
     vector<const char*> v;
     
@@ -592,7 +562,20 @@ vector<const char*> AppContext::getFieldNames(FuncionesUi::Dataframe& dataFrame)
     return v;
 }
 
-void AppContext::saveDataframeToDisk(const QString &outputFileName, FuncionesUi::Dataframe& dataFrame) {
+vector<const char*> AppContext::getFieldNames(FuncionesUi::StringDataframe& dataFrame) {
+    vector<const char*> v;
+
+    auto fields = getFields(dataFrame);
+
+    for(auto field : fields) {
+        string name = std::get<0>(field).c_str();
+        v.push_back(name.c_str());
+    }
+
+    return v;
+}
+
+void AppContext::saveDataframeToDisk(const QString &outputFileName, FuncionesUi::StringDataframe& dataFrame) {
     if (!outputFileName.isNull()) {
         // It creates the file
         QSaveFile file(outputFileName);
@@ -608,14 +591,14 @@ void AppContext::saveDataframeToDisk(const QString &outputFileName, FuncionesUi:
     }
 }
 
-void AppContext::writeHeader(QSaveFile& file, FuncionesUi::Dataframe& dataframe) {
+void AppContext::writeHeader(QSaveFile& file, FuncionesUi::StringDataframe& dataframe) {
     string header = buildCsvHeader(dataframe, Constants::CSV_FIELD_SEPARATOR);
     QByteArray outputByteArray;
     outputByteArray.append(appHelper.asCharArray(header));
     file.write(outputByteArray);
 }
 
-void AppContext::writeContent(QSaveFile& file, FuncionesUi::Dataframe& dataframe) {
+void AppContext::writeContent(QSaveFile& file, FuncionesUi::StringDataframe& dataframe) {
     spdlog::info("Dataframe size: {}", getDataframeSize(dataframe));
     
     auto fields = getFields(dataframe);
@@ -647,12 +630,16 @@ void AppContext::writeContent(QSaveFile& file, FuncionesUi::Dataframe& dataframe
     }
 }
 
-void AppContext::saveDataframe(FuncionesUi::Dataframe& dataframe, QWidget *parent, const string& filetype) {
+void AppContext::saveDataframe(FuncionesUi::StringDataframe& dataframe, QWidget *parent, const string& filetype) {
     const QString filename = QFileDialog::getSaveFileName(parent, i18n("Save File As"), QDir::currentPath(), qtHelper.asQString(filetype));
     saveDataframeToDisk(filename, dataframe);
 }
 
 int AppContext::getDataframeSize(FuncionesUi::Dataframe& dataframe) {
+    return dataframe.get_index().size();
+}
+
+int AppContext::getDataframeSize(FuncionesUi::StringDataframe& dataframe) {
     return dataframe.get_index().size();
 }
 
