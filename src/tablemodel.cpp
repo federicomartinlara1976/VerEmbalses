@@ -31,9 +31,13 @@ int TableModel::rowCount(const QModelIndex &) const {
     return shape.first;
 }
 
+/**
+ * Devuelve el número de columnas del dataframe
+ * (sin contar el índice)
+ */
 int TableModel::columnCount(const QModelIndex &) const {
     auto shape = this->dataFrame.shape();
-    return shape.second+1;
+    return shape.second;
 }
 
 QVariant TableModel::data(const QModelIndex &index, int role) const {
@@ -44,13 +48,9 @@ QVariant TableModel::data(const QModelIndex &index, int role) const {
             return QString(svec[index.row()].c_str());
         }
 
+        // Este va a ser el número de columna a pasar al dataframe
         int columnIndex = index.column() - 1;
         auto column = helper.getColumn(dataFrame, columnIndex);
-        
-        if (std::get<2>(column) == type_index(typeid(string))) {
-            std::vector<string> svec = dataFrame.get_column<string>(columnIndex);
-            return QString(svec[index.row()].c_str());
-        }
         
         if (std::get<2>(column) == type_index(typeid(double))) {
             std::vector<double> dvec = dataFrame.get_column<double>(columnIndex);
