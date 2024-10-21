@@ -30,8 +30,6 @@ private:
     QDate fechaDesde;
     QDate fechaHasta;
     
-    TableModel *model = nullptr; 
-    
     FuncionesUi::StringDataframe dataframe;
 
     enum Constants::TableType tableType;

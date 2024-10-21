@@ -48,18 +48,20 @@ void DlgShowTable::delayedInitialization() {
 }
 
 void DlgShowTable::setData() {
-    this->model = nullptr;
+    TableModel *tableModel = nullptr;
 
-    // Se carga el dataframe en función si está informado codEmbalse
+    // Se carga el modelo en función del tipo
     if (tableType == Constants::EMBALSE) {
-        this->model = new TableModelEmbalse(this->dataframe);
+        tableModel = new TableModelEmbalse(this->dataframe);
     }
 
     if (tableType == Constants::ZONA) {
-        this->model = new TableModelZona(this->dataframe);
+        tableModel = new TableModelZona(this->dataframe);
     }
 
-    this->tblResultados->setModel(model);
+    // El dataframe modificado
+    this->dataframe = tableModel->getDataframe();
+    this->tblResultados->setModel(tableModel);
 
     QHeaderView *headerView = new QHeaderView(Qt::Horizontal);
     this->tblResultados->setHorizontalHeader(headerView);
@@ -125,6 +127,4 @@ void DlgShowTable::showExcelClicked() {
     context.saveDataframe(dataframe, this);
 }
 
-DlgShowTable::~DlgShowTable() {
-    delete model;
-}
+DlgShowTable::~DlgShowTable() {}
