@@ -42,6 +42,7 @@ private slots:
     void cmbEmbalsesIndexChanged(int index);
     void showGraphicClicked();
     void showExcelClicked();
+    void showEmbalsesClicked();
     void buscarPorFechas();
     void estadisticasDiarias();
     void estadisticasMensuales();

@@ -3,6 +3,9 @@
 #include <QtCharts/QLineSeries>
 #include <QtCharts/QValueAxis>
 #include <QtCharts/QDateTimeAxis>
+#include <QFileDialog>
+
+#include <KLocalizedString>
 
 #include <DataFrame/DataFrame.h>
 #include <fmt/format.h>
@@ -124,7 +127,11 @@ void DlgShowTable::showGraphicClicked() {
 
 void DlgShowTable::showExcelClicked() {
     AppContext& context = AppContext::getInstance();
-    context.saveDataframe(dataframe, this);
+    //context.saveDataframe(dataframe, this);
+
+    const string& filetype = Constants::CSV_FILE_TYPE;
+    const QString filename = QFileDialog::getSaveFileName(this, i18n("Save File As"), QDir::currentPath(), helper.asQString(filetype));
+    context.saveDataframeToDisk(filename, this->dataframe);
 }
 
 DlgShowTable::~DlgShowTable() {}

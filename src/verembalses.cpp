@@ -1,12 +1,15 @@
 #include <spdlog/spdlog.h>
 #include <iostream>
 #include <QTimer>
+#include <QFileDialog>
 
 #include <common/config.hpp>
 
 #include "verembalses.hpp"
 #include "constants.hpp"
 #include <QMessageBox>
+
+#include <KLocalizedString>
 
 using namespace std;
 using namespace FuncionesUi;
@@ -23,6 +26,7 @@ void VerEmbalses::connectEvents() {
     connect(cmbZona, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalses::cmbZonasIndexChanged);
     connect(cmbEmbalse, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalses::cmbEmbalsesIndexChanged);
     connect(btnVerGrafico , &QAbstractButton::clicked, this, &VerEmbalses::showGraphicClicked);
+    connect(btnVerEmbalses , &QAbstractButton::clicked, this, &VerEmbalses::showEmbalsesClicked);
     connect(btnExportarCSV , &QAbstractButton::clicked, this, &VerEmbalses::showExcelClicked);
     connect(actionPor_fecha, &QAction::triggered, this, &VerEmbalses::buscarPorFechas);
     connect(actionDiaria, &QAction::triggered, this, &VerEmbalses::estadisticasDiarias);
@@ -40,8 +44,14 @@ void VerEmbalses::delayedInitialization() {
         icon1.addFile(QString::fromUtf8("/usr/share/icons/Humanity/categories/22/redhat-office.svg"), QSize(), QIcon::Normal, QIcon::Off);
         btnVerGrafico->setIcon(icon1);
 
+        btnVerEmbalses->setObjectName(QString::fromUtf8("btnVerEmbalses"));
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8("/usr/share/icons/gnome/22x22/mimetypes/x-office-spreadsheet.png"), QSize(), QIcon::Normal, QIcon::Off);
+        btnVerEmbalses->setIcon(icon2);
+
         btnExportarCSV->setToolTip(QApplication::translate("Dialog", "Exportar a CSV", nullptr));
         btnVerGrafico->setToolTip(QApplication::translate("Dialog", "Ver gr\303\241fico", nullptr));
+        btnVerEmbalses->setToolTip(QApplication::translate("Dialog", "Ver embalses", nullptr));
 
         AppContext& context = AppContext::getInstance();
         string lastExecution = context.getLastExecution();
@@ -137,6 +147,10 @@ void VerEmbalses::showGraphicClicked() {
     }
 }
 
+void VerEmbalses::showEmbalsesClicked() {
+
+}
+
 void VerEmbalses::showExcelClicked() {
     AppContext& context = AppContext::getInstance();
     
@@ -157,7 +171,9 @@ void VerEmbalses::showExcelClicked() {
         if (fechaDesde < fechaHasta) {
             StringDataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, fechaDesde, fechaHasta);
         
-            context.saveDataframe(df, this);
+            const string& filetype = Constants::CSV_FILE_TYPE;
+            const QString filename = QFileDialog::getSaveFileName(this, i18n("Save File As"), QDir::currentPath(), helper.asQString(filetype));
+            context.saveDataframeToDisk(filename, df);
         }
     }
 }

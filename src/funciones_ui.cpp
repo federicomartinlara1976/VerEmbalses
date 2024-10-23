@@ -633,11 +633,6 @@ void AppContext::writeContent(QSaveFile& file, FuncionesUi::StringDataframe& dat
     }
 }
 
-void AppContext::saveDataframe(FuncionesUi::StringDataframe& dataframe, QWidget *parent, const string& filetype) {
-    const QString filename = QFileDialog::getSaveFileName(parent, i18n("Save File As"), QDir::currentPath(), qtHelper.asQString(filetype));
-    saveDataframeToDisk(filename, dataframe);
-}
-
 int AppContext::getDataframeSize(FuncionesUi::Dataframe& dataframe) {
     return dataframe.get_index().size();
 }

@@ -58,7 +58,7 @@ namespace FuncionesUi {
         InfoEmbalse createInfoEmbalse(string codEmbalse, bsoncxx::v_noabi::document::view doc);
         InfoEmbalse getIdEmbalse(bsoncxx::v_noabi::document::view doc);
         string buildCsvHeader(StringDataframe& dataFrame, const string& fieldSeparator);
-        void saveDataframeToDisk(const QString &outputFileName, StringDataframe& dataframe);
+
         void writeHeader(QSaveFile& file, StringDataframe& dataFrame);
         void writeContent(QSaveFile& file, StringDataframe& dataFrame);
 
@@ -96,7 +96,7 @@ namespace FuncionesUi {
         StringDataframe getDataframePorEmbalseYRangoFechas(string codEmbalse, QDate& desde, QDate& hasta);
         StringDataframe getDataframePorZonaYRangoFechas(string codZona, QDate& desde, QDate& hasta);
 
-        void saveDataframe(StringDataframe& dataframe, QWidget *parent, const string& filetype = Constants::CSV_FILE_TYPE);
+        void saveDataframeToDisk(const QString &outputFileName, StringDataframe& dataframe);
 
         std::tuple<double*, double*> getStatsPorZonaYFecha(string codZona, string date);
 

@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'ver_embalsesnDKiBv.ui'
+** Form generated from reading UI file 'ver_embalsesQinFev.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef VER_EMBALSESNDKIBV_H
-#define VER_EMBALSESNDKIBV_H
+#ifndef VER_EMBALSESQINFEV_H
+#define VER_EMBALSESQINFEV_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -43,7 +43,11 @@ public:
     QComboBox *cmbEmbalse;
     QHBoxLayout *horizontalLayout_5;
     QLabel *label_10;
+    QSpacerItem *horizontalSpacer_2;
     QLabel *lblZona;
+    QSpacerItem *horizontalSpacer;
+    QHBoxLayout *horizontalLayout_6;
+    QPushButton *btnVerEmbalses;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_5;
@@ -179,11 +183,29 @@ public:
 
         horizontalLayout_5->addWidget(label_10);
 
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer_2);
+
         lblZona = new QLabel(centralwidget);
         lblZona->setObjectName(QString::fromUtf8("lblZona"));
         lblZona->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         horizontalLayout_5->addWidget(lblZona);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer);
+
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
+        btnVerEmbalses = new QPushButton(centralwidget);
+        btnVerEmbalses->setObjectName(QString::fromUtf8("btnVerEmbalses"));
+
+        horizontalLayout_6->addWidget(btnVerEmbalses);
+
+
+        horizontalLayout_5->addLayout(horizontalLayout_6);
 
 
         verticalLayout_2->addLayout(horizontalLayout_5);
@@ -550,6 +572,7 @@ public:
         label_4->setText(QCoreApplication::translate("MainWindow", "Embalses", nullptr));
         label_10->setText(QCoreApplication::translate("MainWindow", "Estad\303\255sticas por zona", nullptr));
         lblZona->setText(QCoreApplication::translate("MainWindow", "--", nullptr));
+        btnVerEmbalses->setText(QString());
         label_5->setText(QCoreApplication::translate("MainWindow", "Niveles (Hm3)", nullptr));
         label_7->setText(QCoreApplication::translate("MainWindow", "Media", nullptr));
         lblNivelMedia->setText(QCoreApplication::translate("MainWindow", "--", nullptr));
@@ -590,4 +613,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // VER_EMBALSESNDKIBV_H
+#endif // VER_EMBALSESQINFEV_H
