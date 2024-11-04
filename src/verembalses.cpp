@@ -297,11 +297,18 @@ void VerEmbalses::showStatsPorZona(string codZona, string date) {
         sMax = fmt::format(Constants::NUMBER_FORMAT, get<1>(stats)[2]);
         lblVolumenMaximo->setText(helper.asQString(sMax));
 
-        std::string sSum = fmt::format(Constants::NUMBER_FORMAT, get<0>(stats)[3]);
-        lblNivelTotal->setText(helper.asQString(sSum));
-
-        sSum = fmt::format(Constants::NUMBER_FORMAT, get<1>(stats)[3]);
+        double volumenTotal = get<1>(stats)[3];
+        std::string sSum = fmt::format(Constants::NUMBER_FORMAT, volumenTotal);
         lblVolumenTotal->setText(helper.asQString(sSum));
+
+        double totalCapacidad = context.getTotalCapacidadZona(codZona);
+        std::string sTotalCapacidad = fmt::format(Constants::NUMBER_FORMAT, totalCapacidad);
+        lblTotalCapacidadZona->setText(helper.asQString(sTotalCapacidad));
+
+        double porcentajeVolumen = (volumenTotal*100)/totalCapacidad;
+        std::string sPorcentajeVolumen = fmt::format(Constants::NUMBER_FORMAT, porcentajeVolumen);
+        lblPorcentajeVolumenTotal->setText(helper.asQString(sPorcentajeVolumen));
+        helper.setLabelStyleValue(lblPorcentajeVolumenTotal, porcentajeVolumen);
     } catch (const exception& e) {
         spdlog::error("ERROR getStatsPorZona: {}", e.what());
         throw e;

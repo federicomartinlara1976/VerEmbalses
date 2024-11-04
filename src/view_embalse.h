@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'ver_embalsesQinFev.ui'
+** Form generated from reading UI file 'ver_embalsesVxMyoO.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef VER_EMBALSESQINFEV_H
-#define VER_EMBALSESQINFEV_H
+#ifndef VER_EMBALSESVXMYOO_H
+#define VER_EMBALSESVXMYOO_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -60,9 +60,6 @@ public:
     QVBoxLayout *verticalLayout_5;
     QLabel *label_11;
     QLabel *lblNivelMaximo;
-    QVBoxLayout *verticalLayout_16;
-    QLabel *label_2;
-    QLabel *lblNivelTotal;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_6;
     QVBoxLayout *verticalLayout_10;
@@ -77,6 +74,12 @@ public:
     QVBoxLayout *verticalLayout_17;
     QLabel *label_8;
     QLabel *lblVolumenTotal;
+    QHBoxLayout *horizontalLayout_7;
+    QLabel *label_12;
+    QLabel *lblTotalCapacidadZona;
+    QVBoxLayout *verticalLayout_14;
+    QLabel *label;
+    QLabel *lblPorcentajeVolumenTotal;
     QVBoxLayout *verticalLayout_15;
     QLabel *lblNombreEmbalse;
     QHBoxLayout *horizontalLayout_2;
@@ -102,7 +105,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(840, 600);
+        MainWindow->resize(1041, 762);
         MainWindow->setMinimumSize(QSize(840, 600));
         actionDiaria = new QAction(MainWindow);
         actionDiaria->setObjectName(QString::fromUtf8("actionDiaria"));
@@ -290,23 +293,6 @@ public:
 
         horizontalLayout_4->addLayout(verticalLayout_5);
 
-        verticalLayout_16 = new QVBoxLayout();
-        verticalLayout_16->setObjectName(QString::fromUtf8("verticalLayout_16"));
-        verticalLayout_16->setContentsMargins(5, 5, 5, 5);
-        label_2 = new QLabel(centralwidget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        verticalLayout_16->addWidget(label_2);
-
-        lblNivelTotal = new QLabel(centralwidget);
-        lblNivelTotal->setObjectName(QString::fromUtf8("lblNivelTotal"));
-        lblNivelTotal->setFont(font1);
-
-        verticalLayout_16->addWidget(lblNivelTotal);
-
-
-        horizontalLayout_4->addLayout(verticalLayout_16);
-
 
         verticalLayout->addLayout(horizontalLayout_4);
 
@@ -404,6 +390,47 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_3);
 
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        horizontalLayout_7->setContentsMargins(5, 5, 5, 5);
+        label_12 = new QLabel(centralwidget);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
+
+        horizontalLayout_7->addWidget(label_12);
+
+        lblTotalCapacidadZona = new QLabel(centralwidget);
+        lblTotalCapacidadZona->setObjectName(QString::fromUtf8("lblTotalCapacidadZona"));
+        QFont font2;
+        font2.setPointSize(14);
+        font2.setBold(true);
+        lblTotalCapacidadZona->setFont(font2);
+        lblTotalCapacidadZona->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_7->addWidget(lblTotalCapacidadZona);
+
+        verticalLayout_14 = new QVBoxLayout();
+        verticalLayout_14->setObjectName(QString::fromUtf8("verticalLayout_14"));
+        verticalLayout_14->setContentsMargins(5, 5, 5, 5);
+        label = new QLabel(centralwidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_14->addWidget(label);
+
+        lblPorcentajeVolumenTotal = new QLabel(centralwidget);
+        lblPorcentajeVolumenTotal->setObjectName(QString::fromUtf8("lblPorcentajeVolumenTotal"));
+        lblPorcentajeVolumenTotal->setFont(font1);
+        lblPorcentajeVolumenTotal->setStyleSheet(QString::fromUtf8("background-color: white; border: 1px solid black;"));
+        lblPorcentajeVolumenTotal->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_14->addWidget(lblPorcentajeVolumenTotal);
+
+
+        horizontalLayout_7->addLayout(verticalLayout_14);
+
+
+        verticalLayout->addLayout(horizontalLayout_7);
+
 
         verticalLayout_2->addLayout(verticalLayout);
 
@@ -446,9 +473,6 @@ public:
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(lblCapacidad->sizePolicy().hasHeightForWidth());
         lblCapacidad->setSizePolicy(sizePolicy2);
-        QFont font2;
-        font2.setPointSize(14);
-        font2.setBold(true);
         lblCapacidad->setFont(font2);
         lblCapacidad->setStyleSheet(QString::fromUtf8("background-color: white; border: 1px solid black;"));
         lblCapacidad->setAlignment(Qt::AlignCenter);
@@ -538,7 +562,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 840, 22));
+        menubar->setGeometry(QRect(0, 0, 1041, 22));
         menuConsulta = new QMenu(menubar);
         menuConsulta->setObjectName(QString::fromUtf8("menuConsulta"));
         menuGeneral = new QMenu(menubar);
@@ -580,8 +604,6 @@ public:
         lblNivelMinimo->setText(QCoreApplication::translate("MainWindow", "--", nullptr));
         label_11->setText(QCoreApplication::translate("MainWindow", "M\303\241ximo", nullptr));
         lblNivelMaximo->setText(QCoreApplication::translate("MainWindow", "--", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "Total", nullptr));
-        lblNivelTotal->setText(QCoreApplication::translate("MainWindow", "--", nullptr));
         label_6->setText(QCoreApplication::translate("MainWindow", "Volumen (Hm3)", nullptr));
         label_13->setText(QCoreApplication::translate("MainWindow", "Media", nullptr));
         lblVolumenMedia->setText(QCoreApplication::translate("MainWindow", "--", nullptr));
@@ -591,6 +613,10 @@ public:
         lblVolumenMaximo->setText(QCoreApplication::translate("MainWindow", "--", nullptr));
         label_8->setText(QCoreApplication::translate("MainWindow", "Total", nullptr));
         lblVolumenTotal->setText(QCoreApplication::translate("MainWindow", "--", nullptr));
+        label_12->setText(QCoreApplication::translate("MainWindow", "Total capacidad", nullptr));
+        lblTotalCapacidadZona->setText(QCoreApplication::translate("MainWindow", "--", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Porcentaje %", nullptr));
+        lblPorcentajeVolumenTotal->setText(QCoreApplication::translate("MainWindow", "--", nullptr));
         lblNombreEmbalse->setText(QCoreApplication::translate("MainWindow", "EMBALSE", nullptr));
         label_19->setText(QCoreApplication::translate("MainWindow", "Capacidad (Hm3)", nullptr));
         lblCapacidad->setText(QString());
@@ -613,4 +639,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // VER_EMBALSESQINFEV_H
+#endif // VER_EMBALSESVXMYOO_H
