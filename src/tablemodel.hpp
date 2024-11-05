@@ -37,6 +37,11 @@ public:
     TableModelZona(const FuncionesUi::StringDataframe& dataFrame);
 };
 
+class TableModelEmbalses : public TableModel {
+public:
+    TableModelEmbalses(const FuncionesUi::StringDataframe& dataFrame);
+};
+
 
 
 #endif

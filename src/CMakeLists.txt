@@ -12,6 +12,7 @@ target_sources(verembalses PRIVATE
     tablemodel.cpp
     tablemodelembalse.cpp
     tablemodelzona.cpp
+    tablemodelembalses.cpp
     progreso.cpp
     qtdialogwindow.cpp
     qtwindow.cpp

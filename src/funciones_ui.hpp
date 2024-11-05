@@ -90,6 +90,7 @@ namespace FuncionesUi {
         InfoZona getZona(string codZona);
         Dataframe getDataframeZona(string codZona);
         Dataframe getDataframeZonaAndDate(string codZona, string date);
+        StringDataframe getDataframeEmbalsesZonaAndDate(string codZona, string date);
 
         string getLastExecution();
 

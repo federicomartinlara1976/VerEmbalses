@@ -20,7 +20,8 @@ namespace Constants {
 
     enum TableType {
         EMBALSE,
-        ZONA
+        ZONA,
+        EMBALSES
     };
 }
 

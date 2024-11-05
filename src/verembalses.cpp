@@ -57,8 +57,8 @@ void VerEmbalses::delayedInitialization() {
         string lastExecution = context.getLastExecution();
 
         Configuration& config_instance = Configuration::getInstance(applicationName);
-        string zona = config_instance.getPropertyAsString("zona.selected");
-        string embalse = config_instance.getPropertyAsString("embalse.selected");
+        zona = config_instance.getPropertyAsString("zona.selected");
+        embalse = config_instance.getPropertyAsString("embalse.selected");
 
         context.populateZonasIn(cmbZona);
 
@@ -82,13 +82,13 @@ void VerEmbalses::cmbZonasIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
     string lastExecution = context.getLastExecution();
     
-    string value = helper.getStringValue(cmbZona, index);
+    zona = helper.getStringValue(cmbZona, index);
 
-    if (!value.empty()) {
-        InfoZona info = context.getZona(value);
+    if (!zona.empty()) {
+        InfoZona info = context.getZona(zona);
 
         lblZona->setText(helper.asQString(info.nombre));
-        showStatsPorZona(value, lastExecution);
+        showStatsPorZona(zona, lastExecution);
         context.populateEmbalsesIn(helper.getStringValue(cmbZona, index), this->cmbEmbalse);
 
         string codigoEmbalse = helper.getStringValue(cmbEmbalse, 0);
@@ -148,7 +148,12 @@ void VerEmbalses::showGraphicClicked() {
 }
 
 void VerEmbalses::showEmbalsesClicked() {
+    AppContext& context = AppContext::getInstance();
+    string lastExecution = context.getLastExecution();
+    StringDataframe df = context.getDataframeEmbalsesZonaAndDate(zona, lastExecution);
 
+    unique_ptr<DlgShowTable> dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, zona, Constants::EMBALSES, this)};
+    dlgShowTable->mostrar(true);
 }
 
 void VerEmbalses::showExcelClicked() {

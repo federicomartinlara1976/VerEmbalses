@@ -28,6 +28,9 @@ private:
     VerEmbalsesAppHelper helper;
     
     QLoadJob* j1;
+
+    string zona;
+    string embalse;
     
     unique_ptr<DlgSelectFecha> getDlgFecha(bool isSelectedZone = true);
     unique_ptr<DlgSelectMes> getDlgMes();

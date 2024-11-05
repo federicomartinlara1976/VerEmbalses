@@ -24,7 +24,7 @@ DlgShowTable::DlgShowTable(const FuncionesUi::StringDataframe& dataframe, const 
         setCodEmbalse(code);
     }
 
-    if (tableType == Constants::ZONA) {
+    if (tableType == Constants::ZONA || tableType == Constants::EMBALSES) {
         setCodZona(code);
     }
 
@@ -60,6 +60,10 @@ void DlgShowTable::setData() {
 
     if (tableType == Constants::ZONA) {
         tableModel = new TableModelZona(this->dataframe);
+    }
+
+    if (tableType == Constants::EMBALSES) {
+        tableModel = new TableModelEmbalses(this->dataframe);
     }
 
     // El dataframe modificado

@@ -91,7 +91,7 @@ void AppContext::populateZonasIn(QComboBox* combo) {
             combo->addItem(label, value);
         }
     } catch (const exception& e) {
-        spdlog::error("ERROR populateZonas: {}", e.what());
+        spdlog::error("ERROR populateZonasIn: {}", e.what());
         throw e;
     }
 }
@@ -165,7 +165,7 @@ void AppContext::populateEmbalsesIn(string codZona, QComboBox *combo) {
             combo->addItem(label, value);
         }
     } catch (const exception& e) {
-        spdlog::error("ERROR populateEmbalses: {}", e.what());
+        spdlog::error("ERROR populateEmbalsesIn: {}", e.what());
         throw e;
     }
 }
@@ -204,7 +204,48 @@ FuncionesUi::Dataframe AppContext::getDataframeZonaAndDate(string codZona, strin
         
         return ul_df2;
     } catch (const exception& e) {
-        spdlog::error("ERROR getDataframeZona: {}", e.what());
+        spdlog::error("ERROR getDataframeZonaAndDate: {}", e.what());
+        throw e;
+    }
+}
+
+FuncionesUi::StringDataframe AppContext::getDataframeEmbalsesZonaAndDate(string codZona, string date) {
+    try {
+        unique_ptr<vector<InfoEmbalse>> embalses = getEmbalsesPorZona("Embalses", codZona);
+
+        data::ColumnData<string> cIndex("Codigo");
+        vector<string> v_codigos;
+        data::ColumnData<string> cEmbalse("Embalse");
+        vector<string> v_embalses;
+        data::ColumnData<double> cNivel("Nivel");
+        vector<double> v_niveles;
+        data::ColumnData<double> cVolumen("Volumen");
+        vector<double> v_volumenes;
+
+        for (InfoEmbalse& embalse : *embalses) {
+            string codEmbalse = embalse.codEmbalse;
+            InfoEmbalse info = getEmbalseInfoByDate(codEmbalse, date);
+            v_codigos.push_back(codEmbalse);
+            v_embalses.push_back(info.embalse);
+            v_niveles.push_back(info.nivel);
+            v_volumenes.push_back(info.volumen);
+        }
+
+        cIndex.setData(v_codigos);
+        cEmbalse.setData(v_embalses);
+        cNivel.setData(v_niveles);
+        cVolumen.setData(v_volumenes);
+
+        FuncionesUi::StringDataframe ul_df2;
+
+        ul_df2.load_data(std::move(cIndex.getData()),
+                     std::make_pair(appHelper.asCharArray(cEmbalse.getName()), cEmbalse.getData()),
+                     std::make_pair(appHelper.asCharArray(cNivel.getName()), cNivel.getData()),
+                     std::make_pair(appHelper.asCharArray(cVolumen.getName()), cVolumen.getData()));
+
+        return ul_df2;
+    } catch (const exception& e) {
+        spdlog::error("ERROR getDataframeEmbalsesZonaAndDate: {}", e.what());
         throw e;
     }
 }
