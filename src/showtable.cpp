@@ -21,14 +21,12 @@ DlgShowTable::DlgShowTable(const FuncionesUi::StringDataframe& dataframe, const 
     this->tableType = tableType;
 
     if (tableType == Constants::EMBALSE) {
-        setCodEmbalse(code);
+        this->codEmbalse = code;
     }
 
     if (tableType == Constants::ZONA || tableType == Constants::EMBALSES) {
-        setCodZona(code);
+        this->codZona = code;
     }
-
-    setData();
 }
 
 void DlgShowTable::setup() {
@@ -48,6 +46,24 @@ void DlgShowTable::delayedInitialization() {
     QIcon icon1;
     icon1.addFile(QString::fromUtf8("/usr/share/icons/Humanity/categories/22/redhat-office.svg"), QSize(), QIcon::Normal, QIcon::Off);
     btnVerGrafico->setIcon(icon1);
+
+    if (tableType == Constants::EMBALSE) {
+        setCodEmbalse(codEmbalse);
+    }
+
+    if (tableType == Constants::ZONA || tableType == Constants::EMBALSES) {
+        setCodZona(codZona);
+    }
+
+    if (tableType == Constants::EMBALSES) {
+        this->btnVerGrafico->setVisible(false);
+        this->label->setVisible(false);
+        this->lblDesde->setVisible(false);
+        this->label_2->setVisible(false);
+        this->lblHasta->setVisible(false);
+    }
+
+    setData();
 }
 
 void DlgShowTable::setData() {
@@ -69,17 +85,12 @@ void DlgShowTable::setData() {
     // El dataframe modificado
     this->dataframe = tableModel->getDataframe();
     this->tblResultados->setModel(tableModel);
-
-    QHeaderView *headerView = new QHeaderView(Qt::Horizontal);
-    this->tblResultados->setHorizontalHeader(headerView);
 }
   
 void DlgShowTable::setCodEmbalse(const string& codEmbalse) {
     AppContext& context = AppContext::getInstance();
     
-    this->codEmbalse = codEmbalse;
     InfoEmbalse info = context.getEmbalseInfo(codEmbalse);
-    //spdlog::info("{} - {}", info.codEmbalse, info.embalse);
 
     // Recoger la primera fila, los datos MEN y capacidad para informar las etiquetas de la cabecera
     std::vector<const char *> columns = {"MEN", "Capacidad"};
@@ -97,9 +108,7 @@ void DlgShowTable::setCodEmbalse(const string& codEmbalse) {
 void DlgShowTable::setCodZona(const string& codZona) {
     AppContext& context = AppContext::getInstance();
 
-    this->codZona = codZona;
     InfoZona info = context.getZona(codZona);
-    //spdlog::info("{} - {}", info.codZona, info.nombre);
 
     double totalCapacidad = context.getTotalCapacidadZona(codZona);
     std::string sTotalCapacidad = fmt::format(Constants::NUMBER_FORMAT, totalCapacidad);
