@@ -373,8 +373,6 @@ FuncionesUi::StringDataframe AppContext::getDataframePorZonaYRangoFechas(string 
     vector<double> minimoNiveles;
     data::ColumnData<double> cNivelMaximo("MaximoNivel");
     vector<double> maximoNiveles;
-    data::ColumnData<double> cNivelSuma("SumaNivel");
-    vector<double> sumaNiveles;
 
     data::ColumnData<double> cVolumenMedia("MediaVolumen");
     vector<double> mediaVolumenes;
@@ -397,7 +395,6 @@ FuncionesUi::StringDataframe AppContext::getDataframePorZonaYRangoFechas(string 
         mediaNiveles.push_back(statsNivel[0]);
         minimoNiveles.push_back(statsNivel[1]);
         maximoNiveles.push_back(statsNivel[2]);
-        sumaNiveles.push_back(statsNivel[3]);
 
         mediaVolumenes.push_back(statsVolumen[0]);
         minimoVolumenes.push_back(statsVolumen[1]);
@@ -410,7 +407,6 @@ FuncionesUi::StringDataframe AppContext::getDataframePorZonaYRangoFechas(string 
     cNivelMedia.setData(mediaNiveles);
     cNivelMinimo.setData(minimoNiveles);
     cNivelMaximo.setData(maximoNiveles);
-    cNivelSuma.setData(sumaNiveles);
 
     cVolumenMedia.setData(mediaVolumenes);
     cVolumenMinimo.setData(minimoVolumenes);
@@ -423,7 +419,6 @@ FuncionesUi::StringDataframe AppContext::getDataframePorZonaYRangoFechas(string 
                     std::make_pair(appHelper.asCharArray(cNivelMedia.getName()), cNivelMedia.getData()),
                     std::make_pair(appHelper.asCharArray(cNivelMinimo.getName()), cNivelMinimo.getData()),
                     std::make_pair(appHelper.asCharArray(cNivelMaximo.getName()), cNivelMaximo.getData()),
-                    std::make_pair(appHelper.asCharArray(cNivelSuma.getName()), cNivelSuma.getData()),
                     std::make_pair(appHelper.asCharArray(cVolumenMedia.getName()), cVolumenMedia.getData()),
                     std::make_pair(appHelper.asCharArray(cVolumenMinimo.getName()), cVolumenMinimo.getData()),
                     std::make_pair(appHelper.asCharArray(cVolumenMaximo.getName()), cVolumenMaximo.getData()),
@@ -574,7 +569,7 @@ string AppContext::buildCsvHeader(FuncionesUi::StringDataframe& dataFrame, const
     auto columns = getFields(dataFrame);
 
     // Pone la columna fecha
-    header.append("Fecha").append(fieldSeparator);
+    header.append("Indice").append(fieldSeparator);
 
     for (auto citer: columns)  {
         string nombre = std::get<0>(citer).c_str();
