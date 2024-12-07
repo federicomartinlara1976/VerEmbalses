@@ -1,7 +1,6 @@
 #include "sectorgraphic.hpp"
 
 #include <QtCharts/QPieSeries>
-#include <QtCharts/QPieSlice>
 
 GraficoEnSectores::GraficoEnSectores(StringDataframe &df) {
     this->df = df;

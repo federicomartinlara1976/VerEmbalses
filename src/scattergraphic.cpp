@@ -1,28 +1,42 @@
 #include "scattergraphic.hpp"
 
-#include <QtCharts/QPieSeries>
-#include <QtCharts/QPieSlice>
+#include <QtCharts/QScatterSeries>
+#include <QtCharts/QValueAxis>
 
 GraficoEnNubePuntos::GraficoEnNubePuntos(StringDataframe &df) {
     this->df = df;
 
-    QPieSeries *series = new QPieSeries();
+    QScatterSeries *series = new QScatterSeries();
+    series->setName("scatter1");
+    series->setMarkerShape(QScatterSeries::MarkerShapeCircle);
+    series->setMarkerSize(10.0);
 
-    vector<string> embalses = df.get_column<string>("Embalse");
-    vector<double> values = df.get_column<double>("Volumen");
+    vector<double> niveles = df.get_column<double>("Nivel");
+    vector<double> volumenes = df.get_column<double>("Volumen");
 
     int i = 0;
-    for (string embalse : embalses) {
-        QString qEmbalse = qtHelper.asQString(embalse);
-        double val = values[i];
-        series->append(qEmbalse, val);
+    for (double nivel : niveles) {
+        double volumen = volumenes[i];
+        series->append(nivel, volumen);
         i++;
     }
 
-    series->setLabelsVisible();
-
     graphic = new QChart();
     graphic->addSeries(series);
+
+    QValueAxis *axisX = new QValueAxis();
+    axisX->setTitleText("Nivel");
+    axisX->setLabelFormat("%f");
+    graphic->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+
+    QValueAxis *axisY = new QValueAxis();
+    axisY->setTitleText("Volumen");
+    axisY->setLabelFormat("%f");
+    graphic->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+
+    graphic->setDropShadowEnabled(false);
     graphic->legend()->setVisible(true);
     graphic->legend()->setAlignment(Qt::AlignRight);
 
