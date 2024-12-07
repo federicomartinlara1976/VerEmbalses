@@ -1,7 +1,7 @@
-#ifndef _DLG_SHOWLINEGRAPHIC_HPP_
-#define _DLG_SHOWLINEGRAPHIC_HPP_
+#ifndef _DLG_SHOWSCATTERGRAPHIC_HPP_
+#define _DLG_SHOWSCATTERGRAPHIC_HPP_
 
-#include "dlg_showlinegraphic.h"
+#include "dlg_showsimplegraphic.h"
 #include "funciones_ui.hpp"
 #include "VerEmbalsesAppHelper.hpp"
 
@@ -13,36 +13,32 @@
 
 using namespace std;
 
-class DlgShowLineGraphic : public QtDialogWindow, public Ui::DialogShowLineGraphic {
+class DlgShowScatterGraphic : public QtDialogWindow, public Ui::DialogShowSimpleGraphic {
     Q_OBJECT
-    
+
 private:
     QtHelper qtHelper;
     AppHelper appHelper;
-    
+
     FuncionesUi::StringDataframe df;
-    
-    string selectedYValue;
-    
-    void populateDatoY();
-    void drawGraphic(string selectedYValue);
-    
-private slots:
-    void cmbDatoYIndexChanged(int index);
-    
+
+    void drawGraphic();
+
 protected:
     void setup() override;
     void connectEvents() override;
     void delayedInitialization() override;
     void onClose() override;
     void onAccept() override;
-    
+
 public:
-    DlgShowLineGraphic(QWidget* parent = nullptr);
-    
+    DlgShowScatterGraphic(QWidget* parent = nullptr);
+
     void setData(const FuncionesUi::StringDataframe& df);
-    
-    virtual ~DlgShowLineGraphic();
+
+    virtual ~DlgShowScatterGraphic();
 };
 
 #endif
+
+

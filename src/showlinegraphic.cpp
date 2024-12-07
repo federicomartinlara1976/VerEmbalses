@@ -20,6 +20,10 @@ void DlgShowLineGraphic::connectEvents() {
 
 void DlgShowLineGraphic::delayedInitialization() {}
 
+void DlgShowLineGraphic::onClose() {}
+
+void DlgShowLineGraphic::onAccept() {}
+
 void DlgShowLineGraphic::setData(const FuncionesUi::StringDataframe& df) {
     this->df = df;
     

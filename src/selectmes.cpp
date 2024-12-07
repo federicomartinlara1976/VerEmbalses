@@ -25,6 +25,10 @@ void DlgSelectMes::delayedInitialization() {
     selected = make_tuple(value, nombre);
 }
 
+void DlgSelectMes::onClose() {}
+
+void DlgSelectMes::onAccept() {}
+
 void DlgSelectMes::cmbMesIndexChanged(int index) {
     string nombre = helper.asString(cmbMes->currentText());
     int value = cmbMes->itemData(index).toInt();

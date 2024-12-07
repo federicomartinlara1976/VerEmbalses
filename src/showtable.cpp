@@ -11,6 +11,7 @@
 #include <fmt/format.h>
 
 #include "showtable.hpp"
+#include "selecttipografico.hpp"
 
 using namespace std;
 using namespace hmdf;
@@ -64,6 +65,10 @@ void DlgShowTable::delayedInitialization() {
 
     setData();
 }
+
+void DlgShowTable::onClose() {}
+
+void DlgShowTable::onAccept() {}
 
 void DlgShowTable::setData() {
     TableModel *tableModel = nullptr;
@@ -132,13 +137,36 @@ void DlgShowTable::setFechas(const QDate fechaDesde, const QDate fechaHasta) {
 }
 
 void DlgShowTable::showGraphicClicked() {
-    if (tableType == Constants::ZONA || tableType == Constants::EMBALSE) {
+    if (tableType == Constants::ZONA) {
         unique_ptr<DlgShowLineGraphic> dlgShowGraphic = unique_ptr<DlgShowLineGraphic>{new DlgShowLineGraphic(this)};
 
         dlgShowGraphic->setData(dataframe);
         dlgShowGraphic->mostrar(true);
     }
-    else {
+
+    if (tableType == Constants::EMBALSE) {
+        unique_ptr<DlgSelectTipoGrafico> dlgSelectTipoGrafico = unique_ptr<DlgSelectTipoGrafico>{new DlgSelectTipoGrafico(this)};
+        int result = dlgSelectTipoGrafico->mostrar(true);
+
+        if (result == 1) {
+            Constants::GraphType graphType = dlgSelectTipoGrafico->getTipoGrafico();
+            if (graphType == Constants::GraphType::LINEAR) {
+                unique_ptr<DlgShowLineGraphic> dlgShowGraphic = unique_ptr<DlgShowLineGraphic>{new DlgShowLineGraphic(this)};
+
+                dlgShowGraphic->setData(dataframe);
+                dlgShowGraphic->mostrar(true);
+            }
+
+            if (graphType == Constants::GraphType::RELACION_NIVEL_VOLUMEN) {
+                unique_ptr<DlgShowScatterGraphic> dlgShowGraphic = unique_ptr<DlgShowScatterGraphic>{new DlgShowScatterGraphic(this)};
+
+                dlgShowGraphic->setData(dataframe);
+                dlgShowGraphic->mostrar(true);
+            }
+        }
+    }
+
+    if (tableType == Constants::EMBALSES) {
         unique_ptr<DlgShowPieGraphic> dlgShowGraphic = unique_ptr<DlgShowPieGraphic>{new DlgShowPieGraphic(this)};
 
         dlgShowGraphic->setData(dataframe);

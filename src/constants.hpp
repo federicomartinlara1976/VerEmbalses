@@ -23,6 +23,11 @@ namespace Constants {
         ZONA,
         EMBALSES
     };
+
+    enum GraphType {
+        LINEAR,
+        RELACION_NIVEL_VOLUMEN
+    };
 }
 
 #endif

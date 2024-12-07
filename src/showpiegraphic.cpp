@@ -15,6 +15,10 @@ void DlgShowPieGraphic::connectEvents() {}
 
 void DlgShowPieGraphic::delayedInitialization() {}
 
+void DlgShowPieGraphic::onClose() {}
+
+void DlgShowPieGraphic::onAccept() {}
+
 void DlgShowPieGraphic::setData(const FuncionesUi::StringDataframe& df) {
     this->df = df;
 

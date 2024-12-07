@@ -48,6 +48,10 @@ void DlgSelectFecha::delayedInitialization() {
     }
 }
 
+void DlgSelectFecha::onClose() {}
+
+void DlgSelectFecha::onAccept() {}
+
 void DlgSelectFecha::cmbZonasIndexChanged(int index) {
     codZona = helper.getStringValue(cmbZona, index);
 

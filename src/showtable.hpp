@@ -7,6 +7,7 @@
 #include "tablemodel.hpp"
 #include "showlinegraphic.hpp"
 #include "showpiegraphic.hpp"
+#include "showscattergraphic.hpp"
 #include "constants.hpp"
 
 #include "qtdialogwindow.hpp"
@@ -46,7 +47,9 @@ private slots:
 protected:
     void setup() override;
     void connectEvents() override;
-    void delayedInitialization() override;    
+    void delayedInitialization() override;
+    void onClose() override;
+    void onAccept() override;
 
 public:
     DlgShowTable(const FuncionesUi::StringDataframe& dataframe, const string& code, enum Constants::TableType tableType, QWidget* parent = nullptr);

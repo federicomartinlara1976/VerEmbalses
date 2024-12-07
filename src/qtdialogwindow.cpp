@@ -22,6 +22,16 @@ int QtDialogWindow::mostrar(bool modal) {
     return exec();
 }
 
+void QtDialogWindow::closeEvent(QCloseEvent *event) {
+    this->onClose();
+    QDialog::closeEvent(event); // Propaga el evento
+}
+
+void QtDialogWindow::accept() {
+    this->onAccept();
+    QDialog::accept(); // Llama al cierre estándar
+}
+
 void QtDialogWindow::delayInitialization() {
     this->delayedInitialization();
 }

@@ -17,9 +17,14 @@ class QtDialogWindow : public QDialog {
         virtual ~QtDialogWindow() = default;
         
     protected:
+        void closeEvent(QCloseEvent *event) override;
+        void accept() override;
+
         virtual void setup() = 0;
         virtual void connectEvents() = 0;
         virtual void delayedInitialization() = 0;
+        virtual void onClose() = 0;
+        virtual void onAccept() = 0;
 };
 
 #endif
