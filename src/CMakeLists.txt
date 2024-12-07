@@ -5,7 +5,8 @@ target_sources(verembalses PRIVATE
     verembalses.cpp
     selectfecha.cpp
     selectmes.cpp
-    showgraphic.cpp
+    showlinegraphic.cpp
+    showpiegraphic.cpp
     showtable.cpp
     funciones_ui.cpp
     VerEmbalsesAppHelper.cpp
@@ -18,6 +19,9 @@ target_sources(verembalses PRIVATE
     qtwindow.cpp
     signalmanager.cpp
     qloadjob.cpp
+    graphic.cpp
+    linegraphic.cpp
+    sectorgraphic.cpp
 )
 
 ecm_qt_declare_logging_category(verembalses

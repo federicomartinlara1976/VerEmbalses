@@ -56,7 +56,6 @@ void DlgShowTable::delayedInitialization() {
     }
 
     if (tableType == Constants::EMBALSES) {
-        this->btnVerGrafico->setVisible(false);
         this->label->setVisible(false);
         this->lblDesde->setVisible(false);
         this->label_2->setVisible(false);
@@ -133,9 +132,18 @@ void DlgShowTable::setFechas(const QDate fechaDesde, const QDate fechaHasta) {
 }
 
 void DlgShowTable::showGraphicClicked() {
-    unique_ptr<DlgShowGraphic> dlgShowGraphic = unique_ptr<DlgShowGraphic>{new DlgShowGraphic(this)};
-    dlgShowGraphic->setData(dataframe);
-    dlgShowGraphic->mostrar(true);
+    if (tableType == Constants::ZONA || tableType == Constants::EMBALSE) {
+        unique_ptr<DlgShowLineGraphic> dlgShowGraphic = unique_ptr<DlgShowLineGraphic>{new DlgShowLineGraphic(this)};
+
+        dlgShowGraphic->setData(dataframe);
+        dlgShowGraphic->mostrar(true);
+    }
+    else {
+        unique_ptr<DlgShowPieGraphic> dlgShowGraphic = unique_ptr<DlgShowPieGraphic>{new DlgShowPieGraphic(this)};
+
+        dlgShowGraphic->setData(dataframe);
+        dlgShowGraphic->mostrar(true);
+    }
 }
 
 void DlgShowTable::showExcelClicked() {

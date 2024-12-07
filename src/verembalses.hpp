@@ -4,7 +4,7 @@
 #include "view_embalse.h"
 #include "selectfecha.hpp"
 #include "selectmes.hpp"
-#include "showgraphic.hpp"
+#include "showlinegraphic.hpp"
 #include "showtable.hpp"
 #include "progreso.hpp"
 #include "qloadjob.hpp"

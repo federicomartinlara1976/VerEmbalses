@@ -140,7 +140,7 @@ void VerEmbalses::showGraphicClicked() {
             df.remove_column<double>("MEN");
             df.remove_column<double>("Capacidad");
             
-            unique_ptr<DlgShowGraphic> dlgShowGraphic = unique_ptr<DlgShowGraphic>{new DlgShowGraphic(this)};
+            unique_ptr<DlgShowLineGraphic> dlgShowGraphic = unique_ptr<DlgShowLineGraphic>{new DlgShowLineGraphic(this)};
             dlgShowGraphic->setData(df);
             dlgShowGraphic->mostrar(true);
         }

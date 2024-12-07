@@ -5,7 +5,8 @@
 #include "funciones_ui.hpp"
 #include "VerEmbalsesAppHelper.hpp"
 #include "tablemodel.hpp"
-#include "showgraphic.hpp"
+#include "showlinegraphic.hpp"
+#include "showpiegraphic.hpp"
 #include "constants.hpp"
 
 #include "qtdialogwindow.hpp"
