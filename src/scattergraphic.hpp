@@ -1,5 +1,5 @@
-#ifndef __SECTORGRAPHIC_HPP__
-#define __SECTORGRAPHIC_HPP__
+#ifndef __SCATTERGRAPHIC_HPP__
+#define __SCATTERGRAPHIC_HPP__
 
 #include "graphic.hpp"
 #include "funciones_ui.hpp"
@@ -10,7 +10,7 @@
 using namespace QtCharts;
 using namespace FuncionesUi;
 
-class GraficoEnSectores : public GraphicStrategy {
+class GraficoEnNubePuntos : public GraphicStrategy {
 private:
     QtHelper qtHelper;
     AppHelper appHelper;
@@ -20,7 +20,7 @@ private:
     QChart* graphic;
 
 public:
-    GraficoEnSectores(StringDataframe &df);
+    GraficoEnNubePuntos(StringDataframe &df);
     QChart* getGraphic() const override { return graphic; }
 };
 
