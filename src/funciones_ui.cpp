@@ -181,6 +181,8 @@ FuncionesUi::Dataframe AppContext::getDataframeZonaAndDate(string codZona, strin
         vector<double> niveles;
         data::ColumnData<double> cVolumen("Volumen");
         vector<double> volumenes;
+        data::ColumnData<double> cCapacidad("Capacidad");
+        vector<double> capacidades;
         
         unsigned long index = 0;
         for (InfoEmbalse& embalse : *embalses) {
@@ -189,18 +191,21 @@ FuncionesUi::Dataframe AppContext::getDataframeZonaAndDate(string codZona, strin
             indices.push_back(index);
             niveles.push_back(info.nivel);
             volumenes.push_back(info.volumen);
+            capacidades.push_back(info.capacidad);
             index++;
         }
         
         cIndex.setData(indices);
         cNivel.setData(niveles);
         cVolumen.setData(volumenes);
+        cCapacidad.setData(capacidades);
         
         FuncionesUi::Dataframe ul_df2;
         
         ul_df2.load_data(std::move(cIndex.getData()),
                      std::make_pair(appHelper.asCharArray(cNivel.getName()), cNivel.getData()),
-                     std::make_pair(appHelper.asCharArray(cVolumen.getName()), cVolumen.getData()));
+                     std::make_pair(appHelper.asCharArray(cVolumen.getName()), cVolumen.getData()),
+                     std::make_pair(appHelper.asCharArray(cCapacidad.getName()), cCapacidad.getData()));
         
         return ul_df2;
     } catch (const exception& e) {
@@ -221,6 +226,8 @@ FuncionesUi::StringDataframe AppContext::getDataframeEmbalsesZonaAndDate(string 
         vector<double> v_niveles;
         data::ColumnData<double> cVolumen("Volumen");
         vector<double> v_volumenes;
+        data::ColumnData<double> cCapacidad("Capacidad");
+        vector<double> v_capacidades;
 
         for (InfoEmbalse& embalse : *embalses) {
             string codEmbalse = embalse.codEmbalse;
@@ -229,19 +236,22 @@ FuncionesUi::StringDataframe AppContext::getDataframeEmbalsesZonaAndDate(string 
             v_embalses.push_back(info.embalse);
             v_niveles.push_back(info.nivel);
             v_volumenes.push_back(info.volumen);
+            v_capacidades.push_back(info.capacidad);
         }
 
         cIndex.setData(v_codigos);
         cEmbalse.setData(v_embalses);
         cNivel.setData(v_niveles);
         cVolumen.setData(v_volumenes);
+        cCapacidad.setData(v_capacidades);
 
         FuncionesUi::StringDataframe ul_df2;
 
         ul_df2.load_data(std::move(cIndex.getData()),
                      std::make_pair(appHelper.asCharArray(cEmbalse.getName()), cEmbalse.getData()),
                      std::make_pair(appHelper.asCharArray(cNivel.getName()), cNivel.getData()),
-                     std::make_pair(appHelper.asCharArray(cVolumen.getName()), cVolumen.getData()));
+                     std::make_pair(appHelper.asCharArray(cVolumen.getName()), cVolumen.getData()),
+                     std::make_pair(appHelper.asCharArray(cCapacidad.getName()), cCapacidad.getData()));
 
         return ul_df2;
     } catch (const exception& e) {
