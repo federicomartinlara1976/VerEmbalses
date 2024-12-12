@@ -1,5 +1,6 @@
 #include "showpiegraphic.hpp"
 #include "sectorgraphic.hpp"
+#include "stackedbargraphic.hpp"
 
 using namespace std;
 
@@ -11,7 +12,10 @@ void DlgShowPieGraphic::setup() {
     setupUi(this);
 }
 
-void DlgShowPieGraphic::connectEvents() {}
+void DlgShowPieGraphic::connectEvents() {
+    connect(rbtGlobal, &QAbstractButton::clicked, this, &DlgShowPieGraphic::drawGraphic);
+    connect(rbtDetalles, &QAbstractButton::clicked, this, &DlgShowPieGraphic::drawGraphic);
+}
 
 void DlgShowPieGraphic::delayedInitialization() {}
 
@@ -32,7 +36,15 @@ void DlgShowPieGraphic::drawGraphic() {
         chartView->chart()->removeAllSeries();
     }
 
-    GraphicContext graphicContext(std::make_unique<GraficoEnSectores>(df));
+    GraphicContext graphicContext(nullptr);
+
+    if (rbtGlobal->isChecked()) {
+        graphicContext.set_strategy(std::make_unique<GraficoEnSectores>(df));
+    }
+    else {
+        graphicContext.set_strategy(std::make_unique<GraficoEnBarrasApiladas>(df));
+    }
+
     chartView->setChart(graphicContext.getGraphic());
     chartView->repaint();
 }

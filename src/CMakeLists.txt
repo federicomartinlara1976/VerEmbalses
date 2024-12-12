@@ -9,6 +9,7 @@ target_sources(verembalses PRIVATE
     progreso.cpp qtdialogwindow.cpp qtwindow.cpp
     signalmanager.cpp qloadjob.cpp graphic.cpp
     linegraphic.cpp sectorgraphic.cpp scattergraphic.cpp
+    stackedbargraphic.cpp
 )
 
 ecm_qt_declare_logging_category(verembalses

@@ -1,7 +1,7 @@
 #ifndef _DLG_SHOWPIEGRAPHIC_HPP_
 #define _DLG_SHOWPIEGRAPHIC_HPP_
 
-#include "dlg_showsimplegraphic.h"
+#include "dlg_showembalsesgraphic.h"
 #include "funciones_ui.hpp"
 #include "VerEmbalsesAppHelper.hpp"
 
@@ -13,7 +13,7 @@
 
 using namespace std;
 
-class DlgShowPieGraphic : public QtDialogWindow, public Ui::DialogShowSimpleGraphic {
+class DlgShowPieGraphic : public QtDialogWindow, public Ui::DialogShowEmbalsesGraphic {
     Q_OBJECT
 
 private:
@@ -22,6 +22,7 @@ private:
 
     FuncionesUi::StringDataframe df;
 
+private slots:
     void drawGraphic();
 
 protected:
