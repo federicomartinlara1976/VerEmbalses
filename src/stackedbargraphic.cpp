@@ -14,7 +14,6 @@ GraficoEnBarrasApiladas::GraficoEnBarrasApiladas(StringDataframe &df) {
     QStringList categories;
 
     vector<string> embalses = df.get_column<string>("Embalse");
-    vector<double> niveles = df.get_column<double>("Nivel");
     vector<double> volumenes = df.get_column<double>("Volumen");
     vector<double> capacidades = df.get_column<double>("Capacidad");
 
@@ -36,6 +35,7 @@ GraficoEnBarrasApiladas::GraficoEnBarrasApiladas(StringDataframe &df) {
 
     graphic = new QChart();
     graphic->addSeries(series);
+    graphic->setAnimationOptions(QChart::SeriesAnimations);
 
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
     axisX->append(categories);

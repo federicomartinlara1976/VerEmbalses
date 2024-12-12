@@ -22,6 +22,8 @@ GraficoEnSectores::GraficoEnSectores(StringDataframe &df) {
 
     graphic = new QChart();
     graphic->addSeries(series);
+    graphic->setAnimationOptions(QChart::SeriesAnimations);
+
     graphic->legend()->setVisible(true);
     graphic->legend()->setAlignment(Qt::AlignRight);
 
