@@ -20,7 +20,7 @@ private:
     QtHelper qtHelper;
     AppHelper appHelper;
 
-    FuncionesUi::StringDataframe df;
+    FuncionesUi::Dataframe df;
 
     void drawGraphic();
 
@@ -34,7 +34,7 @@ protected:
 public:
     DlgShowScatterGraphic(QWidget* parent = nullptr);
 
-    void setData(const FuncionesUi::StringDataframe& df);
+    void setData(const FuncionesUi::Dataframe& df);
 
     virtual ~DlgShowScatterGraphic();
 };

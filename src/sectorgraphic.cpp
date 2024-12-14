@@ -2,7 +2,7 @@
 
 #include <QtCharts/QPieSeries>
 
-GraficoEnSectores::GraficoEnSectores(StringDataframe &df) {
+GraficoEnSectores::GraficoEnSectores(Dataframe &df) {
     this->df = df;
 
     QPieSeries *series = new QPieSeries();

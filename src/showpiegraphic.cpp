@@ -23,7 +23,7 @@ void DlgShowPieGraphic::onClose() {}
 
 void DlgShowPieGraphic::onAccept() {}
 
-void DlgShowPieGraphic::setData(const FuncionesUi::StringDataframe& df) {
+void DlgShowPieGraphic::setData(const FuncionesUi::Dataframe& df) {
     this->df = df;
 
     auto columns = this->df.get_columns_info<double, string>();

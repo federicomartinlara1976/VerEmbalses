@@ -19,7 +19,7 @@ void DlgShowScatterGraphic::onClose() {}
 
 void DlgShowScatterGraphic::onAccept() {}
 
-void DlgShowScatterGraphic::setData(const FuncionesUi::StringDataframe& df) {
+void DlgShowScatterGraphic::setData(const FuncionesUi::Dataframe& df) {
     this->df = df;
 
     auto columns = this->df.get_columns_info<double, string>();

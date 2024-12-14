@@ -15,12 +15,12 @@ private:
     QtHelper qtHelper;
     AppHelper appHelper;
 
-    StringDataframe df;
+    Dataframe df;
 
     QChart* graphic;
 
 public:
-    GraficoEnSectores(StringDataframe &df);
+    GraficoEnSectores(Dataframe &df);
     QChart* getGraphic() const override { return graphic; }
 };
 

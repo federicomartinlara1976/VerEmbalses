@@ -24,12 +24,12 @@ void DlgShowLineGraphic::onClose() {}
 
 void DlgShowLineGraphic::onAccept() {}
 
-void DlgShowLineGraphic::setData(const FuncionesUi::StringDataframe& df) {
+void DlgShowLineGraphic::setData(const FuncionesUi::Dataframe& df) {
     this->df = df;
     
     auto columns = this->df.get_columns_info<double, string>();
     
-    populateDatoY();
+    populateDatoY("Fecha");
     
     selectedYValue = qtHelper.getStringValue(cmbDatoY);
     drawGraphic(selectedYValue);
@@ -40,17 +40,19 @@ void DlgShowLineGraphic::cmbDatoYIndexChanged(int index) {
     drawGraphic(selectedValue);
 }
 
-void DlgShowLineGraphic::populateDatoY() {
+void DlgShowLineGraphic::populateDatoY(std::string exclude) {
     auto columns = df.get_columns_info<double, string>();
 
     cmbDatoY->clear();
     for (auto citer: columns)  {
         string nombre = std::get<0>(citer).c_str();
         
-        const QString label = qtHelper.asQString(nombre, true);
-        const QVariant value = QVariant(qtHelper.asQString(nombre, true));
-        
-        cmbDatoY->addItem(label, value);
+        if (nombre != exclude) {
+            const QString label = qtHelper.asQString(nombre, true);
+            const QVariant value = QVariant(qtHelper.asQString(nombre, true));
+
+            cmbDatoY->addItem(label, value);
+        }
     }
 }
 

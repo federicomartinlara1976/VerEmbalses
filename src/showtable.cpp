@@ -16,7 +16,7 @@
 using namespace std;
 using namespace hmdf;
 
-DlgShowTable::DlgShowTable(const FuncionesUi::StringDataframe& dataframe, const string& code, enum Constants::TableType tableType, QWidget* parent) : QtDialogWindow(parent) {
+DlgShowTable::DlgShowTable(const FuncionesUi::Dataframe& dataframe, const string& code, enum Constants::TableType tableType, QWidget* parent) : QtDialogWindow(parent) {
     this->initWindow();
     this->dataframe = dataframe;
     this->tableType = tableType;

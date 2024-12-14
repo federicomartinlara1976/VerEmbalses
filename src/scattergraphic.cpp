@@ -3,7 +3,7 @@
 #include <QtCharts/QScatterSeries>
 #include <QtCharts/QValueAxis>
 
-GraficoEnNubePuntos::GraficoEnNubePuntos(StringDataframe &df) {
+GraficoEnNubePuntos::GraficoEnNubePuntos(Dataframe &df) {
     this->df = df;
 
     QScatterSeries *series = new QScatterSeries();

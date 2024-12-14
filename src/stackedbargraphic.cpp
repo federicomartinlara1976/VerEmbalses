@@ -6,7 +6,7 @@
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QValueAxis>
 
-GraficoEnBarrasApiladas::GraficoEnBarrasApiladas(StringDataframe &df) {
+GraficoEnBarrasApiladas::GraficoEnBarrasApiladas(Dataframe &df) {
     this->df = df;
 
 

@@ -16,30 +16,30 @@ private:
     VerEmbalsesAppHelper helper;
 
 protected:
-    FuncionesUi::StringDataframe dataFrame;
+    FuncionesUi::Dataframe dataFrame;
     
 public:
-    TableModel(const FuncionesUi::StringDataframe& dataframe, QObject* parent = nullptr);
+    TableModel(const FuncionesUi::Dataframe& dataframe, QObject* parent = nullptr);
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role) const override;
-    FuncionesUi::StringDataframe getDataframe() { return this->dataFrame; };
+    FuncionesUi::Dataframe getDataframe() { return this->dataFrame; };
     ~TableModel();
 };
 
 class TableModelEmbalse : public TableModel {
 public:
-    TableModelEmbalse(const FuncionesUi::StringDataframe& dataFrame);
+    TableModelEmbalse(const FuncionesUi::Dataframe& dataFrame);
 };
 
 class TableModelZona : public TableModel {
 public:
-    TableModelZona(const FuncionesUi::StringDataframe& dataFrame);
+    TableModelZona(const FuncionesUi::Dataframe& dataFrame);
 };
 
 class TableModelEmbalses : public TableModel {
 public:
-    TableModelEmbalses(const FuncionesUi::StringDataframe& dataFrame);
+    TableModelEmbalses(const FuncionesUi::Dataframe& dataFrame);
 };
 
 

@@ -32,7 +32,7 @@ private:
     QDate fechaDesde;
     QDate fechaHasta;
     
-    FuncionesUi::StringDataframe dataframe;
+    FuncionesUi::Dataframe dataframe;
 
     enum Constants::TableType tableType;
 
@@ -52,7 +52,7 @@ protected:
     void onAccept() override;
 
 public:
-    DlgShowTable(const FuncionesUi::StringDataframe& dataframe, const string& code, enum Constants::TableType tableType, QWidget* parent = nullptr);
+    DlgShowTable(const FuncionesUi::Dataframe& dataframe, const string& code, enum Constants::TableType tableType, QWidget* parent = nullptr);
     
     void setFechas(const QDate fechaDesde, const QDate fechaHasta);
     

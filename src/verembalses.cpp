@@ -134,7 +134,7 @@ void VerEmbalses::showGraphicClicked() {
             return;
     
         if (fechaDesde < fechaHasta) {
-            StringDataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, fechaDesde, fechaHasta);
+            Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, fechaDesde, fechaHasta);
             
             // Remove the columns MEN and Capacidad
             df.remove_column<double>("MEN");
@@ -150,7 +150,7 @@ void VerEmbalses::showGraphicClicked() {
 void VerEmbalses::showEmbalsesClicked() {
     AppContext& context = AppContext::getInstance();
     string lastExecution = context.getLastExecution();
-    StringDataframe df = context.getDataframeEmbalsesZonaAndDate(zona, lastExecution);
+    Dataframe df = context.getDataframeEmbalsesZonaAndDate(zona, lastExecution);
 
     unique_ptr<DlgShowTable> dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, zona, Constants::EMBALSES, this)};
     dlgShowTable->mostrar(true);
@@ -174,7 +174,7 @@ void VerEmbalses::showExcelClicked() {
             return;
         
         if (fechaDesde < fechaHasta) {
-            StringDataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, fechaDesde, fechaHasta);
+            Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, fechaDesde, fechaHasta);
         
             const string& filetype = Constants::CSV_FILE_TYPE;
             const QString filename = QFileDialog::getSaveFileName(this, i18n("Save File As"), QDir::currentPath(), helper.asQString(filetype));
@@ -199,11 +199,11 @@ void VerEmbalses::buscarPorFechas() {
 
             unique_ptr<DlgShowTable> dlgShowTable = nullptr;
             if (!codEmbalse.empty()) {
-                StringDataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, get<0>(fechas), get<1>(fechas));
+                Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, get<0>(fechas), get<1>(fechas));
                 dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codEmbalse, Constants::EMBALSE, this)};
             }
             else {
-                StringDataframe df = context.getDataframePorZonaYRangoFechas(codZona, get<0>(fechas), get<1>(fechas));
+                Dataframe df = context.getDataframePorZonaYRangoFechas(codZona, get<0>(fechas), get<1>(fechas));
                 dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codZona, Constants::ZONA, this)};
             }
 

@@ -20,7 +20,7 @@ private:
     QtHelper qtHelper;
     AppHelper appHelper;
 
-    FuncionesUi::StringDataframe df;
+    FuncionesUi::Dataframe df;
 
 private slots:
     void drawGraphic();
@@ -35,7 +35,7 @@ protected:
 public:
     DlgShowPieGraphic(QWidget* parent = nullptr);
 
-    void setData(const FuncionesUi::StringDataframe& df);
+    void setData(const FuncionesUi::Dataframe& df);
 
     virtual ~DlgShowPieGraphic();
 };

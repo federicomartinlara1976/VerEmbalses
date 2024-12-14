@@ -20,11 +20,11 @@ private:
     QtHelper qtHelper;
     AppHelper appHelper;
     
-    FuncionesUi::StringDataframe df;
+    FuncionesUi::Dataframe df;
     
     string selectedYValue;
     
-    void populateDatoY();
+    void populateDatoY(std::string exclude);
     void drawGraphic(string selectedYValue);
     
 private slots:
@@ -40,7 +40,7 @@ protected:
 public:
     DlgShowLineGraphic(QWidget* parent = nullptr);
     
-    void setData(const FuncionesUi::StringDataframe& df);
+    void setData(const FuncionesUi::Dataframe& df);
     
     virtual ~DlgShowLineGraphic();
 };

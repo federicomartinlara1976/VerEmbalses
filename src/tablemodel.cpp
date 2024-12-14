@@ -7,7 +7,7 @@
 
 using namespace std;
 
-TableModel::TableModel(const FuncionesUi::StringDataframe& dataFrame, QObject* parent) : QStandardItemModel(parent) {
+TableModel::TableModel(const FuncionesUi::Dataframe& dataFrame, QObject* parent) : QStandardItemModel(parent) {
     this->dataFrame = dataFrame;
     auto shape = this->dataFrame.shape();
     
@@ -41,8 +41,8 @@ QVariant TableModel::data(const QModelIndex &index, int role) const {
     if (role == Qt::DisplayRole) {
         // Si el numero de columna es 0, ponemos el índice del dataframe
         if (index.column() == 0) {
-            std::vector<string> svec = dataFrame.get_index();
-            return QString(svec[index.row()].c_str());
+            std::vector<ulong> svec = dataFrame.get_index();
+            return QString(std::to_string(svec[index.row()]).c_str());
         }
         else {
             // Este va a ser el número de columna a pasar al dataframe
