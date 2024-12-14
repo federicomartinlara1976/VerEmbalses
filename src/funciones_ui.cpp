@@ -557,9 +557,6 @@ string AppContext::buildCsvHeader(FuncionesUi::Dataframe& dataFrame, const strin
     string header = {};
     auto columns = getFields(dataFrame);
 
-    // Pone la columna fecha
-    header.append("Indice").append(fieldSeparator);
-
     for (auto citer: columns)  {
         string nombre = std::get<0>(citer).c_str();
         
@@ -618,6 +615,11 @@ void AppContext::writeContent(QSaveFile& file, FuncionesUi::Dataframe& dataframe
         
         int j = 0;
         for (auto field : fields) {
+            if (std::get<2>(field) == std::type_index(typeid(ulong)))  {
+                ulong val = dataframe.get_column<ulong>(j)[i];
+                std::string sVal = std::to_string(val);
+                values.append(sVal).append(",");
+            }
             if (std::get<2>(field) == std::type_index(typeid(double)))  {
                 double val = dataframe.get_column<double>(j)[i];
                 std::string sVal = fmt::format("{:.2f}", val);
