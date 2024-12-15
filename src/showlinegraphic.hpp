@@ -29,6 +29,7 @@ private:
     
 private slots:
     void cmbDatoYIndexChanged(int index);
+    void print();
     
 protected:
     void setup() override;

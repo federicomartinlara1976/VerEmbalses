@@ -4,6 +4,10 @@
 #include "constants.hpp"
 #include "linegraphic.hpp"
 
+#include <QtPrintSupport/QPrinter>
+#include <QtPrintSupport/QPrintDialog>
+#include <QtGui/QPainter>
+
 using namespace std;
 
 DlgShowLineGraphic::DlgShowLineGraphic(QWidget* parent) : QtDialogWindow(parent) {
@@ -17,6 +21,7 @@ void DlgShowLineGraphic::setup() {
 void DlgShowLineGraphic::connectEvents() {
     connect(cmbDatoY, QOverload<int>::of(&QComboBox::activated), this, &DlgShowLineGraphic::cmbDatoYIndexChanged);
     connect(btnClose, &QAbstractButton::clicked, this, &DlgShowLineGraphic::accept);
+    connect(btnPrint, &QAbstractButton::clicked, this, &DlgShowLineGraphic::print);
 }
 
 void DlgShowLineGraphic::delayedInitialization() {}
@@ -39,6 +44,22 @@ void DlgShowLineGraphic::setData(const FuncionesUi::Dataframe& df) {
 void DlgShowLineGraphic::cmbDatoYIndexChanged(int index) {
     string selectedValue = qtHelper.getStringValue(cmbDatoY, index);
     drawGraphic(selectedValue);
+}
+
+void DlgShowLineGraphic::print() {
+    // Crear un objeto QPrinter
+    QPrinter printer(QPrinter::HighResolution);
+
+    // Mostrar el cuadro de diálogo de impresión
+    QPrintDialog printDialog(&printer);
+    if (printDialog.exec() == QDialog::Rejected) {
+        return;
+    }
+
+    // Renderizar el gráfico en el dispositivo de impresión
+    QPainter painter(&printer);
+    chartView->render(&painter);
+    painter.end();
 }
 
 void DlgShowLineGraphic::populateDatoY(std::string exclude) {

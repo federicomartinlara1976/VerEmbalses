@@ -24,6 +24,7 @@ private:
 
 private slots:
     void drawGraphic();
+    void print();
 
 protected:
     void setup() override;

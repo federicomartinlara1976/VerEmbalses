@@ -2,6 +2,10 @@
 #include "sectorgraphic.hpp"
 #include "stackedbargraphic.hpp"
 
+#include <QtPrintSupport/QPrinter>
+#include <QtPrintSupport/QPrintDialog>
+#include <QtGui/QPainter>
+
 using namespace std;
 
 DlgShowPieGraphic::DlgShowPieGraphic(QWidget* parent) : QtDialogWindow(parent) {
@@ -16,6 +20,7 @@ void DlgShowPieGraphic::connectEvents() {
     connect(rbtGlobal, &QAbstractButton::clicked, this, &DlgShowPieGraphic::drawGraphic);
     connect(rbtDetalles, &QAbstractButton::clicked, this, &DlgShowPieGraphic::drawGraphic);
     connect(btnClose, &QAbstractButton::clicked, this, &DlgShowPieGraphic::accept);
+    connect(btnPrint, &QAbstractButton::clicked, this, &DlgShowPieGraphic::print);
 }
 
 void DlgShowPieGraphic::delayedInitialization() {}
@@ -23,6 +28,22 @@ void DlgShowPieGraphic::delayedInitialization() {}
 void DlgShowPieGraphic::onClose() {}
 
 void DlgShowPieGraphic::onAccept() {}
+
+void DlgShowPieGraphic::print() {
+    // Crear un objeto QPrinter
+    QPrinter printer(QPrinter::HighResolution);
+
+    // Mostrar el cuadro de diálogo de impresión
+    QPrintDialog printDialog(&printer);
+    if (printDialog.exec() == QDialog::Rejected) {
+        return;
+    }
+
+    // Renderizar el gráfico en el dispositivo de impresión
+    QPainter painter(&printer);
+    chartView->render(&painter);
+    painter.end();
+}
 
 void DlgShowPieGraphic::setData(const FuncionesUi::Dataframe& df) {
     this->df = df;

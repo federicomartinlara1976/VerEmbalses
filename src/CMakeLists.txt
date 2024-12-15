@@ -39,6 +39,7 @@ target_link_libraries(verembalses
     KF5::ThreadWeaver
     Qt5::Widgets
     Qt5::Charts
+    Qt5::PrintSupport
     spdlog::spdlog
     NumCpp::NumCpp
     DataFrame::DataFrame
