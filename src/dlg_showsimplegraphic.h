@@ -1,31 +1,29 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg-show-simple-graphicuvRfQa.ui'
+** Form generated from reading UI file 'dlg-show-simple-graphiczAnsmi.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICUVRFQA_H
-#define DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICUVRFQA_H
+#ifndef DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICZANSMI_H
+#define DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICZANSMI_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QVBoxLayout>
-#include <QtCharts/QChartView>
 
 QT_BEGIN_NAMESPACE
-
-using namespace QtCharts;
 
 class Ui_DialogShowSimpleGraphic
 {
 public:
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
-    QChartView *chartView;
+    QGraphicsView *chartView;
     QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *DialogShowSimpleGraphic)
@@ -37,15 +35,11 @@ public:
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
+        chartView = new QGraphicsView(DialogShowSimpleGraphic);
+        chartView->setObjectName(QString::fromUtf8("chartView"));
 
-        chartView = new QChartView(DialogShowSimpleGraphic);
-        chartView->setObjectName(QString::fromUtf8("ChartView"));
-        chartView->setRenderHint(QPainter::Antialiasing);
-        sizePolicy.setHeightForWidth(chartView->sizePolicy().hasHeightForWidth());
         verticalLayout->addWidget(chartView);
+
 
         verticalLayout_2->addLayout(verticalLayout);
 
@@ -77,4 +71,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICUVRFQA_H
+#endif // DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICZANSMI_H
