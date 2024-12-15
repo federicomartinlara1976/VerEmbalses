@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg-show-simple-graphicKaRZjQ.ui'
+** Form generated from reading UI file 'dlg-show-simple-graphiccFueix.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICKARZJQ_H
-#define DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICKARZJQ_H
+#ifndef DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICCFUEIX_H
+#define DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICCFUEIX_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -30,8 +30,8 @@ public:
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
-    QPushButton *btnPrint;
     QSpacerItem *horizontalSpacer;
+    QPushButton *btnPrint;
     QChartView *chartView;
     QDialogButtonBox *buttonBox;
 
@@ -48,16 +48,22 @@ public:
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(5, 5, 5, 5);
-        btnPrint = new QPushButton(DialogShowSimpleGraphic);
-        btnPrint->setObjectName(QString::fromUtf8("btnPrint"));
-        QIcon icon(QIcon::fromTheme(QString::fromUtf8("printer")));
-        btnPrint->setIcon(icon);
-
-        horizontalLayout->addWidget(btnPrint);
-
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
+
+        btnPrint = new QPushButton(DialogShowSimpleGraphic);
+        btnPrint->setObjectName(QString::fromUtf8("btnPrint"));
+        QIcon icon;
+        QString iconThemeName = QString::fromUtf8("printer");
+        if (QIcon::hasThemeIcon(iconThemeName)) {
+            icon = QIcon::fromTheme(iconThemeName);
+        } else {
+            icon.addFile(QString::fromUtf8("."), QSize(), QIcon::Normal, QIcon::Off);
+        }
+        btnPrint->setIcon(icon);
+
+        horizontalLayout->addWidget(btnPrint);
 
 
         verticalLayout->addLayout(horizontalLayout);
@@ -102,4 +108,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICKARZJQ_H
+#endif // DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICCFUEIX_H
