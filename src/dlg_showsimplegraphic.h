@@ -1,19 +1,18 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg-show-simple-graphiccFueix.ui'
+** Form generated from reading UI file 'dlg-show-simple-graphicZmnWDG.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICCFUEIX_H
-#define DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICCFUEIX_H
+#ifndef DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICZMNWDG_H
+#define DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICZMNWDG_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
-#include <QtWidgets/QDialogButtonBox>
 #include <QtCharts/QChartView>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QPushButton>
@@ -32,8 +31,8 @@ public:
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
     QPushButton *btnPrint;
+    QPushButton *btnClose;
     QChartView *chartView;
-    QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *DialogShowSimpleGraphic)
     {
@@ -65,6 +64,13 @@ public:
 
         horizontalLayout->addWidget(btnPrint);
 
+        btnClose = new QPushButton(DialogShowSimpleGraphic);
+        btnClose->setObjectName(QString::fromUtf8("btnClose"));
+        QIcon icon1(QIcon::fromTheme(QString::fromUtf8("window-close")));
+        btnClose->setIcon(icon1);
+
+        horizontalLayout->addWidget(btnClose);
+
 
         verticalLayout->addLayout(horizontalLayout);
 
@@ -76,17 +82,8 @@ public:
 
         verticalLayout_2->addLayout(verticalLayout);
 
-        buttonBox = new QDialogButtonBox(DialogShowSimpleGraphic);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
-        buttonBox->setOrientation(Qt::Horizontal);
-        buttonBox->setStandardButtons(QDialogButtonBox::Close);
-
-        verticalLayout_2->addWidget(buttonBox);
-
 
         retranslateUi(DialogShowSimpleGraphic);
-        QObject::connect(buttonBox, SIGNAL(accepted()), DialogShowSimpleGraphic, SLOT(accept()));
-        QObject::connect(buttonBox, SIGNAL(rejected()), DialogShowSimpleGraphic, SLOT(reject()));
 
         QMetaObject::connectSlotsByName(DialogShowSimpleGraphic);
     } // setupUi
@@ -98,6 +95,10 @@ public:
         btnPrint->setToolTip(QCoreApplication::translate("DialogShowSimpleGraphic", "Imprimir", nullptr));
 #endif // QT_CONFIG(tooltip)
         btnPrint->setText(QString());
+#if QT_CONFIG(tooltip)
+        btnClose->setToolTip(QCoreApplication::translate("DialogShowSimpleGraphic", "Cerrar", nullptr));
+#endif // QT_CONFIG(tooltip)
+        btnClose->setText(QString());
     } // retranslateUi
 
 };
@@ -108,4 +109,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICCFUEIX_H
+#endif // DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICZMNWDG_H

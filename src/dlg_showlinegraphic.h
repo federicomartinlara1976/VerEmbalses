@@ -1,20 +1,19 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg-show-line-graphicHaLrnh.ui'
+** Form generated from reading UI file 'dlg-show-line-graphicSUHJaJ.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_2D_SHOW_2D_LINE_2D_GRAPHICHALRNH_H
-#define DLG_2D_SHOW_2D_LINE_2D_GRAPHICHALRNH_H
+#ifndef DLG_2D_SHOW_2D_LINE_2D_GRAPHICSUHJAJ_H
+#define DLG_2D_SHOW_2D_LINE_2D_GRAPHICSUHJAJ_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
-#include <QtWidgets/QDialogButtonBox>
 #include <QtCharts/QChartView>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
@@ -37,8 +36,8 @@ public:
     QComboBox *cmbDatoY;
     QSpacerItem *horizontalSpacer;
     QPushButton *btnPrint;
+    QPushButton *btnClose;
     QChartView *chartView;
-    QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *DialogShowLineGraphic)
     {
@@ -97,6 +96,13 @@ public:
 
         containerSelectores->addWidget(btnPrint);
 
+        btnClose = new QPushButton(DialogShowLineGraphic);
+        btnClose->setObjectName(QString::fromUtf8("btnClose"));
+        QIcon icon1(QIcon::fromTheme(QString::fromUtf8("window-close")));
+        btnClose->setIcon(icon1);
+
+        containerSelectores->addWidget(btnClose);
+
 
         verticalLayout->addLayout(containerSelectores);
 
@@ -108,17 +114,8 @@ public:
 
         verticalLayout_2->addLayout(verticalLayout);
 
-        buttonBox = new QDialogButtonBox(DialogShowLineGraphic);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
-        buttonBox->setOrientation(Qt::Horizontal);
-        buttonBox->setStandardButtons(QDialogButtonBox::Close);
-
-        verticalLayout_2->addWidget(buttonBox);
-
 
         retranslateUi(DialogShowLineGraphic);
-        QObject::connect(buttonBox, SIGNAL(accepted()), DialogShowLineGraphic, SLOT(accept()));
-        QObject::connect(buttonBox, SIGNAL(rejected()), DialogShowLineGraphic, SLOT(reject()));
 
         QMetaObject::connectSlotsByName(DialogShowLineGraphic);
     } // setupUi
@@ -131,6 +128,10 @@ public:
         btnPrint->setToolTip(QCoreApplication::translate("DialogShowLineGraphic", "Imprimir", nullptr));
 #endif // QT_CONFIG(tooltip)
         btnPrint->setText(QString());
+#if QT_CONFIG(tooltip)
+        btnClose->setToolTip(QCoreApplication::translate("DialogShowLineGraphic", "Cerrar", nullptr));
+#endif // QT_CONFIG(tooltip)
+        btnClose->setText(QString());
     } // retranslateUi
 
 };
@@ -141,4 +142,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_2D_SHOW_2D_LINE_2D_GRAPHICHALRNH_H
+#endif // DLG_2D_SHOW_2D_LINE_2D_GRAPHICSUHJAJ_H

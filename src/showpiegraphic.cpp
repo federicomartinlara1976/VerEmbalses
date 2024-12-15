@@ -15,6 +15,7 @@ void DlgShowPieGraphic::setup() {
 void DlgShowPieGraphic::connectEvents() {
     connect(rbtGlobal, &QAbstractButton::clicked, this, &DlgShowPieGraphic::drawGraphic);
     connect(rbtDetalles, &QAbstractButton::clicked, this, &DlgShowPieGraphic::drawGraphic);
+    connect(btnClose, &QAbstractButton::clicked, this, &DlgShowPieGraphic::accept);
 }
 
 void DlgShowPieGraphic::delayedInitialization() {}

@@ -16,6 +16,7 @@ void DlgShowLineGraphic::setup() {
 
 void DlgShowLineGraphic::connectEvents() {
     connect(cmbDatoY, QOverload<int>::of(&QComboBox::activated), this, &DlgShowLineGraphic::cmbDatoYIndexChanged);
+    connect(btnClose, &QAbstractButton::clicked, this, &DlgShowLineGraphic::accept);
 }
 
 void DlgShowLineGraphic::delayedInitialization() {}

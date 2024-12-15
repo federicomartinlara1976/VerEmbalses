@@ -1,19 +1,18 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg-show-embalses-graphicanKgqA.ui'
+** Form generated from reading UI file 'dlg-show-embalses-graphicfyYUry.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_2D_SHOW_2D_EMBALSES_2D_GRAPHICANKGQA_H
-#define DLG_2D_SHOW_2D_EMBALSES_2D_GRAPHICANKGQA_H
+#ifndef DLG_2D_SHOW_2D_EMBALSES_2D_GRAPHICFYYURY_H
+#define DLG_2D_SHOW_2D_EMBALSES_2D_GRAPHICFYYURY_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
-#include <QtWidgets/QDialogButtonBox>
 #include <QtCharts/QChartView>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
@@ -38,8 +37,8 @@ public:
     QRadioButton *rbtDetalles;
     QSpacerItem *horizontalSpacer;
     QPushButton *btnPrint;
+    QPushButton *btnClose;
     QChartView *chartView;
-    QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *DialogShowEmbalsesGraphic)
     {
@@ -78,10 +77,23 @@ public:
 
         btnPrint = new QPushButton(DialogShowEmbalsesGraphic);
         btnPrint->setObjectName(QString::fromUtf8("btnPrint"));
-        QIcon icon(QIcon::fromTheme(QString::fromUtf8("printer")));
+        QIcon icon;
+        QString iconThemeName = QString::fromUtf8("printer");
+        if (QIcon::hasThemeIcon(iconThemeName)) {
+            icon = QIcon::fromTheme(iconThemeName);
+        } else {
+            icon.addFile(QString::fromUtf8("."), QSize(), QIcon::Normal, QIcon::Off);
+        }
         btnPrint->setIcon(icon);
 
         horizontalLayout_2->addWidget(btnPrint);
+
+        btnClose = new QPushButton(DialogShowEmbalsesGraphic);
+        btnClose->setObjectName(QString::fromUtf8("btnClose"));
+        QIcon icon1(QIcon::fromTheme(QString::fromUtf8("window-close")));
+        btnClose->setIcon(icon1);
+
+        horizontalLayout_2->addWidget(btnClose);
 
 
         verticalLayout->addLayout(horizontalLayout_2);
@@ -94,17 +106,8 @@ public:
 
         verticalLayout_2->addLayout(verticalLayout);
 
-        buttonBox = new QDialogButtonBox(DialogShowEmbalsesGraphic);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
-        buttonBox->setOrientation(Qt::Horizontal);
-        buttonBox->setStandardButtons(QDialogButtonBox::Close);
-
-        verticalLayout_2->addWidget(buttonBox);
-
 
         retranslateUi(DialogShowEmbalsesGraphic);
-        QObject::connect(buttonBox, SIGNAL(accepted()), DialogShowEmbalsesGraphic, SLOT(accept()));
-        QObject::connect(buttonBox, SIGNAL(rejected()), DialogShowEmbalsesGraphic, SLOT(reject()));
 
         QMetaObject::connectSlotsByName(DialogShowEmbalsesGraphic);
     } // setupUi
@@ -119,6 +122,10 @@ public:
         btnPrint->setToolTip(QCoreApplication::translate("DialogShowEmbalsesGraphic", "Imprimir", nullptr));
 #endif // QT_CONFIG(tooltip)
         btnPrint->setText(QString());
+#if QT_CONFIG(tooltip)
+        btnClose->setToolTip(QCoreApplication::translate("DialogShowEmbalsesGraphic", "Cerrar", nullptr));
+#endif // QT_CONFIG(tooltip)
+        btnClose->setText(QString());
     } // retranslateUi
 
 };
@@ -129,4 +136,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_2D_SHOW_2D_EMBALSES_2D_GRAPHICANKGQA_H
+#endif // DLG_2D_SHOW_2D_EMBALSES_2D_GRAPHICFYYURY_H

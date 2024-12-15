@@ -11,7 +11,9 @@ void DlgShowScatterGraphic::setup() {
     setupUi(this);
 }
 
-void DlgShowScatterGraphic::connectEvents() {}
+void DlgShowScatterGraphic::connectEvents() {
+    connect(btnClose, &QAbstractButton::clicked, this, &DlgShowScatterGraphic::accept);
+}
 
 void DlgShowScatterGraphic::delayedInitialization() {}
 
