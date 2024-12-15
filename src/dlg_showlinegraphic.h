@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg-show-line-graphicHTPgJc.ui'
+** Form generated from reading UI file 'dlg-show-line-graphicHaLrnh.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_2D_SHOW_2D_LINE_2D_GRAPHICHTPGJC_H
-#define DLG_2D_SHOW_2D_LINE_2D_GRAPHICHTPGJC_H
+#ifndef DLG_2D_SHOW_2D_LINE_2D_GRAPHICHALRNH_H
+#define DLG_2D_SHOW_2D_LINE_2D_GRAPHICHALRNH_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -49,10 +49,11 @@ public:
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(5, 5, 5, 5);
         containerSelectores = new QHBoxLayout();
         containerSelectores->setObjectName(QString::fromUtf8("containerSelectores"));
         containerSelectores->setSizeConstraint(QLayout::SetFixedSize);
-        containerSelectores->setContentsMargins(10, 10, 10, 10);
+        containerSelectores->setContentsMargins(5, 5, 5, 5);
         containerSelectorY = new QHBoxLayout();
         containerSelectorY->setObjectName(QString::fromUtf8("containerSelectorY"));
         containerSelectorY->setContentsMargins(10, 10, 10, 10);
@@ -140,4 +141,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_2D_SHOW_2D_LINE_2D_GRAPHICHTPGJC_H
+#endif // DLG_2D_SHOW_2D_LINE_2D_GRAPHICHALRNH_H

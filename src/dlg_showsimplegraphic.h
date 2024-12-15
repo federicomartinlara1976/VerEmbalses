@@ -1,19 +1,23 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg-show-simple-graphiczAnsmi.ui'
+** Form generated from reading UI file 'dlg-show-simple-graphicKaRZjQ.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICZANSMI_H
-#define DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICZANSMI_H
+#ifndef DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICKARZJQ_H
+#define DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICKARZJQ_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
 #include <QtCharts/QChartView>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
@@ -25,6 +29,9 @@ class Ui_DialogShowSimpleGraphic
 public:
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout;
+    QPushButton *btnPrint;
+    QSpacerItem *horizontalSpacer;
     QChartView *chartView;
     QDialogButtonBox *buttonBox;
 
@@ -37,6 +44,24 @@ public:
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(5, 5, 5, 5);
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setContentsMargins(5, 5, 5, 5);
+        btnPrint = new QPushButton(DialogShowSimpleGraphic);
+        btnPrint->setObjectName(QString::fromUtf8("btnPrint"));
+        QIcon icon(QIcon::fromTheme(QString::fromUtf8("printer")));
+        btnPrint->setIcon(icon);
+
+        horizontalLayout->addWidget(btnPrint);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
         chartView = new QChartView(DialogShowSimpleGraphic);
         chartView->setObjectName(QString::fromUtf8("chartView"));
 
@@ -63,6 +88,10 @@ public:
     void retranslateUi(QDialog *DialogShowSimpleGraphic)
     {
         DialogShowSimpleGraphic->setWindowTitle(QCoreApplication::translate("DialogShowSimpleGraphic", "Mostrar gr\303\241fico", nullptr));
+#if QT_CONFIG(tooltip)
+        btnPrint->setToolTip(QCoreApplication::translate("DialogShowSimpleGraphic", "Imprimir", nullptr));
+#endif // QT_CONFIG(tooltip)
+        btnPrint->setText(QString());
     } // retranslateUi
 
 };
@@ -73,4 +102,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICZANSMI_H
+#endif // DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICKARZJQ_H
