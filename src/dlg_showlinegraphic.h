@@ -15,7 +15,7 @@
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
-#include <QtWidgets/QGraphicsView>
+#include <QtCharts/QChartView>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
@@ -23,6 +23,8 @@
 #include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
+
+using namespace QtCharts;
 
 class Ui_DialogShowLineGraphic
 {
@@ -35,7 +37,7 @@ public:
     QComboBox *cmbDatoY;
     QSpacerItem *horizontalSpacer;
     QPushButton *btnPrint;
-    QGraphicsView *chartView;
+    QChartView *chartView;
     QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *DialogShowLineGraphic)
@@ -97,7 +99,7 @@ public:
 
         verticalLayout->addLayout(containerSelectores);
 
-        chartView = new QGraphicsView(DialogShowLineGraphic);
+        chartView = new QChartView(DialogShowLineGraphic);
         chartView->setObjectName(QString::fromUtf8("chartView"));
 
         verticalLayout->addWidget(chartView);

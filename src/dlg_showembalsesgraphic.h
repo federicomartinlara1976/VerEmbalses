@@ -13,13 +13,15 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
-#include <QtWidgets/QGraphicsView>
+#include <QtCharts/QChartView>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
+
+using namespace QtCharts;
 
 class Ui_DialogShowEmbalsesGraphic
 {
@@ -30,7 +32,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QRadioButton *rbtGlobal;
     QRadioButton *rbtDetalles;
-    QGraphicsView *chartView;
+    QChartView *chartView;
     QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *DialogShowEmbalsesGraphic)
@@ -60,7 +62,7 @@ public:
 
         verticalLayout->addWidget(groupBox);
 
-        chartView = new QGraphicsView(DialogShowEmbalsesGraphic);
+        chartView = new QChartView(DialogShowEmbalsesGraphic);
         chartView->setObjectName(QString::fromUtf8("chartView"));
 
         verticalLayout->addWidget(chartView);

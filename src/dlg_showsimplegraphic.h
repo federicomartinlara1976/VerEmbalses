@@ -13,17 +13,19 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
-#include <QtWidgets/QGraphicsView>
+#include <QtCharts/QChartView>
 #include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
+
+using namespace QtCharts;
 
 class Ui_DialogShowSimpleGraphic
 {
 public:
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
-    QGraphicsView *chartView;
+    QChartView *chartView;
     QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *DialogShowSimpleGraphic)
@@ -35,7 +37,7 @@ public:
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        chartView = new QGraphicsView(DialogShowSimpleGraphic);
+        chartView = new QChartView(DialogShowSimpleGraphic);
         chartView->setObjectName(QString::fromUtf8("chartView"));
 
         verticalLayout->addWidget(chartView);
