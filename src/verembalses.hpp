@@ -3,7 +3,6 @@
 
 #include "view_embalse.h"
 #include "selectfecha.hpp"
-#include "selectmes.hpp"
 #include "showlinegraphic.hpp"
 #include "showtable.hpp"
 #include "progreso.hpp"
@@ -33,11 +32,9 @@ private:
     string embalse;
     
     unique_ptr<DlgSelectFecha> getDlgFecha(bool isSelectedZone = true);
-    unique_ptr<DlgSelectMes> getDlgMes();
     
     void showInfoEmbalse(InfoEmbalse& info);
     void showStatsPorZona(string codZona, string date);
-    void progresoTerminado();
     void setStatus(string date);
     
 private slots:
@@ -47,8 +44,6 @@ private slots:
     void showExcelClicked();
     void showEmbalsesClicked();
     void buscarPorFechas();
-    void estadisticasDiarias();
-    void estadisticasMensuales();
     
 protected:
     void setup() override;

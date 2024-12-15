@@ -2,7 +2,7 @@ add_executable(verembalses)
 
 target_sources(verembalses PRIVATE
     main.cpp verembalses.cpp selectfecha.cpp
-    selectmes.cpp selecttipografico.cpp showlinegraphic.cpp
+    selecttipografico.cpp showlinegraphic.cpp
     showpiegraphic.cpp showscattergraphic.cpp showtable.cpp
     funciones_ui.cpp VerEmbalsesAppHelper.cpp tablemodel.cpp
     tablemodelembalse.cpp tablemodelzona.cpp tablemodelembalses.cpp

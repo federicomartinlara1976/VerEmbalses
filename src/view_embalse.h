@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'ver_embalsesVxMyoO.ui'
+** Form generated from reading UI file 'ver_embalsesGLELJX.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef VER_EMBALSESVXMYOO_H
-#define VER_EMBALSESVXMYOO_H
+#ifndef VER_EMBALSESGLELJX_H
+#define VER_EMBALSESGLELJX_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -97,8 +97,6 @@ public:
     QSpacerItem *verticalSpacer;
     QMenuBar *menubar;
     QMenu *menuConsulta;
-    QMenu *menuGeneral;
-    QMenu *menuEstad_sticas;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -565,21 +563,13 @@ public:
         menubar->setGeometry(QRect(0, 0, 1041, 22));
         menuConsulta = new QMenu(menubar);
         menuConsulta->setObjectName(QString::fromUtf8("menuConsulta"));
-        menuGeneral = new QMenu(menubar);
-        menuGeneral->setObjectName(QString::fromUtf8("menuGeneral"));
-        menuEstad_sticas = new QMenu(menuGeneral);
-        menuEstad_sticas->setObjectName(QString::fromUtf8("menuEstad_sticas"));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
 
         menubar->addAction(menuConsulta->menuAction());
-        menubar->addAction(menuGeneral->menuAction());
         menuConsulta->addAction(actionPor_fecha);
-        menuGeneral->addAction(menuEstad_sticas->menuAction());
-        menuEstad_sticas->addAction(actionDiaria);
-        menuEstad_sticas->addAction(actionMes);
 
         retranslateUi(MainWindow);
 
@@ -627,8 +617,6 @@ public:
         btnVerGrafico->setText(QString());
         btnExportarCSV->setText(QString());
         menuConsulta->setTitle(QCoreApplication::translate("MainWindow", "Consulta", nullptr));
-        menuGeneral->setTitle(QCoreApplication::translate("MainWindow", "General", nullptr));
-        menuEstad_sticas->setTitle(QCoreApplication::translate("MainWindow", "Estad\303\255sticas", nullptr));
     } // retranslateUi
 
 };
@@ -639,4 +627,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // VER_EMBALSESVXMYOO_H
+#endif // VER_EMBALSESGLELJX_H

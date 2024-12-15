@@ -29,8 +29,6 @@ void VerEmbalses::connectEvents() {
     connect(btnVerEmbalses , &QAbstractButton::clicked, this, &VerEmbalses::showEmbalsesClicked);
     connect(btnExportarCSV , &QAbstractButton::clicked, this, &VerEmbalses::showExcelClicked);
     connect(actionPor_fecha, &QAction::triggered, this, &VerEmbalses::buscarPorFechas);
-    connect(actionDiaria, &QAction::triggered, this, &VerEmbalses::estadisticasDiarias);
-    connect(actionMes, &QAction::triggered, this, &VerEmbalses::estadisticasMensuales);
 }
 
 void VerEmbalses::delayedInitialization() {
@@ -219,30 +217,6 @@ void VerEmbalses::buscarPorFechas() {
     }
 }
 
-void VerEmbalses::estadisticasDiarias() {
-    DlgProgreso* dlg = new DlgProgreso(this);
-    dlg->show();
-    
-    connect(dlg, &DlgProgreso::unblockingDialogDispatched, this, &VerEmbalses::progresoTerminado);
-    
-    j1 = new QLoadJob();
-    
-    // Queue the Job using the default Queue stream:
-    stream() << j1;
-}
-
-void VerEmbalses::estadisticasMensuales() {
-    unique_ptr<DlgSelectMes> dlg = getDlgMes();
-    int result = dlg->mostrar(true);
-    
-    if (result == 1) {
-        tuple<int, string> mes = dlg->getMes();
-        //spdlog::info("{}, {}", get<0>(mes), get<1>(mes));
-    }
-}
-
-void VerEmbalses::progresoTerminado() {}
-
 unique_ptr<DlgSelectFecha> VerEmbalses::getDlgFecha(bool isSelectedZone) {
     unique_ptr<DlgSelectFecha> dlg;
     
@@ -257,10 +231,6 @@ unique_ptr<DlgSelectFecha> VerEmbalses::getDlgFecha(bool isSelectedZone) {
     }
     
     return dlg;
-}
-
-unique_ptr<DlgSelectMes> VerEmbalses::getDlgMes() {
-    return unique_ptr<DlgSelectMes>{new DlgSelectMes(this)};
 }
 
 void VerEmbalses::showInfoEmbalse(InfoEmbalse& info) {

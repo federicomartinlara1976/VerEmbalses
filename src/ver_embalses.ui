@@ -1008,21 +1008,7 @@
     </property>
     <addaction name="actionPor_fecha"/>
    </widget>
-   <widget class="QMenu" name="menuGeneral">
-    <property name="title">
-     <string>General</string>
-    </property>
-    <widget class="QMenu" name="menuEstad_sticas">
-     <property name="title">
-      <string>Estadísticas</string>
-     </property>
-     <addaction name="actionDiaria"/>
-     <addaction name="actionMes"/>
-    </widget>
-    <addaction name="menuEstad_sticas"/>
-   </widget>
    <addaction name="menuConsulta"/>
-   <addaction name="menuGeneral"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionDiaria">
