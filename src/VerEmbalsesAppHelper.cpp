@@ -8,7 +8,7 @@
 using namespace std;
 using namespace hmdf;
 
-tuple<String64, std::size_t, std::type_index> VerEmbalsesAppHelper::getColumn(const StdDataFrame<string>& dataframe, int index) const {
+tuple<String64, std::size_t, std::type_index> VerEmbalsesAppHelper::getColumn(const StdDataFrame<ulong>& dataframe, int index) const {
     auto columnsInfo = dataframe.get_columns_info<int, double, std::string>();
     
     int i = 0;

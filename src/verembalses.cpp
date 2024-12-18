@@ -1,12 +1,15 @@
 #include <spdlog/spdlog.h>
 #include <iostream>
 #include <QTimer>
+#include <QFileDialog>
 
 #include <common/config.hpp>
 
 #include "verembalses.hpp"
 #include "constants.hpp"
 #include <QMessageBox>
+
+#include <KLocalizedString>
 
 using namespace std;
 using namespace FuncionesUi;
@@ -23,10 +26,9 @@ void VerEmbalses::connectEvents() {
     connect(cmbZona, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalses::cmbZonasIndexChanged);
     connect(cmbEmbalse, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalses::cmbEmbalsesIndexChanged);
     connect(btnVerGrafico , &QAbstractButton::clicked, this, &VerEmbalses::showGraphicClicked);
+    connect(btnVerEmbalses , &QAbstractButton::clicked, this, &VerEmbalses::showEmbalsesClicked);
     connect(btnExportarCSV , &QAbstractButton::clicked, this, &VerEmbalses::showExcelClicked);
     connect(actionPor_fecha, &QAction::triggered, this, &VerEmbalses::buscarPorFechas);
-    connect(actionDiaria, &QAction::triggered, this, &VerEmbalses::estadisticasDiarias);
-    connect(actionMes, &QAction::triggered, this, &VerEmbalses::estadisticasMensuales);
 }
 
 void VerEmbalses::delayedInitialization() {
@@ -40,15 +42,21 @@ void VerEmbalses::delayedInitialization() {
         icon1.addFile(QString::fromUtf8("/usr/share/icons/Humanity/categories/22/redhat-office.svg"), QSize(), QIcon::Normal, QIcon::Off);
         btnVerGrafico->setIcon(icon1);
 
+        btnVerEmbalses->setObjectName(QString::fromUtf8("btnVerEmbalses"));
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8("/usr/share/icons/gnome/22x22/mimetypes/x-office-spreadsheet.png"), QSize(), QIcon::Normal, QIcon::Off);
+        btnVerEmbalses->setIcon(icon2);
+
         btnExportarCSV->setToolTip(QApplication::translate("Dialog", "Exportar a CSV", nullptr));
         btnVerGrafico->setToolTip(QApplication::translate("Dialog", "Ver gr\303\241fico", nullptr));
+        btnVerEmbalses->setToolTip(QApplication::translate("Dialog", "Ver embalses", nullptr));
 
         AppContext& context = AppContext::getInstance();
         string lastExecution = context.getLastExecution();
 
         Configuration& config_instance = Configuration::getInstance(applicationName);
-        string zona = config_instance.getPropertyAsString("zona.selected");
-        string embalse = config_instance.getPropertyAsString("embalse.selected");
+        zona = config_instance.getPropertyAsString("zona.selected");
+        embalse = config_instance.getPropertyAsString("embalse.selected");
 
         context.populateZonasIn(cmbZona);
 
@@ -72,13 +80,13 @@ void VerEmbalses::cmbZonasIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
     string lastExecution = context.getLastExecution();
     
-    string value = helper.getStringValue(cmbZona, index);
+    zona = helper.getStringValue(cmbZona, index);
 
-    if (!value.empty()) {
-        InfoZona info = context.getZona(value);
+    if (!zona.empty()) {
+        InfoZona info = context.getZona(zona);
 
         lblZona->setText(helper.asQString(info.nombre));
-        showStatsPorZona(value, lastExecution);
+        showStatsPorZona(zona, lastExecution);
         context.populateEmbalsesIn(helper.getStringValue(cmbZona, index), this->cmbEmbalse);
 
         string codigoEmbalse = helper.getStringValue(cmbEmbalse, 0);
@@ -124,17 +132,26 @@ void VerEmbalses::showGraphicClicked() {
             return;
     
         if (fechaDesde < fechaHasta) {
-            StringDataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, fechaDesde, fechaHasta);
+            Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, fechaDesde, fechaHasta);
             
             // Remove the columns MEN and Capacidad
             df.remove_column<double>("MEN");
             df.remove_column<double>("Capacidad");
             
-            unique_ptr<DlgShowGraphic> dlgShowGraphic = unique_ptr<DlgShowGraphic>{new DlgShowGraphic(this)};
+            unique_ptr<DlgShowLineGraphic> dlgShowGraphic = unique_ptr<DlgShowLineGraphic>{new DlgShowLineGraphic(this)};
             dlgShowGraphic->setData(df);
             dlgShowGraphic->mostrar(true);
         }
     }
+}
+
+void VerEmbalses::showEmbalsesClicked() {
+    AppContext& context = AppContext::getInstance();
+    string lastExecution = context.getLastExecution();
+    Dataframe df = context.getDataframeEmbalsesZonaAndDate(zona, lastExecution);
+
+    unique_ptr<DlgShowTable> dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, zona, Constants::EMBALSES, this)};
+    dlgShowTable->mostrar(true);
 }
 
 void VerEmbalses::showExcelClicked() {
@@ -155,9 +172,11 @@ void VerEmbalses::showExcelClicked() {
             return;
         
         if (fechaDesde < fechaHasta) {
-            StringDataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, fechaDesde, fechaHasta);
+            Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, fechaDesde, fechaHasta);
         
-            context.saveDataframe(df, this);
+            const string& filetype = Constants::CSV_FILE_TYPE;
+            const QString filename = QFileDialog::getSaveFileName(this, i18n("Save File As"), QDir::currentPath(), helper.asQString(filetype));
+            context.saveDataframeToDisk(filename, df);
         }
     }
 }
@@ -178,11 +197,11 @@ void VerEmbalses::buscarPorFechas() {
 
             unique_ptr<DlgShowTable> dlgShowTable = nullptr;
             if (!codEmbalse.empty()) {
-                StringDataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, get<0>(fechas), get<1>(fechas));
+                Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, get<0>(fechas), get<1>(fechas));
                 dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codEmbalse, Constants::EMBALSE, this)};
             }
             else {
-                StringDataframe df = context.getDataframePorZonaYRangoFechas(codZona, get<0>(fechas), get<1>(fechas));
+                Dataframe df = context.getDataframePorZonaYRangoFechas(codZona, get<0>(fechas), get<1>(fechas));
                 dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codZona, Constants::ZONA, this)};
             }
 
@@ -198,30 +217,6 @@ void VerEmbalses::buscarPorFechas() {
     }
 }
 
-void VerEmbalses::estadisticasDiarias() {
-    DlgProgreso* dlg = new DlgProgreso(this);
-    dlg->show();
-    
-    connect(dlg, &DlgProgreso::unblockingDialogDispatched, this, &VerEmbalses::progresoTerminado);
-    
-    j1 = new QLoadJob();
-    
-    // Queue the Job using the default Queue stream:
-    stream() << j1;
-}
-
-void VerEmbalses::estadisticasMensuales() {
-    unique_ptr<DlgSelectMes> dlg = getDlgMes();
-    int result = dlg->mostrar(true);
-    
-    if (result == 1) {
-        tuple<int, string> mes = dlg->getMes();
-        //spdlog::info("{}, {}", get<0>(mes), get<1>(mes));
-    }
-}
-
-void VerEmbalses::progresoTerminado() {}
-
 unique_ptr<DlgSelectFecha> VerEmbalses::getDlgFecha(bool isSelectedZone) {
     unique_ptr<DlgSelectFecha> dlg;
     
@@ -236,10 +231,6 @@ unique_ptr<DlgSelectFecha> VerEmbalses::getDlgFecha(bool isSelectedZone) {
     }
     
     return dlg;
-}
-
-unique_ptr<DlgSelectMes> VerEmbalses::getDlgMes() {
-    return unique_ptr<DlgSelectMes>{new DlgSelectMes(this)};
 }
 
 void VerEmbalses::showInfoEmbalse(InfoEmbalse& info) {
@@ -281,11 +272,18 @@ void VerEmbalses::showStatsPorZona(string codZona, string date) {
         sMax = fmt::format(Constants::NUMBER_FORMAT, get<1>(stats)[2]);
         lblVolumenMaximo->setText(helper.asQString(sMax));
 
-        std::string sSum = fmt::format(Constants::NUMBER_FORMAT, get<0>(stats)[3]);
-        lblNivelTotal->setText(helper.asQString(sSum));
-
-        sSum = fmt::format(Constants::NUMBER_FORMAT, get<1>(stats)[3]);
+        double volumenTotal = get<1>(stats)[3];
+        std::string sSum = fmt::format(Constants::NUMBER_FORMAT, volumenTotal);
         lblVolumenTotal->setText(helper.asQString(sSum));
+
+        double totalCapacidad = context.getTotalCapacidadZona(codZona);
+        std::string sTotalCapacidad = fmt::format(Constants::NUMBER_FORMAT, totalCapacidad);
+        lblTotalCapacidadZona->setText(helper.asQString(sTotalCapacidad));
+
+        double porcentajeVolumen = (volumenTotal*100)/totalCapacidad;
+        std::string sPorcentajeVolumen = fmt::format(Constants::NUMBER_FORMAT, porcentajeVolumen);
+        lblPorcentajeVolumenTotal->setText(helper.asQString(sPorcentajeVolumen));
+        helper.setLabelStyleValue(lblPorcentajeVolumenTotal, porcentajeVolumen);
     } catch (const exception& e) {
         spdlog::error("ERROR getStatsPorZona: {}", e.what());
         throw e;

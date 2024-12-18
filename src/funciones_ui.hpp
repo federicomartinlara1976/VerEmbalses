@@ -57,19 +57,14 @@ namespace FuncionesUi {
         
         InfoEmbalse createInfoEmbalse(string codEmbalse, bsoncxx::v_noabi::document::view doc);
         InfoEmbalse getIdEmbalse(bsoncxx::v_noabi::document::view doc);
-        string buildCsvHeader(StringDataframe& dataFrame, const string& fieldSeparator);
-        void saveDataframeToDisk(const QString &outputFileName, StringDataframe& dataframe);
-        void writeHeader(QSaveFile& file, StringDataframe& dataFrame);
-        void writeContent(QSaveFile& file, StringDataframe& dataFrame);
+        string buildCsvHeader(Dataframe& dataFrame, const string& fieldSeparator);
+
+        void writeHeader(QSaveFile& file, Dataframe& dataFrame);
+        void writeContent(QSaveFile& file, Dataframe& dataFrame);
 
         int getDataframeSize(Dataframe& dataframe);
-        int getDataframeSize(StringDataframe& dataframe);
-
         vector<std::tuple<String64, std::size_t, std::type_index>> getFields(Dataframe& dataframe);
-        vector<std::tuple<String64, std::size_t, std::type_index>> getFields(StringDataframe& dataframe);
-
         vector<const char*> getFieldNames(Dataframe& dataFrame);
-        vector<const char*> getFieldNames(StringDataframe& dataFrame);
         
         AppContext();
         static void destroy(AppContext* instance);
@@ -89,14 +84,14 @@ namespace FuncionesUi {
 
         InfoZona getZona(string codZona);
         Dataframe getDataframeZona(string codZona);
-        Dataframe getDataframeZonaAndDate(string codZona, string date);
+        Dataframe getDataframeEmbalsesZonaAndDate(string codZona, string date);
 
         string getLastExecution();
 
-        StringDataframe getDataframePorEmbalseYRangoFechas(string codEmbalse, QDate& desde, QDate& hasta);
-        StringDataframe getDataframePorZonaYRangoFechas(string codZona, QDate& desde, QDate& hasta);
+        Dataframe getDataframePorEmbalseYRangoFechas(string codEmbalse, QDate& desde, QDate& hasta);
+        Dataframe getDataframePorZonaYRangoFechas(string codZona, QDate& desde, QDate& hasta);
 
-        void saveDataframe(StringDataframe& dataframe, QWidget *parent, const string& filetype = Constants::CSV_FILE_TYPE);
+        void saveDataframeToDisk(const QString &outputFileName, Dataframe& dataframe);
 
         std::tuple<double*, double*> getStatsPorZonaYFecha(string codZona, string date);
 

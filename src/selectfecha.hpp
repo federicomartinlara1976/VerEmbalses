@@ -32,6 +32,8 @@ protected:
     void setup() override;
     void connectEvents() override;
     void delayedInitialization() override;
+    void onClose() override;
+    void onAccept() override;
     
 public:
     DlgSelectFecha(QWidget* parent = nullptr);

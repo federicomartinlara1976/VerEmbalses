@@ -14,7 +14,7 @@ using namespace hmdf;
 
 class VerEmbalsesAppHelper : public QtHelper {
 public:
-    tuple<String64, std::size_t, std::type_index> getColumn(const StdDataFrame<string>& dataframe, int index) const;
+    tuple<String64, std::size_t, std::type_index> getColumn(const StdDataFrame<ulong>& dataframe, int index) const;
     
     void setLabelStyleValue(QLabel *lbl, float value);
 };

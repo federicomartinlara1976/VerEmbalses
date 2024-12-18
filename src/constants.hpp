@@ -20,7 +20,13 @@ namespace Constants {
 
     enum TableType {
         EMBALSE,
-        ZONA
+        ZONA,
+        EMBALSES
+    };
+
+    enum GraphType {
+        LINEAR,
+        RELACION_NIVEL_VOLUMEN
     };
 }
 

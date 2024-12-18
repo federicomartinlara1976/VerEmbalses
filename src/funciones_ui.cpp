@@ -91,7 +91,7 @@ void AppContext::populateZonasIn(QComboBox* combo) {
             combo->addItem(label, value);
         }
     } catch (const exception& e) {
-        spdlog::error("ERROR populateZonas: {}", e.what());
+        spdlog::error("ERROR populateZonasIn: {}", e.what());
         throw e;
     }
 }
@@ -165,46 +165,60 @@ void AppContext::populateEmbalsesIn(string codZona, QComboBox *combo) {
             combo->addItem(label, value);
         }
     } catch (const exception& e) {
-        spdlog::error("ERROR populateEmbalses: {}", e.what());
+        spdlog::error("ERROR populateEmbalsesIn: {}", e.what());
         throw e;
     }
 }
 
-FuncionesUi::Dataframe AppContext::getDataframeZonaAndDate(string codZona, string date) {
+FuncionesUi::Dataframe AppContext::getDataframeEmbalsesZonaAndDate(string codZona, string date) {
     try {
-        //spdlog::info("Dataframe para la zona {} con fecha {}", codZona, date);
         unique_ptr<vector<InfoEmbalse>> embalses = getEmbalsesPorZona("Embalses", codZona);
-        
+
         data::ColumnData<unsigned long> cIndex("Index");
         vector<unsigned long> indices;
+        data::ColumnData<string> cCodigo("Codigo");
+        vector<string> v_codigos;
+        data::ColumnData<string> cEmbalse("Embalse");
+        vector<string> v_embalses;
         data::ColumnData<double> cNivel("Nivel");
-        vector<double> niveles;
+        vector<double> v_niveles;
         data::ColumnData<double> cVolumen("Volumen");
-        vector<double> volumenes;
-        
-        unsigned long index = 0;
+        vector<double> v_volumenes;
+        data::ColumnData<double> cCapacidad("Capacidad");
+        vector<double> v_capacidades;
+
+        ulong index = 0;
         for (InfoEmbalse& embalse : *embalses) {
             string codEmbalse = embalse.codEmbalse;
             InfoEmbalse info = getEmbalseInfoByDate(codEmbalse, date);
             indices.push_back(index);
-            niveles.push_back(info.nivel);
-            volumenes.push_back(info.volumen);
+            v_codigos.push_back(codEmbalse);
+            v_embalses.push_back(info.embalse);
+            v_niveles.push_back(info.nivel);
+            v_volumenes.push_back(info.volumen);
+            v_capacidades.push_back(info.capacidad);
             index++;
         }
-        
+
         cIndex.setData(indices);
-        cNivel.setData(niveles);
-        cVolumen.setData(volumenes);
-        
+        cCodigo.setData(v_codigos);
+        cEmbalse.setData(v_embalses);
+        cNivel.setData(v_niveles);
+        cVolumen.setData(v_volumenes);
+        cCapacidad.setData(v_capacidades);
+
         FuncionesUi::Dataframe ul_df2;
-        
+
         ul_df2.load_data(std::move(cIndex.getData()),
+                     std::make_pair(appHelper.asCharArray(cCodigo.getName()), cCodigo.getData()),
+                     std::make_pair(appHelper.asCharArray(cEmbalse.getName()), cEmbalse.getData()),
                      std::make_pair(appHelper.asCharArray(cNivel.getName()), cNivel.getData()),
-                     std::make_pair(appHelper.asCharArray(cVolumen.getName()), cVolumen.getData()));
-        
+                     std::make_pair(appHelper.asCharArray(cVolumen.getName()), cVolumen.getData()),
+                     std::make_pair(appHelper.asCharArray(cCapacidad.getName()), cCapacidad.getData()));
+
         return ul_df2;
     } catch (const exception& e) {
-        spdlog::error("ERROR getDataframeZona: {}", e.what());
+        spdlog::error("ERROR getDataframeEmbalsesZonaAndDate: {}", e.what());
         throw e;
     }
 }
@@ -223,7 +237,7 @@ FuncionesUi::Dataframe AppContext::getDataframeZona(string codZona) {
         data::ColumnData<double> cCapacidad("Capacidad");
         vector<double> capacidades;
 
-        unsigned long index = 0;
+        ulong index = 0;
         for (InfoEmbalse& embalse : *embalses) {
             string codEmbalse = embalse.codEmbalse;
             InfoEmbalse info = getEmbalseInfoByDate(codEmbalse, getLastExecution());
@@ -274,9 +288,11 @@ unique_ptr<vector<InfoEmbalse>> AppContext::getEmbalsesPorZona(string collection
     }
 }
 
-FuncionesUi::StringDataframe AppContext::getDataframePorEmbalseYRangoFechas(string codEmbalse, QDate& desde, QDate& hasta) {
+FuncionesUi::Dataframe AppContext::getDataframePorEmbalseYRangoFechas(string codEmbalse, QDate& desde, QDate& hasta) {
     vector<InfoEmbalse> registros = getPorFechas(codEmbalse, desde, hasta);
     
+    data::ColumnData<ulong> cIndex("Indice");
+    vector<ulong> indices;
     data::ColumnData<string> cFecha("Fecha");
     vector<string> fechas;
     data::ColumnData<double> cNivel("Nivel");
@@ -290,16 +306,20 @@ FuncionesUi::StringDataframe AppContext::getDataframePorEmbalseYRangoFechas(stri
     data::ColumnData<double> cCapacidad("Capacidad");
     vector<double> v_capacidad;
         
+    ulong index = 0;
     for (InfoEmbalse& registro : registros) {
-        fechas.push_back(registro.fecha);
+        indices.push_back(index);
 
+        fechas.push_back(registro.fecha);
         niveles.push_back(registro.nivel);
         volumenes.push_back(registro.volumen);
         porcentajes.push_back(registro.porcentaje);
         v_men.push_back(registro.men);
         v_capacidad.push_back(registro.capacidad);
+        index++;
     }
-        
+
+    cIndex.setData(indices);
     cFecha.setData(fechas);
     cNivel.setData(niveles);
     cVolumen.setData(volumenes);
@@ -307,9 +327,10 @@ FuncionesUi::StringDataframe AppContext::getDataframePorEmbalseYRangoFechas(stri
     cMen.setData(v_men);
     cCapacidad.setData(v_capacidad);
         
-    FuncionesUi::StringDataframe df;
+    FuncionesUi::Dataframe df;
         
-    df.load_data(std::move(cFecha.getData()),
+    df.load_data(std::move(cIndex.getData()),
+                    std::make_pair(appHelper.asCharArray(cFecha.getName()), cFecha.getData()),
                     std::make_pair(appHelper.asCharArray(cNivel.getName()), cNivel.getData()),
                     std::make_pair(appHelper.asCharArray(cVolumen.getName()), cVolumen.getData()),
                     std::make_pair(appHelper.asCharArray(cPorcentaje.getName()), cPorcentaje.getData()),
@@ -319,9 +340,12 @@ FuncionesUi::StringDataframe AppContext::getDataframePorEmbalseYRangoFechas(stri
     return df;
 }
 
-FuncionesUi::StringDataframe AppContext::getDataframePorZonaYRangoFechas(string codZona, QDate& desde, QDate& hasta) {
+FuncionesUi::Dataframe AppContext::getDataframePorZonaYRangoFechas(string codZona, QDate& desde, QDate& hasta) {
     // Obtener las ejecuciones entre las fechas
     vector<string> ejecuciones = getExecutions(desde, hasta);
+
+    data::ColumnData<ulong> cIndex("Indice");
+    vector<ulong> indices;
 
     data::ColumnData<string> cFecha("Fecha");
     vector<string> fechas;
@@ -332,8 +356,6 @@ FuncionesUi::StringDataframe AppContext::getDataframePorZonaYRangoFechas(string 
     vector<double> minimoNiveles;
     data::ColumnData<double> cNivelMaximo("MaximoNivel");
     vector<double> maximoNiveles;
-    data::ColumnData<double> cNivelSuma("SumaNivel");
-    vector<double> sumaNiveles;
 
     data::ColumnData<double> cVolumenMedia("MediaVolumen");
     vector<double> mediaVolumenes;
@@ -346,43 +368,46 @@ FuncionesUi::StringDataframe AppContext::getDataframePorZonaYRangoFechas(string 
 
 
     // Para cada ejecución, obtener el dataframe de las estadísticas de la zona
+    ulong index = 0;
     for (string fecha : ejecuciones) {
         std::tuple<double*, double*> stats = getStatsPorZonaYFecha(codZona, fecha);
         double* statsNivel = std::get<0>(stats);
         double* statsVolumen = std::get<1>(stats);
 
+        indices.push_back(index);
         fechas.push_back(fecha);
 
         mediaNiveles.push_back(statsNivel[0]);
         minimoNiveles.push_back(statsNivel[1]);
         maximoNiveles.push_back(statsNivel[2]);
-        sumaNiveles.push_back(statsNivel[3]);
 
         mediaVolumenes.push_back(statsVolumen[0]);
         minimoVolumenes.push_back(statsVolumen[1]);
         maximoVolumenes.push_back(statsVolumen[2]);
         sumaVolumenes.push_back(statsVolumen[3]);
+
+        index++;
     }
 
+    cIndex.setData(indices);
     cFecha.setData(fechas);
 
     cNivelMedia.setData(mediaNiveles);
     cNivelMinimo.setData(minimoNiveles);
     cNivelMaximo.setData(maximoNiveles);
-    cNivelSuma.setData(sumaNiveles);
 
     cVolumenMedia.setData(mediaVolumenes);
     cVolumenMinimo.setData(minimoVolumenes);
     cVolumenMaximo.setData(maximoVolumenes);
     cVolumenSuma.setData(sumaVolumenes);
 
-    FuncionesUi::StringDataframe df;
+    FuncionesUi::Dataframe df;
 
-    df.load_data(std::move(cFecha.getData()),
+    df.load_data(std::move(cIndex.getData()),
+                    std::make_pair(appHelper.asCharArray(cFecha.getName()), cFecha.getData()),
                     std::make_pair(appHelper.asCharArray(cNivelMedia.getName()), cNivelMedia.getData()),
                     std::make_pair(appHelper.asCharArray(cNivelMinimo.getName()), cNivelMinimo.getData()),
                     std::make_pair(appHelper.asCharArray(cNivelMaximo.getName()), cNivelMaximo.getData()),
-                    std::make_pair(appHelper.asCharArray(cNivelSuma.getName()), cNivelSuma.getData()),
                     std::make_pair(appHelper.asCharArray(cVolumenMedia.getName()), cVolumenMedia.getData()),
                     std::make_pair(appHelper.asCharArray(cVolumenMinimo.getName()), cVolumenMinimo.getData()),
                     std::make_pair(appHelper.asCharArray(cVolumenMaximo.getName()), cVolumenMaximo.getData()),
@@ -528,12 +553,9 @@ InfoEmbalse AppContext::getIdEmbalse(bsoncxx::v_noabi::document::view doc) {
     return info;
 }
 
-string AppContext::buildCsvHeader(FuncionesUi::StringDataframe& dataFrame, const string& fieldSeparator) {
+string AppContext::buildCsvHeader(FuncionesUi::Dataframe& dataFrame, const string& fieldSeparator) {
     string header = {};
     auto columns = getFields(dataFrame);
-
-    // Pone la columna fecha
-    header.append("Fecha").append(fieldSeparator);
 
     for (auto citer: columns)  {
         string nombre = std::get<0>(citer).c_str();
@@ -545,10 +567,6 @@ string AppContext::buildCsvHeader(FuncionesUi::StringDataframe& dataFrame, const
 }
 
 vector<std::tuple<String64, std::size_t, std::type_index>> AppContext::getFields(FuncionesUi::Dataframe& dataframe) {
-    return dataframe.get_columns_info<double, string>();
-}
-
-vector<std::tuple<String64, std::size_t, std::type_index>> AppContext::getFields(FuncionesUi::StringDataframe& dataframe) {
     return dataframe.get_columns_info<double, string>();
 }
 
@@ -565,20 +583,7 @@ vector<const char*> AppContext::getFieldNames(FuncionesUi::Dataframe& dataFrame)
     return v;
 }
 
-vector<const char*> AppContext::getFieldNames(FuncionesUi::StringDataframe& dataFrame) {
-    vector<const char*> v;
-
-    auto fields = getFields(dataFrame);
-
-    for(auto field : fields) {
-        string name = std::get<0>(field).c_str();
-        v.push_back(name.c_str());
-    }
-
-    return v;
-}
-
-void AppContext::saveDataframeToDisk(const QString &outputFileName, FuncionesUi::StringDataframe& dataFrame) {
+void AppContext::saveDataframeToDisk(const QString &outputFileName, FuncionesUi::Dataframe& dataFrame) {
     if (!outputFileName.isNull()) {
         // It creates the file
         QSaveFile file(outputFileName);
@@ -594,24 +599,27 @@ void AppContext::saveDataframeToDisk(const QString &outputFileName, FuncionesUi:
     }
 }
 
-void AppContext::writeHeader(QSaveFile& file, FuncionesUi::StringDataframe& dataframe) {
+void AppContext::writeHeader(QSaveFile& file, FuncionesUi::Dataframe& dataframe) {
     string header = buildCsvHeader(dataframe, Constants::CSV_FIELD_SEPARATOR);
     QByteArray outputByteArray;
     outputByteArray.append(appHelper.asCharArray(header));
     file.write(outputByteArray);
 }
 
-void AppContext::writeContent(QSaveFile& file, FuncionesUi::StringDataframe& dataframe) {
+void AppContext::writeContent(QSaveFile& file, FuncionesUi::Dataframe& dataframe) {
     auto fields = getFields(dataframe);
     vector<const char*> fieldNames = getFieldNames(dataframe);
     
     for (int i=0;i<getDataframeSize(dataframe);i++) {
         string values = {};
-
-        values.append(dataframe.get_index()[i]).append(",");
         
         int j = 0;
         for (auto field : fields) {
+            if (std::get<2>(field) == std::type_index(typeid(ulong)))  {
+                ulong val = dataframe.get_column<ulong>(j)[i];
+                std::string sVal = std::to_string(val);
+                values.append(sVal).append(",");
+            }
             if (std::get<2>(field) == std::type_index(typeid(double)))  {
                 double val = dataframe.get_column<double>(j)[i];
                 std::string sVal = fmt::format("{:.2f}", val);
@@ -633,22 +641,13 @@ void AppContext::writeContent(QSaveFile& file, FuncionesUi::StringDataframe& dat
     }
 }
 
-void AppContext::saveDataframe(FuncionesUi::StringDataframe& dataframe, QWidget *parent, const string& filetype) {
-    const QString filename = QFileDialog::getSaveFileName(parent, i18n("Save File As"), QDir::currentPath(), qtHelper.asQString(filetype));
-    saveDataframeToDisk(filename, dataframe);
-}
-
 int AppContext::getDataframeSize(FuncionesUi::Dataframe& dataframe) {
-    return dataframe.get_index().size();
-}
-
-int AppContext::getDataframeSize(FuncionesUi::StringDataframe& dataframe) {
     return dataframe.get_index().size();
 }
 
 std::tuple<double*, double*> AppContext::getStatsPorZonaYFecha(string codZona, string date) {
     try {
-        Dataframe df = getDataframeZonaAndDate(codZona, date);
+        Dataframe df = getDataframeEmbalsesZonaAndDate(codZona, date);
 
         double* statsNivel = new double[4];
         double* statsVolumen = new double[4];

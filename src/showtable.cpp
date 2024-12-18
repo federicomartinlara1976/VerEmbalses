@@ -3,29 +3,31 @@
 #include <QtCharts/QLineSeries>
 #include <QtCharts/QValueAxis>
 #include <QtCharts/QDateTimeAxis>
+#include <QFileDialog>
+
+#include <KLocalizedString>
 
 #include <DataFrame/DataFrame.h>
 #include <fmt/format.h>
 
 #include "showtable.hpp"
+#include "selecttipografico.hpp"
 
 using namespace std;
 using namespace hmdf;
 
-DlgShowTable::DlgShowTable(const FuncionesUi::StringDataframe& dataframe, const string& code, enum Constants::TableType tableType, QWidget* parent) : QtDialogWindow(parent) {
+DlgShowTable::DlgShowTable(const FuncionesUi::Dataframe& dataframe, const string& code, enum Constants::TableType tableType, QWidget* parent) : QtDialogWindow(parent) {
     this->initWindow();
     this->dataframe = dataframe;
     this->tableType = tableType;
 
     if (tableType == Constants::EMBALSE) {
-        setCodEmbalse(code);
+        this->codEmbalse = code;
     }
 
-    if (tableType == Constants::ZONA) {
-        setCodZona(code);
+    if (tableType == Constants::ZONA || tableType == Constants::EMBALSES) {
+        this->codZona = code;
     }
-
-    setData();
 }
 
 void DlgShowTable::setup() {
@@ -45,7 +47,28 @@ void DlgShowTable::delayedInitialization() {
     QIcon icon1;
     icon1.addFile(QString::fromUtf8("/usr/share/icons/Humanity/categories/22/redhat-office.svg"), QSize(), QIcon::Normal, QIcon::Off);
     btnVerGrafico->setIcon(icon1);
+
+    if (tableType == Constants::EMBALSE) {
+        setCodEmbalse(codEmbalse);
+    }
+
+    if (tableType == Constants::ZONA || tableType == Constants::EMBALSES) {
+        setCodZona(codZona);
+    }
+
+    if (tableType == Constants::EMBALSES) {
+        this->label->setVisible(false);
+        this->lblDesde->setVisible(false);
+        this->label_2->setVisible(false);
+        this->lblHasta->setVisible(false);
+    }
+
+    setData();
 }
+
+void DlgShowTable::onClose() {}
+
+void DlgShowTable::onAccept() {}
 
 void DlgShowTable::setData() {
     TableModel *tableModel = nullptr;
@@ -59,20 +82,19 @@ void DlgShowTable::setData() {
         tableModel = new TableModelZona(this->dataframe);
     }
 
+    if (tableType == Constants::EMBALSES) {
+        tableModel = new TableModelEmbalses(this->dataframe);
+    }
+
     // El dataframe modificado
     this->dataframe = tableModel->getDataframe();
     this->tblResultados->setModel(tableModel);
-
-    QHeaderView *headerView = new QHeaderView(Qt::Horizontal);
-    this->tblResultados->setHorizontalHeader(headerView);
 }
   
 void DlgShowTable::setCodEmbalse(const string& codEmbalse) {
     AppContext& context = AppContext::getInstance();
     
-    this->codEmbalse = codEmbalse;
     InfoEmbalse info = context.getEmbalseInfo(codEmbalse);
-    //spdlog::info("{} - {}", info.codEmbalse, info.embalse);
 
     // Recoger la primera fila, los datos MEN y capacidad para informar las etiquetas de la cabecera
     std::vector<const char *> columns = {"MEN", "Capacidad"};
@@ -90,9 +112,7 @@ void DlgShowTable::setCodEmbalse(const string& codEmbalse) {
 void DlgShowTable::setCodZona(const string& codZona) {
     AppContext& context = AppContext::getInstance();
 
-    this->codZona = codZona;
     InfoZona info = context.getZona(codZona);
-    //spdlog::info("{} - {}", info.codZona, info.nombre);
 
     double totalCapacidad = context.getTotalCapacidadZona(codZona);
     std::string sTotalCapacidad = fmt::format(Constants::NUMBER_FORMAT, totalCapacidad);
@@ -117,14 +137,50 @@ void DlgShowTable::setFechas(const QDate fechaDesde, const QDate fechaHasta) {
 }
 
 void DlgShowTable::showGraphicClicked() {
-    unique_ptr<DlgShowGraphic> dlgShowGraphic = unique_ptr<DlgShowGraphic>{new DlgShowGraphic(this)};
-    dlgShowGraphic->setData(dataframe);
-    dlgShowGraphic->mostrar(true);
+    if (tableType == Constants::ZONA) {
+        unique_ptr<DlgShowLineGraphic> dlgShowGraphic = unique_ptr<DlgShowLineGraphic>{new DlgShowLineGraphic(this)};
+
+        dlgShowGraphic->setData(dataframe);
+        dlgShowGraphic->mostrar(true);
+    }
+
+    if (tableType == Constants::EMBALSE) {
+        unique_ptr<DlgSelectTipoGrafico> dlgSelectTipoGrafico = unique_ptr<DlgSelectTipoGrafico>{new DlgSelectTipoGrafico(this)};
+        int result = dlgSelectTipoGrafico->mostrar(true);
+
+        if (result == 1) {
+            Constants::GraphType graphType = dlgSelectTipoGrafico->getTipoGrafico();
+            if (graphType == Constants::GraphType::LINEAR) {
+                unique_ptr<DlgShowLineGraphic> dlgShowGraphic = unique_ptr<DlgShowLineGraphic>{new DlgShowLineGraphic(this)};
+
+                dlgShowGraphic->setData(dataframe);
+                dlgShowGraphic->mostrar(true);
+            }
+
+            if (graphType == Constants::GraphType::RELACION_NIVEL_VOLUMEN) {
+                unique_ptr<DlgShowScatterGraphic> dlgShowGraphic = unique_ptr<DlgShowScatterGraphic>{new DlgShowScatterGraphic(this)};
+
+                dlgShowGraphic->setData(dataframe);
+                dlgShowGraphic->mostrar(true);
+            }
+        }
+    }
+
+    if (tableType == Constants::EMBALSES) {
+        unique_ptr<DlgShowPieGraphic> dlgShowGraphic = unique_ptr<DlgShowPieGraphic>{new DlgShowPieGraphic(this)};
+
+        dlgShowGraphic->setData(dataframe);
+        dlgShowGraphic->mostrar(true);
+    }
 }
 
 void DlgShowTable::showExcelClicked() {
     AppContext& context = AppContext::getInstance();
-    context.saveDataframe(dataframe, this);
+    //context.saveDataframe(dataframe, this);
+
+    const string& filetype = Constants::CSV_FILE_TYPE;
+    const QString filename = QFileDialog::getSaveFileName(this, i18n("Save File As"), QDir::currentPath(), helper.asQString(filetype));
+    context.saveDataframeToDisk(filename, this->dataframe);
 }
 
 DlgShowTable::~DlgShowTable() {}

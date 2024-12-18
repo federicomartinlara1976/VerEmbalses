@@ -5,7 +5,9 @@
 #include "funciones_ui.hpp"
 #include "VerEmbalsesAppHelper.hpp"
 #include "tablemodel.hpp"
-#include "showgraphic.hpp"
+#include "showlinegraphic.hpp"
+#include "showpiegraphic.hpp"
+#include "showscattergraphic.hpp"
 #include "constants.hpp"
 
 #include "qtdialogwindow.hpp"
@@ -30,7 +32,7 @@ private:
     QDate fechaDesde;
     QDate fechaHasta;
     
-    FuncionesUi::StringDataframe dataframe;
+    FuncionesUi::Dataframe dataframe;
 
     enum Constants::TableType tableType;
 
@@ -45,10 +47,12 @@ private slots:
 protected:
     void setup() override;
     void connectEvents() override;
-    void delayedInitialization() override;    
+    void delayedInitialization() override;
+    void onClose() override;
+    void onAccept() override;
 
 public:
-    DlgShowTable(const FuncionesUi::StringDataframe& dataframe, const string& code, enum Constants::TableType tableType, QWidget* parent = nullptr);
+    DlgShowTable(const FuncionesUi::Dataframe& dataframe, const string& code, enum Constants::TableType tableType, QWidget* parent = nullptr);
     
     void setFechas(const QDate fechaDesde, const QDate fechaHasta);
     

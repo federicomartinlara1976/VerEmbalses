@@ -31,6 +31,10 @@ void DlgProgreso::connectEvents() {
 void DlgProgreso::delayedInitialization() {
 }
 
+void DlgProgreso::onClose() {}
+
+void DlgProgreso::onAccept() {}
+
 void DlgProgreso::percentChanged(int percent, QString message) {
     this->lblEstado->setText(message);
     this->progressBar->setValue(percent);

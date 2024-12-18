@@ -1,7 +1,7 @@
-#ifndef _DLG_SHOWGRAPHIC_HPP_
-#define _DLG_SHOWGRAPHIC_HPP_
+#ifndef _DLG_SHOWLINEGRAPHIC_HPP_
+#define _DLG_SHOWLINEGRAPHIC_HPP_
 
-#include "dlg_showgraphic.h"
+#include "dlg_showlinegraphic.h"
 #include "funciones_ui.hpp"
 #include "VerEmbalsesAppHelper.hpp"
 
@@ -13,34 +13,37 @@
 
 using namespace std;
 
-class DlgShowGraphic : public QtDialogWindow, public Ui::DialogShowGraphic {
+class DlgShowLineGraphic : public QtDialogWindow, public Ui::DialogShowLineGraphic {
     Q_OBJECT
     
 private:
     QtHelper qtHelper;
     AppHelper appHelper;
     
-    FuncionesUi::StringDataframe df;
+    FuncionesUi::Dataframe df;
     
     string selectedYValue;
     
-    void populateDatoY();
+    void populateDatoY(std::string exclude);
     void drawGraphic(string selectedYValue);
     
 private slots:
     void cmbDatoYIndexChanged(int index);
+    void print();
     
 protected:
     void setup() override;
     void connectEvents() override;
     void delayedInitialization() override;
+    void onClose() override;
+    void onAccept() override;
     
 public:
-    DlgShowGraphic(QWidget* parent = nullptr);
+    DlgShowLineGraphic(QWidget* parent = nullptr);
     
-    void setData(const FuncionesUi::StringDataframe& df);
+    void setData(const FuncionesUi::Dataframe& df);
     
-    virtual ~DlgShowGraphic();
+    virtual ~DlgShowLineGraphic();
 };
 
 #endif
