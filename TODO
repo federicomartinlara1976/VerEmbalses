@@ -1,1 +1,3 @@
-- Diagramas de barras estático para los embalses de una zona
+14/03/2025:
+
+- El gráfico estático de detalles de la zona se descuadra cuando hay un valor que excede de la capacidad.
