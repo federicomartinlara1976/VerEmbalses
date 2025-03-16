@@ -7,7 +7,7 @@
 #include <QComboBox>
 #include <QLabel>
 #include <DataFrame/DataFrame.h>
-#include <qttools/QtHelper.hpp>
+#include <qttools/qthelper.hpp>
 
 using namespace std;
 using namespace hmdf;

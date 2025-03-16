@@ -26,7 +26,7 @@ GraficoEnBarrasApiladas::GraficoEnBarrasApiladas(Dataframe &df) {
         categories << s_embalse;
 
         *setVolumen << volumenes[i];
-        if (volumenes[i] < capacidades[i]) [{
+        if (volumenes[i] < capacidades[i]) {
             *setResto << capacidades[i] - volumenes[i];
         }
         i++;
