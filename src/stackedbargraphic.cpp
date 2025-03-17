@@ -19,6 +19,7 @@ GraficoEnBarrasApiladas::GraficoEnBarrasApiladas(Dataframe &df) {
 
     QBarSet *setVolumen = new QBarSet("Volumen");
     QBarSet *setResto = new QBarSet("Resto");
+    QBarSet *setDesbordamiento = new QBarSet("Desbordamiento");
 
     int i = 0;
     for (string embalse : embalses) {
@@ -26,14 +27,20 @@ GraficoEnBarrasApiladas::GraficoEnBarrasApiladas(Dataframe &df) {
         categories << s_embalse;
 
         *setVolumen << volumenes[i];
-        if (volumenes[i] < capacidades[i]) {
+        if (volumenes[i] >= capacidades[i]) {
+            *setDesbordamiento << volumenes[i] - capacidades[i];
+            *setResto << 0.0;
+        }
+        else {
             *setResto << capacidades[i] - volumenes[i];
+            *setDesbordamiento << 0.0;
         }
         i++;
     }
 
     series->append(setVolumen);
     series->append(setResto);
+    series->append(setDesbordamiento);
 
     graphic = new QChart();
     graphic->addSeries(series);
