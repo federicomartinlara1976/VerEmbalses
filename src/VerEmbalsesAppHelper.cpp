@@ -29,11 +29,14 @@ void VerEmbalsesAppHelper::setLabelStyleValue(QLabel *lbl, float value) {
     if (value < 30.0) {
         color = Constants::RED;
     }
-    else if(value >= 30.0 && value <= 65.0) {
+    else if (value >= 30.0 && value <= 65.0) {
         color = Constants::YELLOW;
     }
-    else {
+    else if (value >= 65.0 && value < 100.0) {
         color = Constants::GREEN;
+    }
+    else {
+        color = Constants::BLUE;
     }
     
     string style = "QLabel { background-color : " + color + "; border: 1px solid black; }";

@@ -17,6 +17,7 @@ namespace Constants {
     static constexpr const string RED = "#ffb3b3";
     static constexpr const string GREEN = "#bfff80";
     static constexpr const string YELLOW = "#ffff80";
+    static constexpr const string BLUE = "#3399ff";
 
     enum TableType {
         EMBALSE,
