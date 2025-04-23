@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.9)
 set(CMAKE_BUILD_TYPE DEBUG)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_COMPILER "/usr/bin/g++")
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(verembalses)
 
@@ -39,9 +39,7 @@ find_package(NumCpp REQUIRED)
 find_package(DataFrame REQUIRED)
 find_package(yaml-cpp REQUIRED)
 find_package(fmt REQUIRED)
-
 find_package(mongocxx REQUIRED)
-
 find_package(bsoncxx REQUIRED)
 
 add_subdirectory(doc)
