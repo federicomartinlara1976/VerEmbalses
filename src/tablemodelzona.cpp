@@ -1,7 +1,5 @@
 #include "tablemodel.hpp"
 
-#include <spdlog/spdlog.h>
-
 TableModelZona::TableModelZona(const FuncionesUi::Dataframe& dataFrame) : TableModel(dataFrame) {
     // La función que se usa para eliminar las filas
     auto lambda = [](const ulong &, const double &val1, const double &val2, const double &val3)-> bool {

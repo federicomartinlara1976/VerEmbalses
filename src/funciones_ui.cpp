@@ -135,7 +135,7 @@ InfoZona AppContext::getZona(string codZona) {
 
         bsoncxx::stdx::optional<bsoncxx::document::value> oElement = collection.find_one(make_document(kvp("codigo", make_document(kvp("$eq", codZona)))));
         if(oElement) {
-            auto doc = oElement.get();
+            auto doc = oElement.value();
 
             info.codZona = string(doc["codigo"].get_string().value);
             info.nombre = string(doc["descripcion"].get_string().value);
@@ -450,7 +450,7 @@ InfoEmbalse AppContext::getEmbalseInfoByDate(string collectionName, string date)
         
         bsoncxx::stdx::optional<bsoncxx::document::value> oElement = collection.find_one(make_document(kvp("_id", make_document(kvp("$eq", date)))));
         if(oElement) {
-            auto doc = oElement.get();
+            auto doc = oElement.value();
             info = createInfoEmbalse(collectionName, doc);
         }
         
@@ -469,7 +469,7 @@ InfoEmbalse AppContext::getEmbalseInfo(string codEmbalse) {
 
         bsoncxx::stdx::optional<bsoncxx::document::value> oElement = collection.find_one(make_document(kvp("_id", make_document(kvp("$eq", codEmbalse)))));
         if(oElement) {
-            auto doc = oElement.get();
+            auto doc = oElement.value();
             info = getIdEmbalse(doc);
         }
 
@@ -494,7 +494,7 @@ string AppContext::getLastExecution() {
         
         bsoncxx::stdx::optional<bsoncxx::document::value> oElement = collection.find_one({}, opts);
         if (oElement) {
-            auto element = oElement.get();
+            auto element = oElement.value();
             last = string(element["_id"].get_string().value);
         }
         else {
