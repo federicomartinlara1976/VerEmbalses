@@ -1,19 +1,20 @@
 /********************************************************************************
-** Form generated from reading UI file 'ver_embalsescgeyUO.ui'
+** Form generated from reading UI file 'ver_embalsesPozMlb.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef VER_EMBALSESCGEYUO_H
-#define VER_EMBALSESCGEYUO_H
+#ifndef VER_EMBALSESPOZMLB_H
+#define VER_EMBALSESPOZMLB_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
@@ -22,6 +23,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -100,6 +102,17 @@ public:
     QPushButton *btnExportarCSV;
     QSpacerItem *verticalSpacer;
     QWidget *tabPluviometria;
+    QVBoxLayout *verticalLayout_19;
+    QVBoxLayout *verticalLayout_16;
+    QHBoxLayout *horizontalLayout_8;
+    QVBoxLayout *verticalLayout_20;
+    QLabel *label_2;
+    QComboBox *cmbPlvZona;
+    QVBoxLayout *verticalLayout_21;
+    QLabel *label_14;
+    QComboBox *cmbPuntoControl;
+    QHBoxLayout *horizontalLayout_9;
+    QTableView *tableView;
     QMenuBar *menubar;
     QMenu *menuConsulta;
     QStatusBar *statusbar;
@@ -574,6 +587,71 @@ public:
         tabWidget->addTab(tabEmbalses, QString());
         tabPluviometria = new QWidget();
         tabPluviometria->setObjectName(QString::fromUtf8("tabPluviometria"));
+        verticalLayout_19 = new QVBoxLayout(tabPluviometria);
+        verticalLayout_19->setObjectName(QString::fromUtf8("verticalLayout_19"));
+        verticalLayout_16 = new QVBoxLayout();
+        verticalLayout_16->setObjectName(QString::fromUtf8("verticalLayout_16"));
+        verticalLayout_16->setContentsMargins(5, 5, 5, 5);
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
+        horizontalLayout_8->setContentsMargins(5, 5, 5, 5);
+        verticalLayout_20 = new QVBoxLayout();
+        verticalLayout_20->setObjectName(QString::fromUtf8("verticalLayout_20"));
+        verticalLayout_20->setContentsMargins(5, 5, 5, 5);
+        label_2 = new QLabel(tabPluviometria);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        sizePolicy.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy);
+
+        verticalLayout_20->addWidget(label_2);
+
+        cmbPlvZona = new QComboBox(tabPluviometria);
+        cmbPlvZona->setObjectName(QString::fromUtf8("cmbPlvZona"));
+        sizePolicy1.setHeightForWidth(cmbPlvZona->sizePolicy().hasHeightForWidth());
+        cmbPlvZona->setSizePolicy(sizePolicy1);
+
+        verticalLayout_20->addWidget(cmbPlvZona);
+
+
+        horizontalLayout_8->addLayout(verticalLayout_20);
+
+        verticalLayout_21 = new QVBoxLayout();
+        verticalLayout_21->setObjectName(QString::fromUtf8("verticalLayout_21"));
+        verticalLayout_21->setContentsMargins(5, 5, 5, 5);
+        label_14 = new QLabel(tabPluviometria);
+        label_14->setObjectName(QString::fromUtf8("label_14"));
+        sizePolicy.setHeightForWidth(label_14->sizePolicy().hasHeightForWidth());
+        label_14->setSizePolicy(sizePolicy);
+
+        verticalLayout_21->addWidget(label_14);
+
+        cmbPuntoControl = new QComboBox(tabPluviometria);
+        cmbPuntoControl->setObjectName(QString::fromUtf8("cmbPuntoControl"));
+        sizePolicy1.setHeightForWidth(cmbPuntoControl->sizePolicy().hasHeightForWidth());
+        cmbPuntoControl->setSizePolicy(sizePolicy1);
+
+        verticalLayout_21->addWidget(cmbPuntoControl);
+
+
+        horizontalLayout_8->addLayout(verticalLayout_21);
+
+
+        verticalLayout_16->addLayout(horizontalLayout_8);
+
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
+        horizontalLayout_9->setContentsMargins(5, 5, 5, 5);
+        tableView = new QTableView(tabPluviometria);
+        tableView->setObjectName(QString::fromUtf8("tableView"));
+
+        horizontalLayout_9->addWidget(tableView);
+
+
+        verticalLayout_16->addLayout(horizontalLayout_9);
+
+
+        verticalLayout_19->addLayout(verticalLayout_16);
+
         tabWidget->addTab(tabPluviometria, QString());
 
         verticalLayout_2->addWidget(tabWidget);
@@ -594,7 +672,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -644,6 +722,8 @@ public:
         btnVerGrafico->setText(QString());
         btnExportarCSV->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tabEmbalses), QApplication::translate("MainWindow", "Embalses", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "Zona", nullptr));
+        label_14->setText(QApplication::translate("MainWindow", "Punto de control", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabPluviometria), QApplication::translate("MainWindow", "Pluviometr\303\255a", nullptr));
         menuConsulta->setTitle(QApplication::translate("MainWindow", "Consulta", nullptr));
     } // retranslateUi
@@ -656,4 +736,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // VER_EMBALSESCGEYUO_H
+#endif // VER_EMBALSESPOZMLB_H
