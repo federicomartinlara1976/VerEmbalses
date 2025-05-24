@@ -24,6 +24,7 @@ void VerEmbalses::setup() {
 
 void VerEmbalses::connectEvents() {
     connect(cmbZona, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalses::cmbZonasIndexChanged);
+    connect(cmbPlvZona, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalses::cmbPlvZonasIndexChanged);
     connect(cmbEmbalse, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalses::cmbEmbalsesIndexChanged);
     connect(btnVerGrafico , &QAbstractButton::clicked, this, &VerEmbalses::showGraphicClicked);
     connect(btnVerEmbalses , &QAbstractButton::clicked, this, &VerEmbalses::showEmbalsesClicked);
@@ -59,6 +60,7 @@ void VerEmbalses::delayedInitialization() {
         embalse = config_instance.getPropertyAsString("embalse.selected");
 
         context.populateZonasIn(cmbZona);
+        context.populateZonasIn(cmbPlvZona);
 
         context.setDefaultZona(zona, cmbZona, cmbEmbalse);
         InfoZona infoZona = context.getZona(zona);
@@ -87,13 +89,29 @@ void VerEmbalses::cmbZonasIndexChanged(int index) {
 
         lblZona->setText(helper.asQString(info.nombre));
         showStatsPorZona(zona, lastExecution);
-        context.populateEmbalsesIn(helper.getStringValue(cmbZona, index), this->cmbEmbalse);
+        context.populateEmbalsesIn(zona, this->cmbEmbalse);
 
         string codigoEmbalse = helper.getStringValue(cmbEmbalse, 0);
         if (!codigoEmbalse.empty()) {
             InfoEmbalse info = context.getEmbalseInfoByDate(codigoEmbalse, context.getLastExecution());
             showInfoEmbalse(info);
         }
+    }
+    else {
+        QMessageBox msgBox;
+        msgBox.setText("Debe seleccionar una zona");
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.exec();
+    }
+}
+
+void VerEmbalses::cmbPlvZonasIndexChanged(int index) {
+    AppContext& context = AppContext::getInstance();
+    
+    string plvZona = helper.getStringValue(cmbPlvZona, index);
+
+    if (!plvZona.empty()) {
+        context.populatePuntosControlIn(plvZona, this->cmbPuntoControl);
     }
     else {
         QMessageBox msgBox;

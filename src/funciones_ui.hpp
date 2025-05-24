@@ -37,6 +37,10 @@ namespace FuncionesUi {
     } InfoEmbalse;
     
     typedef struct {
+        string codPunto, nombre;
+    } InfoPuntoControl;
+    
+    typedef struct {
         string codZona, nombre;
     } InfoZona;
     
@@ -52,12 +56,14 @@ namespace FuncionesUi {
         DataEngine& getDataEngine();
         
         unique_ptr<vector<InfoEmbalse>> getEmbalsesPorZona(string collectionName, string codZona);
+        unique_ptr<vector<InfoPuntoControl>> getPuntosControlPorZona(string collectionName, string codPlvZona);
         vector<InfoEmbalse> getPorFechas(string collectionName, QDate& desde, QDate& hasta);
         unique_ptr<vector<InfoZona>> getZonas();
         vector<string> getExecutions(QDate& desde, QDate& hasta);
         
         InfoEmbalse createInfoEmbalse(string codEmbalse, bsoncxx::v_noabi::document::view doc);
         InfoEmbalse getIdEmbalse(bsoncxx::v_noabi::document::view doc);
+        InfoPuntoControl getIdPuntoControl(bsoncxx::v_noabi::document::view doc);
         string buildCsvHeader(Dataframe& dataFrame, const string& fieldSeparator);
 
         void writeHeader(QSaveFile& file, Dataframe& dataFrame);
@@ -79,6 +85,7 @@ namespace FuncionesUi {
         
         void populateZonasIn(QComboBox *combo);
         void populateEmbalsesIn(string codZona, QComboBox *combo);
+        void populatePuntosControlIn(string codPlvZona, QComboBox *combo);
         
         InfoEmbalse getEmbalseInfoByDate(string collectionName, string date);
         InfoEmbalse getEmbalseInfo(string codEmbalse);

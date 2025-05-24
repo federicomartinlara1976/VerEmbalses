@@ -39,6 +39,7 @@ private:
     
 private slots:
     void cmbZonasIndexChanged(int index);
+    void cmbPlvZonasIndexChanged(int index);
     void cmbEmbalsesIndexChanged(int index);
     void showGraphicClicked();
     void showExcelClicked();

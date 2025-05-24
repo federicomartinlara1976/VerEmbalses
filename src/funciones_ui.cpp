@@ -170,6 +170,28 @@ void AppContext::populateEmbalsesIn(string codZona, QComboBox *combo) {
     }
 }
 
+void AppContext::populatePuntosControlIn(string codPlvZona, QComboBox *combo) {
+    try {
+        unique_ptr<vector<InfoPuntoControl>> puntosControl = getPuntosControlPorZona("PuntosControl", codPlvZona);
+        
+        // Clear the combo
+        combo->clear();
+
+        tuple<QString, QVariant> emptyOption = qtHelper.buildComboEmptyOption("Seleccione un punto de control");
+        combo->addItem(get<0>(emptyOption), get<1>(emptyOption));
+        
+        for (InfoPuntoControl& info : *puntosControl) {
+            const QString label = qtHelper.asQString(info.nombre, true);
+            const QVariant value = QVariant(qtHelper.asQString(info.codPunto, true));
+            
+            combo->addItem(label, value);
+        }
+    } catch (const exception& e) {
+        spdlog::error("ERROR populatePuntosControlIn: {}", e.what());
+        throw e;
+    }
+}
+
 FuncionesUi::Dataframe AppContext::getDataframeEmbalsesZonaAndDate(string codZona, string date) {
     try {
         unique_ptr<vector<InfoEmbalse>> embalses = getEmbalsesPorZona("Embalses", codZona);
@@ -284,6 +306,27 @@ unique_ptr<vector<InfoEmbalse>> AppContext::getEmbalsesPorZona(string collection
         return v;
     } catch (const exception& e) {
         spdlog::error("ERROR getEmbalsesPorZona: {}", e.what());
+        throw e;
+    }
+}
+
+unique_ptr<vector<InfoPuntoControl>> AppContext::getPuntosControlPorZona(string collectionName, string codPlvZona) {
+    try {
+        unique_ptr<vector<InfoPuntoControl>> v = unique_ptr<vector<InfoPuntoControl>>{new vector<InfoPuntoControl>()};
+        
+        DataEngine& dbInstance = getDataEngine();
+        
+        collection collection = dbInstance.getCollection(collectionName);
+        cursor cursor_puntos = collection.find(make_document(kvp("_id", make_document(kvp("$regex", codPlvZona)))));
+        
+        for (bsoncxx::v_noabi::document::view punto : cursor_puntos) {
+            InfoPuntoControl info = getIdPuntoControl(punto);
+            v->push_back(info);
+        }
+        
+        return v;
+    } catch (const exception& e) {
+        spdlog::error("ERROR getPuntosControlPorZona: {}", e.what());
         throw e;
     }
 }
@@ -549,6 +592,15 @@ InfoEmbalse AppContext::getIdEmbalse(bsoncxx::v_noabi::document::view doc) {
     
     info.codEmbalse = string(doc["_id"].get_string().value);
     info.embalse = string(doc["nombre"].get_string().value);
+    
+    return info;
+}
+
+InfoPuntoControl AppContext::getIdPuntoControl(bsoncxx::v_noabi::document::view doc) {
+    InfoPuntoControl info{};
+    
+    info.codPunto = string(doc["_id"].get_string().value);
+    info.nombre = string(doc["nombre"].get_string().value);
     
     return info;
 }
