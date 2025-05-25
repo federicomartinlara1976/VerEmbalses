@@ -317,7 +317,7 @@ unique_ptr<vector<InfoPuntoControl>> AppContext::getPuntosControlPorZona(string 
         DataEngine& dbInstance = getDataEngine();
         
         collection collection = dbInstance.getCollection(collectionName);
-        cursor cursor_puntos = collection.find(make_document(kvp("_id", make_document(kvp("$regex", codPlvZona)))));
+        cursor cursor_puntos = collection.find(make_document(kvp("zona", make_document(kvp("$eq", codPlvZona)))));
         
         for (bsoncxx::v_noabi::document::view punto : cursor_puntos) {
             InfoPuntoControl info = getIdPuntoControl(punto);
