@@ -16,16 +16,16 @@
 #include "view_embalse.h"
 #include "dlg_selectfecha.h"
 #include "constants.hpp"
-
-using namespace std;
-using namespace types;
-using namespace data::nosql::mongo;
-
-// DataFrame library is entirely under hmdf name-space
-//
-using namespace hmdf;
     
 namespace FuncionesUi {
+    
+    using namespace std;
+    using namespace types;
+    using namespace data::nosql::mongo;
+
+    // DataFrame library is entirely under hmdf name-space
+    //
+    using namespace hmdf;
     
     typedef StdDataFrame<ulong> Dataframe;
 

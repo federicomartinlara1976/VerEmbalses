@@ -1,7 +1,12 @@
 14/03/2025:
 
-- El gráfico estático de detalles de la zona se descuadra cuando hay un valor que excede de la capacidad.
+- El gráfico estático de detalles de la zona se descuadra cuando hay un valor que excede de la capacidad. COMPLETADO
 
 21/03/2025:
 
-- Cuando el volumen sea superior al 100%, la etiqueta de porcentaje poner el fondo de color azul
+- Cuando el volumen sea superior al 100%, la etiqueta de porcentaje poner el fondo de color azul. COMPLETADO
+
+28/05/2025
+
+- Gráfica que relaciona nivel de embalse con porcentaje
+- áGrfica que relaciona nivel de embalse con volumen

@@ -28,7 +28,7 @@ using bsoncxx::builder::stream::document;
 using namespace FuncionesUi;
 using namespace hmdf;
 
-std::unique_ptr<AppContext> AppContext::_instance = nullptr;
+unique_ptr<AppContext> AppContext::_instance = nullptr;
 
 AppContext& AppContext::getInstance() {
     if (_instance == nullptr) {

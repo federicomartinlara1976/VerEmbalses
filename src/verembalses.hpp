@@ -31,6 +31,8 @@ private:
     string zona;
     string embalse;
     
+    string plvZona;
+    
     unique_ptr<DlgSelectFecha> getDlgFecha(bool isSelectedZone = true);
     
     void showInfoEmbalse(InfoEmbalse& info);
@@ -41,6 +43,7 @@ private slots:
     void cmbZonasIndexChanged(int index);
     void cmbPlvZonasIndexChanged(int index);
     void cmbEmbalsesIndexChanged(int index);
+    void cmbPuntosControlIndexChanged(int index);
     void showGraphicClicked();
     void showExcelClicked();
     void showEmbalsesClicked();

@@ -26,6 +26,7 @@ void VerEmbalses::connectEvents() {
     connect(cmbZona, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalses::cmbZonasIndexChanged);
     connect(cmbPlvZona, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalses::cmbPlvZonasIndexChanged);
     connect(cmbEmbalse, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalses::cmbEmbalsesIndexChanged);
+    connect(cmbPuntoControl, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalses::cmbPuntosControlIndexChanged);
     connect(btnVerGrafico , &QAbstractButton::clicked, this, &VerEmbalses::showGraphicClicked);
     connect(btnVerEmbalses , &QAbstractButton::clicked, this, &VerEmbalses::showEmbalsesClicked);
     connect(btnExportarCSV , &QAbstractButton::clicked, this, &VerEmbalses::showExcelClicked);
@@ -108,7 +109,7 @@ void VerEmbalses::cmbZonasIndexChanged(int index) {
 void VerEmbalses::cmbPlvZonasIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
     
-    string plvZona = helper.getStringValue(cmbPlvZona, index);
+    plvZona = helper.getStringValue(cmbPlvZona, index);
 
     if (!plvZona.empty()) {
         context.populatePuntosControlIn(plvZona, this->cmbPuntoControl);
@@ -130,6 +131,12 @@ void VerEmbalses::cmbEmbalsesIndexChanged(int index) {
         InfoEmbalse info = context.getEmbalseInfoByDate(codigoEmbalse, lastExecution);
         showInfoEmbalse(info);
     }
+}
+
+void VerEmbalses::cmbPuntosControlIndexChanged(int index) {
+    string codigoPuntoControl = helper.getStringValue(cmbPuntoControl, index);
+    string collection = "PL-" + plvZona + "-" + codigoPuntoControl;
+    spdlog::info("Punto de control: {}", collection);
 }
 
 void VerEmbalses::showGraphicClicked() {
