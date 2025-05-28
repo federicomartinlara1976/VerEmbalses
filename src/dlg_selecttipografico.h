@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg_select-tipo-graficoIkJwpD.ui'
+** Form generated from reading UI file 'dlg_select-tipo-graficobnkomB.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.13
+** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_SELECT_2D_TIPO_2D_GRAFICOIKJWPD_H
-#define DLG_SELECT_2D_TIPO_2D_GRAFICOIKJWPD_H
+#ifndef DLG_SELECT_2D_TIPO_2D_GRAFICOBNKOMB_H
+#define DLG_SELECT_2D_TIPO_2D_GRAFICOBNKOMB_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -28,13 +28,14 @@ public:
     QVBoxLayout *verticalLayout_3;
     QRadioButton *rbtLinear;
     QRadioButton *rbtRelacionNivelVolumen;
+    QRadioButton *rbtRelacionVolumenPorcentaje;
     QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *DialogSelectGrafico)
     {
         if (DialogSelectGrafico->objectName().isEmpty())
             DialogSelectGrafico->setObjectName(QString::fromUtf8("DialogSelectGrafico"));
-        DialogSelectGrafico->resize(320, 147);
+        DialogSelectGrafico->resize(320, 217);
         verticalLayout = new QVBoxLayout(DialogSelectGrafico);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout_2 = new QVBoxLayout();
@@ -53,6 +54,11 @@ public:
         rbtRelacionNivelVolumen->setObjectName(QString::fromUtf8("rbtRelacionNivelVolumen"));
 
         verticalLayout_3->addWidget(rbtRelacionNivelVolumen);
+
+        rbtRelacionVolumenPorcentaje = new QRadioButton(groupBox);
+        rbtRelacionVolumenPorcentaje->setObjectName(QString::fromUtf8("rbtRelacionVolumenPorcentaje"));
+
+        verticalLayout_3->addWidget(rbtRelacionVolumenPorcentaje);
 
 
         verticalLayout_2->addWidget(groupBox);
@@ -77,10 +83,11 @@ public:
 
     void retranslateUi(QDialog *DialogSelectGrafico)
     {
-        DialogSelectGrafico->setWindowTitle(QCoreApplication::translate("DialogSelectGrafico", "Tipo de gr\303\241fico", nullptr));
-        groupBox->setTitle(QCoreApplication::translate("DialogSelectGrafico", "Tipo de gr\303\241fico", nullptr));
-        rbtLinear->setText(QCoreApplication::translate("DialogSelectGrafico", "Linear por fecha", nullptr));
-        rbtRelacionNivelVolumen->setText(QCoreApplication::translate("DialogSelectGrafico", "Relaci\303\263n Nivel - Volumen", nullptr));
+        DialogSelectGrafico->setWindowTitle(QApplication::translate("DialogSelectGrafico", "Tipo de gr\303\241fico", nullptr));
+        groupBox->setTitle(QApplication::translate("DialogSelectGrafico", "Tipo de gr\303\241fico", nullptr));
+        rbtLinear->setText(QApplication::translate("DialogSelectGrafico", "Linear por fecha", nullptr));
+        rbtRelacionNivelVolumen->setText(QApplication::translate("DialogSelectGrafico", "Relaci\303\263n Nivel - Volumen", nullptr));
+        rbtRelacionVolumenPorcentaje->setText(QApplication::translate("DialogSelectGrafico", "Relaci\303\263n Volumen - Porcentaje", nullptr));
     } // retranslateUi
 
 };
@@ -91,4 +98,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_SELECT_2D_TIPO_2D_GRAFICOIKJWPD_H
+#endif // DLG_SELECT_2D_TIPO_2D_GRAFICOBNKOMB_H
