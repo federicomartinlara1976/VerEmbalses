@@ -4,10 +4,12 @@
 #include <QtPrintSupport/QPrinter>
 #include <QtPrintSupport/QPrintDialog>
 #include <QtGui/QPainter>
+#include <iostream>
 
 using namespace std;
 
-DlgShowScatterGraphic::DlgShowScatterGraphic(QWidget* parent) : QtDialogWindow(parent) {
+DlgShowScatterGraphic::DlgShowScatterGraphic(Constants::GraphType &graphType, QWidget* parent) : QtDialogWindow(parent) {
+    this->graphType = graphType;
     this->initWindow();
 }
 
@@ -45,7 +47,7 @@ void DlgShowScatterGraphic::print() {
 void DlgShowScatterGraphic::setData(const FuncionesUi::Dataframe& df) {
     this->df = df;
 
-    auto columns = this->df.get_columns_info<double, string>();
+    //auto columns = this->df.get_columns_info<double, string>();
 
     drawGraphic();
 }
@@ -55,8 +57,15 @@ void DlgShowScatterGraphic::drawGraphic() {
         chartView->chart()->removeAllSeries();
     }
 
-    GraphicContext graphicContext(std::make_unique<GraficoEnNubePuntos>(df));
-    chartView->setChart(graphicContext.getGraphic());
+    if (graphType == Constants::GraphType::RELACION_NIVEL_VOLUMEN) {
+        GraphicContext graphicContext1(std::make_unique<GraficoEnNubePuntosNivelVolumen>(df));
+        chartView->setChart(graphicContext1.getGraphic());
+    }
+    else {
+        GraphicContext graphicContext2(std::make_unique<GraficoEnNubePuntosVolumenPorcentaje>(df));
+        chartView->setChart(graphicContext2.getGraphic());
+    }
+    
     chartView->repaint();
 }
 

@@ -33,7 +33,7 @@ void DlgShowLineGraphic::onAccept() {}
 void DlgShowLineGraphic::setData(const FuncionesUi::Dataframe& df) {
     this->df = df;
     
-    auto columns = this->df.get_columns_info<double, string>();
+    //auto columns = this->df.get_columns_info<double, string>();
     
     populateDatoY("Fecha");
     

@@ -4,6 +4,7 @@
 #include "dlg_showsimplegraphic.h"
 #include "funciones_ui.hpp"
 #include "VerEmbalsesAppHelper.hpp"
+#include "constants.hpp"
 
 #include "qtdialogwindow.hpp"
 #include <QObject>
@@ -21,6 +22,8 @@ private:
     AppHelper appHelper;
 
     FuncionesUi::Dataframe df;
+    
+    Constants::GraphType graphType;
 
     void drawGraphic();
 
@@ -35,7 +38,7 @@ protected:
     void onAccept() override;
 
 public:
-    DlgShowScatterGraphic(QWidget* parent = nullptr);
+    DlgShowScatterGraphic(Constants::GraphType &graphType, QWidget* parent = nullptr);
 
     void setData(const FuncionesUi::Dataframe& df);
 

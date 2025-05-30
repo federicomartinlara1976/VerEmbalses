@@ -18,7 +18,7 @@ public:
 class GraphicStrategy {
 public:
     virtual ~GraphicStrategy() = default;
-    virtual QChart* getGraphic() const = 0;
+    virtual QChart* getGraphic() = 0;
 };
 
 class GraphicContext {

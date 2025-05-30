@@ -21,7 +21,7 @@ private:
 
 public:
     GraficoEnSectores(Dataframe &df);
-    QChart* getGraphic() const override { return graphic; }
+    QChart* getGraphic() override { return graphic; }
 };
 
 #endif

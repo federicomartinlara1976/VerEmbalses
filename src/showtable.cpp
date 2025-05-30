@@ -156,10 +156,9 @@ void DlgShowTable::showGraphicClicked() {
                 dlgShowGraphic->setData(dataframe);
                 dlgShowGraphic->mostrar(true);
             }
-
-            if (graphType == Constants::GraphType::RELACION_NIVEL_VOLUMEN) {
-                unique_ptr<DlgShowScatterGraphic> dlgShowGraphic = unique_ptr<DlgShowScatterGraphic>{new DlgShowScatterGraphic(this)};
-
+            else {
+                unique_ptr<DlgShowScatterGraphic> dlgShowGraphic = unique_ptr<DlgShowScatterGraphic>{new DlgShowScatterGraphic(graphType, this)};
+                
                 dlgShowGraphic->setData(dataframe);
                 dlgShowGraphic->mostrar(true);
             }
