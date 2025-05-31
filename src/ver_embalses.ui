@@ -42,7 +42,7 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabEmbalses">
        <attribute name="title">
@@ -220,8 +220,15 @@
            <layout class="QHBoxLayout" name="horizontalLayout_6">
             <item>
              <widget class="QPushButton" name="btnVerEmbalses">
+              <property name="toolTip">
+               <string>Ver embalses</string>
+              </property>
               <property name="text">
                <string/>
+              </property>
+              <property name="icon">
+               <iconset theme="applications-graphics">
+                <normaloff>.</normaloff>.</iconset>
               </property>
              </widget>
             </item>
@@ -983,11 +990,18 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="toolTip">
+               <string>Ver gráfico</string>
+              </property>
               <property name="layoutDirection">
                <enum>Qt::LeftToRight</enum>
               </property>
               <property name="text">
                <string/>
+              </property>
+              <property name="icon">
+               <iconset theme="applications-graphics">
+                <normaloff>.</normaloff>.</iconset>
               </property>
              </widget>
             </item>
@@ -999,8 +1013,15 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="toolTip">
+               <string>Exportar a CSV</string>
+              </property>
               <property name="text">
                <string/>
+              </property>
+              <property name="icon">
+               <iconset theme="document-save">
+                <normaloff>.</normaloff>.</iconset>
               </property>
              </widget>
             </item>

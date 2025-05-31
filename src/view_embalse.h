@@ -1,15 +1,16 @@
 /********************************************************************************
-** Form generated from reading UI file 'ver_embalsesPozMlb.ui'
+** Form generated from reading UI file 'ver_embalsesbevHaK.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef VER_EMBALSESPOZMLB_H
-#define VER_EMBALSESPOZMLB_H
+#ifndef VER_EMBALSESBEVHAK_H
+#define VER_EMBALSESBEVHAK_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
@@ -227,6 +228,14 @@ public:
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         btnVerEmbalses = new QPushButton(tabEmbalses);
         btnVerEmbalses->setObjectName(QString::fromUtf8("btnVerEmbalses"));
+        QIcon icon;
+        QString iconThemeName = QString::fromUtf8("applications-graphics");
+        if (QIcon::hasThemeIcon(iconThemeName)) {
+            icon = QIcon::fromTheme(iconThemeName);
+        } else {
+            icon.addFile(QString::fromUtf8("."), QSize(), QIcon::Normal, QIcon::Off);
+        }
+        btnVerEmbalses->setIcon(icon);
 
         horizontalLayout_6->addWidget(btnVerEmbalses);
 
@@ -564,6 +573,7 @@ public:
         sizePolicy3.setHeightForWidth(btnVerGrafico->sizePolicy().hasHeightForWidth());
         btnVerGrafico->setSizePolicy(sizePolicy3);
         btnVerGrafico->setLayoutDirection(Qt::LeftToRight);
+        btnVerGrafico->setIcon(icon);
 
         verticalLayout_11->addWidget(btnVerGrafico);
 
@@ -571,6 +581,14 @@ public:
         btnExportarCSV->setObjectName(QString::fromUtf8("btnExportarCSV"));
         sizePolicy3.setHeightForWidth(btnExportarCSV->sizePolicy().hasHeightForWidth());
         btnExportarCSV->setSizePolicy(sizePolicy3);
+        QIcon icon1;
+        iconThemeName = QString::fromUtf8("document-save");
+        if (QIcon::hasThemeIcon(iconThemeName)) {
+            icon1 = QIcon::fromTheme(iconThemeName);
+        } else {
+            icon1.addFile(QString::fromUtf8("."), QSize(), QIcon::Normal, QIcon::Off);
+        }
+        btnExportarCSV->setIcon(icon1);
 
         verticalLayout_11->addWidget(btnExportarCSV);
 
@@ -672,7 +690,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -691,6 +709,9 @@ public:
         label_4->setText(QApplication::translate("MainWindow", "Embalses", nullptr));
         label_10->setText(QApplication::translate("MainWindow", "Estad\303\255sticas por zona", nullptr));
         lblZona->setText(QApplication::translate("MainWindow", "--", nullptr));
+#ifndef QT_NO_TOOLTIP
+        btnVerEmbalses->setToolTip(QApplication::translate("MainWindow", "Ver embalses", nullptr));
+#endif // QT_NO_TOOLTIP
         btnVerEmbalses->setText(QString());
         label_5->setText(QApplication::translate("MainWindow", "Niveles (Hm3)", nullptr));
         label_7->setText(QApplication::translate("MainWindow", "Media", nullptr));
@@ -719,7 +740,13 @@ public:
         lblVolumen->setText(QString());
         label_23->setText(QApplication::translate("MainWindow", "Porcentaje %", nullptr));
         lblPercent->setText(QString());
+#ifndef QT_NO_TOOLTIP
+        btnVerGrafico->setToolTip(QApplication::translate("MainWindow", "Ver gr\303\241fico", nullptr));
+#endif // QT_NO_TOOLTIP
         btnVerGrafico->setText(QString());
+#ifndef QT_NO_TOOLTIP
+        btnExportarCSV->setToolTip(QApplication::translate("MainWindow", "Exportar a CSV", nullptr));
+#endif // QT_NO_TOOLTIP
         btnExportarCSV->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tabEmbalses), QApplication::translate("MainWindow", "Embalses", nullptr));
         label_2->setText(QApplication::translate("MainWindow", "Zona", nullptr));
@@ -736,4 +763,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // VER_EMBALSESPOZMLB_H
+#endif // VER_EMBALSESBEVHAK_H

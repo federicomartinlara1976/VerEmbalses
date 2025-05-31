@@ -33,6 +33,7 @@
        <property name="font">
         <font>
          <pointsize>12</pointsize>
+         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -62,6 +63,7 @@
         <widget class="QGroupBox" name="capacidadContainer">
          <property name="font">
           <font>
+           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -77,6 +79,7 @@
             <property name="font">
              <font>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -95,6 +98,7 @@
         <widget class="QGroupBox" name="menContainer">
          <property name="font">
           <font>
+           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -107,6 +111,7 @@
             <property name="font">
              <font>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -154,6 +159,7 @@
            <property name="font">
             <font>
              <pointsize>12</pointsize>
+             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -184,6 +190,7 @@
            <property name="font">
             <font>
              <pointsize>12</pointsize>
+             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -221,6 +228,9 @@
          <property name="text">
           <string>...</string>
          </property>
+         <property name="icon">
+          <iconset theme="document-save"/>
+         </property>
         </widget>
        </item>
        <item>
@@ -230,6 +240,9 @@
          </property>
          <property name="text">
           <string>...</string>
+         </property>
+         <property name="icon">
+          <iconset theme="applications-graphics"/>
          </property>
         </widget>
        </item>

@@ -40,13 +40,6 @@ void DlgShowTable::connectEvents() {
 }
 
 void DlgShowTable::delayedInitialization() {
-    QIcon icon;
-    icon.addFile(QString::fromUtf8("/usr/share/icons/gnome/22x22/apps/ksysguard.png"), QSize(), QIcon::Normal, QIcon::Off);
-    btnExportarCSV->setIcon(icon);
-
-    QIcon icon1;
-    icon1.addFile(QString::fromUtf8("/usr/share/icons/Humanity/categories/22/redhat-office.svg"), QSize(), QIcon::Normal, QIcon::Off);
-    btnVerGrafico->setIcon(icon1);
 
     if (tableType == Constants::EMBALSE) {
         setCodEmbalse(codEmbalse);

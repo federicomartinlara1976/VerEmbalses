@@ -35,24 +35,6 @@ void VerEmbalses::connectEvents() {
 
 void VerEmbalses::delayedInitialization() {
     try {
-        QIcon icon;
-        icon.addFile(QString::fromUtf8("/usr/share/icons/gnome/22x22/apps/ksysguard.png"), QSize(), QIcon::Normal, QIcon::Off);
-        btnExportarCSV->setIcon(icon);
-
-        btnVerGrafico->setObjectName(QString::fromUtf8("btnVerGrafico"));
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8("/usr/share/icons/Humanity/categories/22/redhat-office.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        btnVerGrafico->setIcon(icon1);
-
-        btnVerEmbalses->setObjectName(QString::fromUtf8("btnVerEmbalses"));
-        QIcon icon2;
-        icon2.addFile(QString::fromUtf8("/usr/share/icons/gnome/22x22/mimetypes/x-office-spreadsheet.png"), QSize(), QIcon::Normal, QIcon::Off);
-        btnVerEmbalses->setIcon(icon2);
-
-        btnExportarCSV->setToolTip(QApplication::translate("Dialog", "Exportar a CSV", nullptr));
-        btnVerGrafico->setToolTip(QApplication::translate("Dialog", "Ver gr\303\241fico", nullptr));
-        btnVerEmbalses->setToolTip(QApplication::translate("Dialog", "Ver embalses", nullptr));
-
         AppContext& context = AppContext::getInstance();
         string lastExecution = context.getLastExecution();
 

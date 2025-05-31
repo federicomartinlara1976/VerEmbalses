@@ -1,15 +1,16 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg-show-tablePAImmi.ui'
+** Form generated from reading UI file 'dlg-show-tableDlQJhD.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.13
+** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_2D_SHOW_2D_TABLEPAIMMI_H
-#define DLG_2D_SHOW_2D_TABLEPAIMMI_H
+#ifndef DLG_2D_SHOW_2D_TABLEDLQJHD_H
+#define DLG_2D_SHOW_2D_TABLEDLQJHD_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
@@ -66,6 +67,7 @@ public:
         QFont font;
         font.setPointSize(12);
         font.setBold(true);
+        font.setWeight(75);
         lblTituloTabla->setFont(font);
         lblTituloTabla->setAlignment(Qt::AlignCenter);
 
@@ -78,6 +80,7 @@ public:
         capacidadContainer->setObjectName(QString::fromUtf8("capacidadContainer"));
         QFont font1;
         font1.setBold(true);
+        font1.setWeight(75);
         capacidadContainer->setFont(font1);
         capacidadContainer->setFlat(false);
         _2 = new QVBoxLayout(capacidadContainer);
@@ -157,11 +160,27 @@ public:
         horizontalLayout_3->setContentsMargins(10, 10, 10, 10);
         btnExportarCSV = new QToolButton(DialogShowTable);
         btnExportarCSV->setObjectName(QString::fromUtf8("btnExportarCSV"));
+        QIcon icon;
+        QString iconThemeName = QString::fromUtf8("document-save");
+        if (QIcon::hasThemeIcon(iconThemeName)) {
+            icon = QIcon::fromTheme(iconThemeName);
+        } else {
+            icon.addFile(QString::fromUtf8("."), QSize(), QIcon::Normal, QIcon::Off);
+        }
+        btnExportarCSV->setIcon(icon);
 
         horizontalLayout_3->addWidget(btnExportarCSV);
 
         btnVerGrafico = new QToolButton(DialogShowTable);
         btnVerGrafico->setObjectName(QString::fromUtf8("btnVerGrafico"));
+        QIcon icon1;
+        iconThemeName = QString::fromUtf8("applications-graphics");
+        if (QIcon::hasThemeIcon(iconThemeName)) {
+            icon1 = QIcon::fromTheme(iconThemeName);
+        } else {
+            icon1.addFile(QString::fromUtf8("."), QSize(), QIcon::Normal, QIcon::Off);
+        }
+        btnVerGrafico->setIcon(icon1);
 
         horizontalLayout_3->addWidget(btnVerGrafico);
 
@@ -197,24 +216,24 @@ public:
 
     void retranslateUi(QDialog *DialogShowTable)
     {
-        DialogShowTable->setWindowTitle(QCoreApplication::translate("DialogShowTable", "Datos por fecha", nullptr));
-        lblTituloTabla->setText(QCoreApplication::translate("DialogShowTable", "TextLabel", nullptr));
-        capacidadContainer->setTitle(QCoreApplication::translate("DialogShowTable", "Capacidad (Hm3)", nullptr));
-        lblCapacidad->setText(QCoreApplication::translate("DialogShowTable", "--", nullptr));
-        menContainer->setTitle(QCoreApplication::translate("DialogShowTable", "MEN (m.s.n.m.)", nullptr));
-        lblMen->setText(QCoreApplication::translate("DialogShowTable", "--", nullptr));
-        label->setText(QCoreApplication::translate("DialogShowTable", "Desde", nullptr));
-        lblDesde->setText(QCoreApplication::translate("DialogShowTable", "--", nullptr));
-        label_2->setText(QCoreApplication::translate("DialogShowTable", "Hasta", nullptr));
-        lblHasta->setText(QCoreApplication::translate("DialogShowTable", "--", nullptr));
-#if QT_CONFIG(tooltip)
-        btnExportarCSV->setToolTip(QCoreApplication::translate("DialogShowTable", "Exportar a CSV", nullptr));
-#endif // QT_CONFIG(tooltip)
-        btnExportarCSV->setText(QCoreApplication::translate("DialogShowTable", "...", nullptr));
-#if QT_CONFIG(tooltip)
-        btnVerGrafico->setToolTip(QCoreApplication::translate("DialogShowTable", "Ver gr\303\241fico", nullptr));
-#endif // QT_CONFIG(tooltip)
-        btnVerGrafico->setText(QCoreApplication::translate("DialogShowTable", "...", nullptr));
+        DialogShowTable->setWindowTitle(QApplication::translate("DialogShowTable", "Datos por fecha", nullptr));
+        lblTituloTabla->setText(QApplication::translate("DialogShowTable", "TextLabel", nullptr));
+        capacidadContainer->setTitle(QApplication::translate("DialogShowTable", "Capacidad (Hm3)", nullptr));
+        lblCapacidad->setText(QApplication::translate("DialogShowTable", "--", nullptr));
+        menContainer->setTitle(QApplication::translate("DialogShowTable", "MEN (m.s.n.m.)", nullptr));
+        lblMen->setText(QApplication::translate("DialogShowTable", "--", nullptr));
+        label->setText(QApplication::translate("DialogShowTable", "Desde", nullptr));
+        lblDesde->setText(QApplication::translate("DialogShowTable", "--", nullptr));
+        label_2->setText(QApplication::translate("DialogShowTable", "Hasta", nullptr));
+        lblHasta->setText(QApplication::translate("DialogShowTable", "--", nullptr));
+#ifndef QT_NO_TOOLTIP
+        btnExportarCSV->setToolTip(QApplication::translate("DialogShowTable", "Exportar a CSV", nullptr));
+#endif // QT_NO_TOOLTIP
+        btnExportarCSV->setText(QApplication::translate("DialogShowTable", "...", nullptr));
+#ifndef QT_NO_TOOLTIP
+        btnVerGrafico->setToolTip(QApplication::translate("DialogShowTable", "Ver gr\303\241fico", nullptr));
+#endif // QT_NO_TOOLTIP
+        btnVerGrafico->setText(QApplication::translate("DialogShowTable", "...", nullptr));
     } // retranslateUi
 
 };
@@ -225,4 +244,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_2D_SHOW_2D_TABLEPAIMMI_H
+#endif // DLG_2D_SHOW_2D_TABLEDLQJHD_H
