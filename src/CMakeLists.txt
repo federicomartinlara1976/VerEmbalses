@@ -44,7 +44,7 @@ target_link_libraries(verembalses
     NumCpp::NumCpp
     DataFrame::DataFrame
     yaml-cpp::yaml-cpp
-    "fmt"
+    fmt::fmt
     "common"
     "mongocxx"
     "bsoncxx"
