@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg_select-tipo-graficobnkomB.ui'
+** Form generated from reading UI file 'dlg_select-tipo-graficoBbRgou.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_SELECT_2D_TIPO_2D_GRAFICOBNKOMB_H
-#define DLG_SELECT_2D_TIPO_2D_GRAFICOBNKOMB_H
+#ifndef DLG_SELECT_2D_TIPO_2D_GRAFICOBBRGOU_H
+#define DLG_SELECT_2D_TIPO_2D_GRAFICOBBRGOU_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -28,6 +28,7 @@ public:
     QVBoxLayout *verticalLayout_3;
     QRadioButton *rbtLinear;
     QRadioButton *rbtRelacionNivelVolumen;
+    QRadioButton *rbtRelacionNivelPorcentaje;
     QRadioButton *rbtRelacionVolumenPorcentaje;
     QDialogButtonBox *buttonBox;
 
@@ -54,6 +55,11 @@ public:
         rbtRelacionNivelVolumen->setObjectName(QString::fromUtf8("rbtRelacionNivelVolumen"));
 
         verticalLayout_3->addWidget(rbtRelacionNivelVolumen);
+
+        rbtRelacionNivelPorcentaje = new QRadioButton(groupBox);
+        rbtRelacionNivelPorcentaje->setObjectName(QString::fromUtf8("rbtRelacionNivelPorcentaje"));
+
+        verticalLayout_3->addWidget(rbtRelacionNivelPorcentaje);
 
         rbtRelacionVolumenPorcentaje = new QRadioButton(groupBox);
         rbtRelacionVolumenPorcentaje->setObjectName(QString::fromUtf8("rbtRelacionVolumenPorcentaje"));
@@ -87,6 +93,7 @@ public:
         groupBox->setTitle(QApplication::translate("DialogSelectGrafico", "Tipo de gr\303\241fico", nullptr));
         rbtLinear->setText(QApplication::translate("DialogSelectGrafico", "Linear por fecha", nullptr));
         rbtRelacionNivelVolumen->setText(QApplication::translate("DialogSelectGrafico", "Relaci\303\263n Nivel - Volumen", nullptr));
+        rbtRelacionNivelPorcentaje->setText(QApplication::translate("DialogSelectGrafico", "Relaci\303\263n Nivel - Porcentaje", nullptr));
         rbtRelacionVolumenPorcentaje->setText(QApplication::translate("DialogSelectGrafico", "Relaci\303\263n Volumen - Porcentaje", nullptr));
     } // retranslateUi
 
@@ -98,4 +105,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_SELECT_2D_TIPO_2D_GRAFICOBNKOMB_H
+#endif // DLG_SELECT_2D_TIPO_2D_GRAFICOBBRGOU_H

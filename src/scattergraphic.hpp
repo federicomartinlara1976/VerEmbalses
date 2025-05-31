@@ -37,6 +37,12 @@ public:
     GraficoEnNubePuntosNivelVolumen(Dataframe &df);
 };
 
+class GraficoEnNubePuntosNivelPorcentaje : public GraficoEnNubePuntos {
+private:
+public:
+    GraficoEnNubePuntosNivelPorcentaje(Dataframe &df);
+};
+
 class GraficoEnNubePuntosVolumenPorcentaje : public GraficoEnNubePuntos {
 private:
 public:

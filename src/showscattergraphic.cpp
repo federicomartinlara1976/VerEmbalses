@@ -61,7 +61,11 @@ void DlgShowScatterGraphic::drawGraphic() {
         GraphicContext graphicContext1(std::make_unique<GraficoEnNubePuntosNivelVolumen>(df));
         chartView->setChart(graphicContext1.getGraphic());
     }
-    else {
+    if (graphType == Constants::GraphType::RELACION_NIVEL_PORCENTAJE) {
+        GraphicContext graphicContext1(std::make_unique<GraficoEnNubePuntosNivelPorcentaje>(df));
+        chartView->setChart(graphicContext1.getGraphic());
+    }
+    if (graphType == Constants::GraphType::RELACION_VOLUMEN_PORCENTAJE) {
         GraphicContext graphicContext2(std::make_unique<GraficoEnNubePuntosVolumenPorcentaje>(df));
         chartView->setChart(graphicContext2.getGraphic());
     }

@@ -23,6 +23,10 @@ void DlgSelectTipoGrafico::onAccept() {
         graphType = Constants::GraphType::RELACION_NIVEL_VOLUMEN;
     }
     
+    if (this->rbtRelacionNivelPorcentaje->isChecked()) {
+        graphType = Constants::GraphType::RELACION_NIVEL_PORCENTAJE;
+    }
+    
     if (this->rbtRelacionVolumenPorcentaje->isChecked()) {
         graphType = Constants::GraphType::RELACION_VOLUMEN_PORCENTAJE;
     }

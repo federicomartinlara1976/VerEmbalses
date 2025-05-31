@@ -50,6 +50,26 @@ GraficoEnNubePuntosNivelVolumen::GraficoEnNubePuntosNivelVolumen(Dataframe &df) 
     series->attachAxis(axisY);
 }
 
+GraficoEnNubePuntosNivelPorcentaje::GraficoEnNubePuntosNivelPorcentaje(Dataframe &df) : GraficoEnNubePuntos(df) {
+    vector<double> niveles = df.get_column<double>("Nivel");
+    vector<double> porcentajes = df.get_column<double>("Porcentaje");
+    
+    int i = 0;
+    for (double nivel : niveles) {
+        double porcentaje = porcentajes[i];
+        series->append(nivel, porcentaje);
+        i++;
+    }
+    
+    graphic->addSeries(series);
+    
+    axisX->setTitleText("Nivel");
+    series->attachAxis(axisX);
+    
+    axisY->setTitleText("Porcentaje");
+    series->attachAxis(axisY);
+}
+
 GraficoEnNubePuntosVolumenPorcentaje::GraficoEnNubePuntosVolumenPorcentaje(Dataframe &df) : GraficoEnNubePuntos(df) {
     vector<double> volumenes = df.get_column<double>("Volumen");
     vector<double> porcentajes = df.get_column<double>("Porcentaje");

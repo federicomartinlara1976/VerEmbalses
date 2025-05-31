@@ -28,6 +28,7 @@ namespace Constants {
     enum GraphType {
         LINEAR,
         RELACION_NIVEL_VOLUMEN,
+        RELACION_NIVEL_PORCENTAJE,
         RELACION_VOLUMEN_PORCENTAJE
     };
 }
