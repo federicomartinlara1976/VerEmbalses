@@ -1,10 +1,6 @@
 #include "scattergraphic.hpp"
 
-#include <spdlog/spdlog.h>
-
 GraficoEnNubePuntos::GraficoEnNubePuntos(Dataframe &df) {
-    spdlog::info("GraficoEnNubePuntos");
-    
     this->df = df;
 
     series = new QScatterSeries();
@@ -35,8 +31,6 @@ QChart* GraficoEnNubePuntos::getGraphic() {
 }
 
 GraficoEnNubePuntosNivelVolumen::GraficoEnNubePuntosNivelVolumen(Dataframe &df) : GraficoEnNubePuntos(df) {
-    spdlog::info("GraficoEnNubePuntosNivelVolumen");
-    
     vector<double> niveles = df.get_column<double>("Nivel");
     vector<double> volumenes = df.get_column<double>("Volumen");
     
@@ -57,8 +51,6 @@ GraficoEnNubePuntosNivelVolumen::GraficoEnNubePuntosNivelVolumen(Dataframe &df) 
 }
 
 GraficoEnNubePuntosVolumenPorcentaje::GraficoEnNubePuntosVolumenPorcentaje(Dataframe &df) : GraficoEnNubePuntos(df) {
-    spdlog::info("GraficoEnNubePuntosVolumenPorcentaje");
-    
     vector<double> volumenes = df.get_column<double>("Volumen");
     vector<double> porcentajes = df.get_column<double>("Porcentaje");
     
