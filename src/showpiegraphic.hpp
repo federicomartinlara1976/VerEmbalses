@@ -1,7 +1,7 @@
 #ifndef _DLG_SHOWPIEGRAPHIC_HPP_
 #define _DLG_SHOWPIEGRAPHIC_HPP_
 
-#include "dlg_showembalsesgraphic.h"
+#include "ui_dlg-show-embalses-graphic.h"
 #include "funciones_ui.hpp"
 #include "VerEmbalsesAppHelper.hpp"
 

@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg-show-embalses-graphicfyYUry.ui'
+** Form generated from reading UI file 'dlg-show-embalses-graphicBsPOIk.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.13
+** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_2D_SHOW_2D_EMBALSES_2D_GRAPHICFYYURY_H
-#define DLG_2D_SHOW_2D_EMBALSES_2D_GRAPHICFYYURY_H
+#ifndef DLG_2D_SHOW_2D_EMBALSES_2D_GRAPHICBSPOIK_H
+#define DLG_2D_SHOW_2D_EMBALSES_2D_GRAPHICBSPOIK_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -90,7 +90,13 @@ public:
 
         btnClose = new QPushButton(DialogShowEmbalsesGraphic);
         btnClose->setObjectName(QString::fromUtf8("btnClose"));
-        QIcon icon1(QIcon::fromTheme(QString::fromUtf8("window-close")));
+        QIcon icon1;
+        iconThemeName = QString::fromUtf8("window-close");
+        if (QIcon::hasThemeIcon(iconThemeName)) {
+            icon1 = QIcon::fromTheme(iconThemeName);
+        } else {
+            icon1.addFile(QString::fromUtf8("."), QSize(), QIcon::Normal, QIcon::Off);
+        }
         btnClose->setIcon(icon1);
 
         horizontalLayout_2->addWidget(btnClose);
@@ -114,17 +120,17 @@ public:
 
     void retranslateUi(QDialog *DialogShowEmbalsesGraphic)
     {
-        DialogShowEmbalsesGraphic->setWindowTitle(QCoreApplication::translate("DialogShowEmbalsesGraphic", "Mostrar gr\303\241fico", nullptr));
-        groupBox_2->setTitle(QCoreApplication::translate("DialogShowEmbalsesGraphic", "Tipo de gr\303\241fico", nullptr));
-        rbtGlobal->setText(QCoreApplication::translate("DialogShowEmbalsesGraphic", "Global", nullptr));
-        rbtDetalles->setText(QCoreApplication::translate("DialogShowEmbalsesGraphic", "Detalles", nullptr));
-#if QT_CONFIG(tooltip)
-        btnPrint->setToolTip(QCoreApplication::translate("DialogShowEmbalsesGraphic", "Imprimir", nullptr));
-#endif // QT_CONFIG(tooltip)
+        DialogShowEmbalsesGraphic->setWindowTitle(QApplication::translate("DialogShowEmbalsesGraphic", "Mostrar gr\303\241fico", nullptr));
+        groupBox_2->setTitle(QApplication::translate("DialogShowEmbalsesGraphic", "Tipo de gr\303\241fico", nullptr));
+        rbtGlobal->setText(QApplication::translate("DialogShowEmbalsesGraphic", "Global", nullptr));
+        rbtDetalles->setText(QApplication::translate("DialogShowEmbalsesGraphic", "Detalles", nullptr));
+#ifndef QT_NO_TOOLTIP
+        btnPrint->setToolTip(QApplication::translate("DialogShowEmbalsesGraphic", "Imprimir", nullptr));
+#endif // QT_NO_TOOLTIP
         btnPrint->setText(QString());
-#if QT_CONFIG(tooltip)
-        btnClose->setToolTip(QCoreApplication::translate("DialogShowEmbalsesGraphic", "Cerrar", nullptr));
-#endif // QT_CONFIG(tooltip)
+#ifndef QT_NO_TOOLTIP
+        btnClose->setToolTip(QApplication::translate("DialogShowEmbalsesGraphic", "Cerrar", nullptr));
+#endif // QT_NO_TOOLTIP
         btnClose->setText(QString());
     } // retranslateUi
 
@@ -136,4 +142,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_2D_SHOW_2D_EMBALSES_2D_GRAPHICFYYURY_H
+#endif // DLG_2D_SHOW_2D_EMBALSES_2D_GRAPHICBSPOIK_H

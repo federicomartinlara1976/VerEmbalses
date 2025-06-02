@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg-show-tableDlQJhD.ui'
+** Form generated from reading UI file 'dlg-show-tableCjwmpj.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_2D_SHOW_2D_TABLEDLQJHD_H
-#define DLG_2D_SHOW_2D_TABLEDLQJHD_H
+#ifndef DLG_2D_SHOW_2D_TABLECJWMPJ_H
+#define DLG_2D_SHOW_2D_TABLECJWMPJ_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -244,4 +244,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_2D_SHOW_2D_TABLEDLQJHD_H
+#endif // DLG_2D_SHOW_2D_TABLECJWMPJ_H

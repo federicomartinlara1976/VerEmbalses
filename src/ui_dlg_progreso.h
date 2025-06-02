@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg_progresoyEahoN.ui'
+** Form generated from reading UI file 'dlg_progresovUHlde.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.13
+** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_PROGRESOYEAHON_H
-#define DLG_PROGRESOYEAHON_H
+#ifndef DLG_PROGRESOVUHLDE_H
+#define DLG_PROGRESOVUHLDE_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -46,6 +46,7 @@ public:
         QFont font;
         font.setBold(false);
         font.setUnderline(false);
+        font.setWeight(50);
         progressBar->setFont(font);
         progressBar->setValue(41);
 
@@ -56,6 +57,7 @@ public:
         QFont font1;
         font1.setPointSize(11);
         font1.setBold(true);
+        font1.setWeight(75);
         lblEstado->setFont(font1);
         lblEstado->setAlignment(Qt::AlignCenter);
 
@@ -78,8 +80,8 @@ public:
 
     void retranslateUi(QDialog *DialogProgreso)
     {
-        DialogProgreso->setWindowTitle(QCoreApplication::translate("DialogProgreso", "Dialog", nullptr));
-        lblEstado->setText(QCoreApplication::translate("DialogProgreso", "--", nullptr));
+        DialogProgreso->setWindowTitle(QApplication::translate("DialogProgreso", "Dialog", nullptr));
+        lblEstado->setText(QApplication::translate("DialogProgreso", "--", nullptr));
     } // retranslateUi
 
 };
@@ -90,4 +92,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_PROGRESOYEAHON_H
+#endif // DLG_PROGRESOVUHLDE_H

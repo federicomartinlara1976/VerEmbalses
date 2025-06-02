@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg-select-fechaLDyPWg.ui'
+** Form generated from reading UI file 'dlg-select-fechaWXVaNJ.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.13
+** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_2D_SELECT_2D_FECHALDYPWG_H
-#define DLG_2D_SELECT_2D_FECHALDYPWG_H
+#ifndef DLG_2D_SELECT_2D_FECHAWXVANJ_H
+#define DLG_2D_SELECT_2D_FECHAWXVANJ_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -141,11 +141,11 @@ public:
 
     void retranslateUi(QDialog *DialogSelectFecha)
     {
-        DialogSelectFecha->setWindowTitle(QCoreApplication::translate("DialogSelectFecha", "Seleccionar rango de fechas", nullptr));
-        lblZona->setText(QCoreApplication::translate("DialogSelectFecha", "Zona", nullptr));
-        lblEmbalse->setText(QCoreApplication::translate("DialogSelectFecha", "Embalse", nullptr));
-        label->setText(QCoreApplication::translate("DialogSelectFecha", "Desde:", nullptr));
-        label_2->setText(QCoreApplication::translate("DialogSelectFecha", "Hasta:", nullptr));
+        DialogSelectFecha->setWindowTitle(QApplication::translate("DialogSelectFecha", "Seleccionar rango de fechas", nullptr));
+        lblZona->setText(QApplication::translate("DialogSelectFecha", "Zona", nullptr));
+        lblEmbalse->setText(QApplication::translate("DialogSelectFecha", "Embalse", nullptr));
+        label->setText(QApplication::translate("DialogSelectFecha", "Desde:", nullptr));
+        label_2->setText(QApplication::translate("DialogSelectFecha", "Hasta:", nullptr));
     } // retranslateUi
 
 };
@@ -156,4 +156,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_2D_SELECT_2D_FECHALDYPWG_H
+#endif // DLG_2D_SELECT_2D_FECHAWXVANJ_H

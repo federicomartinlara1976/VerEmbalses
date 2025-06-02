@@ -1,7 +1,7 @@
 #ifndef _DLG_PROGRESO_HPP_
 #define _DLG_PROGRESO_HPP_
 
-#include "dlg_progreso.h"
+#include "ui_dlg_progreso.h"
 #include "funciones_ui.hpp"
 #include "VerEmbalsesAppHelper.hpp"
 

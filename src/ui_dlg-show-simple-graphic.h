@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg-show-simple-graphicZmnWDG.ui'
+** Form generated from reading UI file 'dlg-show-simple-graphicIsFVpV.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.13
+** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICZMNWDG_H
-#define DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICZMNWDG_H
+#ifndef DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICISFVPV_H
+#define DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICISFVPV_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -66,7 +66,13 @@ public:
 
         btnClose = new QPushButton(DialogShowSimpleGraphic);
         btnClose->setObjectName(QString::fromUtf8("btnClose"));
-        QIcon icon1(QIcon::fromTheme(QString::fromUtf8("window-close")));
+        QIcon icon1;
+        iconThemeName = QString::fromUtf8("window-close");
+        if (QIcon::hasThemeIcon(iconThemeName)) {
+            icon1 = QIcon::fromTheme(iconThemeName);
+        } else {
+            icon1.addFile(QString::fromUtf8("."), QSize(), QIcon::Normal, QIcon::Off);
+        }
         btnClose->setIcon(icon1);
 
         horizontalLayout->addWidget(btnClose);
@@ -90,14 +96,14 @@ public:
 
     void retranslateUi(QDialog *DialogShowSimpleGraphic)
     {
-        DialogShowSimpleGraphic->setWindowTitle(QCoreApplication::translate("DialogShowSimpleGraphic", "Mostrar gr\303\241fico", nullptr));
-#if QT_CONFIG(tooltip)
-        btnPrint->setToolTip(QCoreApplication::translate("DialogShowSimpleGraphic", "Imprimir", nullptr));
-#endif // QT_CONFIG(tooltip)
+        DialogShowSimpleGraphic->setWindowTitle(QApplication::translate("DialogShowSimpleGraphic", "Mostrar gr\303\241fico", nullptr));
+#ifndef QT_NO_TOOLTIP
+        btnPrint->setToolTip(QApplication::translate("DialogShowSimpleGraphic", "Imprimir", nullptr));
+#endif // QT_NO_TOOLTIP
         btnPrint->setText(QString());
-#if QT_CONFIG(tooltip)
-        btnClose->setToolTip(QCoreApplication::translate("DialogShowSimpleGraphic", "Cerrar", nullptr));
-#endif // QT_CONFIG(tooltip)
+#ifndef QT_NO_TOOLTIP
+        btnClose->setToolTip(QApplication::translate("DialogShowSimpleGraphic", "Cerrar", nullptr));
+#endif // QT_NO_TOOLTIP
         btnClose->setText(QString());
     } // retranslateUi
 
@@ -109,4 +115,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICZMNWDG_H
+#endif // DLG_2D_SHOW_2D_SIMPLE_2D_GRAPHICISFVPV_H

@@ -1,7 +1,7 @@
 #ifndef _DLG_SHOWTABLE_HPP_
 #define _DLG_SHOWTABLE_HPP_
 
-#include "dlg_showtable.h"
+#include "ui_dlg-show-table.h"
 #include "funciones_ui.hpp"
 #include "VerEmbalsesAppHelper.hpp"
 #include "tablemodel.hpp"

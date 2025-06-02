@@ -1,7 +1,7 @@
 #ifndef _DLG_SHOWLINEGRAPHIC_HPP_
 #define _DLG_SHOWLINEGRAPHIC_HPP_
 
-#include "dlg_showlinegraphic.h"
+#include "ui_dlg-show-line-graphic.h"
 #include "funciones_ui.hpp"
 #include "VerEmbalsesAppHelper.hpp"
 

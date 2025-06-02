@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'dlg_select-tipo-graficoBbRgou.ui'
+** Form generated from reading UI file 'dlg_select-tipo-graficowdOMyq.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef DLG_SELECT_2D_TIPO_2D_GRAFICOBBRGOU_H
-#define DLG_SELECT_2D_TIPO_2D_GRAFICOBBRGOU_H
+#ifndef DLG_SELECT_2D_TIPO_2D_GRAFICOWDOMYQ_H
+#define DLG_SELECT_2D_TIPO_2D_GRAFICOWDOMYQ_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -105,4 +105,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // DLG_SELECT_2D_TIPO_2D_GRAFICOBBRGOU_H
+#endif // DLG_SELECT_2D_TIPO_2D_GRAFICOWDOMYQ_H

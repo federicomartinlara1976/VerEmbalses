@@ -1,7 +1,7 @@
 #ifndef _DLG_SELECTFECHA_HPP_
 #define _DLG_SELECTFECHA_HPP_
 
-#include "dlg_selectfecha.h"
+#include "ui_dlg-select-fecha.h"
 #include "funciones_ui.hpp"
 #include "VerEmbalsesAppHelper.hpp"
 

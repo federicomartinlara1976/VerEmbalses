@@ -1,7 +1,7 @@
 #ifndef _DLG_SELECTTIPOGRAFICO_HPP_
 #define _DLG_SELECTTIPOGRAFICO_HPP_
 
-#include "dlg_selecttipografico.h"
+#include "ui_dlg_select-tipo-grafico.h"
 
 #include "qtdialogwindow.hpp"
 #include "constants.hpp"

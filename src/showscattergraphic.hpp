@@ -1,7 +1,7 @@
 #ifndef _DLG_SHOWSCATTERGRAPHIC_HPP_
 #define _DLG_SHOWSCATTERGRAPHIC_HPP_
 
-#include "dlg_showsimplegraphic.h"
+#include "ui_dlg-show-simple-graphic.h"
 #include "funciones_ui.hpp"
 #include "VerEmbalsesAppHelper.hpp"
 #include "constants.hpp"
