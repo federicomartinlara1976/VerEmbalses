@@ -6,6 +6,8 @@
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QValueAxis>
 
+#include <spdlog/spdlog.h>
+
 GraficoEnBarrasApiladas::GraficoEnBarrasApiladas(Dataframe &df) {
     this->df = df;
 
@@ -58,4 +60,8 @@ GraficoEnBarrasApiladas::GraficoEnBarrasApiladas(Dataframe &df) {
     graphic->legend()->setAlignment(Qt::AlignBottom);
 
     graphic->setDropShadowEnabled(false);
+}
+
+GraficoEnBarrasApiladas::~GraficoEnBarrasApiladas() {
+    spdlog::info("Delete GraficoEnBarrasApiladas");
 }

@@ -13,7 +13,6 @@
 #include <common/types.hpp>
 #include <fmt/core.h>
 
-#include "view_embalse.h"
 #include "dlg_selectfecha.h"
 #include "constants.hpp"
     

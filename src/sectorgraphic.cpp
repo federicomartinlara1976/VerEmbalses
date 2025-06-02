@@ -2,6 +2,8 @@
 
 #include <QtCharts/QPieSeries>
 
+#include <spdlog/spdlog.h>
+
 GraficoEnSectores::GraficoEnSectores(Dataframe &df) {
     this->df = df;
 
@@ -27,5 +29,9 @@ GraficoEnSectores::GraficoEnSectores(Dataframe &df) {
     graphic->legend()->setVisible(true);
     graphic->legend()->setAlignment(Qt::AlignRight);
 
+}
+
+GraficoEnSectores::~GraficoEnSectores() {
+    spdlog::info("Delete GraficoEnSectores");
 }
 

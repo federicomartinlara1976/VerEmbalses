@@ -117,8 +117,16 @@ void VerEmbalses::cmbEmbalsesIndexChanged(int index) {
 
 void VerEmbalses::cmbPuntosControlIndexChanged(int index) {
     string codigoPuntoControl = helper.getStringValue(cmbPuntoControl, index);
-    string collection = "PL-" + plvZona + "-" + codigoPuntoControl;
-    spdlog::info("Punto de control: {}", collection);
+    
+    if (!plvZona.empty()) {
+        // Componer colección de consulta
+        string collection = "PL-" + plvZona + "-" + codigoPuntoControl;
+        spdlog::info("Punto de control: {}", collection);
+        
+        // Consultar
+        
+        // Devolver
+    }
 }
 
 void VerEmbalses::showGraphicClicked() {

@@ -29,24 +29,29 @@ protected:
 public:
     GraficoEnNubePuntos(Dataframe &df);
     QChart* getGraphic() override;
+    
+    ~GraficoEnNubePuntos();
 };
 
 class GraficoEnNubePuntosNivelVolumen : public GraficoEnNubePuntos {
 private:
 public:
     GraficoEnNubePuntosNivelVolumen(Dataframe &df);
+    ~GraficoEnNubePuntosNivelVolumen();
 };
 
 class GraficoEnNubePuntosNivelPorcentaje : public GraficoEnNubePuntos {
 private:
 public:
     GraficoEnNubePuntosNivelPorcentaje(Dataframe &df);
+    ~GraficoEnNubePuntosNivelPorcentaje();
 };
 
 class GraficoEnNubePuntosVolumenPorcentaje : public GraficoEnNubePuntos {
 private:
 public:
     GraficoEnNubePuntosVolumenPorcentaje(Dataframe &df);
+    ~GraficoEnNubePuntosVolumenPorcentaje();
 };
 
 #endif

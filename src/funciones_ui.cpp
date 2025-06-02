@@ -39,7 +39,7 @@ AppContext& AppContext::getInstance() {
 
 void AppContext::destroy(AppContext* instance) {
     if (instance != nullptr) {
-        spdlog::debug("Deleting...");
+        spdlog::info("Deleting...");
         delete instance;
         instance = nullptr;
     }
@@ -47,7 +47,7 @@ void AppContext::destroy(AppContext* instance) {
 
 void AppContext::destroyInstance() {
     if (_instance != nullptr) {
-        spdlog::debug("Destroying AppContext");
+        spdlog::info("Destroying AppContext");
         _instance.reset(nullptr); // Replaces stored pointer with nullptr, calls deleter on pointed-to instance.
     }
 }

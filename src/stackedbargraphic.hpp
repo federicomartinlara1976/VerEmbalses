@@ -22,6 +22,8 @@ private:
 public:
     GraficoEnBarrasApiladas(Dataframe &df);
     QChart* getGraphic() override { return graphic; }
+    
+    ~GraficoEnBarrasApiladas();
 };
 
 #endif

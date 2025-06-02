@@ -1,7 +1,7 @@
 #ifndef _VEREMBALSES_HPP_
 #define _VEREMBALSES_HPP_
 
-#include "view_embalse.h"
+#include "ui_ver_embalses.h"
 #include "selectfecha.hpp"
 #include "showlinegraphic.hpp"
 #include "showtable.hpp"

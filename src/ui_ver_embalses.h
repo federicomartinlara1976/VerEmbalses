@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'ver_embalsesbevHaK.ui'
+** Form generated from reading UI file 'ver_embalseskoJisd.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef VER_EMBALSESBEVHAK_H
-#define VER_EMBALSESBEVHAK_H
+#ifndef VER_EMBALSESKOJISD_H
+#define VER_EMBALSESKOJISD_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -763,4 +763,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // VER_EMBALSESBEVHAK_H
+#endif // VER_EMBALSESKOJISD_H

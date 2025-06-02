@@ -1,5 +1,7 @@
 #include "scattergraphic.hpp"
 
+#include <spdlog/spdlog.h>
+
 GraficoEnNubePuntos::GraficoEnNubePuntos(Dataframe &df) {
     this->df = df;
 
@@ -18,6 +20,10 @@ GraficoEnNubePuntos::GraficoEnNubePuntos(Dataframe &df) {
     axisY = new QValueAxis();
     axisY->setLabelFormat("%f");
     graphic->addAxis(axisY, Qt::AlignLeft);
+}
+
+GraficoEnNubePuntos::~GraficoEnNubePuntos() {
+    spdlog::info("Delete GraficoEnNubePuntos");
 }
 
 QChart* GraficoEnNubePuntos::getGraphic() { 
@@ -50,6 +56,10 @@ GraficoEnNubePuntosNivelVolumen::GraficoEnNubePuntosNivelVolumen(Dataframe &df) 
     series->attachAxis(axisY);
 }
 
+GraficoEnNubePuntosNivelVolumen::~GraficoEnNubePuntosNivelVolumen() {
+    spdlog::info("Delete GraficoEnNubePuntosNivelVolumen");
+}
+
 GraficoEnNubePuntosNivelPorcentaje::GraficoEnNubePuntosNivelPorcentaje(Dataframe &df) : GraficoEnNubePuntos(df) {
     vector<double> niveles = df.get_column<double>("Nivel");
     vector<double> porcentajes = df.get_column<double>("Porcentaje");
@@ -70,6 +80,10 @@ GraficoEnNubePuntosNivelPorcentaje::GraficoEnNubePuntosNivelPorcentaje(Dataframe
     series->attachAxis(axisY);
 }
 
+GraficoEnNubePuntosNivelPorcentaje::~GraficoEnNubePuntosNivelPorcentaje() {
+    spdlog::info("Delete GraficoEnNubePuntosNivelPorcentaje");
+}
+
 GraficoEnNubePuntosVolumenPorcentaje::GraficoEnNubePuntosVolumenPorcentaje(Dataframe &df) : GraficoEnNubePuntos(df) {
     vector<double> volumenes = df.get_column<double>("Volumen");
     vector<double> porcentajes = df.get_column<double>("Porcentaje");
@@ -87,6 +101,10 @@ GraficoEnNubePuntosVolumenPorcentaje::GraficoEnNubePuntosVolumenPorcentaje(Dataf
     
     axisY->setTitleText("Porcentaje");
     series->attachAxis(axisY);
+}
+
+GraficoEnNubePuntosVolumenPorcentaje::~GraficoEnNubePuntosVolumenPorcentaje() {
+    spdlog::info("Delete GraficoEnNubePuntosVolumenPorcentaje");
 }
 
 
