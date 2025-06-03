@@ -39,6 +39,11 @@ namespace FuncionesUi {
     } InfoPuntoControl;
     
     typedef struct {
+        string fecha, nombre, zona, codigo, unidadMedida;
+        float horaActual, horaAnterior, ultimas12Horas, hoy, ayer;
+    } RegistroPluviometrico;
+    
+    typedef struct {
         string codZona, nombre;
     } InfoZona;
     
@@ -58,6 +63,7 @@ namespace FuncionesUi {
         vector<InfoEmbalse> getPorFechas(string collectionName, QDate& desde, QDate& hasta);
         unique_ptr<vector<InfoZona>> getZonas();
         vector<string> getExecutions(QDate& desde, QDate& hasta);
+        vector<RegistroPluviometrico> getRegistrosPuntoControl(string puntoControl, QDate& desde, QDate& hasta);
         
         InfoEmbalse createInfoEmbalse(string codEmbalse, bsoncxx::v_noabi::document::view doc);
         InfoEmbalse getIdEmbalse(bsoncxx::v_noabi::document::view doc);
@@ -96,6 +102,7 @@ namespace FuncionesUi {
 
         Dataframe getDataframePorEmbalseYRangoFechas(string codEmbalse, QDate& desde, QDate& hasta);
         Dataframe getDataframePorZonaYRangoFechas(string codZona, QDate& desde, QDate& hasta);
+        Dataframe getDataframePuntoControl(string puntoControl, QDate& desde, QDate& hasta);
 
         void saveDataframeToDisk(const QString &outputFileName, Dataframe& dataframe);
 

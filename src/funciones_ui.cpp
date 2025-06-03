@@ -1,6 +1,7 @@
 #include <spdlog/spdlog.h>
 #include <yaml-cpp/yaml.h>
 #include <fmt/format.h>
+#include <optional>
 
 #include <QObject>
 #include <QFileDialog>
@@ -459,6 +460,12 @@ FuncionesUi::Dataframe AppContext::getDataframePorZonaYRangoFechas(string codZon
     return df;
 }
 
+FuncionesUi::Dataframe AppContext::getDataframePuntoControl(string puntoControl, QDate& desde, QDate& hasta) {
+    vector<RegistroPluviometrico> registros = getRegistrosPuntoControl(puntoControl, desde, hasta);
+    
+    throw std::runtime_error("Not implemented yet");
+}
+
 vector<string> AppContext::getExecutions(QDate& desde, QDate& hasta) {
     try {
         vector<string> v;
@@ -475,6 +482,34 @@ vector<string> AppContext::getExecutions(QDate& desde, QDate& hasta) {
 
         for (bsoncxx::v_noabi::document::view ejecucion : cursor_ejecuciones) {
             v.push_back(string(ejecucion["_id"].get_string().value));
+        }
+
+        return v;
+    } catch (const exception& e) {
+        spdlog::error("ERROR getExecutions: {}", e.what());
+        throw e;
+    }
+}
+
+vector<RegistroPluviometrico> AppContext::getRegistrosPuntoControl(string puntoControl, QDate& desde, QDate& hasta) {
+    try {
+        vector<RegistroPluviometrico> v;
+
+        DataEngine& dbInstance = getDataEngine();
+
+        const QString format = qtHelper.asQString(Constants::DATE_FORMAT);
+
+        string sDesde = qtHelper.asString(desde.toString(format));
+        string sHasta = qtHelper.asString(hasta.toString(format));
+
+        collection collection = dbInstance.getCollection(puntoControl);
+        cursor cursor_registros = collection.find(make_document(kvp("_id", make_document(kvp("$gte", sDesde), kvp("$lte", sHasta)))));
+
+        for (bsoncxx::v_noabi::document::view registro : cursor_registros) {
+            RegistroPluviometrico registroPluviometrico;
+            spdlog::info("{}", string(registro["_id"].get_string().value));
+            registroPluviometrico.fecha = string(registro["_id"].get_string().value);
+            v.push_back(registroPluviometrico);
         }
 
         return v;

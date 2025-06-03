@@ -13,6 +13,8 @@
 #include "qtwindow.hpp"
 
 #include <QObject>
+#include <qttools/qthelper.hpp>
+#include <qttools/qtdatehelper.hpp>
 
 #include <memory>
 
@@ -22,6 +24,9 @@ class VerEmbalses : public QtWindow, public Ui::MainWindow {
     Q_OBJECT
     
 private:
+    QtHelper qtHelper;
+    QtDateHelper qtDateHelper;
+    
     string applicationName = "verembalses";
 
     VerEmbalsesAppHelper helper;

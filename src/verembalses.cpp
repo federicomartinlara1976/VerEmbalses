@@ -47,7 +47,7 @@ void VerEmbalses::delayedInitialization() {
 
         context.setDefaultZona(zona, cmbZona, cmbEmbalse);
         InfoZona infoZona = context.getZona(zona);
-        lblZona->setText(helper.asQString(infoZona.nombre));
+        lblZona->setText(qtHelper.asQString(infoZona.nombre));
         showStatsPorZona(zona, lastExecution);
 
         context.setDefaultEmbalse(embalse, cmbEmbalse);
@@ -65,16 +65,16 @@ void VerEmbalses::cmbZonasIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
     string lastExecution = context.getLastExecution();
     
-    zona = helper.getStringValue(cmbZona, index);
+    zona = qtHelper.getStringValue(cmbZona, index);
 
     if (!zona.empty()) {
         InfoZona info = context.getZona(zona);
 
-        lblZona->setText(helper.asQString(info.nombre));
+        lblZona->setText(qtHelper.asQString(info.nombre));
         showStatsPorZona(zona, lastExecution);
         context.populateEmbalsesIn(zona, this->cmbEmbalse);
 
-        string codigoEmbalse = helper.getStringValue(cmbEmbalse, 0);
+        string codigoEmbalse = qtHelper.getStringValue(cmbEmbalse, 0);
         if (!codigoEmbalse.empty()) {
             InfoEmbalse info = context.getEmbalseInfoByDate(codigoEmbalse, context.getLastExecution());
             showInfoEmbalse(info);
@@ -91,7 +91,7 @@ void VerEmbalses::cmbZonasIndexChanged(int index) {
 void VerEmbalses::cmbPlvZonasIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
     
-    plvZona = helper.getStringValue(cmbPlvZona, index);
+    plvZona = qtHelper.getStringValue(cmbPlvZona, index);
 
     if (!plvZona.empty()) {
         context.populatePuntosControlIn(plvZona, this->cmbPuntoControl);
@@ -108,7 +108,7 @@ void VerEmbalses::cmbEmbalsesIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
     string lastExecution = context.getLastExecution();
     
-    string codigoEmbalse = helper.getStringValue(cmbEmbalse, index);
+    string codigoEmbalse = qtHelper.getStringValue(cmbEmbalse, index);
     if (!codigoEmbalse.empty()) {
         InfoEmbalse info = context.getEmbalseInfoByDate(codigoEmbalse, lastExecution);
         showInfoEmbalse(info);
@@ -116,16 +116,30 @@ void VerEmbalses::cmbEmbalsesIndexChanged(int index) {
 }
 
 void VerEmbalses::cmbPuntosControlIndexChanged(int index) {
-    string codigoPuntoControl = helper.getStringValue(cmbPuntoControl, index);
-    
-    if (!plvZona.empty()) {
-        // Componer colección de consulta
-        string collection = "PL-" + plvZona + "-" + codigoPuntoControl;
-        spdlog::info("Punto de control: {}", collection);
+    try {
+        AppContext& context = AppContext::getInstance();
         
-        // Consultar
+        string codigoPuntoControl = qtHelper.getStringValue(cmbPuntoControl, index);
         
-        // Devolver
+        if (!plvZona.empty()) {
+            // Componer colección de consulta
+            string puntoControl = "PL-" + plvZona + "-" + codigoPuntoControl;
+            spdlog::info("Punto de control: {}", puntoControl);
+            
+            // Consultar los últmos 5 días
+            QDateTime now = qtDateHelper.now();
+            tuple<QDate, QDate> fechas = qtDateHelper.intervalBeforeInDays(now.date(), 5);
+            QDate fechaHasta = get<0>(fechas);
+            QDate fechaDesde = get<1>(fechas);
+            Dataframe df = context.getDataframePuntoControl(puntoControl, fechaDesde, fechaHasta);
+            
+            // Devolver
+        }
+    } catch (const exception& e) {
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.exec();
     }
 }
 
@@ -190,7 +204,7 @@ void VerEmbalses::showExcelClicked() {
             Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, fechaDesde, fechaHasta);
         
             const string& filetype = Constants::CSV_FILE_TYPE;
-            const QString filename = QFileDialog::getSaveFileName(this, i18n("Save File As"), QDir::currentPath(), helper.asQString(filetype));
+            const QString filename = QFileDialog::getSaveFileName(this, i18n("Save File As"), QDir::currentPath(), qtHelper.asQString(filetype));
             context.saveDataframeToDisk(filename, df);
         }
     }
@@ -236,8 +250,8 @@ unique_ptr<DlgSelectFecha> VerEmbalses::getDlgFecha(bool isSelectedZone) {
     unique_ptr<DlgSelectFecha> dlg;
     
     if (isSelectedZone) {
-        string codigoZona = helper.getStringValue(cmbZona);
-        string codigoEmbalse = helper.getStringValue(cmbEmbalse);
+        string codigoZona = qtHelper.getStringValue(cmbZona);
+        string codigoEmbalse = qtHelper.getStringValue(cmbEmbalse);
         
         dlg = unique_ptr<DlgSelectFecha>{new DlgSelectFecha(codigoZona, codigoEmbalse, this)};
     }
@@ -250,17 +264,17 @@ unique_ptr<DlgSelectFecha> VerEmbalses::getDlgFecha(bool isSelectedZone) {
 
 void VerEmbalses::showInfoEmbalse(InfoEmbalse& info) {
     
-    lblNombreEmbalse->setText(helper.asQString(info.embalse));
+    lblNombreEmbalse->setText(qtHelper.asQString(info.embalse));
     
     std::string sPercent = fmt::format(Constants::PERCENT_FORMAT, info.porcentaje);
-    lblPercent->setText(helper.asQString(sPercent));
+    lblPercent->setText(qtHelper.asQString(sPercent));
     helper.setLabelStyleValue(lblPercent, info.porcentaje);
     
     std::string sCapacidad = fmt::format(Constants::NUMBER_FORMAT, info.capacidad);
-    lblCapacidad->setText(helper.asQString(sCapacidad));
+    lblCapacidad->setText(qtHelper.asQString(sCapacidad));
     
     std::string sVolumen = fmt::format(Constants::NUMBER_FORMAT, info.volumen); // s == "3.14"
-    lblVolumen->setText(helper.asQString(sVolumen));
+    lblVolumen->setText(qtHelper.asQString(sVolumen));
 }
 
 void VerEmbalses::showStatsPorZona(string codZona, string date) {
@@ -270,34 +284,34 @@ void VerEmbalses::showStatsPorZona(string codZona, string date) {
         std::tuple<double*, double*> stats = context.getStatsPorZonaYFecha(codZona, date);
         
         std::string sMedia = fmt::format(Constants::NUMBER_FORMAT, get<0>(stats)[0]);
-        lblNivelMedia->setText(helper.asQString(sMedia));
+        lblNivelMedia->setText(qtHelper.asQString(sMedia));
         
         sMedia = fmt::format(Constants::NUMBER_FORMAT, get<1>(stats)[0]);
-        lblVolumenMedia->setText(helper.asQString(sMedia));
+        lblVolumenMedia->setText(qtHelper.asQString(sMedia));
         
         std::string sMinimo = fmt::format(Constants::NUMBER_FORMAT, get<0>(stats)[1]);
-        lblNivelMinimo->setText(helper.asQString(sMinimo));
+        lblNivelMinimo->setText(qtHelper.asQString(sMinimo));
         
         sMinimo = fmt::format(Constants::NUMBER_FORMAT, get<1>(stats)[1]);
-        lblVolumenMinimo->setText(helper.asQString(sMinimo));
+        lblVolumenMinimo->setText(qtHelper.asQString(sMinimo));
         
         std::string sMax = fmt::format(Constants::NUMBER_FORMAT, get<0>(stats)[2]);
-        lblNivelMaximo->setText(helper.asQString(sMax));
+        lblNivelMaximo->setText(qtHelper.asQString(sMax));
         
         sMax = fmt::format(Constants::NUMBER_FORMAT, get<1>(stats)[2]);
-        lblVolumenMaximo->setText(helper.asQString(sMax));
+        lblVolumenMaximo->setText(qtHelper.asQString(sMax));
 
         double volumenTotal = get<1>(stats)[3];
         std::string sSum = fmt::format(Constants::NUMBER_FORMAT, volumenTotal);
-        lblVolumenTotal->setText(helper.asQString(sSum));
+        lblVolumenTotal->setText(qtHelper.asQString(sSum));
 
         double totalCapacidad = context.getTotalCapacidadZona(codZona);
         std::string sTotalCapacidad = fmt::format(Constants::NUMBER_FORMAT, totalCapacidad);
-        lblTotalCapacidadZona->setText(helper.asQString(sTotalCapacidad));
+        lblTotalCapacidadZona->setText(qtHelper.asQString(sTotalCapacidad));
 
         double porcentajeVolumen = (volumenTotal*100)/totalCapacidad;
         std::string sPorcentajeVolumen = fmt::format(Constants::NUMBER_FORMAT, porcentajeVolumen);
-        lblPorcentajeVolumenTotal->setText(helper.asQString(sPorcentajeVolumen));
+        lblPorcentajeVolumenTotal->setText(qtHelper.asQString(sPorcentajeVolumen));
         helper.setLabelStyleValue(lblPorcentajeVolumenTotal, porcentajeVolumen);
     } catch (const exception& e) {
         spdlog::error("ERROR getStatsPorZona: {}", e.what());
@@ -308,7 +322,7 @@ void VerEmbalses::showStatsPorZona(string codZona, string date) {
 void VerEmbalses::setStatus(string date) {
     try {
         string label = "Datos a fecha: " + date;
-        statusbar->showMessage(helper.asQString(label));
+        statusbar->showMessage(qtHelper.asQString(label));
     } catch (const exception& e) {
         spdlog::error(e.what());
         throw (e);

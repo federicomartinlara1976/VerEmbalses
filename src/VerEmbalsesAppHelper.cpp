@@ -1,7 +1,6 @@
 #include "VerEmbalsesAppHelper.hpp"
 #include "constants.hpp"
 
-#include <spdlog/spdlog.h>
 #include <unistd.h>
 #include <sys/types.h>
 
@@ -40,5 +39,5 @@ void VerEmbalsesAppHelper::setLabelStyleValue(QLabel *lbl, float value) {
     }
     
     string style = "QLabel { background-color : " + color + "; border: 1px solid black; }";
-    lbl->setStyleSheet(asQString(style, false));
+    lbl->setStyleSheet(qtHelper.asQString(style, false));
 }
