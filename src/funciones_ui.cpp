@@ -507,14 +507,27 @@ vector<RegistroPluviometrico> AppContext::getRegistrosPuntoControl(string puntoC
 
         for (bsoncxx::v_noabi::document::view registro : cursor_registros) {
             RegistroPluviometrico registroPluviometrico;
-            spdlog::info("{}", string(registro["_id"].get_string().value));
+            
             registroPluviometrico.fecha = string(registro["_id"].get_string().value);
+            registroPluviometrico.nombre = string(registro["nombre"].get_string().value);
+            registroPluviometrico.codigo = string(registro["codigo"].get_string().value);
+            registroPluviometrico.horaActual = registro["horaActual"].get_double().value;
+            registroPluviometrico.horaAnterior = registro["horaAnterior"].get_double().value;
+            registroPluviometrico.ultimas12Horas = registro["ultimas12Horas"].get_double().value;
+            registroPluviometrico.hoy = registro["hoy"].get_double().value;
+            registroPluviometrico.ayer = registro["ayer"].get_double().value;
+            registroPluviometrico.unidadMedida = string(registro["unidadMedida"].get_string().value);
+            
+            spdlog::info("{}, {}, {}, {}, {}, {}, {}, {}, {}", 
+                         registroPluviometrico.fecha, registroPluviometrico.nombre, registroPluviometrico.codigo,
+                         registroPluviometrico.horaActual, registroPluviometrico.horaAnterior, registroPluviometrico.ultimas12Horas,
+                         registroPluviometrico.hoy, registroPluviometrico.ayer, registroPluviometrico.unidadMedida);
             v.push_back(registroPluviometrico);
         }
 
         return v;
     } catch (const exception& e) {
-        spdlog::error("ERROR getExecutions: {}", e.what());
+        spdlog::error("ERROR getRegistrosPuntoControl: {}", e.what());
         throw e;
     }
 }
