@@ -6,6 +6,7 @@ target_sources(verembalses PRIVATE
     showpiegraphic.cpp showscattergraphic.cpp showtable.cpp
     funciones_ui.cpp VerEmbalsesAppHelper.cpp tablemodel.cpp
     tablemodelembalse.cpp tablemodelzona.cpp tablemodelembalses.cpp
+    tablemodelregistrospluviometricos.cpp
     progreso.cpp qtdialogwindow.cpp qtwindow.cpp
     signalmanager.cpp qloadjob.cpp graphic.cpp
     linegraphic.cpp sectorgraphic.cpp scattergraphic.cpp

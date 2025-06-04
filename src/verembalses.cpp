@@ -7,6 +7,7 @@
 
 #include "verembalses.hpp"
 #include "constants.hpp"
+#include "tablemodel.hpp"
 #include <QMessageBox>
 
 #include <KLocalizedString>
@@ -134,7 +135,8 @@ void VerEmbalses::cmbPuntosControlIndexChanged(int index) {
             
             // Mostrar en tabla
             if (!df.empty()) {
-                
+                TableModel *tableModel = new TableModelRegistrosPluviometricos(df);
+                this->tableView->setModel(tableModel);
             }
         }
     } catch (const exception& e) {

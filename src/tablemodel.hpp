@@ -42,6 +42,9 @@ public:
     TableModelEmbalses(const FuncionesUi::Dataframe& dataFrame);
 };
 
-
+class TableModelRegistrosPluviometricos : public TableModel {
+public:
+    TableModelRegistrosPluviometricos(const FuncionesUi::Dataframe& dataFrame);
+};
 
 #endif
