@@ -124,7 +124,6 @@ void VerEmbalses::cmbPuntosControlIndexChanged(int index) {
         if (!plvZona.empty()) {
             // Componer colección de consulta
             string puntoControl = "PL-" + plvZona + "-" + codigoPuntoControl;
-            spdlog::info("Punto de control: {}", puntoControl);
             
             // Consultar los últmos 5 días
             QDateTime now = qtDateHelper.now();
@@ -133,7 +132,10 @@ void VerEmbalses::cmbPuntosControlIndexChanged(int index) {
             QDate fechaDesde = get<1>(fechas);
             Dataframe df = context.getDataframePuntoControl(puntoControl, fechaDesde, fechaHasta);
             
-            // Devolver
+            // Mostrar en tabla
+            if (!df.empty()) {
+                
+            }
         }
     } catch (const exception& e) {
         QMessageBox msgBox;

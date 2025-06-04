@@ -494,11 +494,6 @@ FuncionesUi::Dataframe AppContext::getDataframePuntoControl(string puntoControl,
         vAyer.push_back(registro.ayer);
         vUnidadMedida.push_back(registro.unidadMedida);
         
-        spdlog::info("{}, {}, {}, {}, {}, {}, {}, {}, {}", 
-                         registro.fecha, registro.nombre, registro.codigo,
-                         registro.horaActual, registro.horaAnterior, registro.ultimas12Horas,
-                         registro.hoy, registro.ayer, registro.unidadMedida);
-        
         index++;
     }
     
