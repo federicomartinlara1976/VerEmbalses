@@ -463,7 +463,67 @@ FuncionesUi::Dataframe AppContext::getDataframePorZonaYRangoFechas(string codZon
 FuncionesUi::Dataframe AppContext::getDataframePuntoControl(string puntoControl, QDate& desde, QDate& hasta) {
     vector<RegistroPluviometrico> registros = getRegistrosPuntoControl(puntoControl, desde, hasta);
     
-    throw std::runtime_error("Not implemented yet");
+    data::ColumnData<ulong> cIndex("Indice");
+    vector<ulong> indices;
+
+    data::ColumnData<string> cFecha("Fecha");
+    vector<string> fechas;
+
+    data::ColumnData<double> cHoraActual("HoraActual");
+    vector<double> vHoraActual;
+    data::ColumnData<double> cHoraAnterior("HoraAnterior");
+    vector<double> vHoraAnterior;
+    data::ColumnData<double> cUltimas12Horas("Ultimas12Horas");
+    vector<double> vUltimas12Horas;
+    data::ColumnData<double> cHoy("Hoy");
+    vector<double> vHoy;
+    data::ColumnData<double> cAyer("Ayer");
+    vector<double> vAyer;
+    data::ColumnData<string> cUnidadMedida("UnidadMedida");
+    vector<string> vUnidadMedida;
+    
+    ulong index = 0;
+    for (RegistroPluviometrico registro : registros) {
+        indices.push_back(index);
+        fechas.push_back(registro.fecha);
+        
+        vHoraActual.push_back(registro.horaActual);
+        vHoraAnterior.push_back(registro.horaAnterior);
+        vUltimas12Horas.push_back(registro.ultimas12Horas);
+        vHoy.push_back(registro.hoy);
+        vAyer.push_back(registro.ayer);
+        vUnidadMedida.push_back(registro.unidadMedida);
+        
+        spdlog::info("{}, {}, {}, {}, {}, {}, {}, {}, {}", 
+                         registro.fecha, registro.nombre, registro.codigo,
+                         registro.horaActual, registro.horaAnterior, registro.ultimas12Horas,
+                         registro.hoy, registro.ayer, registro.unidadMedida);
+        
+        index++;
+    }
+    
+    cIndex.setData(indices);
+    cFecha.setData(fechas);
+
+    cHoraActual.setData(vHoraActual);
+    cHoraAnterior.setData(vHoraAnterior);
+    cUltimas12Horas.setData(vUltimas12Horas);
+    cHoy.setData(vHoy);
+    cAyer.setData(vAyer);
+    cUnidadMedida.setData(vUnidadMedida);
+    
+    FuncionesUi::Dataframe df;
+
+    df.load_data(std::move(cIndex.getData()),
+                    std::make_pair(appHelper.asCharArray(cFecha.getName()), cFecha.getData()),
+                    std::make_pair(appHelper.asCharArray(cHoraActual.getName()), cHoraActual.getData()),
+                    std::make_pair(appHelper.asCharArray(cHoraAnterior.getName()), cHoraAnterior.getData()),
+                    std::make_pair(appHelper.asCharArray(cUltimas12Horas.getName()), cUltimas12Horas.getData()),
+                    std::make_pair(appHelper.asCharArray(cHoy.getName()), cHoy.getData()),
+                    std::make_pair(appHelper.asCharArray(cAyer.getName()), cAyer.getData()),
+                    std::make_pair(appHelper.asCharArray(cUnidadMedida.getName()), cUnidadMedida.getData()));
+    
+    return df;
 }
 
 vector<string> AppContext::getExecutions(QDate& desde, QDate& hasta) {
@@ -518,10 +578,6 @@ vector<RegistroPluviometrico> AppContext::getRegistrosPuntoControl(string puntoC
             registroPluviometrico.ayer = registro["ayer"].get_double().value;
             registroPluviometrico.unidadMedida = string(registro["unidadMedida"].get_string().value);
             
-            spdlog::info("{}, {}, {}, {}, {}, {}, {}, {}, {}", 
-                         registroPluviometrico.fecha, registroPluviometrico.nombre, registroPluviometrico.codigo,
-                         registroPluviometrico.horaActual, registroPluviometrico.horaAnterior, registroPluviometrico.ultimas12Horas,
-                         registroPluviometrico.hoy, registroPluviometrico.ayer, registroPluviometrico.unidadMedida);
             v.push_back(registroPluviometrico);
         }
 
