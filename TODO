@@ -12,4 +12,9 @@
 
 02/06/2025
 
-- Alinear los diseños de pantallas con sus cabeceras, y ajustarlas en el código.
+- Alinear los diseños de pantallas con sus cabeceras, y ajustarlas en el código. COMPLETADO
+
+05/06/2025
+
+- El objeto de configuración de las librerías common de chronoslibs no se libera bien. Reestructurar la configuración
+  de la aplicación para que las propiedades se obtengan a través del sistema general de KDE

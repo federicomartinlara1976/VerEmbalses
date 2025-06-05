@@ -136,6 +136,7 @@ void VerEmbalses::cmbPuntosControlIndexChanged(int index) {
             // Mostrar en tabla
             if (!df.empty()) {
                 TableModel *tableModel = new TableModelRegistrosPluviometricos(df);
+                spdlog::info("Change model");
                 this->tableView->setModel(tableModel);
             }
         }
