@@ -50,5 +50,5 @@ GraficoEnLinea::GraficoEnLinea(Dataframe &df, string yValue) {
 }
 
 GraficoEnLinea::~GraficoEnLinea() {
-    spdlog::info("Delete GraficoEnLinea");
+    spdlog::debug("Delete GraficoEnLinea");
 }

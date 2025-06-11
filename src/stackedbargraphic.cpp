@@ -63,5 +63,5 @@ GraficoEnBarrasApiladas::GraficoEnBarrasApiladas(Dataframe &df) {
 }
 
 GraficoEnBarrasApiladas::~GraficoEnBarrasApiladas() {
-    spdlog::info("Delete GraficoEnBarrasApiladas");
+    spdlog::debug("Delete GraficoEnBarrasApiladas");
 }

@@ -32,6 +32,6 @@ GraficoEnSectores::GraficoEnSectores(Dataframe &df) {
 }
 
 GraficoEnSectores::~GraficoEnSectores() {
-    spdlog::info("Delete GraficoEnSectores");
+    spdlog::debug("Delete GraficoEnSectores");
 }
 

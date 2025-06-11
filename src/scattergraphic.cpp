@@ -23,7 +23,7 @@ GraficoEnNubePuntos::GraficoEnNubePuntos(Dataframe &df) {
 }
 
 GraficoEnNubePuntos::~GraficoEnNubePuntos() {
-    spdlog::info("Delete GraficoEnNubePuntos");
+    spdlog::debug("Delete GraficoEnNubePuntos");
 }
 
 QChart* GraficoEnNubePuntos::getGraphic() { 
