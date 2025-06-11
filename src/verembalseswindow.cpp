@@ -4,12 +4,20 @@
 #include "verembalsesview.hpp"
 #include "verembalsesdebug.h"
 
+#include "showtable.hpp"
+#include "funciones_ui.hpp"
+
 // KF headers
 #include <KActionCollection>
 #include <KConfigDialog>
 
 #include <spdlog/spdlog.h>
 #include <QStatusBar>
+
+#include <QAction>
+#include <QMessageBox>
+
+#include <memory>
 
 
 VerEmbalsesWindow::VerEmbalsesWindow()
@@ -23,6 +31,12 @@ VerEmbalsesWindow::VerEmbalsesWindow()
 
     KActionCollection* actionCollection = this->actionCollection();
     KStandardAction::preferences(this, SLOT(settingsConfigure()), actionCollection);
+    
+    QAction* queryByDateAction = new QAction(this);
+    queryByDateAction->setText(i18n("&Buscar por fecha"));
+    queryByDateAction->setIcon(QIcon::fromTheme("document-new-symbolic"));
+    actionCollection->addAction("query_by_date", queryByDateAction);
+    connect(queryByDateAction, &QAction::triggered, this, &VerEmbalsesWindow::queryByDate);
 
     setupGUI();
 }
@@ -36,6 +50,44 @@ VerEmbalsesWindow::~VerEmbalsesWindow()
 {
     m_verEmbalsesView->detach(this);
     spdlog::debug("VerEmbalsesWindow::~VerEmbalsesWindow()");
+}
+
+void VerEmbalsesWindow::queryByDate() {
+    spdlog::debug("VerEmbalsesWindow::queryByDate");
+    
+    AppContext& context = AppContext::getInstance();
+    
+    unique_ptr<DlgSelectFecha> dlg = getDlgFecha();
+    int result = dlg->mostrar(true);
+    
+    if (result == 1) {
+        tuple<QDate, QDate> fechas = dlg->getFechas();
+        tuple<string, string> datosEmbalse = dlg->getDatosEmbalse();
+        string codZona = get<0>(datosEmbalse);
+
+        if (!codZona.empty()) {
+            string codEmbalse = get<1>(datosEmbalse);
+
+            unique_ptr<DlgShowTable> dlgShowTable = nullptr;
+            if (!codEmbalse.empty()) {
+                Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, get<0>(fechas), get<1>(fechas));
+                dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codEmbalse, Constants::EMBALSE, this)};
+            }
+            else {
+                Dataframe df = context.getDataframePorZonaYRangoFechas(codZona, get<0>(fechas), get<1>(fechas));
+                dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codZona, Constants::ZONA, this)};
+            }
+
+            dlgShowTable->setFechas(get<0>(fechas), get<1>(fechas));
+            dlgShowTable->mostrar(true);
+        }
+        else {
+            QMessageBox msgBox;
+            msgBox.setText("Debe seleccionar una zona");
+            msgBox.setIcon(QMessageBox::Warning);
+            msgBox.exec();
+        }
+    }
 }
 
 void VerEmbalsesWindow::settingsConfigure()
@@ -56,4 +108,10 @@ void VerEmbalsesWindow::settingsConfigure()
     dialog->addPage(generalSettingsPage, i18n("General"), QStringLiteral("package_setting"));
     dialog->setAttribute(Qt::WA_DeleteOnClose);
     dialog->show();
+}
+
+unique_ptr<DlgSelectFecha> VerEmbalsesWindow::getDlgFecha() {
+    unique_ptr<DlgSelectFecha> dlg = unique_ptr<DlgSelectFecha>{new DlgSelectFecha(this)};
+    
+    return dlg;
 }

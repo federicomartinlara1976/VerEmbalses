@@ -6,6 +6,7 @@
 #include "ui_settings.h"
 #include "VerEmbalsesSettings.h"
 #include "observer.hpp"
+#include "selectfecha.hpp"
 
 #include <qthelper.hpp>
 
@@ -42,6 +43,7 @@ private Q_SLOTS:
      * Open the settings dialog
      */
     void settingsConfigure();
+    void queryByDate();
     
 private:
     // this is the name of the root widget inside our Ui file
@@ -50,6 +52,8 @@ private:
     VerEmbalsesView *m_verEmbalsesView;
     
     QtHelper qtHelper;
+    
+    unique_ptr<DlgSelectFecha> getDlgFecha();
 };
 
 #endif
