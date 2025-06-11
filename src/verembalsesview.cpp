@@ -56,7 +56,6 @@ void VerEmbalsesView::connectEvents() {
     connect(m_ui.btnVerGrafico , &QAbstractButton::clicked, this, &VerEmbalsesView::showGraphicClicked);
     connect(m_ui.btnVerEmbalses , &QAbstractButton::clicked, this, &VerEmbalsesView::showEmbalsesClicked);
     connect(m_ui.btnExportarCSV , &QAbstractButton::clicked, this, &VerEmbalsesView::showExcelClicked);
-    //connect(m_ui.actionPor_fecha, &QAction::triggered, this, &VerEmbalses::buscarPorFechas);
 }
 
 void VerEmbalsesView::delayedInitialization() {
@@ -241,54 +240,11 @@ void VerEmbalsesView::showExcelClicked() {
     }
 }
 
-void VerEmbalsesView::buscarPorFechas() {
-    AppContext& context = AppContext::getInstance();
-    
-    unique_ptr<DlgSelectFecha> dlg = getDlgFecha(false);
-    int result = dlg->mostrar(true);
-    
-    if (result == 1) {
-        tuple<QDate, QDate> fechas = dlg->getFechas();
-        tuple<string, string> datosEmbalse = dlg->getDatosEmbalse();
-        string codZona = get<0>(datosEmbalse);
-
-        if (!codZona.empty()) {
-            string codEmbalse = get<1>(datosEmbalse);
-
-            unique_ptr<DlgShowTable> dlgShowTable = nullptr;
-            if (!codEmbalse.empty()) {
-                Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, get<0>(fechas), get<1>(fechas));
-                dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codEmbalse, Constants::EMBALSE, this)};
-            }
-            else {
-                Dataframe df = context.getDataframePorZonaYRangoFechas(codZona, get<0>(fechas), get<1>(fechas));
-                dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codZona, Constants::ZONA, this)};
-            }
-
-            dlgShowTable->setFechas(get<0>(fechas), get<1>(fechas));
-            dlgShowTable->mostrar(true);
-        }
-        else {
-            QMessageBox msgBox;
-            msgBox.setText("Debe seleccionar una zona");
-            msgBox.setIcon(QMessageBox::Warning);
-            msgBox.exec();
-        }
-    }
-}
-
-unique_ptr<DlgSelectFecha> VerEmbalsesView::getDlgFecha(bool isSelectedZone) {
-    unique_ptr<DlgSelectFecha> dlg;
-    
-    if (isSelectedZone) {
-        string codigoZona = qtHelper.getStringValue(m_ui.cmbZona);
-        string codigoEmbalse = qtHelper.getStringValue(m_ui.cmbEmbalse);
+unique_ptr<DlgSelectFecha> VerEmbalsesView::getDlgFecha() {
+    string codigoZona = qtHelper.getStringValue(m_ui.cmbZona);
+    string codigoEmbalse = qtHelper.getStringValue(m_ui.cmbEmbalse);
         
-        dlg = unique_ptr<DlgSelectFecha>{new DlgSelectFecha(codigoZona, codigoEmbalse, this)};
-    }
-    else {
-        dlg = unique_ptr<DlgSelectFecha>{new DlgSelectFecha(this)};
-    }
+    unique_ptr<DlgSelectFecha> dlg = unique_ptr<DlgSelectFecha>{new DlgSelectFecha(codigoZona, codigoEmbalse, this)};
     
     return dlg;
 }

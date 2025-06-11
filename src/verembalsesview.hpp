@@ -55,7 +55,6 @@ private Q_SLOTS:
     void showGraphicClicked();
     void showExcelClicked();
     void showEmbalsesClicked();
-    void buscarPorFechas();
 
 private:
     // this is the name of the root widget inside our Ui file
@@ -76,7 +75,7 @@ private:
     
     string plvZona;
     
-    unique_ptr<DlgSelectFecha> getDlgFecha(bool isSelectedZone = true);
+    unique_ptr<DlgSelectFecha> getDlgFecha();
     
     void showInfoEmbalse(InfoEmbalse& info);
     void showStatsPorZona(string codZona, string date);
