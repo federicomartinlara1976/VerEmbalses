@@ -16,6 +16,7 @@
 
 #include "funciones_ui.hpp"
 #include "constants.hpp"
+#include "configuracion.hpp"
 
 using namespace data;
 using namespace std;
@@ -56,12 +57,17 @@ void AppContext::destroyInstance() {
 AppContext::AppContext() {}
 
 AppContext::~AppContext() {
-    DataEngine& instance = DataEngine::getInstance(applicationName);
+    DataEngine& instance = DataEngine::getInstance();
     instance.destroyInstance();
 }
 
 DataEngine& AppContext::getDataEngine() {
-    DataEngine& dataEngine = DataEngine::getInstance(applicationName);
+    DataEngine& dataEngine = DataEngine::getInstance();
+    if (!dataEngine.isReady()) {
+        Configuracion& configuracion = Configuracion::getInstance();
+        dataEngine.setConfiguration(configuracion.getConfiguration());
+    }
+    
     return dataEngine;
 }
 

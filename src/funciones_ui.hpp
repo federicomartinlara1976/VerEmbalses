@@ -6,11 +6,11 @@
 #include <DataFrame/DataFrame.h>  
 
 #include <qdatetime.h>
-#include <mongo/mongo.hpp>
+#include <mongo.hpp>
 #include <memory>
-#include <common/apphelper.hpp>
-#include <qttools/qthelper.hpp>
-#include <common/types.hpp>
+#include <apphelper.hpp>
+#include <qthelper.hpp>
+#include <types.hpp>
 #include <fmt/core.h>
 
 #include "constants.hpp"

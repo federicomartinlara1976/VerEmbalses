@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name="verembalsesrc"/>
+  <group name="Preferences">
+    <entry name="server" type="String">
+	    <label>Servidor</label>
+	    <default>mongodb://discovery:27017</default>
+    </entry>
+    <entry name="dbName" type="String">
+	    <label>Base de datos</label>
+	    <default>EmbalsesCHG</default>
+    </entry>
+    <entry name="zonaSelected" type="String">
+	    <label>Zona inicial</label>
+	    <default>CO</default>
+    </entry>
+    <entry name="embalseSelected" type="String">
+	    <label>Embalse inicial</label>
+	    <default>CO-E30</default>
+    </entry>
+    <entry name="roundDecimals" type="Int">
+	    <label>Decimales de salida</label>
+	    <default>3</default>
+    </entry>
+  </group>
+</kcfg>

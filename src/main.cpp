@@ -24,26 +24,66 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <KCrash>
 #include <KConfig>
 
+#include <KCrash>
+#include <KDBusService>
+#include <KAboutData>
+#include <KLocalizedString>
+
 // Qt headers
 #include <QApplication>
+#include <QCommandLineParser>
+#include <QIcon>
+
 #include <spdlog/spdlog.h>
 #include <memory>
 
-#include "verembalses.hpp"
+#include "verembalseswindow.hpp"
 
 using namespace std;
 
 int main(int argc, char **argv) {
     try {
-        unique_ptr<QApplication> application = unique_ptr<QApplication>{new QApplication(argc, argv)};
-        //spdlog::info("Application {}", application->applicationDisplayName().toStdString());
-        
-        KCrash::initialize();
-        
-        unique_ptr<VerEmbalses> w = unique_ptr<VerEmbalses>{new VerEmbalses()};
-        w->show();
+        QApplication application(argc, argv);
 
-        return application->exec();
+        // i18n
+        KLocalizedString::setApplicationDomain("verembalses");
+        
+        // Inicializa manejador de errores no controlados
+        KCrash::initialize();
+
+        // Ventana de información de copyright
+        KAboutData aboutData( QStringLiteral("verembalses"),
+                          i18n("VerEmbalses"),
+                          QStringLiteral("1.0"),
+                          i18n("Monitoriza datos de los embalses de la Cuenca Hidrográfica del Guadalquivir"),
+                          KAboutLicense::GPL,
+                          i18n("Copyright 2025, Federico Martín Lara <federicomartinlara1976@gmail.com>"));
+
+        aboutData.addAuthor(i18n("Federico Martín Lara"),i18n("Author"), QStringLiteral("federicomartinlara1976@gmail.com"));
+        aboutData.setOrganizationDomain("chronos.bounceme.net");
+        aboutData.setDesktopFileName(QStringLiteral("net.bounceme.chronos.verembalses"));
+
+        KAboutData::setApplicationData(aboutData);
+        
+        // Icono de la aplicación
+        application.setWindowIcon(QIcon::fromTheme(QStringLiteral("verembalses")));
+
+        QCommandLineParser parser;
+        aboutData.setupCommandLine(&parser);
+
+        parser.process(application);
+        aboutData.processCommandLine(&parser);
+
+        // Bus de KDE
+        KDBusService appDBusService(KDBusService::Multiple | KDBusService::NoExitOnFailure);
+        
+        // TODO Cargar la configuración local y meterla en la factoría de configuración
+
+        // Ventana principal
+        VerEmbalsesWindow *window = new VerEmbalsesWindow;
+        window->show();
+
+        return application.exec();
     } catch (const exception& e) {
         spdlog::error("FATAL: {}", string(e.what()));
         return 1;

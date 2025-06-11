@@ -1,18 +1,18 @@
-#ifndef __QTWINDOW_HPP__
-#define __QTWINDOW_HPP__
+#ifndef __WINDOW_HPP__
+#define __WINDOW_HPP__
 
-#include <QMainWindow>
+#include <KXmlGuiWindow>
 
-class QtWindow : public QMainWindow {
+class Window : public KXmlGuiWindow {
     Q_OBJECT
     
     private slots:
         void delayInitialization();
     
     public:
-        QtWindow(QWidget *parent);
+        Window();
         void initWindow();
-        virtual ~QtWindow() = default;
+        virtual ~Window() = default;
         
     protected:
         virtual void setup() = 0;

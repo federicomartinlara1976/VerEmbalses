@@ -1,65 +1,83 @@
-#include <spdlog/spdlog.h>
-#include <iostream>
-#include <QTimer>
-#include <QFileDialog>
+/*
+Copyright (C) %{CURRENT_YEAR} by %{AUTHOR} <%{EMAIL}>
 
-#include <common/config.hpp>
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2 of
+the License or (at your option) version 3 or any later version
+accepted by the membership of KDE e.V. (or its successor approved
+by the membership of KDE e.V.), which shall act as a proxy 
+defined in Section 14 of version 3 of the license.
 
-#include "verembalses.hpp"
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+// application headers
+#include "verembalsesview.hpp"
+
+#include "VerEmbalsesSettings.h"
 #include "verembalsesdebug.h"
 
 #include "constants.hpp"
 #include "tablemodel.hpp"
 #include <QMessageBox>
+#include <QTimer>
+#include <QFileDialog>
 
-// KF headers
 #include <KLocalizedString>
-#include <KActionCollection>
-#include <KConfigDialog>
+
+#include <spdlog/spdlog.h>
+
+#include "configuracion.hpp"
 
 using namespace std;
 using namespace FuncionesUi;
 
-VerEmbalses::VerEmbalses() : QtWindow() {
-    this->initWindow();
+VerEmbalsesView::VerEmbalsesView(QWidget* parent) : View(parent)
+{
+    initView();
 }
 
-void VerEmbalses::setup() {
-    KActionCollection* actionCollection = this->actionCollection();
-    KStandardAction::preferences(this, SLOT(settingsConfigure()), actionCollection);
-    
-    setupUi(this);
+void VerEmbalsesView::setup() {
+    m_ui.setupUi(this);
 }
 
-void VerEmbalses::connectEvents() {
-    connect(cmbZona, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalses::cmbZonasIndexChanged);
-    connect(cmbPlvZona, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalses::cmbPlvZonasIndexChanged);
-    connect(cmbEmbalse, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalses::cmbEmbalsesIndexChanged);
-    connect(cmbPuntoControl, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalses::cmbPuntosControlIndexChanged);
-    connect(btnVerGrafico , &QAbstractButton::clicked, this, &VerEmbalses::showGraphicClicked);
-    connect(btnVerEmbalses , &QAbstractButton::clicked, this, &VerEmbalses::showEmbalsesClicked);
-    connect(btnExportarCSV , &QAbstractButton::clicked, this, &VerEmbalses::showExcelClicked);
-    connect(actionPor_fecha, &QAction::triggered, this, &VerEmbalses::buscarPorFechas);
+void VerEmbalsesView::connectEvents() {
+    connect(m_ui.cmbZona, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalsesView::cmbZonasIndexChanged);
+    connect(m_ui.cmbPlvZona, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalsesView::cmbPlvZonasIndexChanged);
+    connect(m_ui.cmbEmbalse, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalsesView::cmbEmbalsesIndexChanged);
+    connect(m_ui.cmbPuntoControl, QOverload<int>::of(&QComboBox::activated), this, &VerEmbalsesView::cmbPuntosControlIndexChanged);
+    connect(m_ui.btnVerGrafico , &QAbstractButton::clicked, this, &VerEmbalsesView::showGraphicClicked);
+    connect(m_ui.btnVerEmbalses , &QAbstractButton::clicked, this, &VerEmbalsesView::showEmbalsesClicked);
+    connect(m_ui.btnExportarCSV , &QAbstractButton::clicked, this, &VerEmbalsesView::showExcelClicked);
+    //connect(m_ui.actionPor_fecha, &QAction::triggered, this, &VerEmbalses::buscarPorFechas);
 }
 
-void VerEmbalses::delayedInitialization() {
-    try {
+void VerEmbalsesView::delayedInitialization() {
+        try {
         AppContext& context = AppContext::getInstance();
         string lastExecution = context.getLastExecution();
 
-        Configuration& config_instance = Configuration::getInstance(applicationName);
-        zona = config_instance.getPropertyAsString("zona.selected");
-        embalse = config_instance.getPropertyAsString("embalse.selected");
+        Configuracion& configuracion = Configuracion::getInstance();
+        std::map<std::string, std::string> properties = configuracion.getProperties();
+        zona = properties["zonaSelected"];
+        embalse = properties["embalseSelected"];
 
-        context.populateZonasIn(cmbZona);
-        context.populateZonasIn(cmbPlvZona);
+        context.populateZonasIn(m_ui.cmbZona);
+        context.populateZonasIn(m_ui.cmbPlvZona);
 
-        context.setDefaultZona(zona, cmbZona, cmbEmbalse);
+        context.setDefaultZona(zona, m_ui.cmbZona, m_ui.cmbEmbalse);
         InfoZona infoZona = context.getZona(zona);
-        lblZona->setText(qtHelper.asQString(infoZona.nombre));
+        m_ui.lblZona->setText(qtHelper.asQString(infoZona.nombre));
         showStatsPorZona(zona, lastExecution);
 
-        context.setDefaultEmbalse(embalse, cmbEmbalse);
+        context.setDefaultEmbalse(embalse, m_ui.cmbEmbalse);
 
         InfoEmbalse infoEmbalse = context.getEmbalseInfoByDate(embalse, lastExecution);
         showInfoEmbalse(infoEmbalse);
@@ -70,20 +88,20 @@ void VerEmbalses::delayedInitialization() {
     }
 }
 
-void VerEmbalses::cmbZonasIndexChanged(int index) {
+void VerEmbalsesView::cmbZonasIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
     string lastExecution = context.getLastExecution();
     
-    zona = qtHelper.getStringValue(cmbZona, index);
+    zona = qtHelper.getStringValue(m_ui.cmbZona, index);
 
     if (!zona.empty()) {
         InfoZona info = context.getZona(zona);
 
-        lblZona->setText(qtHelper.asQString(info.nombre));
+        m_ui.lblZona->setText(qtHelper.asQString(info.nombre));
         showStatsPorZona(zona, lastExecution);
-        context.populateEmbalsesIn(zona, this->cmbEmbalse);
+        context.populateEmbalsesIn(zona, m_ui.cmbEmbalse);
 
-        string codigoEmbalse = qtHelper.getStringValue(cmbEmbalse, 0);
+        string codigoEmbalse = qtHelper.getStringValue(m_ui.cmbEmbalse, 0);
         if (!codigoEmbalse.empty()) {
             InfoEmbalse info = context.getEmbalseInfoByDate(codigoEmbalse, context.getLastExecution());
             showInfoEmbalse(info);
@@ -97,13 +115,13 @@ void VerEmbalses::cmbZonasIndexChanged(int index) {
     }
 }
 
-void VerEmbalses::cmbPlvZonasIndexChanged(int index) {
+void VerEmbalsesView::cmbPlvZonasIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
     
-    plvZona = qtHelper.getStringValue(cmbPlvZona, index);
+    plvZona = qtHelper.getStringValue(m_ui.cmbPlvZona, index);
 
     if (!plvZona.empty()) {
-        context.populatePuntosControlIn(plvZona, this->cmbPuntoControl);
+        context.populatePuntosControlIn(plvZona, m_ui.cmbPuntoControl);
     }
     else {
         QMessageBox msgBox;
@@ -113,22 +131,22 @@ void VerEmbalses::cmbPlvZonasIndexChanged(int index) {
     }
 }
 
-void VerEmbalses::cmbEmbalsesIndexChanged(int index) {
+void VerEmbalsesView::cmbEmbalsesIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
     string lastExecution = context.getLastExecution();
     
-    string codigoEmbalse = qtHelper.getStringValue(cmbEmbalse, index);
+    string codigoEmbalse = qtHelper.getStringValue(m_ui.cmbEmbalse, index);
     if (!codigoEmbalse.empty()) {
         InfoEmbalse info = context.getEmbalseInfoByDate(codigoEmbalse, lastExecution);
         showInfoEmbalse(info);
     }
 }
 
-void VerEmbalses::cmbPuntosControlIndexChanged(int index) {
+void VerEmbalsesView::cmbPuntosControlIndexChanged(int index) {
     try {
         AppContext& context = AppContext::getInstance();
         
-        string codigoPuntoControl = qtHelper.getStringValue(cmbPuntoControl, index);
+        string codigoPuntoControl = qtHelper.getStringValue(m_ui.cmbPuntoControl, index);
         
         if (!plvZona.empty()) {
             // Componer colección de consulta
@@ -145,7 +163,7 @@ void VerEmbalses::cmbPuntosControlIndexChanged(int index) {
             if (!df.empty()) {
                 TableModel *tableModel = new TableModelRegistrosPluviometricos(df);
                 spdlog::info("Change model");
-                this->tableView->setModel(tableModel);
+                m_ui.tableView->setModel(tableModel);
             }
         }
     } catch (const exception& e) {
@@ -156,7 +174,7 @@ void VerEmbalses::cmbPuntosControlIndexChanged(int index) {
     }
 }
 
-void VerEmbalses::showGraphicClicked() {
+void VerEmbalsesView::showGraphicClicked() {
     AppContext& context = AppContext::getInstance();
     
     unique_ptr<DlgSelectFecha> dlg = getDlgFecha();
@@ -187,7 +205,7 @@ void VerEmbalses::showGraphicClicked() {
     }
 }
 
-void VerEmbalses::showEmbalsesClicked() {
+void VerEmbalsesView::showEmbalsesClicked() {
     AppContext& context = AppContext::getInstance();
     string lastExecution = context.getLastExecution();
     Dataframe df = context.getDataframeEmbalsesZonaAndDate(zona, lastExecution);
@@ -196,7 +214,7 @@ void VerEmbalses::showEmbalsesClicked() {
     dlgShowTable->mostrar(true);
 }
 
-void VerEmbalses::showExcelClicked() {
+void VerEmbalsesView::showExcelClicked() {
     AppContext& context = AppContext::getInstance();
     
     unique_ptr<DlgSelectFecha> dlg = getDlgFecha();
@@ -223,7 +241,7 @@ void VerEmbalses::showExcelClicked() {
     }
 }
 
-void VerEmbalses::buscarPorFechas() {
+void VerEmbalsesView::buscarPorFechas() {
     AppContext& context = AppContext::getInstance();
     
     unique_ptr<DlgSelectFecha> dlg = getDlgFecha(false);
@@ -259,12 +277,12 @@ void VerEmbalses::buscarPorFechas() {
     }
 }
 
-unique_ptr<DlgSelectFecha> VerEmbalses::getDlgFecha(bool isSelectedZone) {
+unique_ptr<DlgSelectFecha> VerEmbalsesView::getDlgFecha(bool isSelectedZone) {
     unique_ptr<DlgSelectFecha> dlg;
     
     if (isSelectedZone) {
-        string codigoZona = qtHelper.getStringValue(cmbZona);
-        string codigoEmbalse = qtHelper.getStringValue(cmbEmbalse);
+        string codigoZona = qtHelper.getStringValue(m_ui.cmbZona);
+        string codigoEmbalse = qtHelper.getStringValue(m_ui.cmbEmbalse);
         
         dlg = unique_ptr<DlgSelectFecha>{new DlgSelectFecha(codigoZona, codigoEmbalse, this)};
     }
@@ -275,95 +293,76 @@ unique_ptr<DlgSelectFecha> VerEmbalses::getDlgFecha(bool isSelectedZone) {
     return dlg;
 }
 
-void VerEmbalses::showInfoEmbalse(InfoEmbalse& info) {
+void VerEmbalsesView::showInfoEmbalse(InfoEmbalse& info) {
     
-    lblNombreEmbalse->setText(qtHelper.asQString(info.embalse));
+    m_ui.lblNombreEmbalse->setText(qtHelper.asQString(info.embalse));
     
     std::string sPercent = fmt::format(Constants::PERCENT_FORMAT, info.porcentaje);
-    lblPercent->setText(qtHelper.asQString(sPercent));
-    helper.setLabelStyleValue(lblPercent, info.porcentaje);
+    m_ui.lblPercent->setText(qtHelper.asQString(sPercent));
+    helper.setLabelStyleValue(m_ui.lblPercent, info.porcentaje);
     
     std::string sCapacidad = fmt::format(Constants::NUMBER_FORMAT, info.capacidad);
-    lblCapacidad->setText(qtHelper.asQString(sCapacidad));
+    m_ui.lblCapacidad->setText(qtHelper.asQString(sCapacidad));
     
     std::string sVolumen = fmt::format(Constants::NUMBER_FORMAT, info.volumen); // s == "3.14"
-    lblVolumen->setText(qtHelper.asQString(sVolumen));
+    m_ui.lblVolumen->setText(qtHelper.asQString(sVolumen));
 }
 
-void VerEmbalses::showStatsPorZona(string codZona, string date) {
+void VerEmbalsesView::showStatsPorZona(string codZona, string date) {
     try {
         AppContext& context = AppContext::getInstance();
         
         std::tuple<double*, double*> stats = context.getStatsPorZonaYFecha(codZona, date);
         
         std::string sMedia = fmt::format(Constants::NUMBER_FORMAT, get<0>(stats)[0]);
-        lblNivelMedia->setText(qtHelper.asQString(sMedia));
+        m_ui.lblNivelMedia->setText(qtHelper.asQString(sMedia));
         
         sMedia = fmt::format(Constants::NUMBER_FORMAT, get<1>(stats)[0]);
-        lblVolumenMedia->setText(qtHelper.asQString(sMedia));
+        m_ui.lblVolumenMedia->setText(qtHelper.asQString(sMedia));
         
         std::string sMinimo = fmt::format(Constants::NUMBER_FORMAT, get<0>(stats)[1]);
-        lblNivelMinimo->setText(qtHelper.asQString(sMinimo));
+        m_ui.lblNivelMinimo->setText(qtHelper.asQString(sMinimo));
         
         sMinimo = fmt::format(Constants::NUMBER_FORMAT, get<1>(stats)[1]);
-        lblVolumenMinimo->setText(qtHelper.asQString(sMinimo));
+        m_ui.lblVolumenMinimo->setText(qtHelper.asQString(sMinimo));
         
         std::string sMax = fmt::format(Constants::NUMBER_FORMAT, get<0>(stats)[2]);
-        lblNivelMaximo->setText(qtHelper.asQString(sMax));
+        m_ui.lblNivelMaximo->setText(qtHelper.asQString(sMax));
         
         sMax = fmt::format(Constants::NUMBER_FORMAT, get<1>(stats)[2]);
-        lblVolumenMaximo->setText(qtHelper.asQString(sMax));
+        m_ui.lblVolumenMaximo->setText(qtHelper.asQString(sMax));
 
         double volumenTotal = get<1>(stats)[3];
         std::string sSum = fmt::format(Constants::NUMBER_FORMAT, volumenTotal);
-        lblVolumenTotal->setText(qtHelper.asQString(sSum));
+        m_ui.lblVolumenTotal->setText(qtHelper.asQString(sSum));
 
         double totalCapacidad = context.getTotalCapacidadZona(codZona);
         std::string sTotalCapacidad = fmt::format(Constants::NUMBER_FORMAT, totalCapacidad);
-        lblTotalCapacidadZona->setText(qtHelper.asQString(sTotalCapacidad));
+        m_ui.lblTotalCapacidadZona->setText(qtHelper.asQString(sTotalCapacidad));
 
         double porcentajeVolumen = (volumenTotal*100)/totalCapacidad;
         std::string sPorcentajeVolumen = fmt::format(Constants::NUMBER_FORMAT, porcentajeVolumen);
-        lblPorcentajeVolumenTotal->setText(qtHelper.asQString(sPorcentajeVolumen));
-        helper.setLabelStyleValue(lblPorcentajeVolumenTotal, porcentajeVolumen);
+        m_ui.lblPorcentajeVolumenTotal->setText(qtHelper.asQString(sPorcentajeVolumen));
+        helper.setLabelStyleValue(m_ui.lblPorcentajeVolumenTotal, porcentajeVolumen);
     } catch (const exception& e) {
         spdlog::error("ERROR getStatsPorZona: {}", e.what());
         throw e;
     }
 }
 
-void VerEmbalses::setStatus(string date) {
+void VerEmbalsesView::setStatus(string date) {
     try {
         string label = "Datos a fecha: " + date;
-        statusbar->showMessage(qtHelper.asQString(label));
+        updateToObservers(label);
     } catch (const exception& e) {
         spdlog::error(e.what());
         throw (e);
     }
 }
 
-void VerEmbalses::settingsConfigure()
+VerEmbalsesView::~VerEmbalsesView()
 {
-    qCDebug(VEREMBALSES) << "VerEmbalses::settingsConfigure()";
-    // The preference dialog is derived from prefs_base.ui
-    //
-    // compare the names of the widgets in the .ui file
-    // to the names of the variables in the .kcfg file
-    //avoid to have 2 dialogs shown
-    if (KConfigDialog::showDialog(QStringLiteral("settings"))) {
-        return;
-    }
-
-    KConfigDialog *dialog = new KConfigDialog(this, QStringLiteral("settings"), VerEmbalsesSettings::self());
-    QWidget *generalSettingsPage = new QWidget;
-    m_settings.setupUi(generalSettingsPage);
-    dialog->addPage(generalSettingsPage, i18n("General"), QStringLiteral("package_setting"));
-    
-    dialog->setAttribute(Qt::WA_DeleteOnClose);
-    dialog->show();
 }
 
-VerEmbalses::~VerEmbalses() {
-    AppContext& instance = AppContext::getInstance();
-    instance.destroyInstance();
-}
+
+

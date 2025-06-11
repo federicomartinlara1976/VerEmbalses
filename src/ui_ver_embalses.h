@@ -1,28 +1,23 @@
 /********************************************************************************
-** Form generated from reading UI file 'ver_embalseskoJisd.ui'
+** Form generated from reading UI file 'ver_embalsesmCixAO.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef VER_EMBALSESKOJISD_H
-#define VER_EMBALSESKOJISD_H
+#ifndef VER_EMBALSESMCIXAO_H
+#define VER_EMBALSESMCIXAO_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
-#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenu>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
@@ -30,14 +25,10 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_MainWindow
+class Ui_VerEmbalses
 {
 public:
-    QAction *actionDiaria;
-    QAction *actionMes;
-    QAction *actionPor_fecha;
-    QWidget *centralwidget;
-    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout_10;
     QTabWidget *tabWidget;
     QWidget *tabEmbalses;
     QVBoxLayout *verticalLayout_18;
@@ -114,29 +105,15 @@ public:
     QComboBox *cmbPuntoControl;
     QHBoxLayout *horizontalLayout_9;
     QTableView *tableView;
-    QMenuBar *menubar;
-    QMenu *menuConsulta;
-    QStatusBar *statusbar;
 
-    void setupUi(QMainWindow *MainWindow)
+    void setupUi(QWidget *VerEmbalses)
     {
-        if (MainWindow->objectName().isEmpty())
-            MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1041, 762);
-        MainWindow->setMinimumSize(QSize(840, 600));
-        actionDiaria = new QAction(MainWindow);
-        actionDiaria->setObjectName(QString::fromUtf8("actionDiaria"));
-        actionMes = new QAction(MainWindow);
-        actionMes->setObjectName(QString::fromUtf8("actionMes"));
-        actionPor_fecha = new QAction(MainWindow);
-        actionPor_fecha->setObjectName(QString::fromUtf8("actionPor_fecha"));
-        centralwidget = new QWidget(MainWindow);
-        centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        verticalLayout_2 = new QVBoxLayout(centralwidget);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        verticalLayout_2->setSizeConstraint(QLayout::SetDefaultConstraint);
-        verticalLayout_2->setContentsMargins(10, 10, 10, 10);
-        tabWidget = new QTabWidget(centralwidget);
+        if (VerEmbalses->objectName().isEmpty())
+            VerEmbalses->setObjectName(QString::fromUtf8("VerEmbalses"));
+        VerEmbalses->resize(956, 758);
+        horizontalLayout_10 = new QHBoxLayout(VerEmbalses);
+        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
+        tabWidget = new QTabWidget(VerEmbalses);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
         tabEmbalses = new QWidget();
         tabEmbalses->setObjectName(QString::fromUtf8("tabEmbalses"));
@@ -672,95 +649,78 @@ public:
 
         tabWidget->addTab(tabPluviometria, QString());
 
-        verticalLayout_2->addWidget(tabWidget);
+        horizontalLayout_10->addWidget(tabWidget);
 
-        MainWindow->setCentralWidget(centralwidget);
-        menubar = new QMenuBar(MainWindow);
-        menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1041, 32));
-        menuConsulta = new QMenu(menubar);
-        menuConsulta->setObjectName(QString::fromUtf8("menuConsulta"));
-        MainWindow->setMenuBar(menubar);
-        statusbar = new QStatusBar(MainWindow);
-        statusbar->setObjectName(QString::fromUtf8("statusbar"));
-        MainWindow->setStatusBar(statusbar);
 
-        menubar->addAction(menuConsulta->menuAction());
-        menuConsulta->addAction(actionPor_fecha);
-
-        retranslateUi(MainWindow);
+        retranslateUi(VerEmbalses);
 
         tabWidget->setCurrentIndex(0);
 
 
-        QMetaObject::connectSlotsByName(MainWindow);
+        QMetaObject::connectSlotsByName(VerEmbalses);
     } // setupUi
 
-    void retranslateUi(QMainWindow *MainWindow)
+    void retranslateUi(QWidget *VerEmbalses)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Ver embalse", nullptr));
-        actionDiaria->setText(QApplication::translate("MainWindow", "Diaria", nullptr));
-        actionMes->setText(QApplication::translate("MainWindow", "Mensual", nullptr));
-        actionPor_fecha->setText(QApplication::translate("MainWindow", "Por fecha", nullptr));
+        VerEmbalses->setWindowTitle(QApplication::translate("VerEmbalses", "Form", nullptr));
 #ifndef QT_NO_TOOLTIP
         tabWidget->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
-        label_3->setText(QApplication::translate("MainWindow", "Zona", nullptr));
-        label_4->setText(QApplication::translate("MainWindow", "Embalses", nullptr));
-        label_10->setText(QApplication::translate("MainWindow", "Estad\303\255sticas por zona", nullptr));
-        lblZona->setText(QApplication::translate("MainWindow", "--", nullptr));
+        label_3->setText(QApplication::translate("VerEmbalses", "Zona", nullptr));
+        label_4->setText(QApplication::translate("VerEmbalses", "Embalses", nullptr));
+        label_10->setText(QApplication::translate("VerEmbalses", "Estad\303\255sticas por zona", nullptr));
+        lblZona->setText(QApplication::translate("VerEmbalses", "--", nullptr));
 #ifndef QT_NO_TOOLTIP
-        btnVerEmbalses->setToolTip(QApplication::translate("MainWindow", "Ver embalses", nullptr));
+        btnVerEmbalses->setToolTip(QApplication::translate("VerEmbalses", "Ver embalses", nullptr));
 #endif // QT_NO_TOOLTIP
         btnVerEmbalses->setText(QString());
-        label_5->setText(QApplication::translate("MainWindow", "Niveles (Hm3)", nullptr));
-        label_7->setText(QApplication::translate("MainWindow", "Media", nullptr));
-        lblNivelMedia->setText(QApplication::translate("MainWindow", "--", nullptr));
-        label_9->setText(QApplication::translate("MainWindow", "M\303\255nimo", nullptr));
-        lblNivelMinimo->setText(QApplication::translate("MainWindow", "--", nullptr));
-        label_11->setText(QApplication::translate("MainWindow", "M\303\241ximo", nullptr));
-        lblNivelMaximo->setText(QApplication::translate("MainWindow", "--", nullptr));
-        label_6->setText(QApplication::translate("MainWindow", "Volumen (Hm3)", nullptr));
-        label_13->setText(QApplication::translate("MainWindow", "Media", nullptr));
-        lblVolumenMedia->setText(QApplication::translate("MainWindow", "--", nullptr));
-        label_15->setText(QApplication::translate("MainWindow", "M\303\255nimo", nullptr));
-        lblVolumenMinimo->setText(QApplication::translate("MainWindow", "--", nullptr));
-        label_17->setText(QApplication::translate("MainWindow", "M\303\241ximo", nullptr));
-        lblVolumenMaximo->setText(QApplication::translate("MainWindow", "--", nullptr));
-        label_8->setText(QApplication::translate("MainWindow", "Total", nullptr));
-        lblVolumenTotal->setText(QApplication::translate("MainWindow", "--", nullptr));
-        label_12->setText(QApplication::translate("MainWindow", "Total capacidad", nullptr));
-        lblTotalCapacidadZona->setText(QApplication::translate("MainWindow", "--", nullptr));
-        label->setText(QApplication::translate("MainWindow", "Porcentaje %", nullptr));
-        lblPorcentajeVolumenTotal->setText(QApplication::translate("MainWindow", "--", nullptr));
-        lblNombreEmbalse->setText(QApplication::translate("MainWindow", "EMBALSE", nullptr));
-        label_19->setText(QApplication::translate("MainWindow", "Capacidad (Hm3)", nullptr));
+        label_5->setText(QApplication::translate("VerEmbalses", "Niveles (Hm3)", nullptr));
+        label_7->setText(QApplication::translate("VerEmbalses", "Media", nullptr));
+        lblNivelMedia->setText(QApplication::translate("VerEmbalses", "--", nullptr));
+        label_9->setText(QApplication::translate("VerEmbalses", "M\303\255nimo", nullptr));
+        lblNivelMinimo->setText(QApplication::translate("VerEmbalses", "--", nullptr));
+        label_11->setText(QApplication::translate("VerEmbalses", "M\303\241ximo", nullptr));
+        lblNivelMaximo->setText(QApplication::translate("VerEmbalses", "--", nullptr));
+        label_6->setText(QApplication::translate("VerEmbalses", "Volumen (Hm3)", nullptr));
+        label_13->setText(QApplication::translate("VerEmbalses", "Media", nullptr));
+        lblVolumenMedia->setText(QApplication::translate("VerEmbalses", "--", nullptr));
+        label_15->setText(QApplication::translate("VerEmbalses", "M\303\255nimo", nullptr));
+        lblVolumenMinimo->setText(QApplication::translate("VerEmbalses", "--", nullptr));
+        label_17->setText(QApplication::translate("VerEmbalses", "M\303\241ximo", nullptr));
+        lblVolumenMaximo->setText(QApplication::translate("VerEmbalses", "--", nullptr));
+        label_8->setText(QApplication::translate("VerEmbalses", "Total", nullptr));
+        lblVolumenTotal->setText(QApplication::translate("VerEmbalses", "--", nullptr));
+        label_12->setText(QApplication::translate("VerEmbalses", "Total capacidad", nullptr));
+        lblTotalCapacidadZona->setText(QApplication::translate("VerEmbalses", "--", nullptr));
+        label->setText(QApplication::translate("VerEmbalses", "Porcentaje %", nullptr));
+        lblPorcentajeVolumenTotal->setText(QApplication::translate("VerEmbalses", "--", nullptr));
+        lblNombreEmbalse->setText(QApplication::translate("VerEmbalses", "EMBALSE", nullptr));
+        label_19->setText(QApplication::translate("VerEmbalses", "Capacidad (Hm3)", nullptr));
         lblCapacidad->setText(QString());
-        label_21->setText(QApplication::translate("MainWindow", "Volumen (Hm3)", nullptr));
+        label_21->setText(QApplication::translate("VerEmbalses", "Volumen (Hm3)", nullptr));
         lblVolumen->setText(QString());
-        label_23->setText(QApplication::translate("MainWindow", "Porcentaje %", nullptr));
+        label_23->setText(QApplication::translate("VerEmbalses", "Porcentaje %", nullptr));
         lblPercent->setText(QString());
 #ifndef QT_NO_TOOLTIP
-        btnVerGrafico->setToolTip(QApplication::translate("MainWindow", "Ver gr\303\241fico", nullptr));
+        btnVerGrafico->setToolTip(QApplication::translate("VerEmbalses", "Ver gr\303\241fico", nullptr));
 #endif // QT_NO_TOOLTIP
         btnVerGrafico->setText(QString());
 #ifndef QT_NO_TOOLTIP
-        btnExportarCSV->setToolTip(QApplication::translate("MainWindow", "Exportar a CSV", nullptr));
+        btnExportarCSV->setToolTip(QApplication::translate("VerEmbalses", "Exportar a CSV", nullptr));
 #endif // QT_NO_TOOLTIP
         btnExportarCSV->setText(QString());
-        tabWidget->setTabText(tabWidget->indexOf(tabEmbalses), QApplication::translate("MainWindow", "Embalses", nullptr));
-        label_2->setText(QApplication::translate("MainWindow", "Zona", nullptr));
-        label_14->setText(QApplication::translate("MainWindow", "Punto de control", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tabPluviometria), QApplication::translate("MainWindow", "Pluviometr\303\255a", nullptr));
-        menuConsulta->setTitle(QApplication::translate("MainWindow", "Consulta", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tabEmbalses), QApplication::translate("VerEmbalses", "Embalses", nullptr));
+        label_2->setText(QApplication::translate("VerEmbalses", "Zona", nullptr));
+        label_14->setText(QApplication::translate("VerEmbalses", "Punto de control", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tabPluviometria), QApplication::translate("VerEmbalses", "Pluviometr\303\255a", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class MainWindow: public Ui_MainWindow {};
+    class VerEmbalses: public Ui_VerEmbalses {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // VER_EMBALSESKOJISD_H
+#endif // VER_EMBALSESMCIXAO_H

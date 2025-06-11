@@ -12,6 +12,9 @@
 
 #include "qtwindow.hpp"
 
+#include "ui_settings.h"
+#include "VerEmbalsesSettings.h"
+
 #include <QObject>
 #include <qttools/qthelper.hpp>
 #include <qttools/qtdatehelper.hpp>
@@ -20,14 +23,18 @@
 
 using namespace FuncionesUi;
 
-class VerEmbalses : public QtWindow, public Ui::MainWindow {
+class VerEmbalsesView : public QtWidget {
     Q_OBJECT
     
 private:
+    Ui::MainWindow m_ui;
+    
     QtHelper qtHelper;
     QtDateHelper qtDateHelper;
     
     string applicationName = "verembalses";
+    
+    Ui::Settings m_settings;
 
     VerEmbalsesAppHelper helper;
     
@@ -53,6 +60,7 @@ private slots:
     void showExcelClicked();
     void showEmbalsesClicked();
     void buscarPorFechas();
+    void settingsConfigure();
     
 protected:
     void setup() override;
@@ -60,7 +68,7 @@ protected:
     void delayedInitialization() override;
     
 public:
-    VerEmbalses(QWidget *parent = nullptr);
+    VerEmbalses();
     
     virtual ~VerEmbalses();
 };
