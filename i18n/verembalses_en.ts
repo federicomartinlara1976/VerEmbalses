@@ -192,31 +192,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Embalses</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Zona</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Estadísticas por zona</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>--</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ver embalses</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Niveles (Hm3)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Media</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -240,19 +216,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Porcentaje %</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>EMBALSE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Capacidad (Hm3)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ver gráfico</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -265,6 +229,42 @@
     </message>
     <message>
         <source>Punto de control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ver embalses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Niveles (Hm3)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Media</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Embalses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zona</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Estadísticas por zona</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Porcentaje %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>EMBALSE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ver gráfico</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

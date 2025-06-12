@@ -33,6 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QIcon>
+#include <QTranslator>
 
 #include <spdlog/spdlog.h>
 #include <memory>
@@ -44,6 +45,11 @@ using namespace std;
 int main(int argc, char **argv) {
     try {
         QApplication application(argc, argv);
+        
+        QTranslator translator;
+        if (translator.load(QLocale(), "verembalses", "_", ":/i18n")) {
+            application.installTranslator(&translator);
+        }
 
         // i18n
         KLocalizedString::setApplicationDomain("verembalses");
@@ -76,8 +82,6 @@ int main(int argc, char **argv) {
 
         // Bus de KDE
         KDBusService appDBusService(KDBusService::Multiple | KDBusService::NoExitOnFailure);
-        
-        // TODO Cargar la configuración local y meterla en la factoría de configuración
 
         // Ventana principal
         VerEmbalsesWindow *window = new VerEmbalsesWindow;
