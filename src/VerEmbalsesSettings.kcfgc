@@ -3,4 +3,4 @@ File=VerEmbalsesSettings.kcfg
 ClassName=VerEmbalsesSettings
 Singleton=true
 # will create the necessary code for setting those variables
-Mutators=server,dbName,zonaSelected,embalseSelected
+Mutators=server,dbName,zonaSelected,embalseSelected,roundDecimals
