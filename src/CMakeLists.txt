@@ -1,15 +1,19 @@
+set(SOURCE_DIR
+    ${CMAKE_SOURCE_DIR}/src
+)
+
 set(verembalses_SRCS
-    main.cpp verembalseswindow.cpp verembalsesview.cpp selectfecha.cpp
-    selecttipografico.cpp showlinegraphic.cpp
-    showpiegraphic.cpp showscattergraphic.cpp showtable.cpp
-    funciones_ui.cpp VerEmbalsesAppHelper.cpp tablemodel.cpp
-    tablemodelembalse.cpp tablemodelzona.cpp tablemodelembalses.cpp
-    tablemodelregistrospluviometricos.cpp
-    progreso.cpp qtdialogwindow.cpp window.cpp view.cpp observer.cpp
-    configuracion.cpp
-    signalmanager.cpp qloadjob.cpp graphic.cpp
-    linegraphic.cpp sectorgraphic.cpp scattergraphic.cpp
-    stackedbargraphic.cpp
+    ${SOURCE_DIR}/main.cpp ${SOURCE_DIR}/verembalseswindow.cpp ${SOURCE_DIR}/verembalsesview.cpp ${SOURCE_DIR}/selectfecha.cpp
+    ${SOURCE_DIR}/selecttipografico.cpp ${SOURCE_DIR}/showlinegraphic.cpp
+    ${SOURCE_DIR}/showpiegraphic.cpp ${SOURCE_DIR}/showscattergraphic.cpp ${SOURCE_DIR}/showtable.cpp
+    ${SOURCE_DIR}/funciones_ui.cpp ${SOURCE_DIR}/VerEmbalsesAppHelper.cpp ${SOURCE_DIR}/tablemodel.cpp
+    ${SOURCE_DIR}/tablemodelembalse.cpp ${SOURCE_DIR}/tablemodelzona.cpp ${SOURCE_DIR}/tablemodelembalses.cpp
+    ${SOURCE_DIR}/tablemodelregistrospluviometricos.cpp
+    ${SOURCE_DIR}/progreso.cpp ${SOURCE_DIR}/qtdialogwindow.cpp ${SOURCE_DIR}/window.cpp ${SOURCE_DIR}/view.cpp ${SOURCE_DIR}/observer.cpp
+    ${SOURCE_DIR}/configuracion.cpp
+    ${SOURCE_DIR}/signalmanager.cpp ${SOURCE_DIR}/qloadjob.cpp ${SOURCE_DIR}/graphic.cpp
+    ${SOURCE_DIR}/linegraphic.cpp ${SOURCE_DIR}/sectorgraphic.cpp ${SOURCE_DIR}/scattergraphic.cpp
+    ${SOURCE_DIR}/stackedbargraphic.cpp
 )
 
 ecm_qt_declare_logging_category(verembalses_SRCS
@@ -17,6 +21,45 @@ ecm_qt_declare_logging_category(verembalses_SRCS
     IDENTIFIER VEREMBALSES
     CATEGORY_NAME "verembalses"
 )
+
+qt5_add_resources(RESOURCES ${CMAKE_SOURCE_DIR}/translations.qrc)
+
+# Antes de qt5_add_translation
+set(TS_FILES
+    ${CMAKE_SOURCE_DIR}/i18n/verembalses_es.ts
+    ${CMAKE_SOURCE_DIR}/i18n/verembalses_en.ts
+)
+
+set(UI_FILES
+    ${SOURCE_DIR}/dlg-select-fecha.ui
+    ${SOURCE_DIR}/dlg-show-embalses-graphic.ui
+    ${SOURCE_DIR}/dlg-show-line-graphic.ui
+    ${SOURCE_DIR}/dlg-show-simple-graphic.ui
+    ${SOURCE_DIR}/dlg-show-table.ui
+    ${SOURCE_DIR}/dlg_progreso.ui
+    ${SOURCE_DIR}/dlg_select-tipo-grafico.ui
+    ${SOURCE_DIR}/settings.ui
+    ${SOURCE_DIR}/ver_embalses.ui
+)
+
+# 1. Actualizar traducciones
+add_custom_target(update_translations
+    COMMAND Qt5::lupdate ${verembalses_SRCS} ${UI_FILES} -ts ${TS_FILES}
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
+
+# 2. Compilar traducciones
+add_custom_target(build_translations
+    COMMAND Qt5::lrelease ${TS_FILES}
+    DEPENDS update_translations
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
+
+# 3. Target unificado
+add_custom_target(translations
+    DEPENDS build_translations
+)
+
 kconfig_add_kcfg_files(verembalses_SRCS VerEmbalsesSettings.kcfgc)
 ki18n_wrap_ui(verembalses_SRCS
     settings.ui
