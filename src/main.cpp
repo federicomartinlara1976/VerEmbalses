@@ -34,6 +34,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QCommandLineParser>
 #include <QIcon>
 #include <QTranslator>
+#include <QFile>
+#include <qthelper.hpp>
 
 #include <spdlog/spdlog.h>
 #include <memory>
@@ -46,9 +48,40 @@ int main(int argc, char **argv) {
     try {
         QApplication application(argc, argv);
         
+        QtHelper qtHelper;
+        
         QTranslator translator;
-        if (translator.load(QLocale(), "verembalses", "_", ":/i18n")) {
+        // Obtener el idioma del sistema (ej. "es_ES")
+        QString systemLocale = QLocale::system().name(); // "es", "en_US", etc.
+        spdlog::info("El idioma local es: {}", qtHelper.asString(systemLocale));
+        
+        /*
+        if (translator.load(QLocale(), "verembalses", "_", ":/translations")) {
             application.installTranslator(&translator);
+            spdlog::info("Traducciones cargadas correctamente");
+        }
+        else {
+            spdlog::error("No se han podido cargar las traducciones");
+        }
+        */
+        
+        QString appName = "verembalses";  
+        QStringList paths = QStandardPaths::locateAll(
+            QStandardPaths::GenericDataLocation,
+            appName + "/translations",
+            QStandardPaths::LocateDirectory);
+
+        // Buscar en rutas como /usr/share/locale, ~/.local/share/locale, etc.
+        for (const QString &path : paths) {
+            QString fullPath = path + "/" + appName + "_" + systemLocale + ".qm";
+            spdlog::info("Buscando en: {}", qtHelper.asString(fullPath));
+            if (QFile::exists(fullPath)) {
+                if (translator.load(fullPath)) {
+                    application.installTranslator(&translator);
+                    spdlog::info("Traducción cargada desde: {}", qtHelper.asString(fullPath));
+                    break;
+                }
+            }
         }
 
         // i18n

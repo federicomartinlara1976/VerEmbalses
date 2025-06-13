@@ -16,6 +16,7 @@
 
 #include <QAction>
 #include <QMessageBox>
+#include <QtWidgets/QApplication>
 
 #include <memory>
 
@@ -33,7 +34,7 @@ VerEmbalsesWindow::VerEmbalsesWindow()
     KStandardAction::preferences(this, SLOT(settingsConfigure()), actionCollection);
     
     QAction* queryByDateAction = new QAction(this);
-    queryByDateAction->setText(i18n("&Buscar por fecha"));
+    queryByDateAction->setText(QApplication::translate("VerEmbalses", "Buscar por fecha", nullptr));
     queryByDateAction->setIcon(QIcon::fromTheme("document-new-symbolic"));
     actionCollection->addAction("query_by_date", queryByDateAction);
     connect(queryByDateAction, &QAction::triggered, this, &VerEmbalsesWindow::queryByDate);

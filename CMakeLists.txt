@@ -42,6 +42,8 @@ find_package(fmt REQUIRED)
 find_package(mongocxx REQUIRED)
 find_package(bsoncxx REQUIRED)
 
+qt5_add_resources(RESOURCES ${CMAKE_SOURCE_DIR}/translations.qrc)
+
 add_subdirectory(doc)
 add_subdirectory(src)
 add_subdirectory(icons)
