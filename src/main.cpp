@@ -36,6 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QTranslator>
 #include <QFile>
 #include <qthelper.hpp>
+#include <qttranslatorhelper.hpp>
 
 #include <spdlog/spdlog.h>
 #include <memory>
@@ -49,43 +50,38 @@ int main(int argc, char **argv) {
         QApplication application(argc, argv);
         
         QtHelper qtHelper;
+        QtTranslatorHelper qtTranslatorHelper;
         
         QTranslator translator;
+        
         // Obtener el idioma del sistema (ej. "es_ES")
-        QString systemLocale = QLocale::system().name(); // "es", "en_US", etc.
+        QString systemLocale = qtTranslatorHelper.getLocale(); 
         spdlog::info("El idioma local es: {}", qtHelper.asString(systemLocale));
         
-        /*
-        if (translator.load(QLocale(), "verembalses", "_", ":/translations")) {
-            application.installTranslator(&translator);
-            spdlog::info("Traducciones cargadas correctamente");
+        // Traducciones para i18n (No funcionan)
+        KLocalizedString::setApplicationDomain("verembalses");
+        QSet<QString> availableTranslations = KLocalizedString::availableApplicationTranslations();
+        for (QString availableTranslation : availableTranslations) {
+            spdlog::info("Traducción disponible: {}", qtHelper.asString(availableTranslation));
+        }
+        
+        bool isTranslated = KLocalizedString::isApplicationTranslatedInto(systemLocale);
+        if (isTranslated) {
+            spdlog::info("Seleccionada traducción para {}", qtHelper.asString(systemLocale));
         }
         else {
-            spdlog::error("No se han podido cargar las traducciones");
+            spdlog::warn("No está disponible la traducción para {}", qtHelper.asString(systemLocale));
         }
-        */
         
+        // Traducciones para Qt
         QString appName = "verembalses";  
-        QStringList paths = QStandardPaths::locateAll(
-            QStandardPaths::GenericDataLocation,
-            appName + "/translations",
-            QStandardPaths::LocateDirectory);
-
-        // Buscar en rutas como /usr/share/locale, ~/.local/share/locale, etc.
-        for (const QString &path : paths) {
-            QString fullPath = path + "/" + appName + "_" + systemLocale + ".qm";
-            spdlog::info("Buscando en: {}", qtHelper.asString(fullPath));
-            if (QFile::exists(fullPath)) {
-                if (translator.load(fullPath)) {
-                    application.installTranslator(&translator);
-                    spdlog::info("Traducción cargada desde: {}", qtHelper.asString(fullPath));
-                    break;
-                }
-            }
+        
+        QStringList paths = qtTranslatorHelper.loadPaths(appName, "translations");
+        
+        bool loaded = qtTranslatorHelper.loadTranslationFor(application, translator, paths, appName, systemLocale);
+        if (!loaded) {
+            spdlog::warn("Ocurrió un error al cargar las traducciones");
         }
-
-        // i18n
-        KLocalizedString::setApplicationDomain("verembalses");
         
         // Inicializa manejador de errores no controlados
         KCrash::initialize();
@@ -117,7 +113,7 @@ int main(int argc, char **argv) {
         KDBusService appDBusService(KDBusService::Multiple | KDBusService::NoExitOnFailure);
 
         // Ventana principal
-        VerEmbalsesWindow *window = new VerEmbalsesWindow;
+        VerEmbalsesWindow *window = new VerEmbalsesWindow();
         window->show();
 
         return application.exec();
