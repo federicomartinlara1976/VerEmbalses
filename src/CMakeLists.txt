@@ -78,7 +78,6 @@ target_include_directories (verembalses PRIVATE
     "/usr/local/include/mongocxx/v_noabi" 
     "/usr/local/include/chronoslibs/common"
     "/usr/local/include/chronoslibs/mongo"
-    "/usr/local/include/chronoslibs/common"
     "/usr/local/include/chronoslibs/configuration"
     "/usr/local/include/chronoslibs/kdetools")
 target_compile_options(verembalses PRIVATE -fexceptions -Woverloaded-virtual)

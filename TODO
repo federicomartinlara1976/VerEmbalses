@@ -25,9 +25,13 @@
 
 12/06/2025
 
-- Archivos de literales
+- Archivos de literales. COMPLETADO
 - Icono
 
 03/07/2025
 
 - Gráfico en línea de evolución de porcentaje por zona. Hacer dataframe
+
+11/07/2025
+
+- En las estadísticas por zona, se visualizan el mínimo volumen y el máximo. Poner debajo de cada cifra el embalse al que pertenece dicha cifra
