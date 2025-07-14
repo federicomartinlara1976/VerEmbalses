@@ -3,6 +3,8 @@
 #include <fmt/format.h>
 #include <optional>
 
+#include <QtGlobal>
+
 #include <QObject>
 #include <QFileDialog>
 
@@ -40,18 +42,18 @@ AppContext& AppContext::getInstance() {
 }
 
 void AppContext::destroy(AppContext* instance) {
-    if (instance != nullptr) {
-        spdlog::info("Deleting...");
-        delete instance;
-        instance = nullptr;
-    }
+    Q_ASSERT(instance != nullptr);
+    
+    spdlog::info("Deleting...");
+    delete instance;
+    instance = nullptr;
 }
 
 void AppContext::destroyInstance() {
-    if (_instance != nullptr) {
-        spdlog::info("Destroying AppContext");
-        _instance.reset(nullptr); // Replaces stored pointer with nullptr, calls deleter on pointed-to instance.
-    }
+    Q_ASSERT(_instance != nullptr);
+    
+    spdlog::info("Destroying AppContext");
+    _instance.reset(nullptr); // Replaces stored pointer with nullptr, calls deleter on pointed-to instance.
 }
 
 AppContext::AppContext() {}
@@ -63,6 +65,7 @@ AppContext::~AppContext() {
 
 DataEngine& AppContext::getDataEngine() {
     DataEngine& dataEngine = DataEngine::getInstance();
+    
     if (!dataEngine.isReady()) {
         Configuracion& configuracion = Configuracion::getInstance();
         dataEngine.setConfiguration(configuracion.getConfiguration());
@@ -741,19 +744,16 @@ vector<const char*> AppContext::getFieldNames(FuncionesUi::Dataframe& dataFrame)
 }
 
 void AppContext::saveDataframeToDisk(const QString &outputFileName, FuncionesUi::Dataframe& dataFrame) {
-    if (!outputFileName.isNull()) {
-        // It creates the file
-        QSaveFile file(outputFileName);
-        file.open(QIODevice::WriteOnly);
+    Q_ASSERT(!outputFileName.isNull())
+    
+    // It creates the file
+    QSaveFile file(outputFileName);
+    file.open(QIODevice::WriteOnly);
         
-        writeHeader(file, dataFrame);
-        writeContent(file, dataFrame);
+    writeHeader(file, dataFrame);
+    writeContent(file, dataFrame);
         
-        file.commit();
-    }
-    else {
-        spdlog::info("Save cancelled");
-    }
+    file.commit();
 }
 
 void AppContext::writeHeader(QSaveFile& file, FuncionesUi::Dataframe& dataframe) {
