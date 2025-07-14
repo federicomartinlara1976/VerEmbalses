@@ -744,7 +744,7 @@ vector<const char*> AppContext::getFieldNames(FuncionesUi::Dataframe& dataFrame)
 }
 
 void AppContext::saveDataframeToDisk(const QString &outputFileName, FuncionesUi::Dataframe& dataFrame) {
-    Q_ASSERT(!outputFileName.isNull())
+    Q_ASSERT(!outputFileName.isNull());
     
     // It creates the file
     QSaveFile file(outputFileName);
