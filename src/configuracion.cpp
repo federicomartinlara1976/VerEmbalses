@@ -21,9 +21,8 @@ Configuracion::Configuracion() {
 
 
 void Configuracion::destroyInstance() {
-    if (_configuracion != nullptr) {
-        _configuracion.reset(nullptr); // Replaces stored pointer with nullptr, calls deleter on pointed-to instance.
-    }
+    Q_ASSERT(_configuracion != nullptr);
+    _configuracion.reset(nullptr); // Replaces stored pointer with nullptr, calls deleter on pointed-to instance.
 }
 
 std::map<std::string, std::string> Configuracion::getProperties() {
@@ -37,10 +36,9 @@ Configuracion::~Configuracion() {
 }
 
 void Configuracion::destroy(Configuracion* instance) {
-    if (instance != nullptr) {
-        delete instance;
-        instance = nullptr;
-    }
+    Q_ASSERT(instance != nullptr);
+    delete instance;
+    instance = nullptr;
 }
 
 Configuration* VerEmbalsesConfigurationFactory::createConfiguration() const {

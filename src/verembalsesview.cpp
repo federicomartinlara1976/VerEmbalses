@@ -253,14 +253,14 @@ void VerEmbalsesView::showInfoEmbalse(InfoEmbalse& info) {
     
     m_ui.lblNombreEmbalse->setText(qtHelper.asQString(info.embalse));
     
-    std::string sPercent = fmt::format(Constants::PERCENT_FORMAT, info.porcentaje);
+    std::string sPercent = formatter.formatNumber(info.porcentaje);
     m_ui.lblPercent->setText(qtHelper.asQString(sPercent));
     helper.setLabelStyleValue(m_ui.lblPercent, info.porcentaje);
     
-    std::string sCapacidad = fmt::format(Constants::NUMBER_FORMAT, info.capacidad);
+    std::string sCapacidad = formatter.formatNumber(info.capacidad);
     m_ui.lblCapacidad->setText(qtHelper.asQString(sCapacidad));
     
-    std::string sVolumen = fmt::format(Constants::NUMBER_FORMAT, info.volumen); // s == "3.14"
+    std::string sVolumen = formatter.formatNumber(info.volumen); // s == "3.14"
     m_ui.lblVolumen->setText(qtHelper.asQString(sVolumen));
 }
 
@@ -270,34 +270,34 @@ void VerEmbalsesView::showStatsPorZona(string codZona, string date) {
         
         std::tuple<double*, double*> stats = context.getStatsPorZonaYFecha(codZona, date);
         
-        std::string sMedia = fmt::format(Constants::NUMBER_FORMAT, get<0>(stats)[0]);
+        std::string sMedia = formatter.formatNumber(get<0>(stats)[0]);
         m_ui.lblNivelMedia->setText(qtHelper.asQString(sMedia));
         
-        sMedia = fmt::format(Constants::NUMBER_FORMAT, get<1>(stats)[0]);
+        sMedia = formatter.formatNumber(get<1>(stats)[0]);
         m_ui.lblVolumenMedia->setText(qtHelper.asQString(sMedia));
         
-        std::string sMinimo = fmt::format(Constants::NUMBER_FORMAT, get<0>(stats)[1]);
+        std::string sMinimo = formatter.formatNumber(get<0>(stats)[1]);
         m_ui.lblNivelMinimo->setText(qtHelper.asQString(sMinimo));
         
-        sMinimo = fmt::format(Constants::NUMBER_FORMAT, get<1>(stats)[1]);
+        sMinimo = formatter.formatNumber(get<1>(stats)[1]);
         m_ui.lblVolumenMinimo->setText(qtHelper.asQString(sMinimo));
         
-        std::string sMax = fmt::format(Constants::NUMBER_FORMAT, get<0>(stats)[2]);
+        std::string sMax = formatter.formatNumber(get<0>(stats)[2]);
         m_ui.lblNivelMaximo->setText(qtHelper.asQString(sMax));
         
-        sMax = fmt::format(Constants::NUMBER_FORMAT, get<1>(stats)[2]);
+        sMax = formatter.formatNumber(get<1>(stats)[2]);
         m_ui.lblVolumenMaximo->setText(qtHelper.asQString(sMax));
 
         double volumenTotal = get<1>(stats)[3];
-        std::string sSum = fmt::format(Constants::NUMBER_FORMAT, volumenTotal);
+        std::string sSum = formatter.formatNumber(volumenTotal);
         m_ui.lblVolumenTotal->setText(qtHelper.asQString(sSum));
 
         double totalCapacidad = context.getTotalCapacidadZona(codZona);
-        std::string sTotalCapacidad = fmt::format(Constants::NUMBER_FORMAT, totalCapacidad);
+        std::string sTotalCapacidad = formatter.formatNumber(totalCapacidad);
         m_ui.lblTotalCapacidadZona->setText(qtHelper.asQString(sTotalCapacidad));
 
         double porcentajeVolumen = (volumenTotal*100)/totalCapacidad;
-        std::string sPorcentajeVolumen = fmt::format(Constants::NUMBER_FORMAT, porcentajeVolumen);
+        std::string sPorcentajeVolumen = formatter.formatNumber(porcentajeVolumen);
         m_ui.lblPorcentajeVolumenTotal->setText(qtHelper.asQString(sPorcentajeVolumen));
         helper.setLabelStyleValue(m_ui.lblPorcentajeVolumenTotal, porcentajeVolumen);
     } catch (const exception& e) {

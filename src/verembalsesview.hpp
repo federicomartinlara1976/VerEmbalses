@@ -12,6 +12,7 @@
 #include "qloadjob.hpp"
 #include "funciones_ui.hpp"
 #include "VerEmbalsesAppHelper.hpp"
+#include "formatter.hpp"
 
 #include <QObject>
 #include <qthelper.hpp>
@@ -76,6 +77,8 @@ private:
     string plvZona;
     
     unique_ptr<DlgSelectFecha> getDlgFecha();
+    
+    Formatter formatter;
     
     void showInfoEmbalse(InfoEmbalse& info);
     void showStatsPorZona(string codZona, string date);

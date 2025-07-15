@@ -10,7 +10,7 @@ set(verembalses_SRCS
     ${SOURCE_DIR}/tablemodelembalse.cpp ${SOURCE_DIR}/tablemodelzona.cpp ${SOURCE_DIR}/tablemodelembalses.cpp
     ${SOURCE_DIR}/tablemodelregistrospluviometricos.cpp
     ${SOURCE_DIR}/progreso.cpp ${SOURCE_DIR}/qtdialogwindow.cpp ${SOURCE_DIR}/window.cpp ${SOURCE_DIR}/view.cpp ${SOURCE_DIR}/observer.cpp
-    ${SOURCE_DIR}/configuracion.cpp
+    ${SOURCE_DIR}/configuracion.cpp ${SOURCE_DIR}/formatter.cpp
     ${SOURCE_DIR}/signalmanager.cpp ${SOURCE_DIR}/qloadjob.cpp ${SOURCE_DIR}/graphic.cpp
     ${SOURCE_DIR}/linegraphic.cpp ${SOURCE_DIR}/sectorgraphic.cpp ${SOURCE_DIR}/scattergraphic.cpp
     ${SOURCE_DIR}/stackedbargraphic.cpp
