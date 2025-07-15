@@ -29,9 +29,7 @@ std::map<std::string, std::string> Configuracion::getProperties() {
     return configuration->getProperties();
 }
 
-Configuracion::~Configuracion() {
-    delete configuration;
-}
+Configuracion::~Configuracion() {}
 
 void Configuracion::destroy(Configuracion* instance) {
     Q_ASSERT(instance != nullptr);
@@ -44,8 +42,8 @@ Configuration& Configuracion::getConfiguration() {
     return *configuration; 
 }
 
-Configuration* VerEmbalsesConfigurationFactory::createConfiguration() const {
-    Configuration* configuration = new Configuration();
+std::unique_ptr<Configuration> VerEmbalsesConfigurationFactory::createConfiguration() const {
+    std::unique_ptr<Configuration> configuration = std::unique_ptr<Configuration>{new Configuration()};
     
     std::string server = qtHelper.asString(VerEmbalsesSettings::server());
     std::string dbName = qtHelper.asString(VerEmbalsesSettings::dbName());

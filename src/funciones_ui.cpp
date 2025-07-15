@@ -20,7 +20,7 @@
 #include "constants.hpp"
 #include "configuracion.hpp"
 
-using namespace data;
+using namespace chronos::data;
 using namespace std;
 
 using namespace mongocxx;
@@ -206,17 +206,17 @@ FuncionesUi::Dataframe AppContext::getDataframeEmbalsesZonaAndDate(string codZon
     try {
         unique_ptr<vector<InfoEmbalse>> embalses = getEmbalsesPorZona("Embalses", codZona);
 
-        data::ColumnData<unsigned long> cIndex("Index");
+        ColumnData<unsigned long> cIndex("Index");
         vector<unsigned long> indices;
-        data::ColumnData<string> cCodigo("Codigo");
+        ColumnData<string> cCodigo("Codigo");
         vector<string> v_codigos;
-        data::ColumnData<string> cEmbalse("Embalse");
+        ColumnData<string> cEmbalse("Embalse");
         vector<string> v_embalses;
-        data::ColumnData<double> cNivel("Nivel");
+        ColumnData<double> cNivel("Nivel");
         vector<double> v_niveles;
-        data::ColumnData<double> cVolumen("Volumen");
+        ColumnData<double> cVolumen("Volumen");
         vector<double> v_volumenes;
-        data::ColumnData<double> cCapacidad("Capacidad");
+        ColumnData<double> cCapacidad("Capacidad");
         vector<double> v_capacidades;
 
         ulong index = 0;
@@ -260,13 +260,13 @@ FuncionesUi::Dataframe AppContext::getDataframeZona(string codZona) {
         //spdlog::info("Dataframe para la zona {}", codZona);
         unique_ptr<vector<InfoEmbalse>> embalses = getEmbalsesPorZona("Embalses", codZona);
 
-        data::ColumnData<unsigned long> cIndex("Index");
+        ColumnData<unsigned long> cIndex("Index");
         vector<unsigned long> indices;
-        data::ColumnData<double> cNivel("Nivel");
+        ColumnData<double> cNivel("Nivel");
         vector<double> niveles;
-        data::ColumnData<double> cVolumen("Volumen");
+        ColumnData<double> cVolumen("Volumen");
         vector<double> volumenes;
-        data::ColumnData<double> cCapacidad("Capacidad");
+        ColumnData<double> cCapacidad("Capacidad");
         vector<double> capacidades;
 
         ulong index = 0;
@@ -344,19 +344,19 @@ unique_ptr<vector<InfoPuntoControl>> AppContext::getPuntosControlPorZona(string 
 FuncionesUi::Dataframe AppContext::getDataframePorEmbalseYRangoFechas(string codEmbalse, QDate& desde, QDate& hasta) {
     vector<InfoEmbalse> registros = getPorFechas(codEmbalse, desde, hasta);
     
-    data::ColumnData<ulong> cIndex("Indice");
+    ColumnData<ulong> cIndex("Indice");
     vector<ulong> indices;
-    data::ColumnData<string> cFecha("Fecha");
+    ColumnData<string> cFecha("Fecha");
     vector<string> fechas;
-    data::ColumnData<double> cNivel("Nivel");
+    ColumnData<double> cNivel("Nivel");
     vector<double> niveles;
-    data::ColumnData<double> cVolumen("Volumen");
+    ColumnData<double> cVolumen("Volumen");
     vector<double> volumenes;
-    data::ColumnData<double> cPorcentaje("Porcentaje");
+    ColumnData<double> cPorcentaje("Porcentaje");
     vector<double> porcentajes;
-    data::ColumnData<double> cMen("MEN");
+    ColumnData<double> cMen("MEN");
     vector<double> v_men;
-    data::ColumnData<double> cCapacidad("Capacidad");
+    ColumnData<double> cCapacidad("Capacidad");
     vector<double> v_capacidad;
         
     ulong index = 0;
@@ -397,26 +397,26 @@ FuncionesUi::Dataframe AppContext::getDataframePorZonaYRangoFechas(string codZon
     // Obtener las ejecuciones entre las fechas
     vector<string> ejecuciones = getExecutions(desde, hasta);
 
-    data::ColumnData<ulong> cIndex("Indice");
+    ColumnData<ulong> cIndex("Indice");
     vector<ulong> indices;
 
-    data::ColumnData<string> cFecha("Fecha");
+    ColumnData<string> cFecha("Fecha");
     vector<string> fechas;
 
-    data::ColumnData<double> cNivelMedia("MediaNivel");
+    ColumnData<double> cNivelMedia("MediaNivel");
     vector<double> mediaNiveles;
-    data::ColumnData<double> cNivelMinimo("MinimoNivel");
+    ColumnData<double> cNivelMinimo("MinimoNivel");
     vector<double> minimoNiveles;
-    data::ColumnData<double> cNivelMaximo("MaximoNivel");
+    ColumnData<double> cNivelMaximo("MaximoNivel");
     vector<double> maximoNiveles;
 
-    data::ColumnData<double> cVolumenMedia("MediaVolumen");
+    ColumnData<double> cVolumenMedia("MediaVolumen");
     vector<double> mediaVolumenes;
-    data::ColumnData<double> cVolumenMinimo("MinimoVolumen");
+    ColumnData<double> cVolumenMinimo("MinimoVolumen");
     vector<double> minimoVolumenes;
-    data::ColumnData<double> cVolumenMaximo("MaximoVolumen");
+    ColumnData<double> cVolumenMaximo("MaximoVolumen");
     vector<double> maximoVolumenes;
-    data::ColumnData<double> cVolumenSuma("SumaVolumen");
+    ColumnData<double> cVolumenSuma("SumaVolumen");
     vector<double> sumaVolumenes;
 
 
@@ -472,23 +472,23 @@ FuncionesUi::Dataframe AppContext::getDataframePorZonaYRangoFechas(string codZon
 FuncionesUi::Dataframe AppContext::getDataframePuntoControl(string puntoControl, QDate& desde, QDate& hasta) {
     vector<RegistroPluviometrico> registros = getRegistrosPuntoControl(puntoControl, desde, hasta);
     
-    data::ColumnData<ulong> cIndex("Indice");
+    ColumnData<ulong> cIndex("Indice");
     vector<ulong> indices;
 
-    data::ColumnData<string> cFecha("Fecha");
+    ColumnData<string> cFecha("Fecha");
     vector<string> fechas;
 
-    data::ColumnData<double> cHoraActual("HoraActual");
+    ColumnData<double> cHoraActual("HoraActual");
     vector<double> vHoraActual;
-    data::ColumnData<double> cHoraAnterior("HoraAnterior");
+    ColumnData<double> cHoraAnterior("HoraAnterior");
     vector<double> vHoraAnterior;
-    data::ColumnData<double> cUltimas12Horas("Ultimas12Horas");
+    ColumnData<double> cUltimas12Horas("Ultimas12Horas");
     vector<double> vUltimas12Horas;
-    data::ColumnData<double> cHoy("Hoy");
+    ColumnData<double> cHoy("Hoy");
     vector<double> vHoy;
-    data::ColumnData<double> cAyer("Ayer");
+    ColumnData<double> cAyer("Ayer");
     vector<double> vAyer;
-    data::ColumnData<string> cUnidadMedida("UnidadMedida");
+    ColumnData<string> cUnidadMedida("UnidadMedida");
     vector<string> vUnidadMedida;
     
     ulong index = 0;

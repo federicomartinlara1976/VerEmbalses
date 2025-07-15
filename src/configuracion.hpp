@@ -8,6 +8,9 @@
 
 #include <qthelper.hpp>
 
+#include <memory>
+
+using namespace chronos::configuration;
 
 class Configuracion {
 private:
@@ -16,7 +19,7 @@ private:
     Configuracion();
     static void destroy(Configuracion* instance);
     
-    Configuration* configuration;
+    std::unique_ptr<Configuration> configuration;
 
 public:
     static Configuracion& getInstance();
@@ -33,7 +36,7 @@ private:
     QtHelper qtHelper;
     
 public:
-    Configuration* createConfiguration() const override;
+    std::unique_ptr<Configuration> createConfiguration() const override;
 };
 
 #endif

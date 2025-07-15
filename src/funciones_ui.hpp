@@ -19,7 +19,7 @@ namespace FuncionesUi {
     
     using namespace std;
     using namespace types;
-    using namespace data::nosql::mongo;
+    using namespace chronos::data::nosql::mongo;
 
     // DataFrame library is entirely under hmdf name-space
     //
