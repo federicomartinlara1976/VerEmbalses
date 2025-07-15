@@ -35,3 +35,7 @@
 11/07/2025
 
 - En las estadísticas por zona, se visualizan el mínimo volumen y el máximo. Poner debajo de cada cifra el embalse al que pertenece dicha cifra
+
+15/07/2025
+
+- Los decimales establecidos por configuración no se están mostrando en la salida con su correcto número de decimales. Corregir
