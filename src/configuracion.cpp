@@ -30,15 +30,18 @@ std::map<std::string, std::string> Configuracion::getProperties() {
 }
 
 Configuracion::~Configuracion() {
-    if (_configuracion == nullptr) {
-        //spdlog::info("* Instance already deleted!");
-    }
+    delete configuration;
 }
 
 void Configuracion::destroy(Configuracion* instance) {
     Q_ASSERT(instance != nullptr);
     delete instance;
     instance = nullptr;
+}
+
+Configuration& Configuracion::getConfiguration() { 
+    Q_ASSERT(configuration != nullptr);
+    return *configuration; 
 }
 
 Configuration* VerEmbalsesConfigurationFactory::createConfiguration() const {
@@ -58,3 +61,4 @@ Configuration* VerEmbalsesConfigurationFactory::createConfiguration() const {
     
     return configuration;
 }
+

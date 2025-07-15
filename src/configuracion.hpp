@@ -23,7 +23,7 @@ public:
     static void destroyInstance();
     
     std::map<std::string, std::string> getProperties();
-    Configuration& getConfiguration() { return *configuration; }
+    Configuration& getConfiguration();
     
     virtual ~Configuracion();
 };
