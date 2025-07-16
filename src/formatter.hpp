@@ -11,8 +11,8 @@ public:
     Formatter();
     
     string numberFormat() {  return _numberFormat; }
-    string formatNumber(double& number);
-    string formatNumber(float& number);
+    string formatNumber(double& number) const;
+    string formatNumber(float& number) const;
 };
 
 #endif

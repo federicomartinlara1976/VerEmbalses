@@ -93,9 +93,9 @@ void DlgShowTable::setCodEmbalse(const string& codEmbalse) {
     std::vector<const char *> columns = {"MEN", "Capacidad"};
     auto row = dataframe.get_row<double>(0, columns);
 
-    std::string sMen = fmt::format("{:.3f}", row.at<double>(0)); // s == "3.14"
+    std::string sMen = formatter.formatNumber(row.at<double>(0)); // s == "3.14"
     lblMen->setText(helper.asQString(sMen));
-    std::string sCapacidad = fmt::format("{:.3f}", row.at<double>(1)); // s == "3.14"
+    std::string sCapacidad = formatter.formatNumber(row.at<double>(1)); // s == "3.14"
     lblCapacidad->setText(helper.asQString(sCapacidad));
 
     this->lblTituloTabla->setText(helper.asQString(info.embalse));
@@ -108,7 +108,7 @@ void DlgShowTable::setCodZona(const string& codZona) {
     InfoZona info = context.getZona(codZona);
 
     double totalCapacidad = context.getTotalCapacidadZona(codZona);
-    std::string sTotalCapacidad = fmt::format(Constants::NUMBER_FORMAT, totalCapacidad);
+    std::string sTotalCapacidad = formatter.formatNumber(totalCapacidad);
     lblCapacidad->setText(helper.asQString(sTotalCapacidad));
 
     this->lblTituloTabla->setText(helper.asQString(info.nombre));

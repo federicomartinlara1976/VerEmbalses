@@ -9,6 +9,7 @@
 #include "showpiegraphic.hpp"
 #include "showscattergraphic.hpp"
 #include "constants.hpp"
+#include "formatter.hpp"
 
 #include "qtdialogwindow.hpp"
 #include <QObject>
@@ -35,6 +36,8 @@ private:
     FuncionesUi::Dataframe dataframe;
 
     enum Constants::TableType tableType;
+    
+    Formatter formatter;
 
     void setCodEmbalse(const string& codEmbalse);
     void setCodZona(const string& codZona);

@@ -28,10 +28,10 @@ Formatter::Formatter() {
     _numberFormat = ss.str();
 }
 
-string Formatter::formatNumber(double& num) {
+string Formatter::formatNumber(double& num) const {
     return fmt::format(_numberFormat, num);
 }
 
-string Formatter::formatNumber(float& num) {
+string Formatter::formatNumber(float& num) const {
     return fmt::format(_numberFormat, num);
 }

@@ -779,7 +779,7 @@ void AppContext::writeContent(QSaveFile& file, FuncionesUi::Dataframe& dataframe
             }
             if (std::get<2>(field) == std::type_index(typeid(double)))  {
                 double val = dataframe.get_column<double>(j)[i];
-                std::string sVal = fmt::format("{:.2f}", val);
+                std::string sVal = formatter.formatNumber(val);
                 values.append(sVal).append(",");
             }
             if (std::get<2>(field) == std::type_index(typeid(std::string)))  {

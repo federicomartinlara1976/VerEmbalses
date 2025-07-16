@@ -6,6 +6,7 @@
 
 #include "VerEmbalsesAppHelper.hpp"
 #include "funciones_ui.hpp"
+#include "formatter.hpp"
 
 using namespace FuncionesUi;
 
@@ -14,6 +15,8 @@ class TableModel : public QStandardItemModel {
     
 private:
     VerEmbalsesAppHelper helper;
+    
+    Formatter formatter;
 
 protected:
     FuncionesUi::Dataframe dataFrame;

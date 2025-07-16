@@ -1,6 +1,5 @@
 #include <spdlog/spdlog.h>
 #include <iostream>
-#include <fmt/format.h>
 
 #include "constants.hpp"
 #include "tablemodel.hpp"
@@ -51,7 +50,7 @@ QVariant TableModel::data(const QModelIndex &index, int role) const {
 
             if (std::get<2>(column) == type_index(typeid(double))) {
                 std::vector<double> dvec = dataFrame.get_column<double>(columnDataframeIndex);
-                std::string sValue = fmt::format(Constants::NUMBER_FORMAT, dvec[index.row()]);
+                std::string sValue = formatter.formatNumber(dvec[index.row()]);
                 return QString(sValue.c_str());
             }
 

@@ -14,6 +14,7 @@
 #include <fmt/core.h>
 
 #include "constants.hpp"
+#include "formatter.hpp"
     
 namespace FuncionesUi {
     
@@ -55,6 +56,8 @@ namespace FuncionesUi {
         
         QtHelper qtHelper;
         AppHelper appHelper;
+        
+        Formatter formatter;
         
         DataEngine& getDataEngine();
         
