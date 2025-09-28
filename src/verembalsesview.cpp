@@ -235,7 +235,9 @@ void VerEmbalsesView::showExcelClicked() {
         
             const string& filetype = Constants::CSV_FILE_TYPE;
             const QString filename = QFileDialog::getSaveFileName(this, i18n("Save File As"), QDir::currentPath(), qtHelper.asQString(filetype));
-            context.saveDataframeToDisk(filename, df);
+            if (filename != nullptr) {
+                context.saveDataframeToDisk(filename, df);
+            }
         }
     }
 }
