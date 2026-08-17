@@ -64,9 +64,9 @@ void VerEmbalsesView::delayedInitialization() {
         string lastExecution = context.getLastExecution();
 
         Configuracion& configuracion = Configuracion::getInstance();
-        std::map<std::string, std::string> properties = configuracion.getProperties();
-        zona = properties["zonaSelected"];
-        embalse = properties["embalseSelected"];
+        std::map<std::string, std::any> properties = configuracion.getProperties();
+        zona = std::any_cast<std::string>(properties["zonaSelected"]);
+        embalse = std::any_cast<std::string>(properties["embalseSelected"]);
 
         context.populateZonasIn(m_ui.cmbZona);
         context.populateZonasIn(m_ui.cmbPlvZona);

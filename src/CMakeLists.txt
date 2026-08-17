@@ -26,13 +26,11 @@ ecm_qt_declare_logging_category(verembalses_SRCS
 set(TS_FILES
     ${CMAKE_SOURCE_DIR}/translations/verembalses_es.ts
     ${CMAKE_SOURCE_DIR}/translations/verembalses_en.ts
-    ${CMAKE_SOURCE_DIR}/translations/verembalses_ca_ES.ts
 )
 
 set(QM_FILES
     ${CMAKE_SOURCE_DIR}/translations/verembalses_es.qm
     ${CMAKE_SOURCE_DIR}/translations/verembalses_en.qm
-    ${CMAKE_SOURCE_DIR}/translations/verembalses_ca_ES.qm
 )
 
 set(UI_FILES
@@ -122,8 +120,8 @@ message(STATUS "Instalar verembalsesui.rc en: ${KDE_INSTALL_KXMLGUI5DIR}/veremba
 install(FILES verembalsesui.rc DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/verembalses)
 
 # Instalar traducciones en sistemas Unix/Linux
-message(STATUS "Instalar traducciones de ${CMAKE_BINARY_DIR}/i18n/ en: ${KDE_INSTALL_DATADIR}/verembalses/translations")
-install(FILES ${QM_FILES}
-    DESTINATION ${KDE_INSTALL_DATADIR}/verembalses/translations
-)
+#message(STATUS "Instalar traducciones de ${CMAKE_BINARY_DIR}/i18n/ en: ${KDE_INSTALL_DATADIR}/verembalses/translations")
+#install(FILES ${QM_FILES}
+#    DESTINATION ${KDE_INSTALL_DATADIR}/verembalses/translations
+#)
 

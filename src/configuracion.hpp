@@ -9,6 +9,7 @@
 #include <qthelper.hpp>
 
 #include <memory>
+#include <any>
 
 using namespace chronos::configuration;
 
@@ -25,7 +26,7 @@ public:
     static Configuracion& getInstance();
     static void destroyInstance();
     
-    std::map<std::string, std::string> getProperties();
+    std::map<std::string, std::any> getProperties();
     Configuration& getConfiguration();
     
     virtual ~Configuracion();

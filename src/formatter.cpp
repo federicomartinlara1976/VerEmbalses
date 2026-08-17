@@ -14,14 +14,8 @@ Formatter::Formatter() {
     
     // Verificar que la propiedad "roundDecimals" exista y no esté vacía
     const auto& properties = configuration.getProperties();
-    Q_ASSERT_X(
-        properties.find("roundDecimals") != properties.end() && 
-        !properties.at("roundDecimals").empty(),
-        "Formatter", 
-        "La propiedad 'roundDecimals' no existe o está vacía."
-    );
     
-    string decimals = configuration.getProperties()["roundDecimals"];
+    int decimals = std::any_cast<int>(properties["roundDecimals"]);
     
     ss << "{:." << decimals << "f}";
     

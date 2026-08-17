@@ -2,6 +2,5 @@
     <qresource prefix="/translations">
         <file>verembalses_es.qm</file>
         <file>verembalses_en_US.qm</file>
-        <file>verembalses_ca_ES.qm</file>
     </qresource>
 </RCC>

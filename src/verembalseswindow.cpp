@@ -106,7 +106,7 @@ void VerEmbalsesWindow::settingsConfigure()
     KConfigDialog *dialog = new KConfigDialog(this, QStringLiteral("settings"), VerEmbalsesSettings::self());
     QWidget *generalSettingsPage = new QWidget;
     m_settings.setupUi(generalSettingsPage);
-    dialog->addPage(generalSettingsPage, i18n("General"), QStringLiteral("package_setting"));
+    dialog->addPage(generalSettingsPage, i18n("General"), QStringLiteral("preferences_system"));
     dialog->setAttribute(Qt::WA_DeleteOnClose);
     dialog->show();
 }

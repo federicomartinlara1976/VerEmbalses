@@ -52,38 +52,38 @@ include(GNUInstallDirs)
 set(MO_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LOCALEDIR}")
 
 # 2. Lista de idiomas soportados
-set(SUPPORTED_LANGUAGES ca_ES.UTF-8)  # ca_ES -> ca, es_ES -> es
+#set(SUPPORTED_LANGUAGES es_ES.UTF-8)  # ca_ES -> ca, es_ES -> es
 
 # 3. Procesar cada traducción
-foreach(LANG ${SUPPORTED_LANGUAGES})
+#foreach(LANG ${SUPPORTED_LANGUAGES})
     # Ruta del archivo .po (ajusta si usas ca_ES.po -> cambia a ${LANG}_ES.po)
-    set(PO_FILE "${CMAKE_CURRENT_SOURCE_DIR}/po/${LANG}.po")
+#    set(PO_FILE "${CMAKE_CURRENT_SOURCE_DIR}/po/${LANG}.po")
     
     # Ruta de salida del .mo (TEMPORAL en build/)
-    set(MO_FILE "${CMAKE_CURRENT_BINARY_DIR}/${LANG}.mo")
+#    set(MO_FILE "${CMAKE_CURRENT_BINARY_DIR}/${LANG}.mo")
     
     # Comando para generar .mo
-    add_custom_command(
-        OUTPUT ${MO_FILE}
-        COMMAND msgfmt ${PO_FILE} -o ${MO_FILE}
-        DEPENDS ${PO_FILE}
-        COMMENT "Generando .mo para ${LANG}"
-    )
+#    add_custom_command(
+#        OUTPUT ${MO_FILE}
+#        COMMAND msgfmt ${PO_FILE} -o ${MO_FILE}
+#        DEPENDS ${PO_FILE}
+#        COMMENT "Generando .mo para ${LANG}"
+#    )
     
     # Instalación en /usr/share/locale/<lang>/LC_MESSAGES/verembalses.mo
-    install(
-        FILES ${MO_FILE}
-        DESTINATION "${MO_INSTALL_DIR}/${LANG}/LC_MESSAGES"
-        RENAME "verembalses.mo"  # ¡NOMBRE CLAVE!
-    )
+#    install(
+#        FILES ${MO_FILE}
+#        DESTINATION "${MO_INSTALL_DIR}/${LANG}/LC_MESSAGES"
+#        RENAME "verembalses.mo"  # ¡NOMBRE CLAVE!
+#    )
     
     # Añade el .mo a la lista de archivos generados
-    list(APPEND GENERATED_MO_FILES ${MO_FILE})
-endforeach()
+#    list(APPEND GENERATED_MO_FILES ${MO_FILE})
+#endforeach()
 
 # 4. Asegura que las traducciones se compilan ANTES de instalar
-add_custom_target(compile_translations ALL DEPENDS ${GENERATED_MO_FILES})
+#add_custom_target(compile_translations ALL DEPENDS ${GENERATED_MO_FILES})
 
-kdoctools_install(po)
+#kdoctools_install(po)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

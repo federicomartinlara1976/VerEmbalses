@@ -25,7 +25,7 @@ void Configuracion::destroyInstance() {
     _configuracion.reset(nullptr); // Replaces stored pointer with nullptr, calls deleter on pointed-to instance.
 }
 
-std::map<std::string, std::string> Configuracion::getProperties() {
+std::map<std::string, std::any> Configuracion::getProperties() {
     return configuration->getProperties();
 }
 
@@ -51,11 +51,11 @@ std::unique_ptr<Configuration> VerEmbalsesConfigurationFactory::createConfigurat
     std::string embalseSelected = qtHelper.asString(VerEmbalsesSettings::embalseSelected());
     int roundDecimals = VerEmbalsesSettings::roundDecimals();
     
-    configuration->getProperties().insert(par("server", server));
-    configuration->getProperties().insert(par("dbName", dbName));
-    configuration->getProperties().insert(par("zonaSelected", zonaSelected));
-    configuration->getProperties().insert(par("embalseSelected", embalseSelected));
-    configuration->getProperties().insert(par("roundDecimals", std::to_string(roundDecimals)));
+    configuration->getProperties()["server"] = server;
+    configuration->getProperties()["dbName"] = dbName;
+    configuration->getProperties()["zonaSelected"] = zonaSelected;
+    configuration->getProperties()["embalseSelected"] = embalseSelected;
+    configuration->getProperties()["roundDecimals"] = roundDecimals;
     
     return configuration;
 }
