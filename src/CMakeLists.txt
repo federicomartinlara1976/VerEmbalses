@@ -77,8 +77,6 @@ target_include_directories (verembalses PRIVATE
     "/usr/local/include/chronoslibs")
 target_compile_options(verembalses PRIVATE -fexceptions -Woverloaded-virtual -fpermissive)
 
-target_link_directories(verembalses PRIVATE "/usr/local/lib/chronoslibs")
-
 target_link_libraries(verembalses
     KF5::CoreAddons
     KF5::I18n
