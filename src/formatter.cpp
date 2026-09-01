@@ -1,6 +1,6 @@
 #include "formatter.hpp"
 
-#include <configuration.hpp>
+#include <configuration/configuration.hpp>
 #include <sstream>  // Necesario para std::stringstream
 
 #include <fmt/core.h>

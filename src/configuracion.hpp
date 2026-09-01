@@ -4,9 +4,9 @@
 // La configuración se gestiona con un singleton
 
 #include <memory>
-#include <configuration.hpp>
+#include <configuration/configuration.hpp>
 
-#include <qthelper.hpp>
+#include <kdetools/qthelper.hpp>
 
 #include <memory>
 #include <any>

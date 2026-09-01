@@ -15,8 +15,8 @@
 #include "formatter.hpp"
 
 #include <QObject>
-#include <qthelper.hpp>
-#include <qtdatehelper.hpp>
+#include <kdetools/qthelper.hpp>
+#include <kdetools/qtdatehelper.hpp>
 
 #include <memory>
 

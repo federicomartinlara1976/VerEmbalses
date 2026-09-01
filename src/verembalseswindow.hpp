@@ -8,7 +8,7 @@
 #include "observer.hpp"
 #include "selectfecha.hpp"
 
-#include <qthelper.hpp>
+#include <kdetools/qthelper.hpp>
 
 #include <QStatusBar>
 

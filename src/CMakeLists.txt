@@ -74,10 +74,7 @@ target_include_directories (verembalses PRIVATE
     "/usr/local/include"
     "/usr/local/include/bsoncxx/v_noabi"
     "/usr/local/include/mongocxx/v_noabi" 
-    "/usr/local/include/chronoslibs/common"
-    "/usr/local/include/chronoslibs/mongo"
-    "/usr/local/include/chronoslibs/configuration"
-    "/usr/local/include/chronoslibs/kdetools")
+    "/usr/local/include/chronoslibs")
 target_compile_options(verembalses PRIVATE -fexceptions -Woverloaded-virtual -fpermissive)
 
 target_link_directories(verembalses PRIVATE "/usr/local/lib/chronoslibs")
@@ -99,12 +96,12 @@ target_link_libraries(verembalses
     DataFrame::DataFrame
     yaml-cpp::yaml-cpp
     fmt::fmt
-    "common"
+    chronoslibs::chronoslibs-common
+    chronoslibs::chronoslibs-configuration
+    chronoslibs::chronoslibs-kdetools
+    chronoslibs::chronoslibs-mongo
     "mongocxx"
     "bsoncxx"
-    "kdetools"
-    "mongo"
-    "configuration"
 )
 
 message(STATUS "Instalar verembalses en: ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}")

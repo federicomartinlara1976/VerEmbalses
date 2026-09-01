@@ -34,6 +34,10 @@ find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     ThreadWeaver
 )
 
+find_package(chronoslibs-common REQUIRED)
+find_package(chronoslibs-configuration REQUIRED)
+find_package(chronoslibs-kdetools REQUIRED)
+find_package(chronoslibs-mongo REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(NumCpp REQUIRED)
 find_package(DataFrame REQUIRED)

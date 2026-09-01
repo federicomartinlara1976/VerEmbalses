@@ -8,7 +8,7 @@
 #include <QLabel>
 #include <DataFrame/DataFrame.h>
 
-#include <qthelper.hpp>
+#include <kdetools/qthelper.hpp>
 
 using namespace std;
 using namespace hmdf;

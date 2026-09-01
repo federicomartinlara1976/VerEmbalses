@@ -35,8 +35,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QIcon>
 #include <QTranslator>
 #include <QFile>
-#include <qthelper.hpp>
-#include <qttranslatorhelper.hpp>
+#include <kdetools/qthelper.hpp>
+#include <kdetools/qttranslatorhelper.hpp>
 
 #include <spdlog/spdlog.h>
 #include <memory>
