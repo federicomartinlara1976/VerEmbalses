@@ -152,8 +152,8 @@ void VerEmbalsesView::cmbPuntosControlIndexChanged(int index) {
             string puntoControl = "PL-" + plvZona + "-" + codigoPuntoControl;
             
             // Consultar los últmos 5 días
-            QDateTime now = qtDateHelper.now();
-            tuple<QDate, QDate> fechas = qtDateHelper.intervalBeforeInDays(now.date(), 5);
+            QDateTime today = qtDateHelper.today();
+            tuple<QDate, QDate> fechas = qtDateHelper.intervalBeforeInDays(today.date(), 5);
             QDate fechaHasta = get<0>(fechas);
             QDate fechaDesde = get<1>(fechas);
             Dataframe df = context.getDataframePuntoControl(puntoControl, fechaDesde, fechaHasta);
