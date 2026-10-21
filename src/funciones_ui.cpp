@@ -77,7 +77,6 @@ DataEngine& AppContext::getDataEngine() {
 void AppContext::setDefaultZona(const QString &zona, QComboBox* cmbZona, QComboBox* cmbEmbalse) {
     Q_ASSERT(cmbZona != nullptr);
     
-    qCInfo(VEREMBALSES) << "Zonas: " << cmbZona->count();
     int index = qtHelper.getCmbIndexByCode(cmbZona, zona);
     cmbZona->setCurrentIndex(index);
     
