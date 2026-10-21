@@ -11,7 +11,6 @@
 #include <KActionCollection>
 #include <KConfigDialog>
 
-#include <spdlog/spdlog.h>
 #include <QStatusBar>
 
 #include <QAction>
@@ -50,11 +49,11 @@ void VerEmbalsesWindow::updateObserver(const std::string &message) {
 VerEmbalsesWindow::~VerEmbalsesWindow()
 {
     m_verEmbalsesView->detach(this);
-    spdlog::debug("VerEmbalsesWindow::~VerEmbalsesWindow()");
+    qCDebug(VEREMBALSES) << "VerEmbalsesWindow::~VerEmbalsesWindow()";
 }
 
 void VerEmbalsesWindow::queryByDate() {
-    spdlog::debug("VerEmbalsesWindow::queryByDate");
+    qCDebug(VEREMBALSES) << "VerEmbalsesWindow::queryByDate";
     
     AppContext& context = AppContext::getInstance();
     
@@ -63,20 +62,20 @@ void VerEmbalsesWindow::queryByDate() {
     
     if (result == 1) {
         tuple<QDate, QDate> fechas = dlg->getFechas();
-        tuple<string, string> datosEmbalse = dlg->getDatosEmbalse();
-        string codZona = get<0>(datosEmbalse);
+        tuple<QString, QString> datosEmbalse = dlg->getDatosEmbalse();
+        QString codZona = get<0>(datosEmbalse);
 
-        if (!codZona.empty()) {
-            string codEmbalse = get<1>(datosEmbalse);
+        if (!codZona.isEmpty()) {
+            QString codEmbalse = get<1>(datosEmbalse);
 
             unique_ptr<DlgShowTable> dlgShowTable = nullptr;
-            if (!codEmbalse.empty()) {
-                Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, get<0>(fechas), get<1>(fechas));
-                dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codEmbalse, Constants::EMBALSE, this)};
+            if (!codEmbalse.isEmpty()) {
+                Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse.toStdString(), get<0>(fechas), get<1>(fechas));
+                dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codEmbalse.toStdString(), Constants::EMBALSE, this)};
             }
             else {
-                Dataframe df = context.getDataframePorZonaYRangoFechas(codZona, get<0>(fechas), get<1>(fechas));
-                dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codZona, Constants::ZONA, this)};
+                Dataframe df = context.getDataframePorZonaYRangoFechas(codZona.toStdString(), get<0>(fechas), get<1>(fechas));
+                dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codZona.toStdString(), Constants::ZONA, this)};
             }
 
             dlgShowTable->setFechas(get<0>(fechas), get<1>(fechas));
@@ -93,7 +92,7 @@ void VerEmbalsesWindow::queryByDate() {
 
 void VerEmbalsesWindow::settingsConfigure()
 {
-    spdlog::debug("VerEmbalsesWindow::settingsConfigure()");
+    qCDebug(VEREMBALSES) << "VerEmbalsesWindow::settingsConfigure()";
     // The preference dialog is derived from prefs_base.ui
     //
     // compare the names of the widgets in the .ui file

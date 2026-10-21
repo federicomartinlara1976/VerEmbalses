@@ -1,4 +1,3 @@
-#include <spdlog/spdlog.h>
 #include <yaml-cpp/yaml.h>
 #include <fmt/format.h>
 #include <optional>
@@ -19,6 +18,7 @@
 #include "funciones_ui.hpp"
 #include "constants.hpp"
 #include "configuracion.hpp"
+#include "verembalsesdebug.h"
 
 using namespace chronos::data;
 using namespace std;
@@ -44,7 +44,7 @@ AppContext& AppContext::getInstance() {
 void AppContext::destroy(AppContext* instance) {
     Q_ASSERT(instance != nullptr);
     
-    spdlog::info("Deleting...");
+    qCDebug(VEREMBALSES) << "Deleting...";
     delete instance;
     instance = nullptr;
 }
@@ -52,7 +52,7 @@ void AppContext::destroy(AppContext* instance) {
 void AppContext::destroyInstance() {
     Q_ASSERT(_instance != nullptr);
     
-    spdlog::info("Destroying AppContext");
+    qCDebug(VEREMBALSES) << "Destroying AppContext";
     _instance.reset(nullptr); // Replaces stored pointer with nullptr, calls deleter on pointed-to instance.
 }
 
@@ -74,14 +74,17 @@ DataEngine& AppContext::getDataEngine() {
     return dataEngine;
 }
 
-void AppContext::setDefaultZona(string zona, QComboBox* cmbZona, QComboBox* cmbEmbalse) {
+void AppContext::setDefaultZona(const QString &zona, QComboBox* cmbZona, QComboBox* cmbEmbalse) {
+    Q_ASSERT(cmbZona != nullptr);
+    
+    qCInfo(VEREMBALSES) << "Zonas: " << cmbZona->count();
     int index = qtHelper.getCmbIndexByCode(cmbZona, zona);
     cmbZona->setCurrentIndex(index);
     
     populateEmbalsesIn(zona, cmbEmbalse);
 }
 
-void AppContext::setDefaultEmbalse(string embalse, QComboBox* cmbEmbalse) {
+void AppContext::setDefaultEmbalse(const QString& embalse, QComboBox* cmbEmbalse) {
     int index = qtHelper.getCmbIndexByCode(cmbEmbalse, embalse);
     cmbEmbalse->setCurrentIndex(index);
 }
@@ -101,7 +104,7 @@ void AppContext::populateZonasIn(QComboBox* combo) {
             combo->addItem(label, value);
         }
     } catch (const exception& e) {
-        spdlog::error("ERROR populateZonasIn: {}", e.what());
+        qCCritical(VEREMBALSES) << "ERROR populateZonasIn: " << e.what();
         throw e;
     }
 }
@@ -128,7 +131,7 @@ unique_ptr<vector<InfoZona>> AppContext::getZonas() {
         
         return zonas;
     } catch (const exception& e) {
-        spdlog::error("ERROR getZonas: {}", e.what());
+        qCCritical(VEREMBALSES) << "ERROR getZonas: " << e.what();
         throw e;
     }
 }
@@ -153,14 +156,16 @@ InfoZona AppContext::getZona(string codZona) {
 
         return info;
     } catch (const exception& e) {
-        spdlog::error("ERROR getZona: {}", e.what());
+        qCCritical(VEREMBALSES) << "ERROR getZona: " << e.what();
         throw e;
     }
 }
 
-void AppContext::populateEmbalsesIn(string codZona, QComboBox *combo) {
+void AppContext::populateEmbalsesIn(const QString& codZona, QComboBox *combo) {
     try {
-        unique_ptr<vector<InfoEmbalse>> embalses = getEmbalsesPorZona("Embalses", codZona);
+        Q_ASSERT(combo != nullptr);
+        
+        unique_ptr<vector<InfoEmbalse>> embalses = getEmbalsesPorZona("Embalses", qtHelper.asString(codZona));
         
         // Clear the combo
         combo->clear();
@@ -175,7 +180,7 @@ void AppContext::populateEmbalsesIn(string codZona, QComboBox *combo) {
             combo->addItem(label, value);
         }
     } catch (const exception& e) {
-        spdlog::error("ERROR populateEmbalsesIn: {}", e.what());
+        qCCritical(VEREMBALSES) << "ERROR populateEmbalsesIn: " << e.what();
         throw e;
     }
 }
@@ -197,7 +202,7 @@ void AppContext::populatePuntosControlIn(string codPlvZona, QComboBox *combo) {
             combo->addItem(label, value);
         }
     } catch (const exception& e) {
-        spdlog::error("ERROR populatePuntosControlIn: {}", e.what());
+        qCCritical(VEREMBALSES) << "ERROR populatePuntosControlIn: " << e.what();
         throw e;
     }
 }
@@ -250,7 +255,7 @@ FuncionesUi::Dataframe AppContext::getDataframeEmbalsesZonaAndDate(string codZon
 
         return ul_df2;
     } catch (const exception& e) {
-        spdlog::error("ERROR getDataframeEmbalsesZonaAndDate: {}", e.what());
+        qCCritical(VEREMBALSES) << "ERROR getDataframeEmbalsesZonaAndDate: " << e.what();
         throw e;
     }
 }
@@ -294,7 +299,7 @@ FuncionesUi::Dataframe AppContext::getDataframeZona(string codZona) {
 
         return ul_df2;
     } catch (const exception& e) {
-        spdlog::error("ERROR getDataframeZona: {}", e.what());
+        qCCritical(VEREMBALSES) << "ERROR getDataframeZona: " << e.what();
         throw e;
     }
 }
@@ -315,7 +320,7 @@ unique_ptr<vector<InfoEmbalse>> AppContext::getEmbalsesPorZona(string collection
         
         return v;
     } catch (const exception& e) {
-        spdlog::error("ERROR getEmbalsesPorZona: {}", e.what());
+        qCCritical(VEREMBALSES) << "ERROR getEmbalsesPorZona: " << e.what();
         throw e;
     }
 }
@@ -336,7 +341,7 @@ unique_ptr<vector<InfoPuntoControl>> AppContext::getPuntosControlPorZona(string 
         
         return v;
     } catch (const exception& e) {
-        spdlog::error("ERROR getPuntosControlPorZona: {}", e.what());
+        qCCritical(VEREMBALSES) << "ERROR getPuntosControlPorZona: " << e.what();
         throw e;
     }
 }
@@ -550,7 +555,7 @@ vector<string> AppContext::getExecutions(QDate& desde, QDate& hasta) {
 
         return v;
     } catch (const exception& e) {
-        spdlog::error("ERROR getExecutions: {}", e.what());
+        qCCritical(VEREMBALSES) << "ERROR getExecutions: " << e.what();
         throw e;
     }
 }
@@ -587,7 +592,7 @@ vector<RegistroPluviometrico> AppContext::getRegistrosPuntoControl(string puntoC
 
         return v;
     } catch (const exception& e) {
-        spdlog::error("ERROR getRegistrosPuntoControl: {}", e.what());
+        qCCritical(VEREMBALSES) << "ERROR getRegistrosPuntoControl: " << e.what();
         throw e;
     }
 }
@@ -649,12 +654,12 @@ string AppContext::getLastExecution() {
             last = string(element["_id"].get_string().value);
         }
         else {
-            spdlog::warn("No element found!");
+            qCWarning(VEREMBALSES) << "No element found!";
         }
         
         return last;
     } catch (const exception& e) {
-        spdlog::error(e.what());
+        qCCritical(VEREMBALSES) << "ERROR getLastExecution: " << e.what();
         throw (e);
     }
 }
@@ -840,7 +845,7 @@ std::tuple<double*, double*> AppContext::getStatsPorZonaYFecha(string codZona, s
 
         return make_tuple(statsNivel, statsVolumen);
     } catch (const exception& e) {
-        spdlog::error("ERROR getStatsPorZonaYFecha: {}", e.what());
+        qCCritical(VEREMBALSES) << "ERROR getStatsPorZonaYFecha: " << e.what();
         throw e;
     }
 }
@@ -857,7 +862,7 @@ double AppContext::getTotalCapacidadZona(string codZona) {
 
         return totalCapacidad;
     } catch (const exception& e) {
-        spdlog::error("ERROR getTotalCapacidadZona: {}", e.what());
+        qCCritical(VEREMBALSES) << "ERROR getTotalCapacidadZona: " << e.what();
         throw e;
     }
 }

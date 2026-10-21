@@ -71,17 +71,17 @@ private:
     
     QLoadJob* j1;
 
-    string zona;
-    string embalse;
+    QString zona;
+    QString embalse;
     
-    string plvZona;
+    QString plvZona;
     
     unique_ptr<DlgSelectFecha> getDlgFecha();
     
     Formatter formatter;
     
     void showInfoEmbalse(InfoEmbalse& info);
-    void showStatsPorZona(string codZona, string date);
+    void showStatsPorZona(const QString& codZona, string date);
     void setStatus(string date);
 };
 

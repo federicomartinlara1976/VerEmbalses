@@ -21,8 +21,8 @@ class DlgSelectFecha : public QtDialogWindow, public Ui::DialogSelectFecha {
 private:
     QtHelper helper;
     
-    string codZona = {};
-    string codEmbalse = {};
+    QString codZona;
+    QString codEmbalse;
     
 private slots:
     void cmbZonasIndexChanged(int index);
@@ -37,13 +37,13 @@ protected:
     
 public:
     DlgSelectFecha(QWidget* parent = nullptr);
-    DlgSelectFecha(string codZona, string codEmbalse, QWidget *parent = nullptr);
+    DlgSelectFecha(const QString& codZona, const QString& codEmbalse, QWidget *parent = nullptr);
     
-    void setCodZona(string codZona) { this->codZona = codZona; }
-    void setCodEmbalse(string codEmbalse) { this->codEmbalse = codEmbalse; }
+    void setCodZona(const QString& codZona) { this->codZona = codZona; }
+    void setCodEmbalse(const QString& codEmbalse) { this->codEmbalse = codEmbalse; }
     
     tuple<QDate, QDate> getFechas(); 
-    tuple<string, string> getDatosEmbalse();
+    tuple<QString, QString> getDatosEmbalse();
     
     virtual ~DlgSelectFecha();
 };

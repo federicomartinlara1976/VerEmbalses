@@ -22,10 +22,10 @@ private:
     
     FuncionesUi::Dataframe df;
     
-    string selectedYValue;
+    QString selectedYValue;
     
     void populateDatoY(std::string exclude);
-    void drawGraphic(string selectedYValue);
+    void drawGraphic(const QString& selectedYValue);
     
 private slots:
     void cmbDatoYIndexChanged(int index);

@@ -1,6 +1,6 @@
-#include <spdlog/spdlog.h>
-
 #include "selectfecha.hpp"
+#include "verembalsesdebug.h"
+
 #include <QMessageBox>
 
 using namespace std;
@@ -9,7 +9,7 @@ DlgSelectFecha::DlgSelectFecha(QWidget *parent) : QtDialogWindow(parent) {
     this->initWindow();
 }
 
-DlgSelectFecha::DlgSelectFecha(string codZona, string codEmbalse, QWidget *parent) : QtDialogWindow(parent) {
+DlgSelectFecha::DlgSelectFecha(const QString& codZona, const QString& codEmbalse, QWidget *parent) : QtDialogWindow(parent) {
     this->initWindow();
     
     this->codZona = codZona;
@@ -34,16 +34,16 @@ void DlgSelectFecha::delayedInitialization() {
         context.setDefaultZona(codZona, cmbZona, cmbEmbalse);
         context.setDefaultEmbalse(codEmbalse, cmbEmbalse);
         
-        if (!codZona.empty()) {
+        if (!codZona.isEmpty()) {
             cmbZona->setDisabled(true);
         }
         
-        if (!codEmbalse.empty()) {
+        if (!codEmbalse.isEmpty()) {
             this->cmbEmbalse->setDisabled(true);
         }
         
     } catch (const exception& e) {
-        spdlog::error("ERROR delayedInitialization: {}", e.what());
+        qCCritical(VEREMBALSES) << "ERROR delayedInitialization: " << e.what();
         throw e;
     }
 }
@@ -55,7 +55,7 @@ void DlgSelectFecha::onAccept() {}
 void DlgSelectFecha::cmbZonasIndexChanged(int index) {
     codZona = helper.getStringValue(cmbZona, index);
 
-    if (!codZona.empty()) {
+    if (!codZona.isEmpty()) {
         AppContext& context = AppContext::getInstance();
         context.populateEmbalsesIn(codZona, cmbEmbalse);
 
@@ -77,7 +77,7 @@ tuple<QDate, QDate> DlgSelectFecha::getFechas() {
     return make_tuple(cmbDesde->date(), cmbHasta->date());
 }
 
-tuple<string, string> DlgSelectFecha::getDatosEmbalse() {
+tuple<QString, QString> DlgSelectFecha::getDatosEmbalse() {
     return make_tuple(codZona, codEmbalse);
 }
 

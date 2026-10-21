@@ -20,7 +20,7 @@ private:
     QChart* graphic;
 
 public:
-    GraficoEnLinea(Dataframe &df, string yValue);
+    GraficoEnLinea(Dataframe &df, const QString& yValue);
     QChart* getGraphic() override { return graphic; }
     
     ~GraficoEnLinea();

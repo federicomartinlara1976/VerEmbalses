@@ -20,6 +20,8 @@ ecm_qt_declare_logging_category(verembalses_SRCS
     HEADER verembalsesdebug.h
     IDENTIFIER VEREMBALSES
     CATEGORY_NAME "verembalses"
+    EXPORT VEREMBALSES
+    DESCRIPTION "VerEmbalses application logging"
 )
 
 # Antes de qt5_add_translation
@@ -89,7 +91,6 @@ target_link_libraries(verembalses
     Qt5::Widgets
     Qt5::Charts
     Qt5::PrintSupport
-    spdlog::spdlog
     NumCpp::NumCpp
     DataFrame::DataFrame
     yaml-cpp::yaml-cpp

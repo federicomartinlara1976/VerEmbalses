@@ -42,7 +42,7 @@ void DlgShowLineGraphic::setData(const FuncionesUi::Dataframe& df) {
 }
 
 void DlgShowLineGraphic::cmbDatoYIndexChanged(int index) {
-    string selectedValue = qtHelper.getStringValue(cmbDatoY, index);
+    QString selectedValue = qtHelper.getStringValue(cmbDatoY, index);
     drawGraphic(selectedValue);
 }
 
@@ -78,7 +78,7 @@ void DlgShowLineGraphic::populateDatoY(std::string exclude) {
     }
 }
 
-void DlgShowLineGraphic::drawGraphic(string selectedYValue) {
+void DlgShowLineGraphic::drawGraphic(const QString& selectedYValue) {
     if (chartView->chart() != nullptr) {
         chartView->chart()->removeAllSeries();
     }

@@ -87,11 +87,11 @@ namespace FuncionesUi {
         static AppContext& getInstance();
         static void destroyInstance();
         
-        void setDefaultZona(string zona, QComboBox* cmbZona, QComboBox* cmbEmbalse);
-        void setDefaultEmbalse(string embalse, QComboBox* cmbEmbalse);
+        void setDefaultZona(const QString& zona, QComboBox* cmbZona, QComboBox* cmbEmbalse);
+        void setDefaultEmbalse(const QString& embalse, QComboBox* cmbEmbalse);
         
         void populateZonasIn(QComboBox *combo);
-        void populateEmbalsesIn(string codZona, QComboBox *combo);
+        void populateEmbalsesIn(const QString& codZona, QComboBox *combo);
         void populatePuntosControlIn(string codPlvZona, QComboBox *combo);
         
         InfoEmbalse getEmbalseInfoByDate(string collectionName, string date);

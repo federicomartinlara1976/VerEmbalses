@@ -32,8 +32,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <KLocalizedString>
 
-#include <spdlog/spdlog.h>
-
 #include "configuracion.hpp"
 
 using namespace std;
@@ -59,31 +57,31 @@ void VerEmbalsesView::connectEvents() {
 }
 
 void VerEmbalsesView::delayedInitialization() {
-        try {
+    try {
         AppContext& context = AppContext::getInstance();
         string lastExecution = context.getLastExecution();
 
         Configuracion& configuracion = Configuracion::getInstance();
         std::map<std::string, std::any> properties = configuracion.getProperties();
-        zona = std::any_cast<std::string>(properties["zonaSelected"]);
-        embalse = std::any_cast<std::string>(properties["embalseSelected"]);
+        zona = QString(std::any_cast<std::string>(properties["zonaSelected"]).c_str());
+        embalse = QString(std::any_cast<std::string>(properties["embalseSelected"]).c_str());
 
         context.populateZonasIn(m_ui.cmbZona);
         context.populateZonasIn(m_ui.cmbPlvZona);
 
         context.setDefaultZona(zona, m_ui.cmbZona, m_ui.cmbEmbalse);
-        InfoZona infoZona = context.getZona(zona);
+        InfoZona infoZona = context.getZona(zona.toStdString());
         m_ui.lblZona->setText(qtHelper.asQString(infoZona.nombre));
         showStatsPorZona(zona, lastExecution);
 
         context.setDefaultEmbalse(embalse, m_ui.cmbEmbalse);
 
-        InfoEmbalse infoEmbalse = context.getEmbalseInfoByDate(embalse, lastExecution);
+        InfoEmbalse infoEmbalse = context.getEmbalseInfoByDate(embalse.toStdString(), lastExecution);
         showInfoEmbalse(infoEmbalse);
 
         setStatus(lastExecution);
     } catch (const std::exception &e) {
-        spdlog::error(e.what());
+        qCCritical(VEREMBALSES) << "ERROR delayedInitialization: " << e.what();
     }
 }
 
@@ -93,16 +91,16 @@ void VerEmbalsesView::cmbZonasIndexChanged(int index) {
     
     zona = qtHelper.getStringValue(m_ui.cmbZona, index);
 
-    if (!zona.empty()) {
-        InfoZona info = context.getZona(zona);
+    if (!zona.isEmpty()) {
+        InfoZona info = context.getZona(zona.toStdString());
 
         m_ui.lblZona->setText(qtHelper.asQString(info.nombre));
         showStatsPorZona(zona, lastExecution);
         context.populateEmbalsesIn(zona, m_ui.cmbEmbalse);
 
-        string codigoEmbalse = qtHelper.getStringValue(m_ui.cmbEmbalse, 0);
-        if (!codigoEmbalse.empty()) {
-            InfoEmbalse info = context.getEmbalseInfoByDate(codigoEmbalse, context.getLastExecution());
+        QString codigoEmbalse = qtHelper.getStringValue(m_ui.cmbEmbalse, 0);
+        if (!codigoEmbalse.isEmpty()) {
+            InfoEmbalse info = context.getEmbalseInfoByDate(codigoEmbalse.toStdString(), context.getLastExecution());
             showInfoEmbalse(info);
         }
     }
@@ -119,8 +117,8 @@ void VerEmbalsesView::cmbPlvZonasIndexChanged(int index) {
     
     plvZona = qtHelper.getStringValue(m_ui.cmbPlvZona, index);
 
-    if (!plvZona.empty()) {
-        context.populatePuntosControlIn(plvZona, m_ui.cmbPuntoControl);
+    if (!plvZona.isEmpty()) {
+        context.populatePuntosControlIn(plvZona.toStdString(), m_ui.cmbPuntoControl);
     }
     else {
         QMessageBox msgBox;
@@ -134,9 +132,9 @@ void VerEmbalsesView::cmbEmbalsesIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
     string lastExecution = context.getLastExecution();
     
-    string codigoEmbalse = qtHelper.getStringValue(m_ui.cmbEmbalse, index);
-    if (!codigoEmbalse.empty()) {
-        InfoEmbalse info = context.getEmbalseInfoByDate(codigoEmbalse, lastExecution);
+    QString codigoEmbalse = qtHelper.getStringValue(m_ui.cmbEmbalse, index);
+    if (!codigoEmbalse.isEmpty()) {
+        InfoEmbalse info = context.getEmbalseInfoByDate(codigoEmbalse.toStdString(), lastExecution);
         showInfoEmbalse(info);
     }
 }
@@ -145,23 +143,23 @@ void VerEmbalsesView::cmbPuntosControlIndexChanged(int index) {
     try {
         AppContext& context = AppContext::getInstance();
         
-        string codigoPuntoControl = qtHelper.getStringValue(m_ui.cmbPuntoControl, index);
+        QString codigoPuntoControl = qtHelper.getStringValue(m_ui.cmbPuntoControl, index);
         
-        if (!plvZona.empty()) {
+        if (!plvZona.isEmpty()) {
             // Componer colección de consulta
-            string puntoControl = "PL-" + plvZona + "-" + codigoPuntoControl;
+            QString puntoControl = "PL-" + plvZona + "-" + codigoPuntoControl;
             
             // Consultar los últmos 5 días
             QDateTime today = qtDateHelper.today();
             tuple<QDate, QDate> fechas = qtDateHelper.intervalBeforeInDays(today.date(), 5);
             QDate fechaHasta = get<0>(fechas);
             QDate fechaDesde = get<1>(fechas);
-            Dataframe df = context.getDataframePuntoControl(puntoControl, fechaDesde, fechaHasta);
+            Dataframe df = context.getDataframePuntoControl(puntoControl.toStdString(), fechaDesde, fechaHasta);
             
             // Mostrar en tabla
             if (!df.empty()) {
                 TableModel *tableModel = new TableModelRegistrosPluviometricos(df);
-                spdlog::info("Change model");
+                qCInfo(VEREMBALSES) << "Change model";
                 m_ui.tableView->setModel(tableModel);
             }
         }
@@ -181,17 +179,17 @@ void VerEmbalsesView::showGraphicClicked() {
     
     if (result == 1) {
         tuple<QDate, QDate> fechas = dlg->getFechas();
-        tuple<string, string> datosEmbalse = dlg->getDatosEmbalse();
+        tuple<QString, QString> datosEmbalse = dlg->getDatosEmbalse();
         QDate fechaDesde = get<0>(fechas);
         QDate fechaHasta = get<1>(fechas);
-        string codZona = get<0>(datosEmbalse);
-        string codEmbalse = get<1>(datosEmbalse);
+        QString codZona = get<0>(datosEmbalse);
+        QString codEmbalse = get<1>(datosEmbalse);
         
-        if (codZona.empty() || codEmbalse.empty())
+        if (codZona.isEmpty() || codEmbalse.isEmpty())
             return;
     
         if (fechaDesde < fechaHasta) {
-            Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, fechaDesde, fechaHasta);
+            Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse.toStdString(), fechaDesde, fechaHasta);
             
             // Remove the columns MEN and Capacidad
             df.remove_column<double>("MEN");
@@ -207,9 +205,9 @@ void VerEmbalsesView::showGraphicClicked() {
 void VerEmbalsesView::showEmbalsesClicked() {
     AppContext& context = AppContext::getInstance();
     string lastExecution = context.getLastExecution();
-    Dataframe df = context.getDataframeEmbalsesZonaAndDate(zona, lastExecution);
+    Dataframe df = context.getDataframeEmbalsesZonaAndDate(zona.toStdString(), lastExecution);
 
-    unique_ptr<DlgShowTable> dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, zona, Constants::EMBALSES, this)};
+    unique_ptr<DlgShowTable> dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, zona.toStdString(), Constants::EMBALSES, this)};
     dlgShowTable->mostrar(true);
 }
 
@@ -221,17 +219,17 @@ void VerEmbalsesView::showExcelClicked() {
     
     if (result == 1) {
         tuple<QDate, QDate> fechas = dlg->getFechas();
-        tuple<string, string> datosEmbalse = dlg->getDatosEmbalse();
+        tuple<QString, QString> datosEmbalse = dlg->getDatosEmbalse();
         QDate fechaDesde = get<0>(fechas);
         QDate fechaHasta = get<1>(fechas);
-        string codZona = get<0>(datosEmbalse);
-        string codEmbalse = get<1>(datosEmbalse);
+        QString codZona = get<0>(datosEmbalse);
+        QString codEmbalse = get<1>(datosEmbalse);
         
-        if (codZona.empty() || codEmbalse.empty())
+        if (codZona.isEmpty() || codEmbalse.isEmpty())
             return;
         
         if (fechaDesde < fechaHasta) {
-            Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, fechaDesde, fechaHasta);
+            Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse.toStdString(), fechaDesde, fechaHasta);
         
             const string& filetype = Constants::CSV_FILE_TYPE;
             const QString filename = QFileDialog::getSaveFileName(this, i18n("Save File As"), QDir::currentPath(), qtHelper.asQString(filetype));
@@ -243,8 +241,8 @@ void VerEmbalsesView::showExcelClicked() {
 }
 
 unique_ptr<DlgSelectFecha> VerEmbalsesView::getDlgFecha() {
-    string codigoZona = qtHelper.getStringValue(m_ui.cmbZona);
-    string codigoEmbalse = qtHelper.getStringValue(m_ui.cmbEmbalse);
+    QString codigoZona = qtHelper.getStringValue(m_ui.cmbZona);
+    QString codigoEmbalse = qtHelper.getStringValue(m_ui.cmbEmbalse);
         
     unique_ptr<DlgSelectFecha> dlg = unique_ptr<DlgSelectFecha>{new DlgSelectFecha(codigoZona, codigoEmbalse, this)};
     
@@ -266,11 +264,11 @@ void VerEmbalsesView::showInfoEmbalse(InfoEmbalse& info) {
     m_ui.lblVolumen->setText(qtHelper.asQString(sVolumen));
 }
 
-void VerEmbalsesView::showStatsPorZona(string codZona, string date) {
+void VerEmbalsesView::showStatsPorZona(const QString& codZona, string date) {
     try {
         AppContext& context = AppContext::getInstance();
         
-        std::tuple<double*, double*> stats = context.getStatsPorZonaYFecha(codZona, date);
+        std::tuple<double*, double*> stats = context.getStatsPorZonaYFecha(codZona.toStdString(), date);
         
         std::string sMedia = formatter.formatNumber(get<0>(stats)[0]);
         m_ui.lblNivelMedia->setText(qtHelper.asQString(sMedia));
@@ -294,7 +292,7 @@ void VerEmbalsesView::showStatsPorZona(string codZona, string date) {
         std::string sSum = formatter.formatNumber(volumenTotal);
         m_ui.lblVolumenTotal->setText(qtHelper.asQString(sSum));
 
-        double totalCapacidad = context.getTotalCapacidadZona(codZona);
+        double totalCapacidad = context.getTotalCapacidadZona(codZona.toStdString());
         std::string sTotalCapacidad = formatter.formatNumber(totalCapacidad);
         m_ui.lblTotalCapacidadZona->setText(qtHelper.asQString(sTotalCapacidad));
 
@@ -303,7 +301,7 @@ void VerEmbalsesView::showStatsPorZona(string codZona, string date) {
         m_ui.lblPorcentajeVolumenTotal->setText(qtHelper.asQString(sPorcentajeVolumen));
         helper.setLabelStyleValue(m_ui.lblPorcentajeVolumenTotal, porcentajeVolumen);
     } catch (const exception& e) {
-        spdlog::error("ERROR getStatsPorZona: {}", e.what());
+        qCCritical(VEREMBALSES) << "ERROR getStatsPorZona: " << e.what();
         throw e;
     }
 }
@@ -313,7 +311,7 @@ void VerEmbalsesView::setStatus(string date) {
         string label = "Datos a fecha: " + date;
         updateToObservers(label);
     } catch (const exception& e) {
-        spdlog::error(e.what());
+        qCCritical(VEREMBALSES) << e.what();
         throw (e);
     }
 }

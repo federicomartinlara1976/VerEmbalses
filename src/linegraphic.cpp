@@ -4,9 +4,9 @@
 #include <QtCharts/QValueAxis>
 #include <QtCharts/QDateTimeAxis>
 
-#include <spdlog/spdlog.h>
+#include "verembalsesdebug.h"
 
-GraficoEnLinea::GraficoEnLinea(Dataframe &df, string yValue) {
+GraficoEnLinea::GraficoEnLinea(Dataframe &df, const QString& yValue) {
     this->df = df;
 
     QLineSeries *series = new QLineSeries();
@@ -15,7 +15,7 @@ GraficoEnLinea::GraficoEnLinea(Dataframe &df, string yValue) {
     axisY->setTickCount(5);
     axisY->setMinorTickCount(1);
     axisY->setLabelFormat("%.2f");
-    axisY->setTitleText(qtHelper.asQString(yValue));
+    axisY->setTitleText(yValue);
 
     QDateTimeAxis *axisX = new QDateTimeAxis(); // Using QValueAxis here instead makes the problem disappear.
     axisX->setFormat("dd-MM-yyyy");
@@ -23,7 +23,7 @@ GraficoEnLinea::GraficoEnLinea(Dataframe &df, string yValue) {
     axisX->setTickCount(10);
 
     vector<string> fechas = df.get_column<string>("Fecha");
-    vector<double> values = df.get_column<double>(appHelper.asCharArray(yValue));
+    vector<double> values = df.get_column<double>(qtHelper.asCharArray(yValue));
 
     int i = 0;
     for (string fecha : fechas) {
@@ -50,5 +50,5 @@ GraficoEnLinea::GraficoEnLinea(Dataframe &df, string yValue) {
 }
 
 GraficoEnLinea::~GraficoEnLinea() {
-    spdlog::debug("Delete GraficoEnLinea");
+    qCDebug(VEREMBALSES) << "Delete GraficoEnLinea";
 }
