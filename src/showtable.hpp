@@ -28,8 +28,8 @@ class DlgShowTable : public QtDialogWindow, public Ui::DialogShowTable {
 private:
     QtHelper helper;
     
-    string codEmbalse;
-    string codZona;
+    QString codEmbalse;
+    QString codZona;
     QDate fechaDesde;
     QDate fechaHasta;
     
@@ -39,8 +39,8 @@ private:
     
     Formatter formatter;
 
-    void setCodEmbalse(const string& codEmbalse);
-    void setCodZona(const string& codZona);
+    void setCodEmbalse(const QString& codEmbalse);
+    void setCodZona(const QString& codZona);
     void setData();
 
 private slots:
@@ -55,7 +55,7 @@ protected:
     void onAccept() override;
 
 public:
-    DlgShowTable(const FuncionesUi::Dataframe& dataframe, const string& code, enum Constants::TableType tableType, QWidget* parent = nullptr);
+    DlgShowTable(const FuncionesUi::Dataframe& dataframe, const QString& code, enum Constants::TableType tableType, QWidget* parent = nullptr);
     
     void setFechas(const QDate fechaDesde, const QDate fechaHasta);
     

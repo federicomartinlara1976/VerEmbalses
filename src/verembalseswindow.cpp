@@ -71,11 +71,11 @@ void VerEmbalsesWindow::queryByDate() {
             unique_ptr<DlgShowTable> dlgShowTable = nullptr;
             if (!codEmbalse.isEmpty()) {
                 Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse.toStdString(), get<0>(fechas), get<1>(fechas));
-                dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codEmbalse.toStdString(), Constants::EMBALSE, this)};
+                dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codEmbalse, Constants::EMBALSE, this)};
             }
             else {
                 Dataframe df = context.getDataframePorZonaYRangoFechas(codZona.toStdString(), get<0>(fechas), get<1>(fechas));
-                dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codZona.toStdString(), Constants::ZONA, this)};
+                dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, codZona, Constants::ZONA, this)};
             }
 
             dlgShowTable->setFechas(get<0>(fechas), get<1>(fechas));

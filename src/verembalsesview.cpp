@@ -207,7 +207,7 @@ void VerEmbalsesView::showEmbalsesClicked() {
     string lastExecution = context.getLastExecution();
     Dataframe df = context.getDataframeEmbalsesZonaAndDate(zona.toStdString(), lastExecution);
 
-    unique_ptr<DlgShowTable> dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, zona.toStdString(), Constants::EMBALSES, this)};
+    unique_ptr<DlgShowTable> dlgShowTable = unique_ptr<DlgShowTable>{new DlgShowTable(df, zona, Constants::EMBALSES, this)};
     dlgShowTable->mostrar(true);
 }
 

@@ -16,7 +16,7 @@
 using namespace std;
 using namespace hmdf;
 
-DlgShowTable::DlgShowTable(const FuncionesUi::Dataframe& dataframe, const string& code, enum Constants::TableType tableType, QWidget* parent) : QtDialogWindow(parent) {
+DlgShowTable::DlgShowTable(const FuncionesUi::Dataframe& dataframe, const QString& code, enum Constants::TableType tableType, QWidget* parent) : QtDialogWindow(parent) {
     this->initWindow();
     this->dataframe = dataframe;
     this->tableType = tableType;
@@ -84,10 +84,10 @@ void DlgShowTable::setData() {
     this->tblResultados->setModel(tableModel);
 }
   
-void DlgShowTable::setCodEmbalse(const string& codEmbalse) {
+void DlgShowTable::setCodEmbalse(const QString& codEmbalse) {
     AppContext& context = AppContext::getInstance();
     
-    InfoEmbalse info = context.getEmbalseInfo(codEmbalse);
+    InfoEmbalse info = context.getEmbalseInfo(codEmbalse.toStdString());
 
     // Recoger la primera fila, los datos MEN y capacidad para informar las etiquetas de la cabecera
     std::vector<const char *> columns = {"MEN", "Capacidad"};
@@ -102,12 +102,12 @@ void DlgShowTable::setCodEmbalse(const string& codEmbalse) {
     this->menContainer->setVisible(true);
 }
 
-void DlgShowTable::setCodZona(const string& codZona) {
+void DlgShowTable::setCodZona(const QString& codZona) {
     AppContext& context = AppContext::getInstance();
 
-    InfoZona info = context.getZona(codZona);
+    InfoZona info = context.getZona(codZona.toStdString());
 
-    double totalCapacidad = context.getTotalCapacidadZona(codZona);
+    double totalCapacidad = context.getTotalCapacidadZona(codZona.toStdString());
     std::string sTotalCapacidad = formatter.formatNumber(totalCapacidad);
     lblCapacidad->setText(helper.asQString(sTotalCapacidad));
 
