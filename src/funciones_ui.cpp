@@ -169,7 +169,7 @@ void AppContext::populateEmbalsesIn(const QString& codZona, QComboBox *combo) {
         // Clear the combo
         combo->clear();
 
-        tuple<QString, QVariant> emptyOption = qtHelper.buildComboEmptyOption("Seleccione un embalse");
+        tuple<QString, QVariant> emptyOption = qtHelper.buildComboEmptyOption(i18n("Seleccione un embalse"));
         combo->addItem(get<0>(emptyOption), get<1>(emptyOption));
         
         for (InfoEmbalse& info : *embalses) {
@@ -191,7 +191,7 @@ void AppContext::populatePuntosControlIn(string codPlvZona, QComboBox *combo) {
         // Clear the combo
         combo->clear();
 
-        tuple<QString, QVariant> emptyOption = qtHelper.buildComboEmptyOption("Seleccione un punto de control");
+        tuple<QString, QVariant> emptyOption = qtHelper.buildComboEmptyOption(i18n("Seleccione un punto de control"));
         combo->addItem(get<0>(emptyOption), get<1>(emptyOption));
         
         for (InfoPuntoControl& info : *puntosControl) {
@@ -854,7 +854,7 @@ double AppContext::getTotalCapacidadZona(string codZona) {
         double totalCapacidad = 0.0;
         Dataframe df = getDataframeZona(codZona);
 
-        SumVisitor<double, unsigned long> sum_v;
+        SumVisitor<double, ulong> sum_v;
 
         df.visit<double>("Capacidad", sum_v);
         totalCapacidad = sum_v.get_result();
