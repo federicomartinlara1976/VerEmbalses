@@ -35,7 +35,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QIcon>
 #include <QTranslator>
 #include <QFile>
-#include <kdetools/qthelper.hpp>
 #include <kdetools/qttranslatorhelper.hpp>
 
 #include "verembalsesdebug.h"
@@ -49,7 +48,6 @@ int main(int argc, char **argv) {
     try {
         QApplication application(argc, argv);
         
-        QtHelper qtHelper;
         QtTranslatorHelper qtTranslatorHelper;
         
         QTranslator translator;

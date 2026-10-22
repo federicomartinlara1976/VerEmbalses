@@ -57,7 +57,7 @@ GraficoEnNubePuntosNivelVolumen::GraficoEnNubePuntosNivelVolumen(Dataframe &df) 
 }
 
 GraficoEnNubePuntosNivelVolumen::~GraficoEnNubePuntosNivelVolumen() {
-    spdlog::info("Delete GraficoEnNubePuntosNivelVolumen");
+    qCDebug(VEREMBALSES) << "Delete GraficoEnNubePuntosNivelVolumen";
 }
 
 GraficoEnNubePuntosNivelPorcentaje::GraficoEnNubePuntosNivelPorcentaje(Dataframe &df) : GraficoEnNubePuntos(df) {
