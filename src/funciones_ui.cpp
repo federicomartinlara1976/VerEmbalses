@@ -264,8 +264,8 @@ FuncionesUi::Dataframe AppContext::getDataframeZona(string codZona) {
         //spdlog::info("Dataframe para la zona {}", codZona);
         unique_ptr<vector<InfoEmbalse>> embalses = getEmbalsesPorZona("Embalses", codZona);
 
-        ColumnData<unsigned long> cIndex("Index");
-        vector<unsigned long> indices;
+        ColumnData<ulong> cIndex("Index");
+        vector<ulong> indices;
         ColumnData<double> cNivel("Nivel");
         vector<double> niveles;
         ColumnData<double> cVolumen("Volumen");
@@ -813,10 +813,10 @@ std::tuple<double*, double*> AppContext::getStatsPorZonaYFecha(string codZona, s
         double* statsNivel = new double[4];
         double* statsVolumen = new double[4];
 
-        MeanVisitor<double, unsigned long> mean_v;
-        MinVisitor<double, unsigned long> min_v;
-        MaxVisitor<double, unsigned long> max_v;
-        SumVisitor<double, unsigned long> sum_v;
+        MeanVisitor<double, ulong> mean_v;
+        MinVisitor<double, ulong> min_v;
+        MaxVisitor<double, ulong> max_v;
+        SumVisitor<double, ulong> sum_v;
 
         df.visit<double>("Nivel", mean_v);
         statsNivel[0] = mean_v.get_result();
