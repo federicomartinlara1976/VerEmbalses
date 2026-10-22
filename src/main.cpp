@@ -38,7 +38,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <kdetools/qthelper.hpp>
 #include <kdetools/qttranslatorhelper.hpp>
 
-#include <spdlog/spdlog.h>
+#include "verembalsesdebug.h"
 #include <memory>
 
 #include "verembalseswindow.hpp"
@@ -56,21 +56,21 @@ int main(int argc, char **argv) {
         
         // Obtener el idioma del sistema (ej. "es_ES")
         QString systemLocale = qtTranslatorHelper.getLocale(); 
-        spdlog::info("El idioma local es: {}", qtHelper.asString(systemLocale));
+        qCDebug(VEREMBALSES) << "El idioma local es: " << systemLocale;
         
         // Traducciones para i18n (No funcionan)
         KLocalizedString::setApplicationDomain("verembalses");
         QSet<QString> availableTranslations = KLocalizedString::availableApplicationTranslations();
         for (QString availableTranslation : availableTranslations) {
-            spdlog::info("Traducción disponible: {}", qtHelper.asString(availableTranslation));
+            qCDebug(VEREMBALSES) << "Traducción disponible: " << availableTranslation;
         }
         
         bool isTranslated = KLocalizedString::isApplicationTranslatedInto(systemLocale);
         if (isTranslated) {
-            spdlog::info("Seleccionada traducción para {}", qtHelper.asString(systemLocale));
+            qCDebug(VEREMBALSES) << "Seleccionada traducción para " << systemLocale;
         }
         else {
-            spdlog::warn("No está disponible la traducción para {}", qtHelper.asString(systemLocale));
+            qCWarning(VEREMBALSES) << "No está disponible la traducción para " << systemLocale;
         }
         
         // Traducciones para Qt
@@ -80,7 +80,7 @@ int main(int argc, char **argv) {
         
         bool loaded = qtTranslatorHelper.loadTranslationFor(application, translator, paths, appName, systemLocale);
         if (!loaded) {
-            spdlog::warn("Ocurrió un error al cargar las traducciones");
+            qCWarning(VEREMBALSES) << "Ocurrió un error al cargar las traducciones";
         }
         
         // Inicializa manejador de errores no controlados
@@ -118,7 +118,7 @@ int main(int argc, char **argv) {
 
         return application.exec();
     } catch (const exception& e) {
-        spdlog::error("FATAL: {}", string(e.what()));
+        qCCritical(VEREMBALSES) << "FATAL: " << e.what();
         return 1;
     }
 }

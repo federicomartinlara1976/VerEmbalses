@@ -4,7 +4,6 @@
 #include <QtPrintSupport/QPrinter>
 #include <QtPrintSupport/QPrintDialog>
 #include <QtGui/QPainter>
-#include <iostream>
 
 using namespace std;
 

@@ -2,7 +2,7 @@
 
 #include <QtCharts/QPieSeries>
 
-#include <spdlog/spdlog.h>
+#include "verembalsesdebug.h"
 
 GraficoEnSectores::GraficoEnSectores(Dataframe &df) {
     this->df = df;
@@ -32,6 +32,6 @@ GraficoEnSectores::GraficoEnSectores(Dataframe &df) {
 }
 
 GraficoEnSectores::~GraficoEnSectores() {
-    spdlog::debug("Delete GraficoEnSectores");
+    qCDebug(VEREMBALSES) << "Delete GraficoEnSectores";
 }
 

@@ -1,6 +1,3 @@
-#include <spdlog/spdlog.h>
-#include <iostream>
-
 #include "constants.hpp"
 #include "tablemodel.hpp"
 

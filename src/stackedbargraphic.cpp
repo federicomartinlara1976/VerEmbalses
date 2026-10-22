@@ -6,7 +6,7 @@
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QValueAxis>
 
-#include <spdlog/spdlog.h>
+#include "verembalsesdebug.h"
 
 GraficoEnBarrasApiladas::GraficoEnBarrasApiladas(Dataframe &df) {
     this->df = df;
@@ -63,5 +63,5 @@ GraficoEnBarrasApiladas::GraficoEnBarrasApiladas(Dataframe &df) {
 }
 
 GraficoEnBarrasApiladas::~GraficoEnBarrasApiladas() {
-    spdlog::debug("Delete GraficoEnBarrasApiladas");
+    qCWarning(VEREMBALSES) << "Delete GraficoEnBarrasApiladas";
 }

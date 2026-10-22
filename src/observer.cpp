@@ -1,6 +1,6 @@
 #include "observer.hpp"
 
-#include <spdlog/spdlog.h>
+#include "verembalsesdebug.h"
 
 /**
   * The subscription management methods.
@@ -28,5 +28,5 @@ void Subject::updateToObservers(std::string message) {
 }
 
 Subject::~Subject() {
-    spdlog::debug("Goodbye, I was the Subject.");
+    qCDebug(VEREMBALSES) << "Goodbye, I was the Subject.";
 }

@@ -1,12 +1,12 @@
 #include "signalmanager.hpp"
 
-#include <spdlog/spdlog.h>
+#include "verembalsesdebug.h"
 
 SignalManager* SignalManager::_signalManager = nullptr;
 
 SignalManager* SignalManager::instance() {
     if (_signalManager == nullptr) {
-        spdlog::info("Creating SignalManager");
+        qCWarning(VEREMBALSES) << "Creating SignalManager";
         _signalManager = new SignalManager(); // Create new instance, assign to unique_ptr.
     }
     return _signalManager;
@@ -14,15 +14,15 @@ SignalManager* SignalManager::instance() {
 
 void SignalManager::destroyInstance() {
     if (_signalManager != nullptr) {
-        spdlog::info("Destroying SignalManager");
+        qCWarning(VEREMBALSES) << "Destroying SignalManager";
         _signalManager = nullptr; // Replaces stored pointer with nullptr, calls deleter on pointed-to instance.
     }
 }
 
 SignalManager::~SignalManager() {
-    spdlog::info("Destructor called");
+    qCWarning(VEREMBALSES) << "Destructor called";
     if (_signalManager == nullptr) {
-        spdlog::info("* Instance already deleted!");
+        qCWarning(VEREMBALSES) << "* Instance already deleted!";
     }
 }
 

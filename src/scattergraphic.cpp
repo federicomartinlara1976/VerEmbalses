@@ -1,6 +1,6 @@
 #include "scattergraphic.hpp"
 
-#include <spdlog/spdlog.h>
+#include "verembalsesdebug.h"
 
 GraficoEnNubePuntos::GraficoEnNubePuntos(Dataframe &df) {
     this->df = df;
@@ -23,7 +23,7 @@ GraficoEnNubePuntos::GraficoEnNubePuntos(Dataframe &df) {
 }
 
 GraficoEnNubePuntos::~GraficoEnNubePuntos() {
-    spdlog::debug("Delete GraficoEnNubePuntos");
+    qCDebug(VEREMBALSES) << "Delete GraficoEnNubePuntos";
 }
 
 QChart* GraficoEnNubePuntos::getGraphic() { 
@@ -81,7 +81,7 @@ GraficoEnNubePuntosNivelPorcentaje::GraficoEnNubePuntosNivelPorcentaje(Dataframe
 }
 
 GraficoEnNubePuntosNivelPorcentaje::~GraficoEnNubePuntosNivelPorcentaje() {
-    spdlog::info("Delete GraficoEnNubePuntosNivelPorcentaje");
+    qCDebug(VEREMBALSES) << "Delete GraficoEnNubePuntosNivelPorcentaje";
 }
 
 GraficoEnNubePuntosVolumenPorcentaje::GraficoEnNubePuntosVolumenPorcentaje(Dataframe &df) : GraficoEnNubePuntos(df) {
@@ -104,7 +104,7 @@ GraficoEnNubePuntosVolumenPorcentaje::GraficoEnNubePuntosVolumenPorcentaje(Dataf
 }
 
 GraficoEnNubePuntosVolumenPorcentaje::~GraficoEnNubePuntosVolumenPorcentaje() {
-    spdlog::info("Delete GraficoEnNubePuntosVolumenPorcentaje");
+    qCDebug(VEREMBALSES) << "Delete GraficoEnNubePuntosVolumenPorcentaje";
 }
 
 

@@ -1,6 +1,6 @@
 #include "graphic.hpp"
 
-#include <spdlog/spdlog.h>
+#include "verembalsesdebug.h"
 
 using namespace std;
 
@@ -8,8 +8,8 @@ QChart* GraphicContext::getGraphic() const {
     if (strategy_) {
         return strategy_->getGraphic();
     } else {
-        string errorMessage = string("Context: Strategy isn't set");
-        spdlog::error(errorMessage);
-        throw runtime_error(errorMessage);
+        QString errorMessage = "Context: Strategy isn't set";
+        qCCritical(VEREMBALSES) << errorMessage;
+        throw runtime_error(errorMessage.toStdString());
     }
 }

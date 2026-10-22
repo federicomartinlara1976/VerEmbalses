@@ -83,7 +83,7 @@ void VerEmbalsesWindow::queryByDate() {
         }
         else {
             QMessageBox msgBox;
-            msgBox.setText("Debe seleccionar una zona");
+            msgBox.setText(i18n("Debe seleccionar una zona"));
             msgBox.setIcon(QMessageBox::Warning);
             msgBox.exec();
         }
