@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.16)
 set(CMAKE_BUILD_TYPE DEBUG)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_COMPILER "/usr/bin/g++")
@@ -6,13 +6,14 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(verembalses)
 
-set(QT_MIN_VERSION "5.9.0")
-set(KF_MIN_VERSION "5.37.0")
+set(QT_MIN_VERSION "6.5.0")
+set(KF_MIN_VERSION "6.0.0")
 
 find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
-include(KDEInstallDirs)
+set(QT_MAJOR_VERSION 6)
+include(KDEInstallDirs6)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMInstallIcons)
@@ -20,14 +21,14 @@ include(ECMQtDeclareLoggingCategory)
 include(ECMPoQmTools)
 include(FeatureSummary)
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS 
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     Core 
     Gui 
     Widgets 
     Charts 
     PrintSupport)
 
-find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
+find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     ConfigWidgets
     CoreAddons
     Crash
@@ -46,12 +47,10 @@ find_package(chronoslibs-kdetools REQUIRED)
 find_package(chronoslibs-mongo REQUIRED)
 find_package(NumCpp REQUIRED)
 find_package(DataFrame REQUIRED)
-find_package(yaml-cpp REQUIRED)
 find_package(fmt REQUIRED)
 find_package(mongocxx REQUIRED)
 find_package(bsoncxx REQUIRED)
 
-add_subdirectory(doc)
 add_subdirectory(src)
 add_subdirectory(icons)
 

@@ -49,20 +49,19 @@ target_include_directories (verembalses PRIVATE
 target_compile_options(verembalses PRIVATE -fexceptions -Woverloaded-virtual -fpermissive)
 
 target_link_libraries(verembalses
-    KF5::CoreAddons
-    KF5::I18n
-    KF5::XmlGui
-    KF5::ConfigWidgets
-    KF5::DBusAddons
-    KF5::Crash
-    KF5::Plotting
-    KF5::ThreadWeaver
-    Qt5::Widgets
-    Qt5::Charts
-    Qt5::PrintSupport
+    KF6::CoreAddons
+    KF6::I18n
+    KF6::XmlGui
+    KF6::ConfigWidgets
+    KF6::DBusAddons
+    KF6::Crash
+    KF6::Plotting
+    KF6::ThreadWeaver
+    Qt6::Widgets
+    Qt6::Charts
+    Qt6::PrintSupport
     NumCpp::NumCpp
     DataFrame::DataFrame
-    yaml-cpp::yaml-cpp
     fmt::fmt
     chronoslibs::chronoslibs-common
     chronoslibs::chronoslibs-configuration
