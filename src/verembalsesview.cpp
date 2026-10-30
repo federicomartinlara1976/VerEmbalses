@@ -63,8 +63,8 @@ void VerEmbalsesView::delayedInitialization() {
 
         Configuracion& configuracion = Configuracion::getInstance();
         std::map<std::string, std::any> properties = configuracion.getProperties();
-        zona = QString(std::any_cast<std::string>(properties["zonaSelected"]).c_str());
-        embalse = QString(std::any_cast<std::string>(properties["embalseSelected"]).c_str());
+        zona = QString::fromStdString(std::any_cast<std::string>(properties["zonaSelected"]));
+        embalse = QString::fromStdString(std::any_cast<std::string>(properties["embalseSelected"]));
 
         context.populateZonasIn(m_ui.cmbZona);
         context.populateZonasIn(m_ui.cmbPlvZona);
@@ -147,7 +147,7 @@ void VerEmbalsesView::cmbPuntosControlIndexChanged(int index) {
         
         if (!plvZona.isEmpty()) {
             // Componer colección de consulta
-            QString puntoControl = "PL-" + plvZona + "-" + codigoPuntoControl;
+            QString puntoControl = QStringLiteral("PL-") + plvZona + QStringLiteral("-") + codigoPuntoControl;
             
             // Consultar los últmos 5 días
             QDateTime today = qtDateHelper.today();
@@ -165,7 +165,8 @@ void VerEmbalsesView::cmbPuntosControlIndexChanged(int index) {
         }
     } catch (const exception& e) {
         QMessageBox msgBox;
-        msgBox.setText(e.what());
+        QString msg = QString::fromStdString(e.what());
+        msgBox.setText(msg);
         msgBox.setIcon(QMessageBox::Warning);
         msgBox.exec();
     }

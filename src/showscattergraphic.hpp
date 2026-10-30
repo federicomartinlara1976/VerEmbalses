@@ -27,7 +27,7 @@ private:
 
     void drawGraphic();
 
-private slots:
+private Q_SLOTS:
     void print();
 
 protected:

@@ -23,8 +23,6 @@
 
 QT_BEGIN_NAMESPACE
 
-using namespace QtCharts;
-
 class Ui_DialogShowLineGraphic
 {
 public:

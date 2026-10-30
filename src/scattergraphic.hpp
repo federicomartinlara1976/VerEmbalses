@@ -9,7 +9,6 @@
 #include <QtCharts/QScatterSeries>
 #include <QtCharts/QValueAxis>
 
-using namespace QtCharts;
 using namespace FuncionesUi;
 
 class GraficoEnNubePuntos : public GraphicStrategy {

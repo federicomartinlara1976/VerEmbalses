@@ -22,7 +22,7 @@ private:
 
     FuncionesUi::Dataframe df;
 
-private slots:
+private Q_SLOTS:
     void drawGraphic();
     void print();
 

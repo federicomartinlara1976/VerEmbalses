@@ -6,7 +6,7 @@
 class View : public QWidget {
     Q_OBJECT
     
-    private slots:
+    private Q_SLOTS:
         void delayInitialization();
     
     public:

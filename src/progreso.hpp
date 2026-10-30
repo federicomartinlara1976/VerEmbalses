@@ -18,7 +18,7 @@ private:
     AppHelper helper;
     bool visible;
     
-private slots:
+private Q_SLOTS:
     void percentChanged(int percent, QString message);
     void started();
     void finished();

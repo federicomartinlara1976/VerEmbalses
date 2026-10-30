@@ -43,7 +43,7 @@ private:
     void setCodZona(const QString& codZona);
     void setData();
 
-private slots:
+private Q_SLOTS:
     void showGraphicClicked();
     void showExcelClicked();
 

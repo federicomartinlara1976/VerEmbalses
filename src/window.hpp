@@ -6,7 +6,7 @@
 class Window : public KXmlGuiWindow {
     Q_OBJECT
     
-    private slots:
+    private Q_SLOTS:
         void delayInitialization();
     
     public:

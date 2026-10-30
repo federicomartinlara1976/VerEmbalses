@@ -24,7 +24,7 @@ private:
     QString codZona;
     QString codEmbalse;
     
-private slots:
+private Q_SLOTS:
     void cmbZonasIndexChanged(int index);
     void cmbEmbalsesIndexChanged(int index);
     

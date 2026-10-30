@@ -1,4 +1,3 @@
-#include <yaml-cpp/yaml.h>
 #include <fmt/format.h>
 #include <optional>
 
@@ -90,7 +89,7 @@ void AppContext::setDefaultEmbalse(const QString& embalse, QComboBox* cmbEmbalse
 
 void AppContext::populateZonasIn(QComboBox* combo) {
     try {
-        tuple<QString, QVariant> emptyOption = qtHelper.buildComboEmptyOption("Seleccione una zona");
+        tuple<QString, QVariant> emptyOption = qtHelper.buildComboEmptyOption(i18n("Seleccione una zona"));
         combo->addItem(get<0>(emptyOption), get<1>(emptyOption));
 
         unique_ptr<vector<InfoZona>> zonas = getZonas();

@@ -27,7 +27,7 @@ private:
     void populateDatoY(std::string exclude);
     void drawGraphic(const QString& selectedYValue);
     
-private slots:
+private Q_SLOTS:
     void cmbDatoYIndexChanged(int index);
     void print();
     

@@ -34,8 +34,8 @@ VerEmbalsesWindow::VerEmbalsesWindow()
     
     QAction* queryByDateAction = new QAction(this);
     queryByDateAction->setText(QApplication::translate("VerEmbalses", "Buscar por fecha", nullptr));
-    queryByDateAction->setIcon(QIcon::fromTheme("document-new-symbolic"));
-    actionCollection->addAction("query_by_date", queryByDateAction);
+    queryByDateAction->setIcon(QIcon::fromTheme(QStringLiteral("document-new-symbolic")));
+    actionCollection->addAction(QStringLiteral("query_by_date"), queryByDateAction);
     connect(queryByDateAction, &QAction::triggered, this, &VerEmbalsesWindow::queryByDate);
 
     setupGUI();

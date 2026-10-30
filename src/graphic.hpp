@@ -5,7 +5,6 @@
 #include <QtCharts/QChartView>
 
 using namespace std;
-using namespace QtCharts;
 
 class Grafico {
 protected:

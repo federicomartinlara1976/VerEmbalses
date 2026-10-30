@@ -35,7 +35,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QIcon>
 #include <QTranslator>
 #include <QFile>
-#include <kdetools/qttranslatorhelper.hpp>
 
 #include "verembalsesdebug.h"
 #include <memory>
@@ -47,39 +46,6 @@ using namespace std;
 int main(int argc, char **argv) {
     try {
         QApplication application(argc, argv);
-        
-        QtTranslatorHelper qtTranslatorHelper;
-        
-        QTranslator translator;
-        
-        // Obtener el idioma del sistema (ej. "es_ES")
-        QString systemLocale = qtTranslatorHelper.getLocale(); 
-        qCDebug(VEREMBALSES) << "El idioma local es: " << systemLocale;
-        
-        // Traducciones para i18n (No funcionan)
-        KLocalizedString::setApplicationDomain("verembalses");
-        QSet<QString> availableTranslations = KLocalizedString::availableApplicationTranslations();
-        for (QString availableTranslation : availableTranslations) {
-            qCDebug(VEREMBALSES) << "Traducción disponible: " << availableTranslation;
-        }
-        
-        bool isTranslated = KLocalizedString::isApplicationTranslatedInto(systemLocale);
-        if (isTranslated) {
-            qCDebug(VEREMBALSES) << "Seleccionada traducción para " << systemLocale;
-        }
-        else {
-            qCWarning(VEREMBALSES) << "No está disponible la traducción para " << systemLocale;
-        }
-        
-        // Traducciones para Qt
-        QString appName = "verembalses";  
-        
-        QStringList paths = qtTranslatorHelper.loadPaths(appName, "translations");
-        
-        bool loaded = qtTranslatorHelper.loadTranslationFor(application, translator, paths, appName, systemLocale);
-        if (!loaded) {
-            qCWarning(VEREMBALSES) << "Ocurrió un error al cargar las traducciones";
-        }
         
         // Inicializa manejador de errores no controlados
         KCrash::initialize();

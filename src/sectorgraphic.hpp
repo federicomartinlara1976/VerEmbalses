@@ -7,7 +7,6 @@
 
 #include <QtCharts/QChartView>
 
-using namespace QtCharts;
 using namespace FuncionesUi;
 
 class GraficoEnSectores : public GraphicStrategy {

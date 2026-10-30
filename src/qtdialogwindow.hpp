@@ -5,7 +5,7 @@
 
 class QtDialogWindow : public QDialog {
     
-    private slots:
+    private Q_SLOTS:
         void delayInitialization();
     
     public:
