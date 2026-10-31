@@ -350,192 +350,200 @@ unique_ptr<vector<InfoPuntoControl>> AppContext::getPuntosControlPorZona(string 
     }
 }
 
-FuncionesUi::Dataframe AppContext::getDataframePorEmbalseYRangoFechas(string codEmbalse, QDate& desde, QDate& hasta) {
-    vector<InfoEmbalse> registros = getPorFechas(codEmbalse, desde, hasta);
-    
-    ColumnData<ulong> cIndex("Indice");
-    vector<ulong> indices;
-    ColumnData<string> cFecha("Fecha");
-    vector<string> fechas;
-    ColumnData<double> cNivel("Nivel");
-    vector<double> niveles;
-    ColumnData<double> cVolumen("Volumen");
-    vector<double> volumenes;
-    ColumnData<double> cPorcentaje("Porcentaje");
-    vector<double> porcentajes;
-    ColumnData<double> cMen("MEN");
-    vector<double> v_men;
-    ColumnData<double> cCapacidad("Capacidad");
-    vector<double> v_capacidad;
-        
-    ulong index = 0;
-    for (InfoEmbalse& registro : registros) {
-        indices.push_back(index);
+FuncionesUi::Dataframe AppContext::getDataframePorEmbalseYRangoFechas(const QString& codEmbalse, QDate& desde, QDate& hasta) {
+    FuncionesUi::Dataframe df;
 
-        fechas.push_back(registro.fecha);
-        niveles.push_back(registro.nivel);
-        volumenes.push_back(registro.volumen);
-        porcentajes.push_back(registro.porcentaje);
-        v_men.push_back(registro.men);
-        v_capacidad.push_back(registro.capacidad);
-        index++;
+    vector<InfoEmbalse> registros = getPorFechas(codEmbalse.toStdString(), desde, hasta);
+    
+    if (!registros.empty()) {
+        ColumnData<ulong> cIndex("Indice");
+        vector<ulong> indices;
+        ColumnData<string> cFecha("Fecha");
+        vector<string> fechas;
+        ColumnData<double> cNivel("Nivel");
+        vector<double> niveles;
+        ColumnData<double> cVolumen("Volumen");
+        vector<double> volumenes;
+        ColumnData<double> cPorcentaje("Porcentaje");
+        vector<double> porcentajes;
+        ColumnData<double> cMen("MEN");
+        vector<double> v_men;
+        ColumnData<double> cCapacidad("Capacidad");
+        vector<double> v_capacidad;
+
+        ulong index = 0;
+        for (InfoEmbalse& registro : registros) {
+            indices.push_back(index);
+
+            fechas.push_back(registro.fecha);
+            niveles.push_back(registro.nivel);
+            volumenes.push_back(registro.volumen);
+            porcentajes.push_back(registro.porcentaje);
+            v_men.push_back(registro.men);
+            v_capacidad.push_back(registro.capacidad);
+            index++;
+        }
+
+        cIndex.setData(indices);
+        cFecha.setData(fechas);
+        cNivel.setData(niveles);
+        cVolumen.setData(volumenes);
+        cPorcentaje.setData(porcentajes);
+        cMen.setData(v_men);
+        cCapacidad.setData(v_capacidad);
+
+        df.load_data(std::move(cIndex.getData()),
+                        std::make_pair(appHelper.asCharArray(cFecha.getName()), cFecha.getData()),
+                        std::make_pair(appHelper.asCharArray(cNivel.getName()), cNivel.getData()),
+                        std::make_pair(appHelper.asCharArray(cVolumen.getName()), cVolumen.getData()),
+                        std::make_pair(appHelper.asCharArray(cPorcentaje.getName()), cPorcentaje.getData()),
+                        std::make_pair(appHelper.asCharArray(cMen.getName()), cMen.getData()),
+                        std::make_pair(appHelper.asCharArray(cCapacidad.getName()), cCapacidad.getData()));
     }
 
-    cIndex.setData(indices);
-    cFecha.setData(fechas);
-    cNivel.setData(niveles);
-    cVolumen.setData(volumenes);
-    cPorcentaje.setData(porcentajes);
-    cMen.setData(v_men);
-    cCapacidad.setData(v_capacidad);
-        
-    FuncionesUi::Dataframe df;
-        
-    df.load_data(std::move(cIndex.getData()),
-                    std::make_pair(appHelper.asCharArray(cFecha.getName()), cFecha.getData()),
-                    std::make_pair(appHelper.asCharArray(cNivel.getName()), cNivel.getData()),
-                    std::make_pair(appHelper.asCharArray(cVolumen.getName()), cVolumen.getData()),
-                    std::make_pair(appHelper.asCharArray(cPorcentaje.getName()), cPorcentaje.getData()),
-                    std::make_pair(appHelper.asCharArray(cMen.getName()), cMen.getData()),
-                    std::make_pair(appHelper.asCharArray(cCapacidad.getName()), cCapacidad.getData()));
-        
     return df;
 }
 
-FuncionesUi::Dataframe AppContext::getDataframePorZonaYRangoFechas(string codZona, QDate& desde, QDate& hasta) {
+FuncionesUi::Dataframe AppContext::getDataframePorZonaYRangoFechas(const QString& codZona, QDate& desde, QDate& hasta) {
+    FuncionesUi::Dataframe df;
+
     // Obtener las ejecuciones entre las fechas
     vector<string> ejecuciones = getExecutions(desde, hasta);
 
-    ColumnData<ulong> cIndex("Indice");
-    vector<ulong> indices;
+    if (!ejecuciones.empty()) {
+        ColumnData<ulong> cIndex("Indice");
+        vector<ulong> indices;
 
-    ColumnData<string> cFecha("Fecha");
-    vector<string> fechas;
+        ColumnData<string> cFecha("Fecha");
+        vector<string> fechas;
 
-    ColumnData<double> cNivelMedia("MediaNivel");
-    vector<double> mediaNiveles;
-    ColumnData<double> cNivelMinimo("MinimoNivel");
-    vector<double> minimoNiveles;
-    ColumnData<double> cNivelMaximo("MaximoNivel");
-    vector<double> maximoNiveles;
+        ColumnData<double> cNivelMedia("MediaNivel");
+        vector<double> mediaNiveles;
+        ColumnData<double> cNivelMinimo("MinimoNivel");
+        vector<double> minimoNiveles;
+        ColumnData<double> cNivelMaximo("MaximoNivel");
+        vector<double> maximoNiveles;
 
-    ColumnData<double> cVolumenMedia("MediaVolumen");
-    vector<double> mediaVolumenes;
-    ColumnData<double> cVolumenMinimo("MinimoVolumen");
-    vector<double> minimoVolumenes;
-    ColumnData<double> cVolumenMaximo("MaximoVolumen");
-    vector<double> maximoVolumenes;
-    ColumnData<double> cVolumenSuma("SumaVolumen");
-    vector<double> sumaVolumenes;
+        ColumnData<double> cVolumenMedia("MediaVolumen");
+        vector<double> mediaVolumenes;
+        ColumnData<double> cVolumenMinimo("MinimoVolumen");
+        vector<double> minimoVolumenes;
+        ColumnData<double> cVolumenMaximo("MaximoVolumen");
+        vector<double> maximoVolumenes;
+        ColumnData<double> cVolumenSuma("SumaVolumen");
+        vector<double> sumaVolumenes;
 
 
-    // Para cada ejecución, obtener el dataframe de las estadísticas de la zona
-    ulong index = 0;
-    for (string fecha : ejecuciones) {
-        std::tuple<double*, double*> stats = getStatsPorZonaYFecha(codZona, fecha);
-        double* statsNivel = std::get<0>(stats);
-        double* statsVolumen = std::get<1>(stats);
+        // Para cada ejecución, obtener el dataframe de las estadísticas de la zona
+        ulong index = 0;
+        for (string fecha : ejecuciones) {
+            std::tuple<double*, double*> stats = getStatsPorZonaYFecha(codZona.toStdString(), fecha);
+            double* statsNivel = std::get<0>(stats);
+            double* statsVolumen = std::get<1>(stats);
 
-        indices.push_back(index);
-        fechas.push_back(fecha);
+            indices.push_back(index);
+            fechas.push_back(fecha);
 
-        mediaNiveles.push_back(statsNivel[0]);
-        minimoNiveles.push_back(statsNivel[1]);
-        maximoNiveles.push_back(statsNivel[2]);
+            mediaNiveles.push_back(statsNivel[0]);
+            minimoNiveles.push_back(statsNivel[1]);
+            maximoNiveles.push_back(statsNivel[2]);
 
-        mediaVolumenes.push_back(statsVolumen[0]);
-        minimoVolumenes.push_back(statsVolumen[1]);
-        maximoVolumenes.push_back(statsVolumen[2]);
-        sumaVolumenes.push_back(statsVolumen[3]);
+            mediaVolumenes.push_back(statsVolumen[0]);
+            minimoVolumenes.push_back(statsVolumen[1]);
+            maximoVolumenes.push_back(statsVolumen[2]);
+            sumaVolumenes.push_back(statsVolumen[3]);
 
-        index++;
+            index++;
+        }
+
+        cIndex.setData(indices);
+        cFecha.setData(fechas);
+
+        cNivelMedia.setData(mediaNiveles);
+        cNivelMinimo.setData(minimoNiveles);
+        cNivelMaximo.setData(maximoNiveles);
+
+        cVolumenMedia.setData(mediaVolumenes);
+        cVolumenMinimo.setData(minimoVolumenes);
+        cVolumenMaximo.setData(maximoVolumenes);
+        cVolumenSuma.setData(sumaVolumenes);
+
+        df.load_data(std::move(cIndex.getData()),
+                        std::make_pair(appHelper.asCharArray(cFecha.getName()), cFecha.getData()),
+                        std::make_pair(appHelper.asCharArray(cNivelMedia.getName()), cNivelMedia.getData()),
+                        std::make_pair(appHelper.asCharArray(cNivelMinimo.getName()), cNivelMinimo.getData()),
+                        std::make_pair(appHelper.asCharArray(cNivelMaximo.getName()), cNivelMaximo.getData()),
+                        std::make_pair(appHelper.asCharArray(cVolumenMedia.getName()), cVolumenMedia.getData()),
+                        std::make_pair(appHelper.asCharArray(cVolumenMinimo.getName()), cVolumenMinimo.getData()),
+                        std::make_pair(appHelper.asCharArray(cVolumenMaximo.getName()), cVolumenMaximo.getData()),
+                        std::make_pair(appHelper.asCharArray(cVolumenSuma.getName()), cVolumenSuma.getData()));
+
     }
-
-    cIndex.setData(indices);
-    cFecha.setData(fechas);
-
-    cNivelMedia.setData(mediaNiveles);
-    cNivelMinimo.setData(minimoNiveles);
-    cNivelMaximo.setData(maximoNiveles);
-
-    cVolumenMedia.setData(mediaVolumenes);
-    cVolumenMinimo.setData(minimoVolumenes);
-    cVolumenMaximo.setData(maximoVolumenes);
-    cVolumenSuma.setData(sumaVolumenes);
-
-    FuncionesUi::Dataframe df;
-
-    df.load_data(std::move(cIndex.getData()),
-                    std::make_pair(appHelper.asCharArray(cFecha.getName()), cFecha.getData()),
-                    std::make_pair(appHelper.asCharArray(cNivelMedia.getName()), cNivelMedia.getData()),
-                    std::make_pair(appHelper.asCharArray(cNivelMinimo.getName()), cNivelMinimo.getData()),
-                    std::make_pair(appHelper.asCharArray(cNivelMaximo.getName()), cNivelMaximo.getData()),
-                    std::make_pair(appHelper.asCharArray(cVolumenMedia.getName()), cVolumenMedia.getData()),
-                    std::make_pair(appHelper.asCharArray(cVolumenMinimo.getName()), cVolumenMinimo.getData()),
-                    std::make_pair(appHelper.asCharArray(cVolumenMaximo.getName()), cVolumenMaximo.getData()),
-                    std::make_pair(appHelper.asCharArray(cVolumenSuma.getName()), cVolumenSuma.getData()));
 
     return df;
 }
 
-FuncionesUi::Dataframe AppContext::getDataframePuntoControl(string puntoControl, QDate& desde, QDate& hasta) {
-    vector<RegistroPluviometrico> registros = getRegistrosPuntoControl(puntoControl, desde, hasta);
-    
-    ColumnData<ulong> cIndex("Indice");
-    vector<ulong> indices;
-
-    ColumnData<string> cFecha("Fecha");
-    vector<string> fechas;
-
-    ColumnData<double> cHoraActual("HoraActual");
-    vector<double> vHoraActual;
-    ColumnData<double> cHoraAnterior("HoraAnterior");
-    vector<double> vHoraAnterior;
-    ColumnData<double> cUltimas12Horas("Ultimas12Horas");
-    vector<double> vUltimas12Horas;
-    ColumnData<double> cHoy("Hoy");
-    vector<double> vHoy;
-    ColumnData<double> cAyer("Ayer");
-    vector<double> vAyer;
-    ColumnData<string> cUnidadMedida("UnidadMedida");
-    vector<string> vUnidadMedida;
-    
-    ulong index = 0;
-    for (RegistroPluviometrico registro : registros) {
-        indices.push_back(index);
-        fechas.push_back(registro.fecha);
-        
-        vHoraActual.push_back(registro.horaActual);
-        vHoraAnterior.push_back(registro.horaAnterior);
-        vUltimas12Horas.push_back(registro.ultimas12Horas);
-        vHoy.push_back(registro.hoy);
-        vAyer.push_back(registro.ayer);
-        vUnidadMedida.push_back(registro.unidadMedida);
-        
-        index++;
-    }
-    
-    cIndex.setData(indices);
-    cFecha.setData(fechas);
-
-    cHoraActual.setData(vHoraActual);
-    cHoraAnterior.setData(vHoraAnterior);
-    cUltimas12Horas.setData(vUltimas12Horas);
-    cHoy.setData(vHoy);
-    cAyer.setData(vAyer);
-    cUnidadMedida.setData(vUnidadMedida);
-    
+FuncionesUi::Dataframe AppContext::getDataframePuntoControl(const QString& puntoControl, QDate& desde, QDate& hasta) {
     FuncionesUi::Dataframe df;
 
-    df.load_data(std::move(cIndex.getData()),
-                    std::make_pair(appHelper.asCharArray(cFecha.getName()), cFecha.getData()),
-                    std::make_pair(appHelper.asCharArray(cHoraActual.getName()), cHoraActual.getData()),
-                    std::make_pair(appHelper.asCharArray(cHoraAnterior.getName()), cHoraAnterior.getData()),
-                    std::make_pair(appHelper.asCharArray(cUltimas12Horas.getName()), cUltimas12Horas.getData()),
-                    std::make_pair(appHelper.asCharArray(cHoy.getName()), cHoy.getData()),
-                    std::make_pair(appHelper.asCharArray(cAyer.getName()), cAyer.getData()),
-                    std::make_pair(appHelper.asCharArray(cUnidadMedida.getName()), cUnidadMedida.getData()));
+    vector<RegistroPluviometrico> registros = getRegistrosPuntoControl(puntoControl.toStdString(), desde, hasta);
     
+    if (!registros.empty()) {
+        ColumnData<ulong> cIndex("Indice");
+        vector<ulong> indices;
+
+        ColumnData<string> cFecha("Fecha");
+        vector<string> fechas;
+
+        ColumnData<double> cHoraActual("HoraActual");
+        vector<double> vHoraActual;
+        ColumnData<double> cHoraAnterior("HoraAnterior");
+        vector<double> vHoraAnterior;
+        ColumnData<double> cUltimas12Horas("Ultimas12Horas");
+        vector<double> vUltimas12Horas;
+        ColumnData<double> cHoy("Hoy");
+        vector<double> vHoy;
+        ColumnData<double> cAyer("Ayer");
+        vector<double> vAyer;
+        ColumnData<string> cUnidadMedida("UnidadMedida");
+        vector<string> vUnidadMedida;
+
+        ulong index = 0;
+        for (RegistroPluviometrico registro : registros) {
+            indices.push_back(index);
+            fechas.push_back(registro.fecha);
+
+            vHoraActual.push_back(registro.horaActual);
+            vHoraAnterior.push_back(registro.horaAnterior);
+            vUltimas12Horas.push_back(registro.ultimas12Horas);
+            vHoy.push_back(registro.hoy);
+            vAyer.push_back(registro.ayer);
+            vUnidadMedida.push_back(registro.unidadMedida);
+
+            index++;
+        }
+
+        cIndex.setData(indices);
+        cFecha.setData(fechas);
+
+        cHoraActual.setData(vHoraActual);
+        cHoraAnterior.setData(vHoraAnterior);
+        cUltimas12Horas.setData(vUltimas12Horas);
+        cHoy.setData(vHoy);
+        cAyer.setData(vAyer);
+        cUnidadMedida.setData(vUnidadMedida);
+
+        df.load_data(std::move(cIndex.getData()),
+                        std::make_pair(appHelper.asCharArray(cFecha.getName()), cFecha.getData()),
+                        std::make_pair(appHelper.asCharArray(cHoraActual.getName()), cHoraActual.getData()),
+                        std::make_pair(appHelper.asCharArray(cHoraAnterior.getName()), cHoraAnterior.getData()),
+                        std::make_pair(appHelper.asCharArray(cUltimas12Horas.getName()), cUltimas12Horas.getData()),
+                        std::make_pair(appHelper.asCharArray(cHoy.getName()), cHoy.getData()),
+                        std::make_pair(appHelper.asCharArray(cAyer.getName()), cAyer.getData()),
+                        std::make_pair(appHelper.asCharArray(cUnidadMedida.getName()), cUnidadMedida.getData()));
+
+    }
+
     return df;
 }
 

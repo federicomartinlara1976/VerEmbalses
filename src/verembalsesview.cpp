@@ -116,6 +116,7 @@ void VerEmbalsesView::cmbPlvZonasIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
     
     plvZona = qtHelper.getStringValue(m_ui.cmbPlvZona, index);
+    qCInfo(VEREMBALSES) << "Zona pluviométrica: " << plvZona;
 
     if (!plvZona.isEmpty()) {
         context.populatePuntosControlIn(plvZona.toStdString(), m_ui.cmbPuntoControl);
@@ -148,19 +149,27 @@ void VerEmbalsesView::cmbPuntosControlIndexChanged(int index) {
         if (!plvZona.isEmpty()) {
             // Componer colección de consulta
             QString puntoControl = QStringLiteral("PL-") + plvZona + QStringLiteral("-") + codigoPuntoControl;
-            
+            qCInfo(VEREMBALSES) << "Punto de control: " << puntoControl;
+
             // Consultar los últmos 5 días
             QDateTime today = qtDateHelper.today();
             tuple<QDate, QDate> fechas = qtDateHelper.intervalBeforeInDays(today.date(), 5);
             QDate fechaHasta = get<0>(fechas);
             QDate fechaDesde = get<1>(fechas);
-            Dataframe df = context.getDataframePuntoControl(puntoControl.toStdString(), fechaDesde, fechaHasta);
+            Dataframe df = context.getDataframePuntoControl(puntoControl, fechaDesde, fechaHasta);
             
             // Mostrar en tabla
             if (!df.empty()) {
                 TableModel *tableModel = new TableModelRegistrosPluviometricos(df);
-                qCInfo(VEREMBALSES) << "Change model";
+                qCDebug(VEREMBALSES) << "Change model";
                 m_ui.tableView->setModel(tableModel);
+            }
+            else {
+                QMessageBox msgBox;
+                QString msg = i18n("No se encontraron datos");
+                msgBox.setText(msg);
+                msgBox.setIcon(QMessageBox::Warning);
+                msgBox.exec();
             }
         }
     } catch (const exception& e) {
@@ -190,7 +199,7 @@ void VerEmbalsesView::showGraphicClicked() {
             return;
     
         if (fechaDesde < fechaHasta) {
-            Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse.toStdString(), fechaDesde, fechaHasta);
+            Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, fechaDesde, fechaHasta);
             
             // Remove the columns MEN and Capacidad
             df.remove_column<double>("MEN");
@@ -230,7 +239,7 @@ void VerEmbalsesView::showExcelClicked() {
             return;
         
         if (fechaDesde < fechaHasta) {
-            Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse.toStdString(), fechaDesde, fechaHasta);
+            Dataframe df = context.getDataframePorEmbalseYRangoFechas(codEmbalse, fechaDesde, fechaHasta);
         
             const string& filetype = Constants::CSV_FILE_TYPE;
             const QString filename = QFileDialog::getSaveFileName(this, i18n("Save File As"), QDir::currentPath(), qtHelper.asQString(filetype));

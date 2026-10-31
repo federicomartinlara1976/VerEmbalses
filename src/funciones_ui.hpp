@@ -103,9 +103,9 @@ namespace FuncionesUi {
 
         string getLastExecution();
 
-        Dataframe getDataframePorEmbalseYRangoFechas(string codEmbalse, QDate& desde, QDate& hasta);
-        Dataframe getDataframePorZonaYRangoFechas(string codZona, QDate& desde, QDate& hasta);
-        Dataframe getDataframePuntoControl(string puntoControl, QDate& desde, QDate& hasta);
+        Dataframe getDataframePorEmbalseYRangoFechas(const QString& codEmbalse, QDate& desde, QDate& hasta);
+        Dataframe getDataframePorZonaYRangoFechas(const QString& codZona, QDate& desde, QDate& hasta);
+        Dataframe getDataframePuntoControl(const QString& puntoControl, QDate& desde, QDate& hasta);
 
         void saveDataframeToDisk(const QString &outputFileName, Dataframe& dataframe);
 

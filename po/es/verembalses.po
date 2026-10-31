@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-22 10:03+0200\n"
+"POT-Creation-Date: 2026-10-31 21:03+0100\n"
 "PO-Revision-Date: 2026-10-22 10:06+0200\n"
 "Last-Translator: Federico Martín Lara <federicomartinlara1976@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -60,17 +60,17 @@ msgid "Hasta:"
 msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DialogShowLineGraphic)
-#. i18n: ectx: property (windowTitle), widget (QDialog, DialogShowSimpleGraphic)
 #. i18n: ectx: property (windowTitle), widget (QDialog, DialogShowEmbalsesGraphic)
+#. i18n: ectx: property (windowTitle), widget (QDialog, DialogShowSimpleGraphic)
 #: src/dlg-show-embalses-graphic.ui:14 src/dlg-show-line-graphic.ui:14
 #: src/dlg-show-simple-graphic.ui:14
 #, kde-format
 msgid "Mostrar gráfico"
 msgstr ""
 
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #. i18n: ectx: property (windowTitle), widget (QDialog, DialogSelectGrafico)
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: src/dlg-show-embalses-graphic.ui:48 src/dlg_select-tipo-grafico.ui:14
 #: src/dlg_select-tipo-grafico.ui:22
 #, kde-format
@@ -121,13 +121,18 @@ msgstr ""
 msgid "TextLabel"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QLabel, label_19)
 #. i18n: ectx: property (title), widget (QGroupBox, capacidadContainer)
+#. i18n: ectx: property (text), widget (QLabel, label_19)
 #: src/dlg-show-table.ui:71 src/ver_embalses.ui:796
 #, kde-format
 msgid "Capacidad (Hm3)"
 msgstr ""
 
+#. i18n: ectx: property (text), widget (QLabel, lblEstado)
+#. i18n: ectx: property (text), widget (QLabel, lblCapacidad)
+#. i18n: ectx: property (text), widget (QLabel, lblMen)
+#. i18n: ectx: property (text), widget (QLabel, lblDesde)
+#. i18n: ectx: property (text), widget (QLabel, lblHasta)
 #. i18n: ectx: property (text), widget (QLabel, lblZona)
 #. i18n: ectx: property (text), widget (QLabel, lblNivelMedia)
 #. i18n: ectx: property (text), widget (QLabel, lblNivelMinimo)
@@ -138,11 +143,6 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, lblVolumenTotal)
 #. i18n: ectx: property (text), widget (QLabel, lblTotalCapacidadZona)
 #. i18n: ectx: property (text), widget (QLabel, lblPorcentajeVolumenTotal)
-#. i18n: ectx: property (text), widget (QLabel, lblCapacidad)
-#. i18n: ectx: property (text), widget (QLabel, lblMen)
-#. i18n: ectx: property (text), widget (QLabel, lblDesde)
-#. i18n: ectx: property (text), widget (QLabel, lblHasta)
-#. i18n: ectx: property (text), widget (QLabel, lblEstado)
 #: src/dlg-show-table.ui:87 src/dlg-show-table.ui:119 src/dlg-show-table.ui:167
 #: src/dlg-show-table.ui:198 src/dlg_progreso.ui:57 src/ver_embalses.ui:177
 #: src/ver_embalses.ui:306 src/ver_embalses.ui:354 src/ver_embalses.ui:402
@@ -170,8 +170,8 @@ msgstr ""
 msgid "Hasta"
 msgstr ""
 
-#. i18n: ectx: property (toolTip), widget (QPushButton, btnExportarCSV)
 #. i18n: ectx: property (toolTip), widget (QToolButton, btnExportarCSV)
+#. i18n: ectx: property (toolTip), widget (QPushButton, btnExportarCSV)
 #: src/dlg-show-table.ui:226 src/ver_embalses.ui:995
 #, kde-format
 msgid "Exportar a CSV"
@@ -184,8 +184,8 @@ msgstr ""
 msgid "..."
 msgstr ""
 
-#. i18n: ectx: property (toolTip), widget (QPushButton, btnVerGrafico)
 #. i18n: ectx: property (toolTip), widget (QToolButton, btnVerGrafico)
+#. i18n: ectx: property (toolTip), widget (QPushButton, btnVerGrafico)
 #: src/dlg-show-table.ui:239 src/ver_embalses.ui:972
 #, kde-format
 msgid "Ver gráfico"
@@ -221,40 +221,71 @@ msgstr ""
 msgid "Relación Volumen - Porcentaje"
 msgstr ""
 
-#: src/funciones_ui.cpp:172
+#: src/funciones_ui.cpp:98
+#, kde-format
+msgid "Seleccione una zona"
+msgstr ""
+
+#: src/funciones_ui.cpp:177
 #, kde-format
 msgid "Seleccione un embalse"
 msgstr ""
 
-#: src/funciones_ui.cpp:194
+#: src/funciones_ui.cpp:199
 #, kde-format
 msgid "Seleccione un punto de control"
 msgstr ""
 
-#: src/main.cpp:89
+#: src/graphic.cpp:13
+#, kde-format
+msgid "Context: Strategy isn't set"
+msgstr ""
+
+#: src/main.cpp:55
 #, kde-format
 msgid "VerEmbalses"
 msgstr ""
 
-#: src/main.cpp:91
+#: src/main.cpp:57
 #, kde-format
 msgid ""
 "Monitoriza datos de los embalses de la Cuenca Hidrográfica del Guadalquivir"
 msgstr ""
 
-#: src/main.cpp:93
+#: src/main.cpp:59
 #, kde-format
 msgid "Copyright 2025, Federico Martín Lara <federicomartinlara1976@gmail.com>"
 msgstr ""
 
-#: src/main.cpp:95
+#: src/main.cpp:61
 #, kde-format
 msgid "Federico Martín Lara"
 msgstr ""
 
-#: src/main.cpp:95
+#: src/main.cpp:61
 #, kde-format
 msgid "Author"
+msgstr ""
+
+#: src/progreso.cpp:14
+#, kde-format
+msgid "Progreso"
+msgstr ""
+
+#: src/progreso.cpp:46
+#, kde-format
+msgid "Inicio"
+msgstr ""
+
+#: src/progreso.cpp:52
+#, kde-format
+msgid "Finalizado"
+msgstr ""
+
+#: src/selectfecha.cpp:67 src/verembalsesview.cpp:109
+#: src/verembalsesview.cpp:126 src/verembalseswindow.cpp:86
+#, kde-format
+msgid "Debe seleccionar una zona"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, serverLabel)
@@ -287,7 +318,7 @@ msgstr ""
 msgid "Decimales:"
 msgstr ""
 
-#: src/showtable.cpp:174 src/verembalsesview.cpp:235
+#: src/showtable.cpp:174 src/verembalsesview.cpp:245
 #, kde-format
 msgid "Save File As"
 msgstr ""
@@ -430,10 +461,9 @@ msgstr ""
 msgid "Main Toolbar"
 msgstr ""
 
-#: src/verembalsesview.cpp:109 src/verembalsesview.cpp:125
-#: src/verembalseswindow.cpp:86
+#: src/verembalsesview.cpp:169
 #, kde-format
-msgid "Debe seleccionar una zona"
+msgid "No se encontraron datos"
 msgstr ""
 
 #: src/verembalseswindow.cpp:108
