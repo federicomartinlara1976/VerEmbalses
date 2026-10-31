@@ -7,6 +7,7 @@
 #include "VerEmbalsesSettings.h"
 #include "observer.hpp"
 #include "selectfecha.hpp"
+#include "VerEmbalsesAppHelper.hpp"
 
 #include <kdetools/qthelper.hpp>
 
@@ -51,6 +52,7 @@ private:
     Ui::Settings m_settings;
     VerEmbalsesView *m_verEmbalsesView;
     
+    VerEmbalsesAppHelper helper;
     QtHelper qtHelper;
     
     unique_ptr<DlgSelectFecha> getDlgFecha();

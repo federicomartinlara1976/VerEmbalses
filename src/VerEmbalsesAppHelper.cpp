@@ -41,3 +41,10 @@ void VerEmbalsesAppHelper::setLabelStyleValue(QLabel *lbl, float value) {
     string style = "QLabel { background-color : " + color + "; border: 1px solid black; }";
     lbl->setStyleSheet(qtHelper.asQString(style, false));
 }
+
+void VerEmbalsesAppHelper::showMessage(const QString& msg, QMessageBox::Icon icon) {
+    QMessageBox msgBox;
+    msgBox.setText(msg);
+    msgBox.setIcon(icon);
+    msgBox.exec();
+}

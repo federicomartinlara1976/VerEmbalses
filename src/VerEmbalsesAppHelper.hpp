@@ -6,6 +6,7 @@
 
 #include <QComboBox>
 #include <QLabel>
+#include <QMessageBox>
 #include <DataFrame/DataFrame.h>
 
 #include <kdetools/qthelper.hpp>
@@ -21,6 +22,8 @@ public:
     tuple<String64, std::size_t, std::type_index> getColumn(const StdDataFrame<ulong>& dataframe, int index) const;
     
     void setLabelStyleValue(QLabel *lbl, float value);
+
+    void showMessage(const QString& msg, QMessageBox::Icon icon);
 };
 
 #endif

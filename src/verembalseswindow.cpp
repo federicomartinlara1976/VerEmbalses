@@ -82,10 +82,7 @@ void VerEmbalsesWindow::queryByDate() {
             dlgShowTable->mostrar(true);
         }
         else {
-            QMessageBox msgBox;
-            msgBox.setText(i18n("Debe seleccionar una zona"));
-            msgBox.setIcon(QMessageBox::Warning);
-            msgBox.exec();
+            helper.showMessage(i18n("Debe seleccionar una zona"), QMessageBox::Warning);
         }
     }
 }

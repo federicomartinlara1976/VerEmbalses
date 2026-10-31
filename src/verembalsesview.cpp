@@ -105,10 +105,7 @@ void VerEmbalsesView::cmbZonasIndexChanged(int index) {
         }
     }
     else {
-        QMessageBox msgBox;
-        msgBox.setText(i18n("Debe seleccionar una zona"));
-        msgBox.setIcon(QMessageBox::Warning);
-        msgBox.exec();
+        helper.showMessage(i18n("Debe seleccionar una zona"), QMessageBox::Warning);
     }
 }
 
@@ -122,10 +119,7 @@ void VerEmbalsesView::cmbPlvZonasIndexChanged(int index) {
         context.populatePuntosControlIn(plvZona.toStdString(), m_ui.cmbPuntoControl);
     }
     else {
-        QMessageBox msgBox;
-        msgBox.setText(i18n("Debe seleccionar una zona"));
-        msgBox.setIcon(QMessageBox::Warning);
-        msgBox.exec();
+        helper.showMessage(i18n("Debe seleccionar una zona"), QMessageBox::Warning);
     }
 }
 
@@ -165,19 +159,11 @@ void VerEmbalsesView::cmbPuntosControlIndexChanged(int index) {
                 m_ui.tableView->setModel(tableModel);
             }
             else {
-                QMessageBox msgBox;
-                QString msg = i18n("No se encontraron datos");
-                msgBox.setText(msg);
-                msgBox.setIcon(QMessageBox::Warning);
-                msgBox.exec();
+                helper.showMessage(i18n("No se encontraron datos"), QMessageBox::Warning);
             }
         }
-    } catch (const exception& e) {
-        QMessageBox msgBox;
-        QString msg = QString::fromStdString(e.what());
-        msgBox.setText(msg);
-        msgBox.setIcon(QMessageBox::Warning);
-        msgBox.exec();
+    } catch (const exception& exception) {
+        helper.showMessage(QString::fromStdString(exception.what()), QMessageBox::Warning);
     }
 }
 
