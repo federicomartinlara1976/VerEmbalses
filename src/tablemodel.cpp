@@ -1,6 +1,9 @@
 #include "constants.hpp"
 #include "tablemodel.hpp"
 
+#include "verembalsesdebug.h"
+#include <iostream>
+
 TableModel::TableModel(const FuncionesUi::Dataframe& dataFrame, QObject* parent) : QStandardItemModel(parent) {
     this->dataFrame = dataFrame;
     auto shape = this->dataFrame.shape();
@@ -13,7 +16,8 @@ TableModel::TableModel(const FuncionesUi::Dataframe& dataFrame, QObject* parent)
     
     int i = 1;
     for (auto citer : columnsInfo)  {
-        const QVariant& value = QVariant(std::get<0>(citer));
+        std::string s = std::get<0>(citer).c_str();
+        const QVariant value = QString::fromStdString(s);
         setHeaderData(i, Qt::Horizontal, value, Qt::DisplayRole);
         i++;
     }
