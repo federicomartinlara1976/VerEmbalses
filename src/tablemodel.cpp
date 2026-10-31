@@ -1,8 +1,6 @@
 #include "constants.hpp"
 #include "tablemodel.hpp"
 
-using namespace std;
-
 TableModel::TableModel(const FuncionesUi::Dataframe& dataFrame, QObject* parent) : QStandardItemModel(parent) {
     this->dataFrame = dataFrame;
     auto shape = this->dataFrame.shape();
@@ -11,11 +9,12 @@ TableModel::TableModel(const FuncionesUi::Dataframe& dataFrame, QObject* parent)
     setColumnCount(shape.second+1);
 
     auto columnsInfo = this->dataFrame.get_columns_info<double, std::string>();
-    setHeaderData(0, Qt::Horizontal, "Indice", Qt::DisplayRole);
+    setHeaderData(0, Qt::Horizontal, QStringLiteral("Indice"), Qt::DisplayRole);
     
     int i = 1;
-    for (auto citer: columnsInfo)  {
-        setHeaderData(i, Qt::Horizontal, std::get<0>(citer).c_str(), Qt::DisplayRole);
+    for (auto citer : columnsInfo)  {
+        const QVariant& value = QVariant(std::get<0>(citer));
+        setHeaderData(i, Qt::Horizontal, value, Qt::DisplayRole);
         i++;
     }
 }
@@ -38,7 +37,7 @@ QVariant TableModel::data(const QModelIndex &index, int role) const {
         // Si el numero de columna es 0, ponemos el índice del dataframe
         if (index.column() == 0) {
             std::vector<ulong> svec = dataFrame.get_index();
-            return QString(std::to_string(svec[index.row()]).c_str());
+            return QString::fromStdString(std::to_string(svec[index.row()]));
         }
         else {
             // Este va a ser el número de columna a pasar al dataframe
@@ -48,12 +47,12 @@ QVariant TableModel::data(const QModelIndex &index, int role) const {
             if (std::get<2>(column) == type_index(typeid(double))) {
                 std::vector<double> dvec = dataFrame.get_column<double>(columnDataframeIndex);
                 std::string sValue = formatter.formatNumber(dvec[index.row()]);
-                return QString(sValue.c_str());
+                return QString::fromStdString(sValue);
             }
 
             if (std::get<2>(column) == type_index(typeid(std::string))) {
                 std::vector<string> svec = dataFrame.get_column<string>(columnDataframeIndex);
-                return QString(svec[index.row()].c_str());
+                return QString::fromStdString(svec[index.row()]);
             }
         }
     }

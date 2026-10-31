@@ -67,7 +67,13 @@ DataEngine& AppContext::getDataEngine() {
     
     if (!dataEngine.isReady()) {
         Configuracion& configuracion = Configuracion::getInstance();
-        dataEngine.setConfiguration(configuracion.getConfiguration());
+        const auto& properties = configuracion.getProperties();
+
+        Options dbOptions;
+        dbOptions.setServer(any_cast<string>(properties["server"]));
+        dbOptions.setDbName(any_cast<string>(properties["dbName"]));
+
+        dataEngine.setConfiguration(dbOptions);
     }
     
     return dataEngine;

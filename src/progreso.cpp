@@ -4,12 +4,14 @@
 
 #include <QThread>
 
+#include <KLocalizedString>
+
 using namespace std;
 
 DlgProgreso::DlgProgreso(QWidget *parent) : QtDialogWindow(parent) {
     this->initWindow();
     
-    setWindowTitle("Progreso");
+    setWindowTitle(i18n("Progreso"));
     setModal(false);  // Make the dialog non-blocking
 
     // Set dialog always on top of its parent
@@ -41,13 +43,13 @@ void DlgProgreso::percentChanged(int percent, QString message) {
 }
 
 void DlgProgreso::started() {
-    this->lblEstado->setText("Inicio");
+    this->lblEstado->setText(i18n("Inicio"));
     this->progressBar->setValue(0);
     this->buttonBox->setEnabled(false);
 }
 
 void DlgProgreso::finished() {
-    this->lblEstado->setText("Finalizado");
+    this->lblEstado->setText(i18n("Finalizado"));
     this->progressBar->setValue(100);
     QThread::sleep(1);
     this->accept();

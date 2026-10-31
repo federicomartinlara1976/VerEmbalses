@@ -19,9 +19,9 @@ GraficoEnBarrasApiladas::GraficoEnBarrasApiladas(Dataframe &df) {
     vector<double> volumenes = df.get_column<double>("Volumen");
     vector<double> capacidades = df.get_column<double>("Capacidad");
 
-    QBarSet *setVolumen = new QBarSet("Volumen");
-    QBarSet *setResto = new QBarSet("Resto");
-    QBarSet *setDesbordamiento = new QBarSet("Desbordamiento");
+    QBarSet *setVolumen = new QBarSet(QStringLiteral("Volumen"));
+    QBarSet *setResto = new QBarSet(QStringLiteral("Resto"));
+    QBarSet *setDesbordamiento = new QBarSet(QStringLiteral("Desbordamiento"));
 
     int i = 0;
     for (string embalse : embalses) {

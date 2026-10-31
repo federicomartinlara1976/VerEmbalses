@@ -6,7 +6,7 @@ GraficoEnNubePuntos::GraficoEnNubePuntos(Dataframe &df) {
     this->df = df;
 
     series = new QScatterSeries();
-    series->setName("nubePuntos");
+    series->setName(QStringLiteral("nubePuntos"));
     series->setMarkerShape(QScatterSeries::MarkerShapeCircle);
     series->setMarkerSize(10.0);
     
@@ -14,11 +14,11 @@ GraficoEnNubePuntos::GraficoEnNubePuntos(Dataframe &df) {
     graphic->setAnimationOptions(QChart::SeriesAnimations);
     
     axisX = new QValueAxis();
-    axisX->setLabelFormat("%f");
+    axisX->setLabelFormat(QStringLiteral("%f"));
     graphic->addAxis(axisX, Qt::AlignBottom);
     
     axisY = new QValueAxis();
-    axisY->setLabelFormat("%f");
+    axisY->setLabelFormat(QStringLiteral("%f"));
     graphic->addAxis(axisY, Qt::AlignLeft);
 }
 
@@ -49,10 +49,10 @@ GraficoEnNubePuntosNivelVolumen::GraficoEnNubePuntosNivelVolumen(Dataframe &df) 
     
     graphic->addSeries(series);
     
-    axisX->setTitleText("Nivel");
+    axisX->setTitleText(QStringLiteral("Nivel"));
     series->attachAxis(axisX);
     
-    axisY->setTitleText("Volumen");
+    axisY->setTitleText(QStringLiteral("Volumen"));
     series->attachAxis(axisY);
 }
 
@@ -73,10 +73,10 @@ GraficoEnNubePuntosNivelPorcentaje::GraficoEnNubePuntosNivelPorcentaje(Dataframe
     
     graphic->addSeries(series);
     
-    axisX->setTitleText("Nivel");
+    axisX->setTitleText(QStringLiteral("Nivel"));
     series->attachAxis(axisX);
     
-    axisY->setTitleText("Porcentaje");
+    axisY->setTitleText(QStringLiteral("Porcentaje"));
     series->attachAxis(axisY);
 }
 
@@ -96,10 +96,10 @@ GraficoEnNubePuntosVolumenPorcentaje::GraficoEnNubePuntosVolumenPorcentaje(Dataf
     }
     
     graphic->addSeries(series);
-    axisX->setTitleText("Volumen");
+    axisX->setTitleText(QStringLiteral("Volumen"));
     series->attachAxis(axisX);
     
-    axisY->setTitleText("Porcentaje");
+    axisY->setTitleText(QStringLiteral("Porcentaje"));
     series->attachAxis(axisY);
 }
 

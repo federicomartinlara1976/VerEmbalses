@@ -1,14 +1,13 @@
 #include "formatter.hpp"
 
 #include <configuration/configuration.hpp>
-#include <sstream>  // Necesario para std::stringstream
 
 #include <fmt/core.h>
-#include <spdlog/spdlog.h>
+
+using namespace std;
+using namespace fmt;
 
 Formatter::Formatter() {
-    std::stringstream ss;
-    
     Configuracion& configuracion = Configuracion::getInstance();
     Configuration& configuration = configuracion.getConfiguration();
     
@@ -17,15 +16,13 @@ Formatter::Formatter() {
     
     int decimals = std::any_cast<int>(properties["roundDecimals"]);
     
-    ss << "{:." << decimals << "f}";
-    
-    _numberFormat = ss.str();
+    _numberFormat = "{:." + to_string(decimals) + "f}";
 }
 
 string Formatter::formatNumber(double& num) const {
-    return fmt::format(_numberFormat, num);
+    return format(_numberFormat, num);
 }
 
 string Formatter::formatNumber(float& num) const {
-    return fmt::format(_numberFormat, num);
+    return format(_numberFormat, num);
 }

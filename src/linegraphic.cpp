@@ -14,11 +14,11 @@ GraficoEnLinea::GraficoEnLinea(Dataframe &df, const QString& yValue) {
     QValueAxis *axisY = new QValueAxis();
     axisY->setTickCount(5);
     axisY->setMinorTickCount(1);
-    axisY->setLabelFormat("%.2f");
+    axisY->setLabelFormat(QStringLiteral("%.2f"));
     axisY->setTitleText(yValue);
 
     QDateTimeAxis *axisX = new QDateTimeAxis(); // Using QValueAxis here instead makes the problem disappear.
-    axisX->setFormat("dd-MM-yyyy");
+    axisX->setFormat(QStringLiteral("dd-MM-yyyy"));
     axisX->setLabelsAngle(-90);
     axisX->setTickCount(10);
 
