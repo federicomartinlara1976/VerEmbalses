@@ -5,7 +5,6 @@
 #include <fmt/core.h>
 
 using namespace std;
-using namespace fmt;
 
 Formatter::Formatter() {
     Configuracion& configuracion = Configuracion::getInstance();
@@ -20,9 +19,13 @@ Formatter::Formatter() {
 }
 
 string Formatter::formatNumber(double& num) const {
-    return format(_numberFormat, num);
+    /**
+     * fmt::runtime() es una función que le dice a {fmt} que la cadena que le pasas no es un literal conocido en tiempo de compilación, por lo que debe posponer la
+     * validación al tiempo de ejecución. Esto es exactamente lo que necesitas para una cadena de formato construida dinámicamente.
+     */
+    return fmt::format(fmt::runtime(_numberFormat), num);
 }
 
 string Formatter::formatNumber(float& num) const {
-    return format(_numberFormat, num);
+    return fmt::format(fmt::runtime(_numberFormat), num);
 }
