@@ -116,7 +116,7 @@ void VerEmbalsesView::cmbPlvZonasIndexChanged(int index) {
     AppContext& context = AppContext::getInstance();
     
     plvZona = qtHelper.getStringValue(m_ui.cmbPlvZona, index);
-    qCInfo(VEREMBALSES) << "Zona pluviométrica: " << plvZona;
+    qCDebug(VEREMBALSES) << "Zona pluviométrica: " << plvZona;
 
     if (!plvZona.isEmpty()) {
         context.populatePuntosControlIn(plvZona.toStdString(), m_ui.cmbPuntoControl);
@@ -149,7 +149,7 @@ void VerEmbalsesView::cmbPuntosControlIndexChanged(int index) {
         if (!plvZona.isEmpty()) {
             // Componer colección de consulta
             QString puntoControl = QStringLiteral("PL-") + plvZona + QStringLiteral("-") + codigoPuntoControl;
-            qCInfo(VEREMBALSES) << "Punto de control: " << puntoControl;
+            qCDebug(VEREMBALSES) << "Punto de control: " << puntoControl;
 
             // Consultar los últmos 5 días
             QDateTime today = qtDateHelper.today();
